@@ -36,7 +36,7 @@ we ask to test with `CARGO_BUILD_BUILD_DIR=build` to help identify cause and rel
 Known failure modes:
 - Inferring a `[[bin]]`s path from a `[[test]]`s path:
   - Use [`std::env::var_os("CARGO_BIN_EXE_*")`](https://doc.rust-lang.org/cargo/reference/environment-variables.html#environment-variables-cargo-sets-for-cargo-test) for Cargo 1.94+, maybe keeping the inference as a fallback for older Cargo versions
-  - Use [`env!("CARGO_BIN_EXE_*")](https://doc.rust-lang.org/cargo/reference/environment-variables.html#environment-variables-cargo-sets-for-crates)
+  - Use [`env!("CARGO_BIN_EXE_*")`](https://doc.rust-lang.org/cargo/reference/environment-variables.html#environment-variables-cargo-sets-for-crates)
 - Build scripts looking up target-dir from their binary or `OUT_DIR`: see [Issue #13663](https://github.com/rust-lang/cargo/issues/13663)
 - Looking up user-requested artifacts from rustc, see [Issue #13672](https://github.com/rust-lang/cargo/issues/13672)
 
