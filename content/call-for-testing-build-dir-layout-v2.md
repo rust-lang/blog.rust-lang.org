@@ -81,7 +81,7 @@ build-dir/
     │    ├── bin-[RUN_HASH]/*             # build script run cache
     │    ├── lib-[BIN_HASH]/*             # build script binary
     │    ├── lib-[RUN_HASH]/out/          # build script run OUT_DIR
-    │    └── bin-[RUN_HASH]/*             # build script run cache
+    │    └── lib-[RUN_HASH]/*             # build script run cache
     ├── deps/
     │   ├── bin-[HASH]*                   # binary and debug information
     │   ├── lib-[HASH]*                   # library and debug information
