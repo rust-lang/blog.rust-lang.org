@@ -1,5 +1,5 @@
 +++
-path = "2026/03/15/call-for-testing-build-dir-layout-v2"
+path = "2026/03/13/call-for-testing-build-dir-layout-v2"
 title = "Call for Testing: Build Dir Layout v2"
 authors = ["Ed Page"]
 +++
