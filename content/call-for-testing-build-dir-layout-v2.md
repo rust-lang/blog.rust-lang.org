@@ -56,6 +56,8 @@ Library support status as of publish time:
 
 The layout of final artifacts within [target dir](https://doc.rust-lang.org/cargo/reference/build-cache.html).
 
+Nesting of build artifacts under the profile and the target tuple, if specified.
+
 ## What is changing?
 
 We are switching from organizing by content type to scoping the content by the package name and a hash of the build unit and its inputs.
