@@ -1,5 +1,5 @@
 +++
-path = "2026/03/05/Rustup-1.29.0"
+path = "2026/03/12/Rustup-1.29.0"
 title = "Announcing rustup 1.29.0"
 authors = ["The Rustup Team"]
 +++
