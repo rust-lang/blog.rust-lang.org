@@ -38,7 +38,9 @@ Known failure modes:
   - Use [`std::env::var_os("CARGO_BIN_EXE_*")`](https://doc.rust-lang.org/cargo/reference/environment-variables.html#environment-variables-cargo-sets-for-cargo-test) for Cargo 1.94+, maybe keeping the inference as a fallback for older Cargo versions
   - Use [`env!("CARGO_BIN_EXE_*")`](https://doc.rust-lang.org/cargo/reference/environment-variables.html#environment-variables-cargo-sets-for-crates)
 - Build scripts looking up target-dir from their binary or `OUT_DIR`: see [Issue #13663](https://github.com/rust-lang/cargo/issues/13663)
+  - Update current workarounds to support the new layout
 - Looking up user-requested artifacts from rustc, see [Issue #13672](https://github.com/rust-lang/cargo/issues/13672)
+  - Update current workarounds to support the new layout
 
 Library support status as of publish time:
 - [assert_cmd](https://crates.io/crates/assert_cmd): fixed
