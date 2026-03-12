@@ -45,6 +45,10 @@ Library support status as of publish time:
 - [test_bin](https://crates.io/crates/test_bin): [Issue #13](https://github.com/MichaelMcDonnell/test_bin/issues/13)
 - [trycmd](https://crates.io/crates/trycmd): fixed
 
+## What is not changing?
+
+The layout of final artifacts within [target dir](https://doc.rust-lang.org/cargo/reference/build-cache.html).
+
 ## What is changing?
 
 We are switching from organizing by content type to scoping the content by the package name and a hash of the build unit and its inputs.
