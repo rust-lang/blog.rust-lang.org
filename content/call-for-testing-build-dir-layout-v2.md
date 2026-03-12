@@ -77,7 +77,7 @@ build-dir/
     │   ├── bin-[HASH]*  # binary and debug information
     │   ├── lib-[HASH]*  # library and debug information
     │   └── liblib-[HASH]*  # library and debug information
-    ├── examples/  # unused in our case
+    ├── examples/  # unused in this case
     └── incremental/... # managed by rustc
 ```
 
@@ -88,7 +88,7 @@ build-dir/
 └── debug/
     ├── .cargo-lock  # file lock protecting access to this location
     ├── build/
-    │   ├── bin/
+    │   ├── bin/  # package name
     │   │   ├── [BUILD_SCRIPT_BIN_HASH]/
     │   │   │   ├── fingerprint/*  # build cache tracking
     │   │   │   └── out/*  # build script binary
@@ -99,7 +99,7 @@ build-dir/
     │   │   └── [HASH]/
     │   │       ├── fingerprint/*  # build cache tracking
     │   │       └── out/*  # binary and debug information
-    │   └── lib/
+    │   └── lib/  # package name
     │       ├── [BUILD_SCRIPT_BIN_HASH]/
     │       │   ├── fingerprint/*  # build cache tracking
     │       │   └── out/*  # build script binary
