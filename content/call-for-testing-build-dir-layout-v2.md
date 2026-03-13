@@ -17,21 +17,23 @@ reporting issues to these projects so they can update to the new layout or suppo
 
 With at least nightly 2026-03-10,
 run your tests, release processes, and anything else that may touch build-dir/target-dir
-with the `-Zbuild-dir-new-layout` flag and `CARGO_BUILD_BUILD_DIR=build` environment variable, separately.
+with the `-Zbuild-dir-new-layout` flag.
 
 For example:
 ```console
 $ cargo test -Zbuild-dir-new-layout
-$ CARGO_BUILD_BUILD_DIR=build cargo test
 ```
+
+Note: if you see failures, the problem may not be isolated to just `-Zbuild-dir-new-layout`.
+With [Cargo 1.91](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-191-2025-10-30),
+users can separate where to store intermediate build artifacts (build-dir) and final artifacts (still in target-dir).
+You can verify this by running with only `CARGO_BUILD_BUILD_DIR=build` set.
+We are evaluating changing the default for build-dir in [#16147](https://github.com/rust-lang/cargo/issues/16147).
 
 Outcomes may include:
 - Fixing local problems
 - Reporting problems in upstream tools with a note on the [the tracking issue](https://github.com/rust-lang/cargo/issues/15010) for others
 - Providing feedback on the [the tracking issue](https://github.com/rust-lang/cargo/issues/15010)
-
-While this Call for Testing is for `-Zbuild-dir-new-layout`,
-we ask to test with `CARGO_BUILD_BUILD_DIR=build` to help identify cause and relative impact.
 
 Known failure modes:
 - Inferring a `[[bin]]`s path from a `[[test]]`s path:
