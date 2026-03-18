@@ -174,7 +174,7 @@ To that end, Niko asked the Project members for their personal views on the topi
 
 ## Stats
 
-Total words of meeting minutes written: 396.7k (June 2025 – February 2026)
+Total words of meeting minutes written: 396.7k (June 2025–February 2026)
 
 Meetings attended: 45
 
