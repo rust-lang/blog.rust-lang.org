@@ -8,7 +8,7 @@ Rust's WebAssembly targets are soon going to experience a change which has a
 risk of breaking existing projects, and this post is intended to notify users of
 this upcoming change, explain what it is, and how to handle it. Specifically, all
 WebAssembly targets in Rust have been linked using the `--allow-undefined` flag
-to `wasm-ld`, and this is being removed.
+to `wasm-ld`, and this flag is being removed.
 
 ## What is `--allow-undefined`?
 
@@ -25,8 +25,7 @@ as:
                           --unresolved-symbols=ignore-all
 ```
 
-The term "undefined" here means in the linking-sense as opposed to the
-wasm-name-sense. For example with this Rust program:
+The term "undefined" here specifically means wiwth respect to symbol resolution in `wasm-ld` itself. Symbols used by `wasm-ld` correspond relatively closely to what native platforms use, for example all Rust functions have a symbol associated with them. Symbols can be referred to in Rust through `extern "C"` blocks, for example:
 
 ```rust
 unsafe extern "C" {
