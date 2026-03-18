@@ -103,7 +103,7 @@ If you're interested in *how* the language is formatted -- providing the input o
 
 ## Rust for Linux
 
-We've discussed the [Rust for Linux roadmap](https://rust-lang.github.io/rust-project-goals/2026/roadmap-rust-for-linux.html) and went over all the other things the [project is tracking](https://github.com/Rust-for-Linux/linux/issues/354) which aren't part of a particular goal. These are to be tracked in the roadmap, and we'll be spinning up goals where that makes sense.
+We've discussed the [Rust for Linux roadmap](https://rust-lang.github.io/rust-project-goals/2026/roadmap-rust-for-linux.html) and went over all the other unstable features the [project is tracking](https://github.com/Rust-for-Linux/linux/issues/2) which aren't part of a particular goal. These are to be tracked in the roadmap, and we'll be spinning up goals where that makes sense.
 
 There is an important milestone of sorts for Rust for Linux: the upcoming Debian 14 stable release (codename: Forky). It is a time when the project can upgrade to using a new Rust version and take advantage of any features that were shipped in the meantime.
 
@@ -115,7 +115,7 @@ Here are some examples:
 
 * [Arbitrary Self Types](https://rust-lang.github.io/rust-project-goals/2026/arbitrary-self-types.html)
 * [Field Projections](https://rust-lang.github.io/rust-project-goals/2026/field-projections.html)
-* `rustdoc --output-format=doctest`
+* [`rustdoc --output-format=doctest`](https://github.com/rust-lang/rust/issues/134529)
 
 Some examples of things that would be nice, but there isn't that much pressure to get them in the next Debian:
 
@@ -133,7 +133,7 @@ Miguel went over the rough timeline of the project: it started with a diverse te
 
 When the project started, there was skepticism around how to introduce Rust into a mature C code base (C was the only language allowed in the kernel -- Linus Torvalds famously was against introducing C++ into the project). There were concerns over Rust's dependency on LLVM leading to poorer portability compared to Linux, as well as having to learn a whole new language and set of tooling with unclear benefits. A lot of time was spent talking to people about their concerns, staying on top of the media coverage, and helping clarify misconceptions and misunderstandings. In 2025, Miguel presented a keynote showcasing what kernel maintainers, team members, stakeholders, and companies had thought about Rust for Linux at [that year's FOSDEM event](https://archive.fosdem.org/2025/schedule/event/fosdem-2025-6507-rust-for-linux/).
 
-In the [RFC Miguel proposed](https://lore.kernel.org/lkml/20210414184604.23473-1-ojeda@kernel.org/), they were honest about the advantages and disadvantages of Rust. A lot of the C experts thought that memory safety was the main appeal, but the RFC highlighted benefits beyond that: a clear separation between safe and unsafe code (with the former having no undefined behavior, memory safety violations, or data races), useful language features (rich enums, pattern matching, modules, hygienic macros), and powerful out-of-the-box tooling (rustfmt, rustdoc, lints).
+In the [RFC Miguel proposed](https://lore.kernel.org/lkml/20210414184604.23473-1-ojeda@kernel.org/), they were honest about the advantages and disadvantages of Rust. A lot of the kernel experts thought that memory safety was the main appeal, but the RFC highlighted benefits beyond that: a clear separation between safe and unsafe code (with the former having no undefined behavior, memory safety violations, or data races), useful language features (rich enums, pattern matching, modules, hygienic macros), and powerful out-of-the-box tooling (rustfmt, rustdoc, lints).
 
 One of their priorities was raising the bar on the quality of Rust code: requiring `SAFETY` comments around each `unsafe` use, consistent code formatting via rustfmt, and having clean generated documentation that passes CI. They demonstrated these principles by writing the gpio driver in Rust and providing a line-by-line comparison with the C implementation. The Rust experience ended up benefitting non-Rust parts as well. Over time, even maintainers of C modules started to adopt Rust concepts when writing and discussing code.
 
