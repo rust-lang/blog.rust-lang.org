@@ -6,16 +6,16 @@ authors = ["Alex Crichton"]
 
 Rust's WebAssembly targets are soon going to experience a change which has a
 risk of breaking existing projects, and this post is intended to notify users of
-this upcoming change, explain what it is, and how to handle it. Specifically all
+this upcoming change, explain what it is, and how to handle it. Specifically, all
 WebAssembly targets in Rust have been linked using the `--allow-undefined` flag
-to `wasm-ld` historically, and this is being removed.
+to `wasm-ld`, and this is being removed.
 
 ## What is `--allow-undefined`?
 
 WebAssembly binaries in Rust today are all created by linking with `wasm-ld`.
-This serves a similar purpose to `ld`, `lld`, and `mold` for example where it
+This serves a similar purpose to `ld`, `lld`, and `mold`, for example; it
 takes separately compiled crates/object files and creates one final binary.
-Since the first introduction of WebAssembly targets in Rust the
+Since the first introduction of WebAssembly targets in Rust, the
 `--allow-undefined` flag has been passed to `wasm-ld`. This flag is documented
 as:
 
@@ -64,10 +64,10 @@ around til today and hasn't changed.
 
 ## What's wrong with `--allow-undefined`?
 
-By passing `--allow-undefined` on all WebAssembly targets rustc is introducing
+By passing `--allow-undefined` on all WebAssembly targets, rustc is introducing
 diverging behavior between other platforms and WebAssembly. The main risk of
-`--allow-undefined` means that misconfiguration or mistakes in building can
-result in broken WebAssembly modules being produced as opposed to compilation
+`--allow-undefined` is that misconfiguration or mistakes in building can
+result in broken WebAssembly modules being produced, as opposed to compilation
 errors. This means that the proverbial can is kicked down the road and lengthens
 the distance from where the problem is discovered to where it was introduced.
 Some example problematic situations are:
@@ -88,9 +88,9 @@ behave more like native platforms.
 ## What is going to break, and how to fix?
 
 In theory, not a whole lot is expected to break from this change. If the final
-WebAssembly binary imports unexpected symbols then it's likely that the binary
-won't be runnable in the desired embedding as the desired embedding probably
-doesn't provide the symbol as a definition. For example if you compile an
+WebAssembly binary imports unexpected symbols, then it's likely that the binary
+won't be runnable in the desired embedding, as the desired embedding probably
+doesn't provide the symbol as a definition. For example, if you compile an
 application for `wasm32-wasip1` if the final binary imports `mylibrary_init`
 then it'll fail to run in most runtimes because it's considered an unresolved
 import. This means that most of the time this change won't break users, but
@@ -141,8 +141,7 @@ quickly restore the old behavior.
 ## When is this change being made?
 
 Removing `--allow-undefined` on wasm targets is being done in
-[rust-lang/rust#149868]. That change is slated to land in nightly soon which
-will get released with Rust 1.96 on 2026-05-28. If you see any issues as a
+[rust-lang/rust#149868]. That change is slated to land in nightly soon, and will then get released with Rust 1.96 on 2026-05-28. If you see any issues as a
 result of this fallout please don't hesitate to file an issue on
 [rust-lang/rust].
 
