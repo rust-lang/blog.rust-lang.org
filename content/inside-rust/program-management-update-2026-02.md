@@ -105,25 +105,22 @@ If you're interested in *how* the language is formatted -- providing the input o
 
 We've discussed the [Rust for Linux roadmap](https://rust-lang.github.io/rust-project-goals/2026/roadmap-rust-for-linux.html) and went over all the other unstable features the [project is tracking](https://github.com/Rust-for-Linux/linux/issues/2) which aren't part of a particular goal. These are to be tracked in the roadmap, and we'll be spinning up goals where that makes sense.
 
-There is an important milestone of sorts for Rust for Linux: the upcoming Debian 14 stable release (codename: Forky). It is a time when the project can upgrade to using a new Rust version and take advantage of any features that were shipped in the meantime.
+There is an important milestone of sorts for Rust for Linux: the upcoming Debian 14 stable release (codename: Forky). It is a time when the project can upgrade to using a new Rust version and take advantage of any features that were shipped in the meantime. Debian releases happen roughly every two years, thus Forky is expected to be released around Summer 2027.
 
-Rust for Linux is using the stable version of the compiler, but they do have access to *unstable features*, and they use those where there's reasonable confidence that things won't change much (or disappear!). There's generally a desire to limit churn, so replacing existing code with new features is something that typically happens when a new Debian stable is released.
+Rust for Linux supports a range of stable versions of the compiler, but it also needs some *[unstable features](https://rust-for-linux.com/unstable-features)*, which the team uses when there's reasonable confidence that things won't change much (or disappear!). There's generally a desire to limit churn, so replacing existing code with new features is something that typically happens when a new Debian stable is released.
 
-With that in mind, we looked at things with the most significant impact that Rust for Linux wants to start using as soon as possible (i.e., with the next Debian). We'll add these to the roadmap.
+With that in mind, we looked at features with the most significant impact that Rust for Linux wants to start using as soon as possible (i.e., with the next Debian):
 
-Here are some examples:
-
-* [Arbitrary Self Types](https://rust-lang.github.io/rust-project-goals/2026/arbitrary-self-types.html)
-* [Field Projections](https://rust-lang.github.io/rust-project-goals/2026/field-projections.html)
+* [Arbitrary Self Types]
+* [Field Projections]
+* [Immovable types and guaranteed destructors](https://rust-lang.github.io/rust-project-goals/2026/move-trait.html)
+* [ADT const params](https://rust-lang.github.io/rust-project-goals/2026/const-generics.html#adt-const-params)
 * [`rustdoc --output-format=doctest`](https://github.com/rust-lang/rust/issues/134529)
 
-Some examples of things that would be nice, but there isn't that much pressure to get them in the next Debian:
+In general, something that provides new language capabilities -- especially when tied in with new syntax -- is something that Rust for Linux wants to use soon so they don't have to rewrite a lot of code later on. If the new syntax can be hidden behind a macro, that is acceptable. Anything behind a feature flag is also acceptable so long as there's a reasonable expectation it will be stabilized roughly in that form (e.g., no massive syntax changes) or won't be removed. For example, while Rust for Linux would benefit greatly from [in-place initialization](https://rust-lang.github.io/rust-project-goals/2026/in-place-init.html) as a native language feature, the team has a working solution for it, so it's not as blocking as [field projections] or [arbitrary self types], the latter being used as an unstable feature.
 
-* [In-place initialization](https://rust-lang.github.io/rust-project-goals/2026/in-place-init.html)
-* [Immovable types and guaranteed destructors](https://rust-lang.github.io/rust-project-goals/2026/move-trait.html)
-
-In general, something that provides new language capabilities -- especially when tied in with new syntax -- is something that Rust for Linux wants to use soon so they don't have to rewrite a lot of code later on. If the new syntax can be hidden behind a macro, that is acceptable. Anything behind a feature flag is also acceptable so long as there's a reasonable expectation it will be stabilised roughly in that form (e.g., no massive syntax changes) or won't be removed.
-
+[field projections]: https://rust-lang.github.io/rust-project-goals/2026/field-projections.html
+[arbitrary self types]: https://rust-lang.github.io/rust-project-goals/2026/arbitrary-self-types.html
 
 ## Rust for CPython
 
