@@ -79,10 +79,16 @@ Some example problematic situations are:
   application then the `mylibrary_init` symbol would end up imported rather than
   producing a linker error saying it's undefined.
 
+* If external tooling is used to process a WebAssembly module, such as `wasm-bindgen` or `wasm-tools component new`, these tools don't know what to do with `"env"` imports by default and they are likely to provide an error message of some form that isn't clearly connected back to the original source code and where the symbols was imported from.
+
+* For web users if you've ever seen an error along the lines of `Uncaught TypeError: Failed to resolve module specifier "env". Relative references must start with either "/", "./", or "../".` this can mean that `"env"` leaked into the final module unexpectedly and the true error is the unefined symbol error, not the lack of `"env"` items provided.
+
 All native platforms consider undefined symbols to be an error by default, and
 thus by passing `--allow-undefined` rustc is introducing surprising behavior on
 WebAssembly targets. The goal of the change is to remove this surprise and
 behave more like native platforms.
+
+
 
 ## What is going to break, and how to fix?
 
