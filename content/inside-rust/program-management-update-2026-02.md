@@ -109,7 +109,7 @@ There is an important milestone of sorts for Rust for Linux: the upcoming Debian
 
 Rust for Linux supports a range of stable versions of the compiler, but it also needs some *[unstable features](https://rust-for-linux.com/unstable-features)*, which the team uses when there's reasonable confidence that things won't change much (or disappear!). There's generally a desire to limit churn, so replacing existing code with new features is something that typically happens when a new Debian stable is released.
 
-With that in mind, we looked at features with the most significant impact that Rust for Linux wants to start using as soon as possible (i.e., with the next Debian):
+With that in mind, we looked at features with the most significant impact that Rust for Linux wants to start using as soon as possible (i.e., with the next Debian). Some of the most notable ones are:
 
 * [Arbitrary Self Types]
 * [Field Projections]
