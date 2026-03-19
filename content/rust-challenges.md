@@ -1,6 +1,6 @@
 +++
 path = "2026/03/20/rust-challenges.md"
-title = "Rust's challenges don't disappear with experience: they evolve"
+title = "What we heard about Rust's challenges, and how we can address them"
 authors = ["Jack Huey"]
 
 [extra]
@@ -10,7 +10,11 @@ team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-projec
 
 When we set out to understand Rust's challenges, we expected to hear about the borrow checker learning curve and maybe some ecosystem gaps. Of course, we did. A lot. But, of course, it's more nuanced.
 
-The conventional wisdom is that Rust has a steep learning curve, but once you "get it," smooth sailing awaits. We found that generally, yes, Rust has a steep learning curve, but that doesn't just mean everything is easy once you understand the basics. While beginners struggle with ownership concepts, experts face domain-specific challenges—async complexity for network developers, certification gaps for safety-critical teams, ecosystem maturity issues for embedded developers.
+The conventional wisdom is that Rust has a steep learning curve, but once you "get it," smooth sailing awaits. We found that while some challenges disappear with experience, they are replaced with others. Beginners struggle with ownership concepts, experts face domain-specific challenges: async complexity for network developers, certification gaps for safety-critical teams, ecosystem maturity issues for embedded developers.
+
+This isn't all doom and gloom though: we ultimately found that despite Rust's challenges, it remains necessary and desired:
+
+> If all the things laid out [to make Rust better] were done, I'd be a happy Rust programmer. If not, I'd still be a Rust programmer. -- Engineering manager adopting Rust for performance
 
 ## The universal challenges that affect everyone
 
