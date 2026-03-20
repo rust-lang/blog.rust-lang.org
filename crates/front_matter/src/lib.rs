@@ -135,6 +135,11 @@ pub fn normalize(
         }
     }
 
+    // Make sure the URL path doesn't contain a `.md` file extension.
+    front_matter
+        .path
+        .truncate(front_matter.path.trim_end_matches(".md").len());
+
     let path = front_matter.path.as_str();
     let date = path.strip_prefix("inside-rust/").unwrap_or(path);
     if date > "2025/04/14" {
