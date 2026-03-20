@@ -47,7 +47,7 @@ However, highly-experienced Rust developers basically never cite the borrow chec
 
 ### Async complexity: the "Three Horsemen" problem
 
-Multiple participants identified `async` as a pain point. Many people, not just beginners, often choose to completely avoid it, instead focusing on solely on sync Rust. This is because, for many, `async` Rust feels completely different.
+Multiple participants identified `async` as a pain point. Many people, not just beginners, often choose to completely avoid it, instead focusing solely on sync Rust. This is because, for many, `async` Rust feels completely different.
 
 > My biggest complaint with Rust is async. If we want to use [a tool], we're forced into that model...not just a different language, but a different programming model...I have zero [experience], I've been avoiding it. - Developer working on a security agent at a large company
 
