@@ -141,7 +141,7 @@ Given that compilation performance affects every single user group, we recommend
 - **Tooling integration** that makes build times less disruptive
 
 We do want to quickly shout a couple of neat community projects that have this goal in mind:
-- The [subsecond crate](https://crates.io/crates/subsecond) by the Dioxius team allows hot-reloading, which can make workflows like those found in GUI development more seamless
+- The [subsecond crate](https://crates.io/crates/subsecond) by the Dioxus team allows hot-reloading, which can make workflows like those found in GUI development more seamless
 - The [Wild linker](https://github.com/davidlattimore/wild) aims to be a fast linker for Linux, with plans for incremental linking
 
 ### Invest in ecosystem guidance and compatibility
