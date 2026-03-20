@@ -1,7 +1,8 @@
 +++
-path = "2026/03/20/rust-challenges.md"
+path = "2026/03/20/rust-challenges"
 title = "What we heard about Rust's challenges, and how we can address them"
 authors = ["Jack Huey"]
+aliases = ["2026/03/20/rust-challenges.md"]
 
 [extra]
 team = "Vision Doc group"
