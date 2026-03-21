@@ -104,7 +104,7 @@ Julien helped to convert the `Makefile`-based `run-make` tests into plain Rust-b
 - Added to and improved the test support library API and implementation; and
 - Improved code organization within the tests to make them easier to understand and maintain.
 
-Just to give you an idea of the scope of his work, he has ported almost [250](https://github.com/rust-lang/rust/pulls?q=is%3Apr+author%3Aoneirical+is%3Amerged) Makefile tests over the span of his GSoC project! If you like puns, check out the branch names of Julien's PRs, as they are simply *fantastic*.
+Just to give you an idea of the scope of his work, he has ported almost [250](https://github.com/rust-lang/rust/pulls?q=is%3Apr+author%3Aoneirical+is%3Amerged) Makefile tests over the span of his GSoC project! If you like puns, check out the branch names of Julien's PRs, as they are simply fan*test*ic.
 
 As a result, Julien has significantly improved the robustness of the `run-make` test suite, and improved the ergonomics of modifying existing `run-make` tests and authoring new `run-make` tests. Multiple contributors have expressed that they were more willing to work with the Rust-based `run-make` tests over the previous `Makefile` versions.
 
