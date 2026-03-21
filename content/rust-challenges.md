@@ -153,7 +153,7 @@ We [previously](https://blog.rust-lang.org/2025/12/19/what-do-people-love-about-
 
 When someone is learning Rust, their programming language background, level of experience, and domain in which they are trying to work in, all influence the challenges they face. We recommend that the Rust Project and the community find ways to *tailor* learning paths to individuals' needs. For example, for someone with a C or C++ background, it might be useful to be able to directly compare references to pointers.
 
-Similarly, having domain-specific learning materials can help newcomers focus on the problems they are facing more specifically than a general "Rust tutorial" might. The [Embedded Rust Book](docs.rust-embedded.org/book/) does this, for example.
+Similarly, having domain-specific learning materials can help newcomers focus on the problems they are facing more specifically than a general "Rust tutorial" might. The [Embedded Rust Book](https://docs.rust-embedded.org/book/) does this, for example.
 
 ### Close the gap between sync and async Rust
 
