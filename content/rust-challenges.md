@@ -65,7 +65,7 @@ The async complexity isn't just about individual developer experience: it is exa
 
 This fragmentation forces architectural decisions early and limits library compatibility, creating a unique challenge among programming languages.
 
-Of course, it would remiss to clarify that plenty of people *do* express positive sentiments of async, often despite the mentioned challenges.
+Of course, it would be remiss to clarify that plenty of people *do* express positive sentiments of async, often despite the mentioned challenges.
 
 ### Ecosystem navigation: choice paralysis and tacit knowledge
 
