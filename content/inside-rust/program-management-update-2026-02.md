@@ -143,20 +143,6 @@ The Rust Project is happy to see cross-pollination in this space, and we'd love 
 
 Other than that, we kept talking about build systems and linking. Compared to when we started, we got through a lot of the immediately pressing topics. So now we're only meeting when there's enough to talk about. That currently works out to about every two weeks. 
 
-## Project perspectives on AI
-
-The Project started seeing more uses of LLM-generated pull requests across the board — from people using it to write or translate commit messages all the way to fully generated PRs where even the reviewer feedback was fed back to the model. The latter, in particular, often causes heavy reviewer burden for low-effort and low-quality changes.
-
-The Project members' attitudes also vary greatly. There are some who use these tools, derive a lot of benefit from them, and believe the Project does too, while others want to ban their use wholesale for ethical, IP rights, labor, environmental, review burden, or externalized cost reasons.
-
-Many free and open source projects have a policy around LLM tool use, disclosures, etc., and it has become clear that for reviewers, maintainers, and moderators to be able to operate effectively, we need a policy as well. These discussions have happened across multiple Zulip channels with a subset of people.
-
-In addition, there may be Foundation members who are heavily involved in the AI space or Project goals proposed to, e.g., integrate AI tooling or standards.
-
-For example, as of this writing, we can't enable/disable GitHub Copilot on individual repositories. If the Compiler team wants to block its use, we can't have any other rust-lang repo have it enabled (and *vice versa*). That is something we'll reach out to GitHub about, but either way, we need a Project-wide policy.
-
-To that end, Niko asked the Project members for their personal views on the topic. You can read through the [comprehensive summary](https://nikomatsakis.github.io/rust-project-perspectives-on-ai/feb27-summary.html) and [all the individual comments](https://nikomatsakis.github.io/rust-project-perspectives-on-ai/all-comments.html). These will serve as a starting point for drafting the actual policy.
-
 ## Worth a look
 
 ### Rust Foundation posts
