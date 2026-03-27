@@ -52,11 +52,9 @@ Here are the recent blog posts we've published:
 
 Given that there are now two people taking on the program management work full time, we created places dedicated to that.
 
-First off, we have a [backlog/board](https://github.com/orgs/rust-lang/projects/69) where we will track our work. Any issue from any rust-lang repo can be added there.
+First, we have a [backlog/board](https://github.com/orgs/rust-lang/projects/69) where we will track our work. Any issue from any rust-lang repo can be added there.
 
-Since some topics won't fit into any of the existing repositories (things like scheduling the *signing & mirroring* meetings, or writing the monthly PM update come to mind), we also had the [program-team repository](https://github.com/rust-lang/program-team) created.
-
-This can double for any documentation and tooling related to the effort.
+Since some topics won't fit into any of the existing repositories (things like scheduling the *signing & mirroring* meetings or writing the monthly PM update come to mind), we also had the [program-team repository](https://github.com/rust-lang/program-team) created. It can also house any documentation and tooling related to the effort.
 
 Finally, you can now use the `T-program` alias on Zulip to talk to us, tag us on a thread, or make a request.
 
@@ -66,7 +64,7 @@ As of this writing, the repo and board are both empty. There are a few issues in
 
 ## C++/Rust interoperability
 
-The Foundation hired [teor](https://github.com/teor2345) for a short-term contract to speed up mapping out of the interop problem space, and they hit the ground running.
+The Foundation hired [teor](https://github.com/teor2345) for a short-term contract to speed up the mapping of the interop problem space, and they hit the ground running.
 
 teor read through all the existing documents that we had, created a [template for each issue / problem statement](https://github.com/rustfoundation/interop-initiative/blob/main/problem-space/0000-template.md) (e.g., exceptions & unwinding or incompatible allocators), immediately started [documenting the known ones](https://github.com/rustfoundation/interop-initiative/tree/main/problem-space) and filing issues for the various [use cases](https://github.com/rustfoundation/interop-initiative/issues) that projects integrating these two languages have.
 
@@ -78,7 +76,7 @@ If this is an area you're interested in, please take a look at the [interop-init
 
 ## Signing and mirroring
 
-Following up from [January](//inside-rust/2026/02/11/program-management-update-2026-01/#crates-io-mirroring-and-verification), Walter Pearce proposed a draft of the Project goal. It focuses on building an MVP that sets up a mirror for Rustup targets. This would happen fully on the backend (and should therefore be completely transparent to any users) to look at bandwidth and logging cost reduction, stand up the security infrastructure, and get hands-on information to build the ultimate solution.
+Following up from [January](https://blog.rust-lang.org/inside-rust/2026/02/11/program-management-update-2026-01/#crates-io-mirroring-and-verification), Walter Pearce proposed a draft of the Project goal. It focuses on building an MVP that sets up a mirror for Rustup targets. This would happen fully on the backend (and should therefore be completely transparent to any users) to look at bandwidth and logging cost reduction, stand up the security infrastructure, and get hands-on information to build the ultimate solution.
 
 We've added a few more people to the group (e.g., Rustup folks), and the draft is under active discussion. There are still questions to resolve both on the technical and communication sides, but the proposal seems to be in a solid place, and we hope to have a PR open soon.
 
@@ -86,19 +84,19 @@ We've added a few more people to the group (e.g., Rustup folks), and the draft i
 
 For the last several months, a lot of the meetings ended up canceled. At the end of January, I scheduled a new time with a fortnightly cadence, and we've met two times since.
 
-In the first one, we triaged all the nominated issues. Recognizing the capacity issues (the Style team has three members, and lately, one of them has not been able to dedicate a lot of time), TC proposed we focus on getting things unblocked while leaning on the Project members.
+In the first one, we triaged all the nominated issues. Recognizing the capacity issues (the Style team has three members, and lately, one of them has not been able to dedicate a lot of time), TC proposed we focus on getting things unblocked while leaning on others.
 
 So, when an issue comes in, the Style team considers it, figures out where it fits within the existing guidelines, and then asks the submitter for a concrete proposal instead of writing it all down themselves.
 
-This practice is similar to how the Lang team operates, born out of similar capacity issues.
+This practice is similar to how the Lang team operates.
 
 The last two meetings felt much more productive that way, but the capacity issue remains. We need help!
 
-If you're interested in *how* the language is formatted -- providing input on what rustfmt should do -- we would love to have you! You can join the [t-style channel](https://rust-lang.zulipchat.com/#narrow/channel/346005-t-style) or [attend one of our meetings](https://rust-lang.github.io/calendar/style.ics).
+If you're interested in *how* the language is formatted — providing input on what rustfmt should do — we would love to have you! You can join the [t-style channel](https://rust-lang.zulipchat.com/#narrow/channel/346005-t-style) or [attend one of our meetings](https://rust-lang.github.io/calendar/style.ics).
 
 ## Rust for Linux
 
-We've discussed the [Rust for Linux roadmap](https://rust-lang.github.io/rust-project-goals/2026/roadmap-rust-for-linux.html) and went over all the other unstable features the [project is tracking](https://github.com/Rust-for-Linux/linux/issues/2) that are not part of a particular goal. These are to be tracked in the roadmap, and we'll be spinning up goals where that makes sense.
+We discussed the [Rust for Linux roadmap](https://rust-lang.github.io/rust-project-goals/2026/roadmap-rust-for-linux.html) and went over all the other unstable features the [project is tracking](https://github.com/Rust-for-Linux/linux/issues/2) that are not part of a particular goal. These are to be tracked in the roadmap, and we'll be spinning up goals where that makes sense.
 
 There is an important milestone of sorts for Rust for Linux: the upcoming Debian 14 Stable release (codename: Forky). The version of the Rust toolchain provided by Debian Stable releases is what Rust for Linux currently uses to decide which minimum version to support. For instance, assuming Debian Forky releases around Summer 2027 with, say, Rust 1.104.0, then Rust for Linux will be able to use the new (and possibly unstable) features available in that version when the kernel's MSRV is bumped some time after Debian's release.
 
@@ -111,12 +109,12 @@ Rust for Linux supports a range of stable toolchains, each having access to a su
 
 With that in mind, we looked at features with the most significant impact that Rust for Linux wants to start using as soon as the next MSRV upgrade becomes possible. Some of the most notable ones are:
 
-* [Arbitrary Self Types]
-* [Field Projections]
+* [Arbitrary self types]
+* [Field projections]
 * [Immovable types and guaranteed destructors](https://rust-lang.github.io/rust-project-goals/2026/move-trait.html)
 * [ADT const params](https://rust-lang.github.io/rust-project-goals/2026/const-generics.html#adt-const-params)
 * [`rustdoc --output-format=doctest`](https://github.com/rust-lang/rust/issues/134529)
-* [Relaxing Rust's orphan rules.](https://github.com/rust-lang/rust/issues/136979) Later this year, the team wants to split the monolithic `kernel` crate into sub-crates, at which point they will need to deal with the orphan rules. One approach is to relax the orphan rules within a set of crates (a *coherence domain*). This idea was informally proposed in 2022 and [recently revisited](https://github.com/rust-lang/rust/pull/150652#issuecomment-3707365609). We hope to formalize this approach (or consider another) through continued discussions.
+* [Relaxing Rust's orphan rules](https://github.com/rust-lang/rust/issues/136979) — later this year, the team wants to split the monolithic `kernel` crate into sub-crates, at which point they will need to deal with the orphan rules. One approach is to relax the orphan rules within a set of crates (a *coherence domain*). This idea was informally proposed in 2022 and [recently revisited](https://github.com/rust-lang/rust/pull/150652#issuecomment-3707365609). We hope to formalize this approach (or consider another) through continued discussions.
 
 In general, Rust for Linux wants to start using new language capabilities (especially those with new syntax) as soon as the MSRV allows, since supporting both old and new forms across the toolchains can become burdensome, and delaying adoption may also lead to large-scale refactoring later. If the new syntax can be hidden behind a macro, that is usually acceptable. Likewise, using an unstable feature is acceptable so long as there's a reasonable expectation that it will be stabilized in roughly that form or at least won't be removed. For example, immovable types could supersede `Pin`, leading to massive syntactic changes. A special case is [in-place initialization](https://rust-lang.github.io/rust-project-goals/2026/in-place-init.html): the team has a working solution for the underlying problem, with a potential path to integrate with the eventual language feature, so its absence is less blocking than [field projections], which doesn't exist in any form yet.
 
