@@ -48,7 +48,6 @@ Here are the recent blog posts we've published:
 * [November 2025](https://blog.rust-lang.org/2025/12/16/Project-Goals-2025-November-Update.md/)
 * [October 2025](https://blog.rust-lang.org/2025/11/19/project-goals-update-october-2025/)
 
-
 ## Program management tracking
 
 Given that there are now two people taking on the program management work full time, we created places dedicated to that.
@@ -65,7 +64,6 @@ We're hoping this will make it clearer how to reach out to Program management, p
 
 As of this writing, the repo and board are both empty. There are a few issues in other repos that we can link there, but mainly, Tomas needs to move the contents of his Rust org-mode file over.
 
-
 ## C++/Rust interoperability
 
 The Foundation hired [teor](https://github.com/teor2345) for a short-term contract to speed up mapping out of the interop problem space, and they hit the ground running.
@@ -78,13 +76,11 @@ These updates and the focus on mapping out the technical aspects are a result of
 
 If this is an area you're interested in, please take a look at the [interop-initiative](https://github.com/rustfoundation/interop-initiative) and the [t-lang/interop Zulip channel](https://rust-lang.zulipchat.com/#narrow/channel/427678-t-lang.2Finterop).
 
-
 ## Signing and mirroring
 
 Following up from [January](//inside-rust/2026/02/11/program-management-update-2026-01/#crates-io-mirroring-and-verification), Walter Pearce proposed a draft of the Project goal. It focuses on building an MVP that sets up a mirror for Rustup targets. This would happen fully on the backend (and should therefore be completely transparent to any users) to look at bandwidth and logging cost reduction, stand up the security infrastructure, and get hands-on information to build the ultimate solution.
 
 We've added a few more people to the group (e.g., Rustup folks), and the draft is under active discussion. There are still questions to resolve both on the technical and communication sides, but the proposal seems to be in a solid place, and we hope to have a PR open soon.
-
 
 ## Style
 
@@ -99,7 +95,6 @@ This practice is similar to how the Lang team operates, born out of similar capa
 The last two meetings felt much more productive that way, but the capacity issue remains. We need help!
 
 If you're interested in *how* the language is formatted -- providing input on what rustfmt should do -- we would love to have you! You can join the [t-style channel](https://rust-lang.zulipchat.com/#narrow/channel/346005-t-style) or [attend one of our meetings](https://rust-lang.github.io/calendar/style.ics).
-
 
 ## Rust for Linux
 
@@ -146,7 +141,7 @@ All of this strongly resonated with the CPython developers, who saw very similar
 
 The Rust Project is happy to see cross-pollination in this space, and we'd love to see (and help!) more projects adding Rust to existing code.
 
-Other than that, we kept talking about build systems and linking. Compared to when we started, we got through a lot of the immediately pressing topics. So now we're only meeting when there's enough to talk about. That currently works out to about every two weeks. 
+Other than that, we kept talking about build systems and linking. Compared to when we started, we got through a lot of the immediately pressing topics. So now we're only meeting when there's enough to talk about. That currently works out to about every two weeks.
 
 ## Worth a look
 
@@ -161,7 +156,6 @@ Other than that, we kept talking about build systems and linking. Compared to wh
 * [Announcing Rust 1.94.0](https://blog.rust-lang.org/2026/03/05/Rust-1.94.0/)
 * [2025 State of Rust Survey Results](https://blog.rust-lang.org/2026/03/02/2025-State-Of-Rust-Survey-results/)
 * [Rust participates in Google Summer of Code 2026](https://blog.rust-lang.org/2026/02/19/Rust-participates-in-GSoC-2026/)
-
 
 ## Stats
 
