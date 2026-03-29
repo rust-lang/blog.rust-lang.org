@@ -67,7 +67,7 @@ For developers programming for embedded systems, we heard most often about the d
 
 ### Safety-critical
 
-We made an [entire post](https://blog.rust-lang.org/2026/01/14/what-does-it-take-to-ship-rust-in-safety-critical/) about shipping Rust in safety critical systems. The biggest issue for safety-crticial developers with Rust is the lack of availability or maturity for tools to *certify* their Rust code.
+We made an [entire post](https://blog.rust-lang.org/2026/01/14/what-does-it-take-to-ship-rust-in-safety-critical/) about shipping Rust in safety critical systems. The biggest issue for safety-critical developers with Rust is the lack of availability or maturity for tools to *certify* their Rust code.
 
 ### GUI development
 
