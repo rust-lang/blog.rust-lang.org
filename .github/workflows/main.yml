@@ -18,7 +18,7 @@ jobs:
       - run: rustup override set ${{ env.RUST_VERSION }}
       - run: rustup component add clippy
       - run: rustup component add rustfmt
-      - uses: Swatinem/rust-cache@779680da715d629ac1d338a641029a2f4372abb5 # v2.8.2
+      - uses: Swatinem/rust-cache@c19371144df3bb44fab255c43d04cbc2ab54d1c4 # v2.9.1
 
       - run: cargo clippy --workspace -- -D warnings
       - run: cargo fmt --check --all
@@ -36,7 +36,7 @@ jobs:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - run: rustup override set ${{ env.RUST_VERSION }}
-      - uses: Swatinem/rust-cache@779680da715d629ac1d338a641029a2f4372abb5 # v2.8.2
+      - uses: Swatinem/rust-cache@c19371144df3bb44fab255c43d04cbc2ab54d1c4 # v2.9.1
       - name: Install Zola
         run: cargo install --locked --git https://github.com/getzola/zola --rev 45d3f8d6285f0b47013c5fa31eb405332118af8b
 
@@ -57,7 +57,7 @@ jobs:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - run: rustup override set ${{ env.RUST_VERSION }}
-      - uses: Swatinem/rust-cache@779680da715d629ac1d338a641029a2f4372abb5 # v2.8.2
+      - uses: Swatinem/rust-cache@c19371144df3bb44fab255c43d04cbc2ab54d1c4 # v2.9.1
 
       - run: cargo test -p front_matter -- --include-ignored date_is_set
 
