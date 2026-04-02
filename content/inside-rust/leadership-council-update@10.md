@@ -47,7 +47,7 @@ In February we welcomed [Nurzhan Saken] as our second Program Manager joining [T
 
 ### Project priorities budget
 
-The Foundation approved a budget of $650,000 (USD) for the Project to spend at their discretion in 2026. For the past several months the Council has been working on allocating towards various priorities. The following items have been approved:
+Since 2024, the Project has managed a *Project Priorities* budget. The council spends funds from this budget on activities that support the work of the Project. At the start of 2026, the Foundation allocated to this budget $306k (USD) in new funds and transferred $106k in remaining funds from the Project Grants program. For the past several months the Council has been working on allocating towards various priorities. The following items have been approved:
 
 - Raised our travel grant limit to $100k ([#254](https://github.com/rust-lang/leadership-council/pull/254)). Note that in addition to this, the Foundation is providing an additional $50k for RustConf travel.
 - Allocated an additional $160k for the Program Manager program, which combined with the remaining budget from 2025 gave us about $344k starting balance for the year. ([#255](https://github.com/rust-lang/leadership-council/issues/255))
