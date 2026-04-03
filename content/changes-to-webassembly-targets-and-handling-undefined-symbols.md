@@ -25,7 +25,7 @@ as:
                           --unresolved-symbols=ignore-all
 ```
 
-The term "undefined" here specifically means wiwth respect to symbol resolution in `wasm-ld` itself. Symbols used by `wasm-ld` correspond relatively closely to what native platforms use, for example all Rust functions have a symbol associated with them. Symbols can be referred to in Rust through `extern "C"` blocks, for example:
+The term "undefined" here specifically means with respect to symbol resolution in `wasm-ld` itself. Symbols used by `wasm-ld` correspond relatively closely to what native platforms use, for example all Rust functions have a symbol associated with them. Symbols can be referred to in Rust through `extern "C"` blocks, for example:
 
 ```rust
 unsafe extern "C" {
@@ -59,7 +59,7 @@ symbol in the final WebAssembly module that is produced.
 The precise history here is somewhat lost to time, but the current understanding
 is that `--allow-undefined` was effectively required in the very early days of
 introducing `wasm-ld` to the Rust toolchain. This historical workaround stuck
-around til today and hasn't changed.
+around till today and hasn't changed.
 
 ## What's wrong with `--allow-undefined`?
 
