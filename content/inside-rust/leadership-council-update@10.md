@@ -1,5 +1,5 @@
 +++
-path = "inside-rust/2026/04/03/leadership-council-update"
+path = "inside-rust/2026/04/06/leadership-council-update"
 title = "Leadership Council update — March 2026"
 authors = ["Eric Huss"]
 
