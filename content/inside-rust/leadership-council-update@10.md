@@ -78,7 +78,7 @@ The team has been working very hard on a proposal which is now open for comments
 
 ### Contribution policy
 
-A lively discussion has been taking place around policies for AI contributions. An interim proposal was submitted in [#273](https://github.com/rust-lang/leadership-council/issues/273), which was intended to address some of the immediate concerns in the `rust-lang/rust` repository. A second proposal was also submitted that focuses on the desired kinds of contributions and that has since moved to [RFC#3936](https://github.com/rust-lang/rfcs/pull/3936) to gather comments from the project. This is an important question for the Project, and we expect this to continue to be a focus in the near term as we continue discussions and consider different proposals.
+A lively discussion has been taking place around policies for AI contributions, prompted by an increase of "slop" submissions to the project. An interim proposal was submitted in [#273](https://github.com/rust-lang/leadership-council/issues/273), which was intended to address some of the immediate concerns in the `rust-lang/rust` repository. A second proposal was also submitted that focuses on the desired kinds of contributions and that has since moved to [RFC#3936](https://github.com/rust-lang/rfcs/pull/3936) to gather comments from the project. This is an important question for the Project, and we expect this to continue to be a focus in the near term as we continue discussions and consider different proposals.
 
 ### Additional items
 
