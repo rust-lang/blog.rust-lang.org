@@ -1,5 +1,5 @@
 +++
-path = "2026/04/02/changes-to-webassembly-targets-and-handling-undefined-symbols"
+path = "2026/04/04/changes-to-webassembly-targets-and-handling-undefined-symbols"
 title = "Changes to WebAssembly targets and handling undefined symbols"
 authors = ["Alex Crichton"]
 +++
