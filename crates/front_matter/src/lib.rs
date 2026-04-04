@@ -64,7 +64,10 @@ impl Extra {
 /// the tuple.
 pub fn parse(markdown: &str) -> eyre::Result<(FrontMatter, &str)> {
     if !markdown.starts_with("+++\n") {
-        bail!("missing start of TOML front matter (+++)");
+        bail!(
+            "missing start of TOML front matter (+++), found: {:?}",
+            markdown.chars().take(4).collect::<String>()
+        );
     }
     let (front_matter, content) = markdown
         .trim_start_matches("+++\n")
