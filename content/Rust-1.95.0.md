@@ -1,0 +1,118 @@
++++
+path = "2026/04/16/Rust-1.95.0"
+title = "Announcing Rust 1.95.0"
+authors = ["The Rust Release Team"]
+aliases = ["releases/1.95.0"]
+
+[extra]
+release = true
++++
+
+The Rust team is happy to announce a new version of Rust, 1.95.0. Rust is a programming language empowering everyone to build reliable and efficient software.
+
+If you have a previous version of Rust installed via `rustup`, you can get 1.95.0 with:
+
+```console
+$ rustup update stable
+```
+
+If you don't have it already, you can [get `rustup`](https://www.rust-lang.org/install.html) from the appropriate page on our website, and check out the [detailed release notes for 1.95.0](https://doc.rust-lang.org/stable/releases.html#version-1950-2026-04-16).
+
+If you'd like to help us out by testing future releases, you might consider updating locally to use the beta channel (`rustup default beta`) or the nightly channel (`rustup default nightly`). Please [report](https://github.com/rust-lang/rust/issues/new/choose) any bugs you might come across!
+
+## What's in 1.95.0 stable
+
+### `cfg_select!`
+
+Rust 1.95 introduces a
+[`cfg_select!`](https://doc.rust-lang.org/stable/std/macro.cfg_select.html)
+macro that acts roughly similar to a compile-time `match` on `cfg`s. This
+fulfills the same purpose as the popular
+[`cfg-if`](https://crates.io/crates/cfg-if) crate, although with a different
+syntax. `cfg_select!` expands to the right-hand side of the first arm whose
+configuration predicate evaluates to `true`. Some examples:
+
+```rust
+cfg_select! {
+    unix => {
+        fn foo() { /* unix specific functionality */ }
+    }
+    target_pointer_width = "32" => {
+        fn foo() { /* non-unix, 32-bit functionality */ }
+    }
+    _ => {
+        fn foo() { /* fallback implementation */ }
+    }
+}
+
+let is_windows_str = cfg_select! {
+    windows => "windows",
+    _ => "not windows",
+};
+```
+
+### if-let guards in matches
+
+Rust 1.88 stabilized [let chains](https://blog.rust-lang.org/2025/06/26/Rust-1.88.0/#let-chains). Rust
+1.95 brings that capability into match expressions, allowing for conditionals
+based on pattern matching.
+
+```rust
+match value {
+    Some(x) if let Ok(y) = compute(x) => {
+        // Both `x` and `y` are available here
+        println!("{}, {}", x, y);
+    }
+    _ => {}
+}
+```
+
+Note that the compiler will not currently consider the patterns matched in `if
+let` guards as part of the exhaustiveness evaluation of the overall match, just
+like `if` guards.
+
+### `assert_matches!`
+
+When checking whether an expression matches a pattern, [`assert_matches!`] helps
+avoid needing to write out a match statement or lower the pattern into a series
+of conditional assertions. Unlike `assert!(matches!(...))`, this form will
+print the `Debug` representation of the value if the assertion fails.
+
+Note that this macro is not placed in the prelude, and must either be imported
+or written with a relative path (as done in the example below).
+
+```rust
+std::assert_matches!(apples, Some(x) if x >= 100, "expected at least 100 apples");
+```
+
+[`debug_assert_matches!`] is also stabilized in this release.
+
+[`assert_matches!]: https://doc.rust-lang.org/stable/std/macro.assert_matches.html
+[`debug_assert_matches!]: https://doc.rust-lang.org/stable/std/macro.debug_assert_matches.html
+
+### Stabilized APIs
+
+See draft release notes, will get copied after those are non-draft:
+
+<https://github.com/rust-lang/rust/issues/154711#:~:text=Stabilized%20APIs>
+
+### Destabilized JSON target specs
+
+Rust 1.95 removes stable support for passing a custom target specification to
+`rustc`. This should **not** affect any Rust users using a fully stable
+toolchain, as building the standard library (including just `core`) already
+required using nightly-only features.
+
+We are generally interested in use cases that require custom target
+specifications. TODO: Do we want a link to an issue where people can comment
+with a use case?
+
+### Other changes
+
+Check out everything that changed in [Rust](https://github.com/rust-lang/rust/releases/tag/1.95.0), [Cargo](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-195-2026-04-16), and [Clippy](https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-195).
+
+## Contributors to 1.95.0
+
+Many people came together to create Rust 1.95.0. We couldn't have done it without all of you. [Thanks!](https://thanks.rust-lang.org/rust/1.95.0/)
+
+[platform-support]: https://doc.rust-lang.org/rustc/platform-support.html
