@@ -87,8 +87,8 @@ std::assert_matches!(apples, Some(x) if x >= 100, "expected at least 100 apples"
 
 [`debug_assert_matches!`] is also stabilized in this release.
 
-[`assert_matches!]: https://doc.rust-lang.org/stable/std/macro.assert_matches.html
-[`debug_assert_matches!]: https://doc.rust-lang.org/stable/std/macro.debug_assert_matches.html
+[`assert_matches!`]: https://doc.rust-lang.org/stable/std/macro.assert_matches.html
+[`debug_assert_matches!`]: https://doc.rust-lang.org/stable/std/macro.debug_assert_matches.html
 
 ### Stabilized APIs
 
