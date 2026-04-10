@@ -71,25 +71,6 @@ Note that the compiler will not currently consider the patterns matched in `if
 let` guards as part of the exhaustiveness evaluation of the overall match, just
 like `if` guards.
 
-### `assert_matches!`
-
-When checking whether an expression matches a pattern, [`assert_matches!`] helps
-avoid needing to write out a match statement or lower the pattern into a series
-of conditional assertions. Unlike `assert!(matches!(...))`, this form will
-print the `Debug` representation of the value if the assertion fails.
-
-Note that this macro is not placed in the prelude, and must either be imported
-or written with a relative path (as done in the example below).
-
-```rust
-std::assert_matches!(apples, Some(x) if x >= 100, "expected at least 100 apples");
-```
-
-[`debug_assert_matches!`] is also stabilized in this release.
-
-[`assert_matches!`]: https://doc.rust-lang.org/stable/std/macro.assert_matches.html
-[`debug_assert_matches!`]: https://doc.rust-lang.org/stable/std/macro.debug_assert_matches.html
-
 ### Stabilized APIs
 
 See draft release notes, will get copied after those are non-draft:
@@ -98,8 +79,8 @@ See draft release notes, will get copied after those are non-draft:
 
 ### Destabilized JSON target specs
 
-Rust 1.95 removes stable support for passing a custom target specification to
-`rustc`. This should **not** affect any Rust users using a fully stable
+Rust 1.95 removes support on stable for passing a custom target specification
+to `rustc`. This should **not** affect any Rust users using a fully stable
 toolchain, as building the standard library (including just `core`) already
 required using nightly-only features.
 
