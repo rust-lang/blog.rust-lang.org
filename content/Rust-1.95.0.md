@@ -84,9 +84,8 @@ to `rustc`. This should **not** affect any Rust users using a fully stable
 toolchain, as building the standard library (including just `core`) already
 required using nightly-only features.
 
-We are generally interested in use cases that require custom target
-specifications. TODO: Do we want a link to an issue where people can comment
-with a use case?
+We're also gathering use cases for custom targets on the [tracking issue](https://github.com/rust-lang/rust/issues/151528)
+as we consider whether some form of this feature should eventually be stabilized.
 
 ### Other changes
 
