@@ -12,7 +12,7 @@ We have been porting the crates.io frontend from Ember.js to Svelte 5 ([tracking
 
 The Svelte app is intended as a 1:1 port of the Ember.js app for now. It should look and behave the same (our UI test suite, including visual regression testing, already passes against both), so any significant difference you notice is a bug we want to hear about. To keep the two apps easy to compare, a few rough edges of the Ember.js app have been carried over as well. Those will get smoothed out once we are no longer maintaining two frontends in parallel.
 
-Both apps are served from the same domain and share session state and data, so you can just visit <https://crates.io/svelte/> and keep using the site normally without logging in again. If something looks or behaves differently than on the Ember.js app, please let us know, either via [GitHub](https://github.com/rust-lang/crates.io/issues/new?template=bug_report.yml) or on Zulip ([#t-crates-io](https://rust-lang.zulipchat.com/#narrow/channel/318791-t-crates-io).
+Both apps are served from the same domain and share session state and data, so you can just visit <https://crates.io/svelte/> and keep using the site normally without logging in again. If something looks or behaves differently than on the Ember.js app, please let us know, either via [GitHub](https://github.com/rust-lang/crates.io/issues/new?template=bug_report.yml) or on Zulip ([#t-crates-io](https://rust-lang.zulipchat.com/#narrow/channel/318791-t-crates-io)).
 
 If testing goes well, we'll switch the Svelte app to the default in the coming weeks, and we're looking forward to what we can build on top of it from there.
 
