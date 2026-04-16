@@ -16,4 +16,4 @@ Both apps are served from the same domain and share session state and data, so y
 
 If testing goes well, we'll switch the Svelte app to the default in the coming weeks, and we're looking forward to what we can build on top of it from there.
 
-Finally, a big thank you to [@eth3lbert](https://github.com/eth3lbert) from the crates.io team for reviewing the bulk of the migration pull requests, and to the [Svelte team](https://svelte.dev) for building such an enjoyable web framework.
+We want to thank the [Ember.js team](https://emberjs.com/teams/) for a framework that served crates.io well for many years, and the [Svelte team](https://svelte.dev) for making the transition to something new so enjoyable. A big thank you also to [@eth3lbert](https://github.com/eth3lbert) from the crates.io team for reviewing the bulk of the migration pull requests.
