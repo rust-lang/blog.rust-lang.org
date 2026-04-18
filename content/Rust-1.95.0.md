@@ -73,12 +73,12 @@ like `if` guards.
 
 ### Stabilized APIs
 
-- [`MaybeUninit<[T; N]>: From<[MaybeUninit<T>; N]>`](https://doc.rust-lang.org/stable/std/mem/union.MaybeUninit.html#impl-From%3CMaybeUninit%3C%5BT;+N%5D%3E%3E-for-%5BMaybeUninit%3CT%3E;+N%5D)
+- [`MaybeUninit<[T; N]>: From<[MaybeUninit<T>; N]>`](https://doc.rust-lang.org/stable/std/mem/union.MaybeUninit.html#impl-From%3C%5BMaybeUninit%3CT%3E;+N%5D%3E-for-MaybeUninit%3C%5BT;+N%5D%3E)
 - [`MaybeUninit<[T; N]>: AsRef<[MaybeUninit<T>; N]>`](https://doc.rust-lang.org/stable/std/mem/union.MaybeUninit.html#impl-AsRef%3C%5BMaybeUninit%3CT%3E;+N%5D%3E-for-MaybeUninit%3C%5BT;+N%5D%3E)
 - [`MaybeUninit<[T; N]>: AsRef<[MaybeUninit<T>]>`](https://doc.rust-lang.org/stable/std/mem/union.MaybeUninit.html#impl-AsRef%3C%5BMaybeUninit%3CT%3E%5D%3E-for-MaybeUninit%3C%5BT;+N%5D%3E)
 - [`MaybeUninit<[T; N]>: AsMut<[MaybeUninit<T>; N]>`](https://doc.rust-lang.org/stable/std/mem/union.MaybeUninit.html#impl-AsMut%3C%5BMaybeUninit%3CT%3E;+N%5D%3E-for-MaybeUninit%3C%5BT;+N%5D%3E)
 - [`MaybeUninit<[T; N]>: AsMut<[MaybeUninit<T>]>`](https://doc.rust-lang.org/stable/std/mem/union.MaybeUninit.html#impl-AsMut%3C%5BMaybeUninit%3CT%3E%5D%3E-for-MaybeUninit%3C%5BT;+N%5D%3E)
-- [`[MaybeUninit<T>; N]: From<MaybeUninit<[T; N]>>`](https://doc.rust-lang.org/stable/std/mem/union.MaybeUninit.html#impl-From%3C%5BMaybeUninit%3CT%3E;+N%5D%3E-for-MaybeUninit%3C%5BT;+N%5D%3E)
+- [`[MaybeUninit<T>; N]: From<MaybeUninit<[T; N]>>`](https://doc.rust-lang.org/stable/std/mem/union.MaybeUninit.html#impl-From%3CMaybeUninit%3C%5BT;+N%5D%3E%3E-for-%5BMaybeUninit%3CT%3E;+N%5D)
 - [`Cell<[T; N]>: AsRef<[Cell<T>; N]>`](https://doc.rust-lang.org/stable/std/cell/struct.Cell.html#impl-AsRef%3C%5BCell%3CT%3E;+N%5D%3E-for-Cell%3C%5BT;+N%5D%3E)
 - [`Cell<[T; N]>: AsRef<[Cell<T>]>`](https://doc.rust-lang.org/stable/std/cell/struct.Cell.html#impl-AsRef%3C%5BCell%3CT%3E%5D%3E-for-Cell%3C%5BT;+N%5D%3E)
 - [`Cell<[T]>: AsRef<[Cell<T>]>`](https://doc.rust-lang.org/stable/std/cell/struct.Cell.html#impl-AsRef%3C%5BCell%3CT%3E%5D%3E-for-Cell%3C%5BT%5D%3E)
