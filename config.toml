@@ -7,15 +7,13 @@ feed_filenames = ["feed.xml", "releases.json"]
 build_search_index = false
 
 [markdown]
-highlight_code = true
-highlight_theme = "css"
-highlight_themes_css = [
-  { theme = "boron", filename = "styles/syntax-theme-dark.css" },
-  { theme = "OneHalfLight", filename = "styles/syntax-theme-light.css" },
-]
 bottom_footnotes = true
 insert_anchor_links = "left"
-extra_syntaxes_and_themes = ["syntaxes"]
+
+[markdown.highlighting]
+light_theme = "light-plus"
+dark_theme = "dark-plus"
+style = "class"
 
 [extra]
 # Put all your custom variables here
