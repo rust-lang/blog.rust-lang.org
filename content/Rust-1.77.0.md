@@ -87,7 +87,7 @@ flag in the relevant Cargo profile.
 
 - [`array::each_ref`](https://doc.rust-lang.org/stable/std/primitive.array.html#method.each_ref)
 - [`array::each_mut`](https://doc.rust-lang.org/stable/std/primitive.array.html#method.each_mut)
-- [`core::net`](https://doc.rust-lang.org/stable/core/net/index.html)
+- [`mod core::net`](https://doc.rust-lang.org/stable/core/net/index.html)
 - [`f32::round_ties_even`](https://doc.rust-lang.org/stable/std/primitive.f32.html#method.round_ties_even)
 - [`f64::round_ties_even`](https://doc.rust-lang.org/stable/std/primitive.f64.html#method.round_ties_even)
 - [`mem::offset_of!`](https://doc.rust-lang.org/stable/std/mem/macro.offset_of.html)
