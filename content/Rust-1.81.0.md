@@ -96,7 +96,7 @@ note: the lint level is defined here
 
 ### Stabilized APIs
 
-- [`core::error`](https://doc.rust-lang.org/stable/core/error/index.html)
+- [`mod core::error`](https://doc.rust-lang.org/stable/core/error/index.html)
 - [`hint::assert_unchecked`](https://doc.rust-lang.org/stable/core/hint/fn.assert_unchecked.html)
 - [`fs::exists`](https://doc.rust-lang.org/stable/std/fs/fn.exists.html)
 - [`AtomicBool::fetch_not`](https://doc.rust-lang.org/stable/core/sync/atomic/struct.AtomicBool.html#method.fetch_not)

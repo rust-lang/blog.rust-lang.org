@@ -149,7 +149,7 @@ In Rust 1.62.0 we introduced `cargo add`, a command line utility to add dependen
 - [`core::hint::black_box`](https://doc.rust-lang.org/stable/std/hint/fn.black_box.html)
 - [`Duration::try_from_secs_{f32,f64}`](https://doc.rust-lang.org/stable/std/time/struct.Duration.html#method.try_from_secs_f32)
 - [`Option::unzip`](https://doc.rust-lang.org/stable/std/option/enum.Option.html#method.unzip)
-- [`std::os::fd`](https://doc.rust-lang.org/stable/std/os/fd/index.html)
+- [`mod std::os::fd`](https://doc.rust-lang.org/stable/std/os/fd/index.html)
 
 ### Other changes
 
