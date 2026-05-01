@@ -59,7 +59,7 @@ In order to enable PGO for rustc's LLVM we basically follow the steps laid out i
     [llvm]
 
     # Pass extra compiler and linker flags to the LLVM CMake build.
-    # <PROFDATA_DIR> must be an absolute path to a writeable
+    # <PROFDATA_DIR> must be an absolute path to a writable
     # directory, like for example /tmp/my-rustc-profdata
     cflags = "-fprofile-generate=<PROFDATA_DIR>"
     cxxflags = "-fprofile-generate=<PROFDATA_DIR>"
