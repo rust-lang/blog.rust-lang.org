@@ -3,7 +3,7 @@
 // val: "light" | "dark"
 function renderTheme(val) {
     document.documentElement.setAttribute("data-theme", val);
-    document.getElementById("syntax-theme").href = `/styles/syntax-theme-${val}.css`
+    document.getElementById("syntax-theme").href = `/giallo-${val}.css`
 }
 
 function changeThemeTo(val) {
