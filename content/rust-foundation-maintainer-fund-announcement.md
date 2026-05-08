@@ -8,9 +8,10 @@ We've established the *Rust Foundation Maintainer Fund* (RFMF)!
 
 Concretely this means we've come up with a single system for taking in funds from large sponsors as well as individual sponsors, and directing those funds *exclusively* to maintainers.
 
-We're funding maintainers via the following three means:
+We're funding maintainers via the following means:
 
 * the existing program management program,
+* the existing compiler-ops program,
 * the proposed [Project Grants program], which provides modest stipends to recognize and support existing contributors, and
 * the new (established just for the RFMF) Maintainer in Residence program.
 
