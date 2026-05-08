@@ -10,8 +10,8 @@ Concretely this means we've come up with a single system for taking in funds fro
 
 We're funding maintainers via the following means:
 
-* the existing program management program,
-* the existing compiler-ops program,
+* the existing [program management program](https://blog.rust-lang.org/inside-rust/2026/04/09/program-management-update-2026-03/),
+* the existing [compiler-ops program](https://blog.rust-lang.org/inside-rust/2025/06/05/a-glance-at-the-team-compiler-operations),
 * the proposed [Project Grants program], which provides modest stipends to recognize and support existing contributors, and
 * the new (established just for the RFMF) Maintainer in Residence program.
 
