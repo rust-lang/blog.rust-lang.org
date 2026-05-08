@@ -29,7 +29,7 @@ RFMF sponsors typically contribute to a general fund and don't direct where the 
 Every contribution helps fund the sustained maintenance that keeps Rust healthy.
 All sponsors receive public recognition and visibility into how funds are being used through regular public reports.
 
-See [the RFC section on sponsor benefits](sponsor benefits) for details.
+See [the RFC section on sponsor benefits][sponsor benefits] for details.
 
 To contribute funds, go to [https://rustfoundation.org/project-support/](https://rustfoundation.org/project-support/) or [contact the Rust Foundation] directly
 
