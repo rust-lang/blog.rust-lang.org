@@ -5,6 +5,7 @@ on:
 env:
   # renovate: datasource=github-tags depName=rust lookupName=rust-lang/rust
   RUST_VERSION: 1.95.0
+  ZOLA_VERSION: 29540e9897dbe8aca388b13f7bdf615985f6ca2c
 
 jobs:
   snapshot-tests:
@@ -14,8 +15,10 @@ jobs:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - run: rustup override set ${{ env.RUST_VERSION }}
       - uses: Swatinem/rust-cache@c19371144df3bb44fab255c43d04cbc2ab54d1c4 # v2.9.1
+        with:
+          env-vars: CARGO RUST ZOLA_VERSION
       - name: Install Zola
-        run: cargo install --locked --git https://github.com/getzola/zola --rev 29540e9897dbe8aca388b13f7bdf615985f6ca2c
+        run: cargo install --locked --git https://github.com/getzola/zola --rev ${{ env.ZOLA_VERSION }}
 
       - run: git fetch --depth 2
       - run: git checkout origin/main
