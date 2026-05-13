@@ -469,7 +469,7 @@ Thanks to everyone who contributed! <3
 
 - **People involved:** **[Taylor Cramer]** and others
 - **Champions:** [lang] ([Taylor Cramer]), [types] ([Oliver Scherer])
-- **Status:** Superseded by the [Implement Supertrait `auto impl`](https://rust-lang.github.io/rust-project-goals/2026/supertrait-auto-impl.html) and [Arbirary Self Types](https://rust-lang.github.io/rust-project-goals/2026/arbitrary-self-types.html) 2026 goals
+- **Status:** Superseded by the [Implement Supertrait `auto impl`](https://rust-lang.github.io/rust-project-goals/2026/supertrait-auto-impl.html) and [Arbitrary Self Types](https://rust-lang.github.io/rust-project-goals/2026/arbitrary-self-types.html) 2026 goals
 
 ### [In-place initialization](https://github.com/rust-lang/rust-project-goals/issues/395)
 
@@ -984,7 +984,7 @@ Thanks to everyone who contributed! <3
   > 1. [Marcelo Domínguez], @kevinsala, @jdoerfert, and I started implementing the first benchmarks, since that's generally the best way to find missing features or performance issues. We were positively surprised by how good the out-of-the-box performance was. We will implement a few more benchmarks and post the results once we have verified them. We also implemented multiple PRs which implement bugfixes, cleanups, and needed features like [support for scalars](https://github.com/rust-lang/rust/pull/150288). We also started working on LLVM optimizations which make sure that we can achieve even better performance.
   > 2. I noticed that our offload intrinsic allowed running Rust code on the GPU, but it wasn't of much help when calling gpu vendor libraries like cuBLAS. I [implemented](https://github.com/rust-lang/rust/pull/150683) a new helper intrinsic which allows calling those functions conveniently, without having to manually move data to or from the device. It will benefit from the same LLVM optimizations as our full offload intrinsic. It also a bit simpler to set up on the compiler and linker side, so it already works with `std` and mangled kernel names, something that we still have to improve for our main offload intrinsic.
   > 3. A lot of work happened on the LLVM offload side for SPIRV and Intel GPU support. At the moment, our Rust frontend is tested on NVIDIA and AMD server and consumer GPUs, as well as AMD HPC and Lapotop APUs. [Karol Zwolak] reached out since he wants to help with with also running Rust on Intel GPUs. Offload relies on LLVM which started gaining Intel support, so hopefully we won't need much work beyond a new intel-gpu target and a new stdarch module. There is also work on a new spirv target for rustc, which we could also support if it goes through LLVM. Due to some open questions around typed pointers it does not seem clear yet whether it will, so we will have to wait.
-  > 4. Nikita started working on [updating](https://github.com/rust-lang/rust/pull/150722) our submodule to LLVM 22. This hopefully does not only brings some compile and runtime performance improvements, but also greatly simplifies how we can build and use offload. Once it landed I'll refactor our bootstraping logic, and as part of that start building offload in CI.
+  > 4. Nikita started working on [updating](https://github.com/rust-lang/rust/pull/150722) our submodule to LLVM 22. This hopefully does not only brings some compile and runtime performance improvements, but also greatly simplifies how we can build and use offload. Once it landed I'll refactor our bootstrapping logic, and as part of that start building offload in CI.
 
   </details>
 
@@ -1156,7 +1156,7 @@ Thanks to everyone who contributed! <3
   >
   > Miguel noted they've just added dependency on [syn](https://crates.io/crates/syn), but they would like to remove it some day if their could.
   >
-  > Benno provided a few cases of large macros that he thought were unlikely to be replacable by declarative-style ones. Josh suggested there may be a way and suggested an asynchronous discussion.
+  > Benno provided a few cases of large macros that he thought were unlikely to be replaceable by declarative-style ones. Josh suggested there may be a way and suggested an asynchronous discussion.
 
   </details>
 
@@ -1174,7 +1174,7 @@ Thanks to everyone who contributed! <3
   >
   > #### Niche optimizations
   >
-  > We discussed the feasibility of embedding data in lower bits of a pointer -- something the kernel is doing in C. This could also enable setting the top bit in the integers (which is otherwise never set) and make it reprent an error in that case (and a regular pointer otherwise).
+  > We discussed the feasibility of embedding data in lower bits of a pointer -- something the kernel is doing in C. This could also enable setting the top bit in the integers (which is otherwise never set) and make it represent an error in that case (and a regular pointer otherwise).
   >
   > Ideally, this would be done in safe Rust, as the idea is to improve the safety of the C code in question.
   >
