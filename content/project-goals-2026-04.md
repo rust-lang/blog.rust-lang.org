@@ -71,11 +71,10 @@ Thanks to everyone who contributed! <3
 - **Champions:** [compiler] ([Oliver Scherer]), [lang] ([TC])
 - **Status:** [Continued](https://rust-lang.github.io/rust-project-goals/2026/pin-ergonomics.html)
 
-3 detailed updates available.
+<details>
+<summary>3 detailed updates available.</summary>
 
 - **[Frank King]** — [comment from 2026-02-26](https://github.com/rust-lang/rust-project-goals/issues/389#issuecomment-3963321984)
-
-  <details>
 
   > (Just come back from the Spring Festival)
   >
@@ -83,24 +82,16 @@ Thanks to everyone who contributed! <3
   > - Reviewed [Add `Drop::pin_drop` for pinned drops](https://github.com/rust-lang/rust/pull/144537), to update the submodule `book`
   > - Reviewed [Implement coercions between `&pin (mut|const) T` and `&(mut) T` when `T: Unpin`](https://github.com/rust-lang/rust/pull/149130), to do some refactors according to the reviewed messages.
 
-  </details>
-
 - **[Frank King]** — [comment from 2026-03-16](https://github.com/rust-lang/rust-project-goals/issues/389#issuecomment-4064499322)
-
-  <details>
 
   > - Merged [Implement coercions between `&pin (mut|const) T` and `&(mut) T` when `T: Unpin`](https://github.com/rust-lang/rust/pull/149130).
   > - Opened draft PR [Implement borrowck for `&pin mut|const $place`](https://github.com/rust-lang/rust/pull/153693). The implementation needs to be refined and self-reviewed before the community reviews.
 
-  </details>
-
 - **[Frank King]** — [comment from 2026-04-16](https://github.com/rust-lang/rust-project-goals/issues/389#issuecomment-4258655696)
-
-  <details>
 
   > Self-reviewed [Implement borrowck for `&pin mut|const $place`](https://github.com/rust-lang/rust/pull/153693). Found that the current approach of handling pinned borrows may be incorrect, as it failed to distinguish a pinned borrow from a coercion of a normal-to-pinned reference. The latter doesn't prevent a `T: Unpin` type from being moved, but the former does, which breaks the pin coercion test.
 
-  </details>
+</details>
 
 ### [Design a language feature to solve Field Projections](https://github.com/rust-lang/rust-project-goals/issues/390)
 
@@ -108,11 +99,10 @@ Thanks to everyone who contributed! <3
 - **Champions:** [lang] ([Tyler Mandry])
 - **Status:** [Continued](https://rust-lang.github.io/rust-project-goals/2026/field-projections.html)
 
-5 detailed updates available.
+<details>
+<summary>5 detailed updates available.</summary>
 
 - **[Benno Lossin]** — [comment from 2026-01-01](https://github.com/rust-lang/rust-project-goals/issues/390#issuecomment-3703190328)
-
-  <details>
 
   > - At the beginning of December, we set out to [answer five important questions](https://github.com/rust-lang/rust-project-goals/issues/390#issuecomment-3621913656) regarding the virtual places approach. We discussed four questions and arrived at answers for three.
   >   - The first question we looked at was question 3 [Canonical Projections](https://github.com/rust-lang/rust-project-goals/issues/390#issuecomment-3644702112).
@@ -123,19 +113,11 @@ Thanks to everyone who contributed! <3
   >   - We [implemented an algorithm](https://github.com/rust-lang/beyond-refs/pull/9) to determine the type of a place expression.
   > - Our plan is to continue this project goal in the next goal period.
 
-  </details>
-
 - **[Benno Lossin]** — [comment from 2026-01-25](https://github.com/rust-lang/rust-project-goals/issues/390#issuecomment-3796971577)
-
-  <details>
 
   > Earlier this month, [Nadrieril] [Ding Xiang Fei] and I held a meeting on autoref and method resolution in a world with field projections. This meeting resulted in a new page for the wiki on [autoref](https://rust-lang.github.io/beyond-refs/autoref.html).
 
-  </details>
-
 - **[Benno Lossin]** — [comment from 2026-02-28](https://github.com/rust-lang/rust-project-goals/issues/390#issuecomment-3977436014)
-
-  <details>
 
   > The first pull request of the lang experiment has just been merged: rust-lang/rust#152730
   >
@@ -229,11 +211,7 @@ Thanks to everyone who contributed! <3
   >
   > ([playground link](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2024&gist=5b9494bd8f88aa4adf054f70abe16d9d))
 
-  </details>
-
 - **[Benno Lossin]** — [comment from 2026-03-20](https://github.com/rust-lang/rust-project-goals/issues/390#issuecomment-4099385451)
-
-  <details>
 
   > ### Plan for 2026
   >
@@ -251,11 +229,7 @@ Thanks to everyone who contributed! <3
   >
   > **Experimentation:** after each compiler or standard library change, we look to several projects to stress-test our ideas in real code. I will take care of experimentation in the Linux kernel, while [Tyler Mandry] will be taking a look at testing field projections with `crubit`. [Josh Triplett] also has expressed eagerness of introducing them in the standard library; I will coordinate with him and the rest of t-libs-api to experiment there.
 
-  </details>
-
 - **[Benno Lossin]** — [comment from 2026-04-02](https://github.com/rust-lang/rust-project-goals/issues/390#issuecomment-4178384770)
-
-  <details>
 
   > Yesterday, we held a t-lang design meeting on our current approach. [Nadrieril] and I authored a [design document](https://hackmd.io/H5d2-83ER2ymNPZVIWCYWg) with the feedback of [Tyler Mandry], [Ding Xiang Fei], [Alice Ryhl], and [Gary Guo]. In this document, we provided the motivation for this feature, what the look and feel of a solution fitting into the existing features of Rust is, and a comprehensive + compact introduction to our current approach based on virtual places.
   >
@@ -298,7 +272,7 @@ Thanks to everyone who contributed! <3
   >
   > Thanks to everyone who participated in the meeting!
 
-  </details>
+</details>
 
 ### [Reborrow traits](https://github.com/rust-lang/rust-project-goals/issues/399)
 
@@ -306,11 +280,10 @@ Thanks to everyone who contributed! <3
 - **Champions:** [compiler] ([Oliver Scherer]), [lang] ([Tyler Mandry])
 - **Status:** [Continued](https://rust-lang.github.io/rust-project-goals/2026/reborrow-traits.html)
 
-1 detailed update available.
+<details>
+<summary>1 detailed update available.</summary>
 
 - **[Aapo Alasuutari]** — [comment from 2026-02-28](https://github.com/rust-lang/rust-project-goals/issues/399#issuecomment-3977652772)
-
-  <details>
 
   > [PR](https://github.com/rust-lang/rust/pull/151753) open to get the first working version of the `Reborrow` and `CoerceShared` traits merged.
   >
@@ -346,7 +319,7 @@ Thanks to everyone who contributed! <3
   >
   > If the PR merges soon, then public testing and exploration of the traits will be the next big thing. Likely concurrently with that the massive refactoring to generalise `Rvalue::Ref` / `ExprKind::Ref`.
 
-  </details>
+</details>
 
 ## Flagship: Flexible, fast(er) compilation
 
@@ -356,41 +329,28 @@ Thanks to everyone who contributed! <3
 - **Champions:** [cargo] ([Eric Huss]), [compiler] ([David Wood]), [libs] ([Amanieu d'Antras])
 - **Status:** [Continued](https://rust-lang.github.io/rust-project-goals/2026/build-std.html)
 
-4 detailed updates available.
+<details>
+<summary>4 detailed updates available.</summary>
 
 - **[David Wood]** — [comment from 2026-01-15](https://github.com/rust-lang/rust-project-goals/issues/274#issuecomment-3754440280)
 
-  <details>
-
   > [rust-lang/rfcs#3873](https://github.com/rust-lang/rfcs/pull/3873) has been merged and an FCP has been started on [rust-lang/rfcs#3874](https://github.com/rust-lang/rfcs/pull/3874) and [rust-lang/rfcs#3875](https://github.com/rust-lang/rfcs/pull/3875) - those both have some feedback for me to respond to that I'll get to as soon as I can.
-
-  </details>
 
 - **[David Wood]** — [comment from 2026-02-17](https://github.com/rust-lang/rust-project-goals/issues/274#issuecomment-3914113179)
 
-  <details>
-
   > No major updates this cycle - we're still working through feedback on [rust-lang/rfcs#3874](https://github.com/rust-lang/rfcs/pull/3874) and [rust-lang/rfcs#3875](https://github.com/rust-lang/rfcs/pull/3875) and prototyping the implementation to be prepared.
-
-  </details>
 
 - **[David Wood]** — [comment from 2026-03-17](https://github.com/rust-lang/rust-project-goals/issues/274#issuecomment-4073778569)
 
-  <details>
-
   > Update this cycle is the same as last time - [rust-lang/rfcs#3874](https://github.com/rust-lang/rfcs/pull/3874) and [rust-lang/rfcs#3875](https://github.com/rust-lang/rfcs/pull/3875) are progressing, with feedback being addressed and checkboxes checked, and we're still working out what the implementation would look like.
 
-  </details>
-
 - **[David Wood]** — [comment from 2026-04-14](https://github.com/rust-lang/rust-project-goals/issues/274#issuecomment-4245212089)
-
-  <details>
 
   > [rust-lang/rfcs#3874](https://github.com/rust-lang/rfcs/pull/3874) has finished FCP and is due to be merged any day now. I'm working on resolving the remaining open comments on [rust-lang/rfcs#3875](https://github.com/rust-lang/rfcs/pull/3875) and then intend to nudge the reviewers to have a look and check their boxes or leave concerns.
   >
   > [Adam Gemmell] has opened [rust-lang/cargo#16675](https://github.com/rust-lang/cargo/pull/16675) with an early sketch of some of the core changes that build-std would require and is working with the Cargo team to address feedback and work out how to proceed with the implementation.
 
-  </details>
+</details>
 
 ### [Production-ready cranelift backend](https://github.com/rust-lang/rust-project-goals/issues/397)
 
@@ -423,11 +383,10 @@ Thanks to everyone who contributed! <3
 - **Champions:** [cargo] ([Ed Page]), [lang] ([Josh Triplett]), [lang-docs] ([Josh Triplett])
 - **Status:** [Continued](https://rust-lang.github.io/rust-project-goals/2026/cargo-script.html)
 
-3 detailed updates available.
+<details>
+<summary>3 detailed updates available.</summary>
 
 - **[Ed Page]** — [comment from 2026-01-14](https://github.com/rust-lang/rust-project-goals/issues/119#issuecomment-3750134602)
-
-  <details>
 
   > [#146377](https://github.com/rust-lang/rust/pull/146377) has been decided and merged.
   >
@@ -436,11 +395,7 @@ Thanks to everyone who contributed! <3
   > - T-lang discussing CR / text direction feedback: [comment](https://github.com/rust-lang/rust/pull/148051#issuecomment-3638326490)
   > - T-rustdoc deciding on and implementing how they want frontmatter handled in doctests
 
-  </details>
-
 - **[Ed Page]** — [comment from 2026-02-13](https://github.com/rust-lang/rust-project-goals/issues/119#issuecomment-3897507244)
-
-  <details>
 
   > - FCP has ended on [frontmatter support](https://github.com/rust-lang/rust/pull/148051), just awaiting merge
   > - [Cargo script](https://github.com/rust-lang/cargo/pull/16569) has entered FCP
@@ -449,11 +404,7 @@ Thanks to everyone who contributed! <3
   >
   > - Potential issues around edition, see [Cargo script edition policy (lang/edition aspects)](https://github.com/rust-lang/rust/issues/152254).
 
-  </details>
-
 - **[Ed Page]** — [comment from 2026-03-16](https://github.com/rust-lang/rust-project-goals/issues/119#issuecomment-4067313342)
-
-  <details>
 
   > Cargo's FCP has ended.
   >
@@ -461,7 +412,7 @@ Thanks to everyone who contributed! <3
   >
   > - [Cargo script edition policy (lang/edition aspects)](https://github.com/rust-lang/rust/issues/152254)
 
-  </details>
+</details>
 
 ## Flagship: Unblocking dormant traits
 
@@ -477,15 +428,14 @@ Thanks to everyone who contributed! <3
 - **Champions:** [lang] ([Taylor Cramer])
 - **Status:** [Continued](https://rust-lang.github.io/rust-project-goals/2026/in-place-init.html)
 
-1 detailed update available.
+<details>
+<summary>1 detailed update available.</summary>
 
 - **[Alice Ryhl]** — [comment from 2026-01-31](https://github.com/rust-lang/rust-project-goals/issues/395#issuecomment-3828006712)
 
-  <details>
-
   > A [proposal](https://github.com/rust-lang/rust-project-goals/pull/477) to continue this goal in the next goal period was merged.
 
-  </details>
+</details>
 
 ### [Next-generation trait solver](https://github.com/rust-lang/rust-project-goals/issues/113)
 
@@ -493,11 +443,10 @@ Thanks to everyone who contributed! <3
 - **Champions:** [types] ([lcnr])
 - **Status:** [Continued](https://rust-lang.github.io/rust-project-goals/2026/next-solver.html)
 
-1 detailed update available.
+<details>
+<summary>1 detailed update available.</summary>
 
 - **[lcnr]** — [comment from 2026-01-19](https://github.com/rust-lang/rust-project-goals/issues/113#issuecomment-3767714713)
-
-  <details>
 
   > There hasn't been too much progress over the last few weeks and I've been mostly taking a Christmas break. [Nicholas Nethercote] has been looking into the performance of the new trait solver, cleaning up canonicalization and slightly improving its performance: [PR 1](https://github.com/rust-lang/rust/pull/150748) and [PR 2](https://github.com/rust-lang/rust/pull/150859).
   >
@@ -507,7 +456,7 @@ Thanks to everyone who contributed! <3
   >
   > There's also a lot in-progress work going on. I am collaborating with [Niko Matsakis] to specify and later RFC the cycle semantics of Rust. [León Orell Valerian Liehr] is working on a [replacement for the rustdoc's auto trait impl synthesis](https://github.com/rust-lang/rust/pull/149019). [tiif] is working on a fix a [MIR borrowck unsoundness](https://github.com/rust-lang/trait-system-refactor-initiative/issues/159). [Shoyu Vanilla] and I are improving the way we propagate inference constraints from the expected return type to function arguments, fixing [this issue](https://github.com/rust-lang/trait-system-refactor-initiative/issues/259).
 
-  </details>
+</details>
 
 ### [Stabilizable Polonius support on nightly](https://github.com/rust-lang/rust-project-goals/issues/118)
 
@@ -515,11 +464,10 @@ Thanks to everyone who contributed! <3
 - **Champions:** [types] ([Jack Huey])
 - **Status:** [Continued](https://rust-lang.github.io/rust-project-goals/2026/polonius.html)
 
-2 detailed updates available.
+<details>
+<summary>2 detailed updates available.</summary>
 
 - **[Rémy Rakic]** — [comment from 2026-01-30](https://github.com/rust-lang/rust-project-goals/issues/118#issuecomment-3824711064)
-
-  <details>
 
   > This month's update:
   >
@@ -534,11 +482,7 @@ Thanks to everyone who contributed! <3
   > - we discussed possible plans to gather actual statistics, using the infrastructure that was created for the Metrics project
   > - we're also preparing the new project goal for this year, where we'll want to stabilize the alpha 🤞
 
-  </details>
-
 - **[Rémy Rakic]** — [comment from 2026-02-28](https://github.com/rust-lang/rust-project-goals/issues/118#issuecomment-3977551969)
-
-  <details>
 
   > We had a bit less time this month, the update will be shorter, but still meaningful I hope:
   >
@@ -550,7 +494,7 @@ Thanks to everyone who contributed! <3
   > - we'll be tracking the opaque type region liveness soundness issue in [#153215](https://github.com/rust-lang/rust/issues/153215), and I've added [a couple tests](https://github.com/rust-lang/rust/pull/153216), in case [tiif]'s PR or anything that impacts them lands.
   > - some of the tiny cleanups I mentioned last time have also landed in [#152587](https://github.com/rust-lang/rust/pull/152587).
 
-  </details>
+</details>
 
 ## Other goal updates
 
@@ -572,11 +516,10 @@ Thanks to everyone who contributed! <3
 - **Champions:** [compiler] ([Oliver Scherer]), [lang] ([Tyler Mandry]), [libs] ([David Tolnay])
 - **Status:** [Continued](https://rust-lang.github.io/rust-project-goals/2026/interop-problem-map.html)
 
-5 detailed updates available.
+<details>
+<summary>5 detailed updates available.</summary>
 
 - **[Joel Marcey]** — [comment from 2026-01-20](https://github.com/rust-lang/rust-project-goals/issues/388#issuecomment-3774860319)
-
-  <details>
 
   > The Rust Foundation is opening up a short-term, approximately 3-month, contracting role to assist in our [Rust/C++ Interop](https://rustfoundation.org/interop-initiative/) initiative. The primary work and deliverables for the role will be to make substantial progress on the [Problem Space Mapping Rust Project Goal](https://rust-lang.github.io/rust-project-goals/2025h2/interop-problem-map.html) by collecting discrete problem statements and offering up recommendations on the work that should follow based upon the problems that you found.
   >
@@ -588,19 +531,11 @@ Thanks to everyone who contributed! <3
   >
   > Thank you.
 
-  </details>
-
 - **[Joel Marcey]** — [comment from 2026-01-31](https://github.com/rust-lang/rust-project-goals/issues/388#issuecomment-3827224576)
-
-  <details>
 
   > The effort to fill the [contracting role ](https://github.com/rust-lang/rust-project-goals/issues/388#issuecomment-3774860319) to support this project goal is in the process winding down. The interview and discussion process is nearly complete. We expect to make a final decision for the role in early February.
 
-  </details>
-
 - **[teor]** — [comment from 2026-02-27](https://github.com/rust-lang/rust-project-goals/issues/388#issuecomment-3970777014)
-
-  <details>
 
   > Hi, I'm the new contractor on the interop problem space mapping project goal.
   >
@@ -622,11 +557,7 @@ Thanks to everyone who contributed! <3
   >
   > I'll post an update here every few weeks, you can follow [more detailed weekly updates on Zulip](https://rust-lang.zulipchat.com/#narrow/channel/427678-t-lang.2Finterop/topic/Interop.20Problem.20Space.20Mapping.20-.20Weekly.20Updates/with/576165231).
 
-  </details>
-
 - **[teor]** — [comment from 2026-03-30](https://github.com/rust-lang/rust-project-goals/issues/388#issuecomment-4151397648)
-
-  <details>
 
   > In the last month, I've:
   >
@@ -649,11 +580,7 @@ Thanks to everyone who contributed! <3
   >
   > Nothing at the moment, everyone has been extremely helpful, and I'm getting good feedback on use cases, problems, priorities, and Rust language experiments.
 
-  </details>
-
 - **[teor]** — [comment from 2026-05-01](https://github.com/rust-lang/rust-project-goals/issues/388#issuecomment-4357141346)
-
-  <details>
 
   > In the last month, I've:
   >
@@ -680,7 +607,7 @@ Thanks to everyone who contributed! <3
   >
   > Nothing at the moment. There is a steady stream of new use cases, problems, code examples and Rust language experiment feedback.
 
-  </details>
+</details>
 
 ### [Comprehensive niche checks for Rust](https://github.com/rust-lang/rust-project-goals/issues/262)
 
@@ -694,11 +621,10 @@ Thanks to everyone who contributed! <3
 - **Champions:** [lang] ([Niko Matsakis])
 - **Status:** [Continued](https://rust-lang.github.io/rust-project-goals/2026/const-generics.html)
 
-6 detailed updates available.
+<details>
+<summary>6 detailed updates available.</summary>
 
 - **[Niko Matsakis]** — [comment from 2026-01-27](https://github.com/rust-lang/rust-project-goals/issues/100#issuecomment-3806305532)
-
-  <details>
 
   > [Boxy] and I have established a regular time to check-in on formalizing this within a-mir-formality. Today we mostly worked on the "model" of const values, starting with this
   >
@@ -756,11 +682,7 @@ Thanks to everyone who contributed! <3
   >
   > i.e., a const value can be a scalar value (as today) or a struct literal like `Foo { ... }` (which would also cover tuples and things). We got the various tests passing. Huzzah!
 
-  </details>
-
 - **[Boxy]** — [comment from 2026-01-30](https://github.com/rust-lang/rust-project-goals/issues/100#issuecomment-3823289633)
-
-  <details>
 
   > In addition to what niko posted previously there's been a lot of other stuff happening. A lot of people have opened PRs to improve mGCA this month: [León Orell Valerian Liehr] [Noah Lev] @enthropy7 [Kivooeo] [mu001999] @Human9000-bit [Redddy] @Keith-Cancel @AprilNEA
   >
@@ -777,43 +699,27 @@ Thanks to everyone who contributed! <3
   >
   > There's some more detail about the various bits of work people have done and who did what here: [#project-const-generics > perfectly adequately sized wins @ 💬](https://rust-lang.zulipchat.com/#narrow/channel/260443-project-const-generics/topic/perfectly.20adequately.20sized.20wins/near/566850721)
 
-  </details>
-
 - **[Niko Matsakis]** — [comment from 2026-02-13](https://github.com/rust-lang/rust-project-goals/issues/100#issuecomment-3897552648)
-
-  <details>
 
   > [Boxy] and I have met (and continue to meet) and work on modeling const generics in a-mir-formality. We're still working on laying the groundwork.
   >
   > There is a proposed [project goal](https://rust-lang.github.io/rust-project-goals/2026/const-generics.html) for next year.
 
-  </details>
-
 - **[Boxy]** — [comment from 2026-02-28](https://github.com/rust-lang/rust-project-goals/issues/100#issuecomment-3977295413)
-
-  <details>
 
   > There's been a lot of miscellaneous fixes for mGCA this month. I've also started drafting some blog posts to explain what's going on with mGCA/oGCA as well as soliciting use cases/experience reports for them and `adt_const_params`. I also talked with some folks at Rust Nation this month about const generics and what features would be useful for them and why.
 
-  </details>
-
 - **[Boxy]** — [comment from 2026-04-02](https://github.com/rust-lang/rust-project-goals/issues/100#issuecomment-4179111762)
-
-  <details>
 
   > Late on the update :') niko and i continue to meet to discuss const generics. we've made some progress on figuring out problems around privacy/safety in const generics. we've also been discussing the big picture stuff for const generics and where we're "heading".
 
-  </details>
-
 - **[Boxy]** — [comment from 2026-05-01](https://github.com/rust-lang/rust-project-goals/issues/100#issuecomment-4359546137)
-
-  <details>
 
   > started running weekly meetings about const generics to make it easier to keep up to date with all the people who are working on const generics stuff. i think `min_adt_const_params` is now at the point of what the RFC is going to specify.
   >
   > GCA is making good progress thanks to ashley's work. i also met with lcnr where we talked about whether there was some version of mGCA that is stabilizeable in the near future or not (maybe!)
 
-  </details>
+</details>
 
 ### [Continue resolving `cargo-semver-checks` blockers for merging into cargo](https://github.com/rust-lang/rust-project-goals/issues/104)
 
@@ -821,17 +727,16 @@ Thanks to everyone who contributed! <3
 - **Champions:** [cargo] ([Ed Page]), [rustdoc] ([Alona Enraght-Moony])
 - **Status:** [Continued](https://rust-lang.github.io/rust-project-goals/2026/cargo-semver-checks.html)
 
-1 detailed update available.
+<details>
+<summary>1 detailed update available.</summary>
 
 - **[Predrag Gruevski]** — [comment from 2026-01-17](https://github.com/rust-lang/rust-project-goals/issues/104#issuecomment-3764211880)
-
-  <details>
 
   > I posted a ["year in review" for cargo-semver-checks](https://predr.ag/blog/cargo-semver-checks-2025-year-in-review/).
   >
   > It has a section on [how I think we should move forward in 2026 and beyond](https://predr.ag/blog/cargo-semver-checks-2025-year-in-review/#the-path-forward-for-2026-and-beyond).
 
-  </details>
+</details>
 
 ### [Develop the capabilities to keep the FLS up to date](https://github.com/rust-lang/rust-project-goals/issues/391)
 
@@ -839,11 +744,10 @@ Thanks to everyone who contributed! <3
 - **Champions:** [bootstrap] ([Jakub Beránek]), [lang] ([Niko Matsakis]), [spec] ([Pete LeVasseur])
 - **Status:** Superseded by the [Stabilize FLS Release Cadence](https://rust-lang.github.io/rust-project-goals/2026/stabilize-fls-releases.html) 2026 goal
 
-2 detailed updates available.
+<details>
+<summary>2 detailed updates available.</summary>
 
 - **[Pete LeVasseur]** — [comment from 2026-03-04](https://github.com/rust-lang/rust-project-goals/issues/391#issuecomment-3999761277)
-
-  <details>
 
   > We have a Project Goal in 2026 that we'll take on: [Stabilize FLS Release Cadence](https://rust-lang.github.io/rust-project-goals/2026/stabilize-fls-releases.html). Progress towards 1.93.1 looks good, most issues are [closed](https://github.com/rust-lang/fls/issues?q=is%3Aissue%20state%3Aopen%20%5BChange%5D%3A%20%5B1.93%5D).
   >
@@ -851,11 +755,7 @@ Thanks to everyone who contributed! <3
   >
   > We'd love more folks from the safety-critical community to contribute to picking up [issues](https://github.com/rust-lang/fls/issues) or opening an issue if you notice something is missing.
 
-  </details>
-
 - **[Pete LeVasseur]** — [comment from 2026-04-02](https://github.com/rust-lang/rust-project-goals/issues/391#issuecomment-4178437764)
-
-  <details>
 
   > Trying to prepare FLS releases earlier:
   >
@@ -874,7 +774,7 @@ Thanks to everyone who contributed! <3
   > - akin to how the Reference now has a developer's guide now for contributing we'll do the same in the FLS
   > - [Hristian Kirtchev] has been working on this
 
-  </details>
+</details>
 
 ### [Emit Retags in Codegen](https://github.com/rust-lang/rust-project-goals/issues/392)
 
@@ -882,11 +782,10 @@ Thanks to everyone who contributed! <3
 - **Champions:** [compiler] ([Ralf Jung]), [opsem] ([Ralf Jung])
 - **Status:** Superseded by the [BorrowSanitizer](https://rust-lang.github.io/rust-project-goals/2026/borrowsanitizer.html) 2026 goal
 
-4 detailed updates available.
+<details>
+<summary>4 detailed updates available.</summary>
 
 - **[Ian McCormack]** — [comment from 2026-01-09](https://github.com/rust-lang/rust-project-goals/issues/392#issuecomment-3730419629)
-
-  <details>
 
   > Here's our January status update!
   >
@@ -894,11 +793,7 @@ Thanks to everyone who contributed! <3
   > - We published our first monthly [blog post](https://borrowsanitizer.com/status/january_2026.html) about BorrowSanitizer.
   > - Our overall goal for 2026 is to transition from a research prototype to a functional tool. Three key features have yet to be implemented: garbage collection, error reporting, and support for atomic memory accesses. Once these are complete, we'll be able to start testing real-world libraries and auditing our results against Miri.
 
-  </details>
-
 - **[Ian McCormack]** — [comment from 2026-02-24](https://github.com/rust-lang/rust-project-goals/issues/392#issuecomment-3955255197)
-
-  <details>
 
   > We just posted our [February status update](https://borrowsanitizer.com/status/february_2026.html) for BorrowSanitizer. TL;DR:
   >
@@ -907,11 +802,7 @@ Thanks to everyone who contributed! <3
   > - We are starting to have a better understanding of how BorrowSanitizer performs in practice, but we do not have enough data yet to be certain. From one test case, it seems like we are somewhat faster but still in the same category of performance as Miri when we compare against other sanitizers. Expect more detailed results to come as we scale up our benchmarking pipeline.
   > - We have a tentative plan for upstreaming BorrowSanitizer in 2026, starting with its LLVM components. We intend to start the RFC process on the LLVM side this spring, once our API is stable.
 
-  </details>
-
 - **[Ian McCormack]** — [comment from 2026-03-30](https://github.com/rust-lang/rust-project-goals/issues/392#issuecomment-4158528895)
-
-  <details>
 
   > We just posted our [March status update](https://borrowsanitizer.com/status/march_2026.html) for BorrowSanitizer. TL;DR:
   >
@@ -920,11 +811,7 @@ Thanks to everyone who contributed! <3
   >
   > Our goal for April is to continue expanding our test suite, finish an initial version of the LLVM components of BorrowSanitizer, and hopefully start the RFC process on the LLVM side.
 
-  </details>
-
 - **[Ian McCormack]** — [comment from 2026-04-29](https://github.com/rust-lang/rust-project-goals/issues/392#issuecomment-4346250277)
-
-  <details>
 
   > We have some exciting news: our talk on BorrowSanitizer was accepted [at RustConf](https://rustconf2026.sched.com/event/2KHtb) this year! We’re grateful for the opportunity and looking forward to sharing our results with the broader community this September.
   >
@@ -935,7 +822,7 @@ Thanks to everyone who contributed! <3
   >
   > The RFC for our LLVM components is taking a little longer than expected, but it was worth taking the extra time to test out compiler changes and make sure that we had the core parts of the instrumentation pass settled. We’ll be drafting the RFC throughout the next few weeks.
 
-  </details>
+</details>
 
 ### [Expand the Rust Reference to specify more aspects of the Rust language](https://github.com/rust-lang/rust-project-goals/issues/394)
 
@@ -943,15 +830,14 @@ Thanks to everyone who contributed! <3
 - **Champions:** [lang-docs] ([Josh Triplett]), [spec] ([Josh Triplett])
 - **Status:** Superseded by the [Experimental language specification](https://rust-lang.github.io/rust-project-goals/2026/experimental-language-specification.html) 2026 goal
 
-1 detailed update available.
+<details>
+<summary>1 detailed update available.</summary>
 
 - **[Josh Triplett]** — [comment from 2026-04-14](https://github.com/rust-lang/rust-project-goals/issues/394#issuecomment-4245135894)
 
-  <details>
-
   > This work is now continuing into a [new goal](https://github.com/rust-lang/rust-project-goals/pull/490) by [Jack Huey].
 
-  </details>
+</details>
 
 ### [Finish the libtest json output experiment](https://github.com/rust-lang/rust-project-goals/issues/255)
 
@@ -965,11 +851,10 @@ Thanks to everyone who contributed! <3
 - **Champions:** [compiler] ([Manuel Drehwald]), [lang] ([TC])
 - **Status:** Superseded by the [High-Level ML optimizations](https://rust-lang.github.io/rust-project-goals/2026/high-level-ml.html) 2026 goal
 
-2 detailed updates available.
+<details>
+<summary>2 detailed updates available.</summary>
 
 - **[Manuel Drehwald]** — [comment from 2026-01-16](https://github.com/rust-lang/rust-project-goals/issues/109#issuecomment-3762217620)
-
-  <details>
 
   > `std::autodiff` is moving closer to nightly, and `std::offload` is gaining various performance, feature, and hardware support improvements.
   >
@@ -986,11 +871,7 @@ Thanks to everyone who contributed! <3
   > 3. A lot of work happened on the LLVM offload side for SPIRV and Intel GPU support. At the moment, our Rust frontend is tested on NVIDIA and AMD server and consumer GPUs, as well as AMD HPC and Lapotop APUs. [Karol Zwolak] reached out since he wants to help with with also running Rust on Intel GPUs. Offload relies on LLVM which started gaining Intel support, so hopefully we won't need much work beyond a new intel-gpu target and a new stdarch module. There is also work on a new spirv target for rustc, which we could also support if it goes through LLVM. Due to some open questions around typed pointers it does not seem clear yet whether it will, so we will have to wait.
   > 4. Nikita started working on [updating](https://github.com/rust-lang/rust/pull/150722) our submodule to LLVM 22. This hopefully does not only brings some compile and runtime performance improvements, but also greatly simplifies how we can build and use offload. Once it landed I'll refactor our bootstrapping logic, and as part of that start building offload in CI.
 
-  </details>
-
 - **[Manuel Drehwald]** — [comment from 2026-04-01](https://github.com/rust-lang/rust-project-goals/issues/109#issuecomment-4166618042)
-
-  <details>
 
   > `std::autodiff` is now partly in CI, and `std::offload` got tested on a lot more benchmarks.
   >
@@ -1004,7 +885,7 @@ Thanks to everyone who contributed! <3
   >
   > Beyond benchmarks, there was a lot of tinkering on smaller PRs, reviewing, and housekeeping. LLVM-22 landed, so we updated our bootrstrap code to make use of new APIs, and tried to move a few smaller PRs forward, mainly around a better user experience and for making more Rust features available. Since the focus is still on benchmarks, not many of those PRs landed. They are in a mostly ready state, so it's a good time to pick them up if you're considering contributing. Please ping me on Zulip or in any PR with the offload label if you are interested!
 
-  </details>
+</details>
 
 ### [Getting Rust for Linux into stable Rust: compiler features](https://github.com/rust-lang/rust-project-goals/issues/407)
 
@@ -1012,11 +893,10 @@ Thanks to everyone who contributed! <3
 - **Champions:** [compiler] ([Wesley Wiser])
 - **Status:** [Continued](https://rust-lang.github.io/rust-project-goals/2026/rust-for-linux-compiler-features.html)
 
-4 detailed updates available.
+<details>
+<summary>4 detailed updates available.</summary>
 
 - **[Tomas Sedovic]** — [comment from 2026-01-16](https://github.com/rust-lang/rust-project-goals/issues/407#issuecomment-3760359980)
-
-  <details>
 
   > Update from the 2026-01-14 meeting:
   >
@@ -1036,11 +916,7 @@ Thanks to everyone who contributed! <3
   >
   > There's an [ongoing discussion about the feature on the Rust Zulip](https://rust-lang.zulipchat.com/#narrow/channel/425075-rust-for-linux/topic/New.20relocation.20model.20for.20relocatable.20code.20but.20static.20data/with/566044955) as well.
 
-  </details>
-
 - **[Tomas Sedovic]** — [comment from 2026-02-17](https://github.com/rust-lang/rust-project-goals/issues/407#issuecomment-3914550342)
-
-  <details>
 
   > Updates from the 2026-01-28 and 2026-02-11 meetings:
   >
@@ -1054,11 +930,7 @@ Thanks to everyone who contributed! <3
   >
   > Improving objtool's handling of noreturn is on [Gary Guo]'s radar but there wasn't time yet.
 
-  </details>
-
 - **[Tomas Sedovic]** — [comment from 2026-03-16](https://github.com/rust-lang/rust-project-goals/issues/407#issuecomment-4068915161)
-
-  <details>
 
   > Update from the 2026-03-11 meeting:
   >
@@ -1086,11 +958,7 @@ Thanks to everyone who contributed! <3
   >
   > The discussion here has stalled.
 
-  </details>
-
 - **[Tomas Sedovic]** — [comment from 2026-04-10](https://github.com/rust-lang/rust-project-goals/issues/407#issuecomment-4223621611)
-
-  <details>
 
   > Update from the 2026-04-08 meeting:
   >
@@ -1100,7 +968,7 @@ Thanks to everyone who contributed! <3
   >
   > [Alice Ryhl] added the unstable book doc changes in the PR itself and [Wesley Wiser] confirmed that's all the documentation needed for sanitizers.
 
-  </details>
+</details>
 
 ### [Getting Rust for Linux into stable Rust: language features](https://github.com/rust-lang/rust-project-goals/issues/116)
 
@@ -1108,11 +976,10 @@ Thanks to everyone who contributed! <3
 - **Champions:** [lang] ([Josh Triplett]), [lang-docs] ([TC])
 - **Status:** Superseded by the [Rust for Linux](https://rust-lang.github.io/rust-project-goals/2026/roadmap-rust-for-linux.html) 2026 roadmap
 
-6 detailed updates available.
+<details>
+<summary>6 detailed updates available.</summary>
 
 - **[Tomas Sedovic]** — [comment from 2026-01-19](https://github.com/rust-lang/rust-project-goals/issues/116#issuecomment-3768690708)
-
-  <details>
 
   > Update from the 2026-01-14 meeting.
   >
@@ -1158,11 +1025,7 @@ Thanks to everyone who contributed! <3
   >
   > Benno provided a few cases of large macros that he thought were unlikely to be replaceable by declarative-style ones. Josh suggested there may be a way and suggested an asynchronous discussion.
 
-  </details>
-
 - **[Tomas Sedovic]** — [comment from 2026-02-16](https://github.com/rust-lang/rust-project-goals/issues/116#issuecomment-3909582195)
-
-  <details>
 
   > Updates from the 2026-01-28 and 2026-02-11 meetings:
   >
@@ -1198,11 +1061,7 @@ Thanks to everyone who contributed! <3
   >
   > This year brings in the concept of roadmaps. We now have a [Rust for Linux](https://rust-lang.github.io/rust-project-goals/2026/roadmap-rust-for-linux.html) and a few more granular Goals. We'll be adding more goals over time, but the one merged cover what we've been focusing on for now.
 
-  </details>
-
 - **[Tomas Sedovic]** — [comment from 2026-03-11](https://github.com/rust-lang/rust-project-goals/issues/116#issuecomment-4039494143)
-
-  <details>
 
   > Update from the 2026-02-25 meeting:
   >
@@ -1216,11 +1075,7 @@ Thanks to everyone who contributed! <3
   >
   > I'll add all this data into the [roadmap](https://rust-lang.github.io/rust-project-goals/2026/roadmap-rust-for-linux.html).
 
-  </details>
-
 - **[Tomas Sedovic]** — [comment from 2026-03-16](https://github.com/rust-lang/rust-project-goals/issues/116#issuecomment-4068513211)
-
-  <details>
 
   > Update from the 2026-03-11 meeting:
   >
@@ -1244,11 +1099,7 @@ Thanks to everyone who contributed! <3
   >
   > The next step are to create such an issue. We were hesitant to add burden to a team that's already at limit, but having the issue would let us track it from the Rust for Linux side.
 
-  </details>
-
 - **[Tomas Sedovic]** — [comment from 2026-03-26](https://github.com/rust-lang/rust-project-goals/issues/116#issuecomment-4136755115)
-
-  <details>
 
   > Update from the 2026-03-26 meeting:
   >
@@ -1272,11 +1123,7 @@ Thanks to everyone who contributed! <3
   >
   > [Miguel Ojeda] suggested contacting Christian Brauner and Alexander Viro (i.e. the VFS maintainers); [Josh Triplett] agreed that it would be good if we can get a thread with the right people in linux-fsdevel.
 
-  </details>
-
 - **[Tomas Sedovic]** — [comment from 2026-04-10](https://github.com/rust-lang/rust-project-goals/issues/116#issuecomment-4224585576)
-
-  <details>
 
   > Update from the 2026-04-08 meeting:
   >
@@ -1314,7 +1161,7 @@ Thanks to everyone who contributed! <3
   >
   > The design space is complex and the team hopes that discussing it in person will help move it forward.
 
-  </details>
+</details>
 
 ### [Implement Open API Namespace Support](https://github.com/rust-lang/rust-project-goals/issues/256)
 
@@ -1328,11 +1175,10 @@ Thanks to everyone who contributed! <3
 - **Champions:** [lang] ([Amanieu d'Antras])
 - **Status:** [Continued](https://rust-lang.github.io/rust-project-goals/2026/mir-move-elimination.html)
 
-1 detailed update available.
+<details>
+<summary>1 detailed update available.</summary>
 
 - **[Amanieu d'Antras]** — [comment from 2026-04-03](https://github.com/rust-lang/rust-project-goals/issues/396#issuecomment-4183522763)
-
-  <details>
 
   > The RFC has just been [published](https://github.com/rust-lang/rfcs/pull/3943). It has been significantly reworked since the last draft.
   >
@@ -1345,7 +1191,7 @@ Thanks to everyone who contributed! <3
   > - Changed the MIR operand evaluation order to be left-to-right, except for destination places which are always evaluated last.
   > - Added StorageLive back: we need it to mark the location where `llvm.lifetime.start` should be inserted, which is not the same as the location where a local is initialized. In the opsem, `StorageLive` doesn't actually allocate the local, that's still done when it is initialized by a write.
 
-  </details>
+</details>
 
 ### [Prototype a new set of Cargo "plumbing" commands](https://github.com/rust-lang/rust-project-goals/issues/264)
 
@@ -1359,11 +1205,10 @@ Thanks to everyone who contributed! <3
 - **Champions:** [cargo] ([Weihang Lo])
 - **Status:** Completed
 
-1 detailed update available.
+<details>
+<summary>1 detailed update available.</summary>
 
 - **[Weihang Lo]** — [comment from 2026-01-08](https://github.com/rust-lang/rust-project-goals/issues/398#issuecomment-3725163795)
-
-  <details>
 
   > The prototype of this project goal is basically complete.
   >
@@ -1503,7 +1348,7 @@ Thanks to everyone who contributed! <3
   > - https://github.com/rust-lang/cargo/issues/16477
   > - https://github.com/rust-lang/cargo/issues/16488
 
-  </details>
+</details>
 
 ### [reflection and comptime](https://github.com/rust-lang/rust-project-goals/issues/406)
 
@@ -1511,21 +1356,16 @@ Thanks to everyone who contributed! <3
 - **Champions:** [compiler] ([Oliver Scherer]), [lang] ([Scott McMurray]), [libs] ([Josh Triplett])
 - **Status:** [Continued](https://rust-lang.github.io/rust-project-goals/2026/reflection-and-comptime.html)
 
-5 detailed updates available.
+<details>
+<summary>5 detailed updates available.</summary>
 
 - **[Oliver Scherer]** — [comment from 2026-01-14](https://github.com/rust-lang/rust-project-goals/issues/406#issuecomment-3749416638)
-
-  <details>
 
   > - [The MVP](https://github.com/rust-lang/rust/pull/146923) has landed, and we even got the first contribs adding array support to reflection.
   >   - there are lots more types and type information that we could support, and it's rather easy to add more. Happy to review any work here.
   > - [`try_as_dyn` and `try_as_dyn_mut`](https://github.com/rust-lang/rust/pull/150033) have landed, and I'm working on [removing the `'static` requirement](https://github.com/rust-lang/rust/pull/150161).
 
-  </details>
-
 - **[Oliver Scherer]** — [comment from 2026-02-09](https://github.com/rust-lang/rust-project-goals/issues/406#issuecomment-3871224433)
-
-  <details>
 
   > - @BD103 added [`Type::of` for unsized types](https://github.com/rust-lang/rust/pull/151019) and support for [slices](https://github.com/rust-lang/rust/pull/151118), [arrays](https://github.com/rust-lang/rust/pull/151031), and [raw pointer](https://github.com/rust-lang/rust/pull/151119)
   > - [Asuna] added [all of our primitives](https://github.com/rust-lang/rust/pull/151123)
@@ -1536,38 +1376,26 @@ Thanks to everyone who contributed! <3
   >
   > [Removing the `'static` bound from `try_as_dyn`](https://github.com/rust-lang/rust/pull/150161) turned out to have many warts, so I'm limiting it to a much smaller subset and will have borrowck emit the `'static` requirement if the other rules do not apply (instead of having an unconditional `'static` requirement)
 
-  </details>
-
 - **[Oliver Scherer]** — [comment from 2026-03-19](https://github.com/rust-lang/rust-project-goals/issues/406#issuecomment-4093308372)
-
-  <details>
 
   > - I added [support for getting reflection information of any type, not just `'static` ones](https://github.com/rust-lang/rust/pull/152381)
   > - [9SonSteroids] added a [function pointer MVP](https://github.com/rust-lang/rust/pull/152173) and [trait object support](https://github.com/rust-lang/rust/pull/152003)
   > - [Asuna] added [basic struct/enum/union support](https://github.com/rust-lang/rust/pull/151142)
 
-  </details>
-
 - **[Oliver Scherer]** — [comment from 2026-04-22](https://github.com/rust-lang/rust-project-goals/issues/406#issuecomment-4294713163)
-
-  <details>
 
   > No changes since last time.
   >
   > I'm writing a document for the lang team meeting on reflection next week
 
-  </details>
-
 - **[Oliver Scherer]** — [comment from 2026-04-22](https://github.com/rust-lang/rust-project-goals/issues/406#issuecomment-4294725433)
-
-  <details>
 
   > ### Help wanted
   >
   > - add more information to adts (e.g. doc comments, attributes, ...), whatever else is usually used by crates like bevy-reflect
   > - need to make struct field reflection respect privacy
 
-  </details>
+</details>
 
 ### [Rework Cargo Build Dir Layout](https://github.com/rust-lang/rust-project-goals/issues/401)
 
@@ -1575,11 +1403,10 @@ Thanks to everyone who contributed! <3
 - **Champions:** [cargo] ([Weihang Lo])
 - **Status:** Completed; the [Cargo cross workspace cache](https://rust-lang.github.io/rust-project-goals/2026/cargo-cross-workspace-cache.html) 2026 goal will build on this work
 
-2 detailed updates available.
+<details>
+<summary>2 detailed updates available.</summary>
 
 - **[Ross Sullivan]** — [comment from 2026-01-15](https://github.com/rust-lang/rust-project-goals/issues/401#issuecomment-3752502595)
-
-  <details>
 
   > [Fine grain locking for `build-dir`](https://github.com/rust-lang/cargo/pull/16155) was merged and now available on nightly via `-Zfine-grain-locking` unstable flag. 🎉
   >
@@ -1587,11 +1414,7 @@ Thanks to everyone who contributed! <3
   >
   > I am hopeful that these issues will be resolved over the coming month and we can do a call for testing to start gathering feedback from the community on whether the new locking strategy improves workflows.
 
-  </details>
-
 - **[Ross Sullivan]** — [comment from 2026-03-09](https://github.com/rust-lang/rust-project-goals/issues/401#issuecomment-4024119674)
-
-  <details>
 
   > After the initial PR from the last update was merged, we shifted our focus to resolving some of the known issues. Notably, locking blocks the Cargo job queue slowly causing thread starvation if many build units are held by another Cargo instance.
   >
@@ -1603,7 +1426,7 @@ Thanks to everyone who contributed! <3
   >
   > I suspect this may be the last update on this goal, as the 2026 slate of goals is coming up. While I did not renew this goal for 2026, I do plan to continue work on this and eventually stabilize this within this year.
 
-  </details>
+</details>
 
 ### [Run more tests for GCC backend in the Rust's CI](https://github.com/rust-lang/rust-project-goals/issues/402)
 
@@ -1616,33 +1439,24 @@ Thanks to everyone who contributed! <3
 - **People involved:** **[Jakob Koschel]**, [Bastian Kersting]
 - **Status:** [Continued](https://rust-lang.github.io/rust-project-goals/2026/stabilization-of-sanitizer-support.html)
 
-3 detailed updates available.
+<details>
+<summary>3 detailed updates available.</summary>
 
 - **[Jakob Koschel]** — [comment from 2026-01-14](https://github.com/rust-lang/rust-project-goals/issues/403#issuecomment-3750257467)
 
-  <details>
-
   > The [MCP](https://github.com/rust-lang/compiler-team/issues/951) has been seconded and is still waiting 3 days to be approved. Once that is done, we can proceed with merging the Tier 2 target.
-
-  </details>
 
 - **[Jakob Koschel]** — [comment from 2026-02-16](https://github.com/rust-lang/rust-project-goals/issues/403#issuecomment-3907370057)
 
-  <details>
-
   > Both the [MCP](https://github.com/rust-lang/compiler-team/issues/951) and the [PR](https://github.com/rust-lang/rust/pull/149644) for the AddressSanitizer target have been merged. Next up I should prepare the MCP for the Memory- and ThreadSanitizer targets, hopefully sending out soon.
 
-  </details>
-
 - **[Jakob Koschel]** — [comment from 2026-03-31](https://github.com/rust-lang/rust-project-goals/issues/403#issuecomment-4161071545)
-
-  <details>
 
   > The [targets for MSan and TSan](https://github.com/rust-lang/rust/pull/152757) are merged now.
   >
   > Next, I'll be working on stabilizing those two, now that we have a way to use it without other unstable features (`build-std`).
 
-  </details>
+</details>
 
 ### [Rust Vision Document](https://github.com/rust-lang/rust-project-goals/issues/269)
 
@@ -1673,45 +1487,28 @@ Thanks to everyone who contributed! <3
 - **Champions:** [compiler] ([David Wood]), [lang] ([Niko Matsakis]), [libs] ([Amanieu d'Antras])
 - **Status:** [Continued](https://rust-lang.github.io/rust-project-goals/2026/scalable-vectors.html)
 
-5 detailed updates available.
+<details>
+<summary>5 detailed updates available.</summary>
 
 - **[David Wood]** — [comment from 2026-01-15](https://github.com/rust-lang/rust-project-goals/issues/270#issuecomment-3754437263)
 
-  <details>
-
   > [rust-lang/rust#143924](http://github.com/rust-lang/rust/pull/143924) has been merged, enabling scalable vector types to be defined on nightly, and I'm working on a patch to introduce unstable intrinsics/scalable vector types to `std::arch`
-
-  </details>
 
 - **[David Wood]** — [comment from 2026-02-17](https://github.com/rust-lang/rust-project-goals/issues/270#issuecomment-3914105881)
 
-  <details>
-
   > Progress has been slow since the last update because I've been busy, but I've been working on a rebase of [rust-lang/stdarch#1509](https://github.com/rust-lang/stdarch/pull/1509), which has bitrot quite a bit. [Rémy Rakic] is joining me to work on the Sized Hierarchy parts of the goal.
 
-  </details>
-
 - **[David Wood]** — [comment from 2026-03-17](https://github.com/rust-lang/rust-project-goals/issues/270#issuecomment-4073820988)
-
-  <details>
 
   > On the scalable vector half of the goal, I've got a branch with [rust-lang/stdarch#1509](https://github.com/rust-lang/stdarch/pull/1509) rebased, though without the `intrinsic-test` tool having been updated - that ended up being tricky and we've agreed to do it as a follow-up. We've opened [rust-lang/rust#153286](http://github.com/rust-lang/rust/pull/153286) with the compiler fixes that the stdarch patch requires, which should land soon ([rust-lang/rust#153653](http://github.com/rust-lang/rust/pull/153653) was opened and landed in the interim).
   >
   > On the sized hierarchy half of the goal, [Rémy Rakic] has been updating our RFC such that we can discuss it in design meetings with the language team on the 18th and 25th - we'll update [rust-lang/rfcs#3729](https://github.com/rust-lang/rfcs/pull/3729) later today. We've split out the `const Sized` parts as a future possibility (though one we are committed to pursuing) as that has more open design questions, and we've discussed the proposed syntax and approach to migration - which are what we intend to focus on in the design meetings. He's also been working out how we can start implementing our migration strategy and help resolve blockers in other areas.
 
-  </details>
-
 - **[David Wood]** — [comment from 2026-03-17](https://github.com/rust-lang/rust-project-goals/issues/270#issuecomment-4076740397)
-
-  <details>
 
   > Per last comment, [rust-lang/rfcs#3729 has been updated](https://github.com/rust-lang/rfcs/pull/3729#issuecomment-4076702909)
 
-  </details>
-
 - **[David Wood]** — [comment from 2026-04-14](https://github.com/rust-lang/rust-project-goals/issues/270#issuecomment-4245300680)
-
-  <details>
 
   > For the scalable vector half of the goal, we've landed a bunch of compiler fixes - [rust-lang/rust#153286](http://github.com/rust-lang/rust/pull/153286), [rust-lang/rust#153608](http://github.com/rust-lang/rust/pull/153608), [rust-lang/rust#154850](http://github.com/rust-lang/rust/pull/154850), [rust-lang/rust#154950](http://github.com/rust-lang/rust/pull/154950), [rust-lang/rust#155106](http://github.com/rust-lang/rust/pull/155106) and [rust-lang/rust#155243](http://github.com/rust-lang/rust/pull/155243) - and opened our stdarch patch with intrinsics - [rust-lang/stdarch#2071](https://github.com/rust-lang/stdarch/pull/2071). That patch should be passing CI tomorrow once nightly updates to fix an unrelated spurious CI failure. We've got a handful of follow-ups to do afterwards, listed on [rust-lang/rust#145052](http://github.com/rust-lang/rust/pull/145052).
   >
@@ -1723,7 +1520,7 @@ Thanks to everyone who contributed! <3
   >
   > On migration, the language team were largely happy with our proposed approach, and we realised that the approach proposed by lcnr for associated types might also work for our other migrations. [Rémy Rakic] has had meetings with lcnr to better understand that approach and to work out the next steps for implementing it.
 
-  </details>
+</details>
 
 ### [Type System Documentation](https://github.com/rust-lang/rust-project-goals/issues/405)
 
@@ -1737,27 +1534,20 @@ Thanks to everyone who contributed! <3
 - **Champions:** [compiler] ([Jack Wrenn]), [lang] ([Scott McMurray])
 - **Status:** [Continued](https://rust-lang.github.io/rust-project-goals/2026/unsafe-fields.html)
 
-2 detailed updates available.
+<details>
+<summary>2 detailed updates available.</summary>
 
 - **[Jack Wrenn]** — [comment from 2026-02-18](https://github.com/rust-lang/rust-project-goals/issues/273#issuecomment-3922926899)
 
-  <details>
-
   > RFC has been accepted. I'm preparing a 2026 continuing goal for stabilization.
 
-  </details>
-
 - **[Jack Wrenn]** — [comment from 2026-04-14](https://github.com/rust-lang/rust-project-goals/issues/273#issuecomment-4244724055)
-
-  <details>
 
   > Opened PR ([#16767](https://github.com/rust-lang/rust/issues/16767)(https://github.com/rust-lang/rust-clippy/pull/16767)) extending Clippy support to unsafe fields.
   >
   > ### Blockers
   >
   > Waiting for t-clippy to review [#16767](https://github.com/rust-lang/rust/issues/16767)(https://github.com/rust-lang/rust-clippy/pull/16767).
-
-  </details>
 
 [James Barford]: https://github.com/Jamesbarford
 [Carol Nichols]: https://github.com/carols10cents
@@ -2010,3 +1800,4 @@ Thanks to everyone who contributed! <3
 [Team]: https://img.shields.io/badge/Team%20ask-red
 [Not funded]: https://img.shields.io/badge/Not%20yet%20funded-red
 [TBD]: https://img.shields.io/badge/TBD-red
+</details>
