@@ -63,6 +63,7 @@ These new macros have not been added to the standard prelude, because they would
 ```rust
 use core::assert_matches;
 
+/// [Random Number](https://xkcd.com/221/)
 fn get_random_number() -> u32 {
     // chosen by a fair dice roll.
     // guaranteed to be random.
