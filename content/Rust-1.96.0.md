@@ -22,7 +22,7 @@ If you'd like to help us out by testing future releases, you might consider upda
 
 ## What's in 1.96.0 stable
 
-## New `Range*` types
+### New `Range*` types
 
 Many users expect `Range` and related `core::ops` types to be `Copy`, but this is not the case: they implement `Iterator` directly, and [it is a footgun to implement both `Iterator` and `Copy` on the same type](https://rust-lang.github.io/rust-clippy/rust-1.95.0/index.html#copy_iterator) so this has been avoided. [RFC3550] proposed a set of replacement range types that implement `IntoIterator` rather than `Iterator`, meaning they can also be `Copy`. The standard library portion of that RFC is now stable, introducing:
 
