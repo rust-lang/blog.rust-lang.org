@@ -63,12 +63,14 @@ These new macros have not been added to the standard prelude, because they would
 ```rust
 use core::assert_matches;
 
-unsafe extern "C" {
-    safe fn get_current_year() -> u32;
+fn get_random_number() -> u32 {
+    // chosen by a fair dice roll.
+    // guaranteed to be random.
+    4
 }
 
 fn main() {
-    assert_matches!(get_current_year(), 2026..);
+    assert_matches!(get_random_number(), 1..=6);
 }
 ```
 
