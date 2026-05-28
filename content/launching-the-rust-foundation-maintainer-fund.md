@@ -34,7 +34,7 @@ The important thing is that **all proceeds from this fund will be directly used 
 
 We really appreciate each donation, however small, because with more money we can hire more maintainers to ensure that we can continue to develop Rust and that important improvements are not blocked on maintenance tasks. This is especially important at this time, where Rust is starting to get used more and more in the industry in various application areas, which increases the need for sustained maintenance. The importance of multiple funding sources is underscored by an unfortunate trend we currently observe, where key Rust maintainers are losing their funding for Rust work due to budget shifts. The Rust Foundation Maintenance Fund is designed to provide stable funding for Rust maintainers that is less dependent on sudden shifts in the job market and the IT industry.
 
-As with most things, there is no one-size-fits-all solution for funding maintainers, and there are multiple ways to support Rust. The [RustNL Maintainers Team][rustnl-maintainers] recently hired several Rust Project contributors, and we previously [wrote][individual-contributors] about how you can support specific individuals working on Rust. We welcome all efforts that can help support Rust Project maintainers, who often do work that is near invisible and thankless, while at the same time incredibly important and necessary, on a volunteer basis.
+As with most things, there is no one-size-fits-all solution, so there are multiple ways to support Rust financially. The [RustNL Maintainers Team][rustnl-maintainers] recently hired several Rust Project maintainers. Previously, we [wrote][individual-contributors] about how you can support specific individuals working on Rust. And there are also Rust Project Goals [in search of funding][project-goals-funding]. We welcome all efforts that can help support Rust Project maintainers, who often do work that is near invisible and thankless, while at the same time incredibly important and necessary, on a volunteer basis.
 
 Thank you for considering sponsoring the development and maintenance of Rust! You can find more information about funding Rust on our [Funding page][funding-page].
 
@@ -49,3 +49,4 @@ Thank you for considering sponsoring the development and maintenance of Rust! Yo
 [rustnl-maintainers]: https://rustnl.org/maintainers
 [individual-contributors]: https://blog.rust-lang.org/2025/12/08/making-it-easier-to-sponsor-rust-contributors/
 [funding-page]: https://rust-lang.org/funding/
+[project-goals-funding]: https://rust-lang.github.io/rust-project-goals/2026/help-wanted.html#looking-for-funds
