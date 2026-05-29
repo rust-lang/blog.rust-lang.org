@@ -91,11 +91,10 @@ This change was [previously announced](https://blog.rust-lang.org/2026/04/04/cha
 - [`From<T> for LazyCell<T, F>`](https://doc.rust-lang.org/stable/std/cell/struct.LazyCell.html#impl-From%3CT%3E-for-LazyCell%3CT,+F%3E)
 - [`From<T> for LazyLock<T, F>`](https://doc.rust-lang.org/stable/std/sync/struct.LazyLock.html#impl-From%3CT%3E-for-LazyLock%3CT,+F%3E)
 - [`core::range::RangeToInclusive`](https://doc.rust-lang.org/stable/core/range/struct.RangeToInclusive.html)
-- [`core::range::RangeToInclusiveIter`](https://doc.rust-lang.org/stable/core/range/struct.RangeToInclusiveIter.html)
-- [`core::range::RangeFrom`](https://doc.rust-lang.org/stable/core/ops/struct.RangeFrom.html)
-- [`core::range::RangeFromIter`](https://doc.rust-lang.org/stable/core/ops/struct.RangeFromIter.html)
-- [`core::range::Range`](https://doc.rust-lang.org/stable/std/range/struct.Range.html)
-- [`core::range::RangeIter`](https://doc.rust-lang.org/stable/std/range/struct.RangeIter.html)
+- [`core::range::RangeFrom`](https://doc.rust-lang.org/stable/core/range/struct.RangeFrom.html)
+- [`core::range::RangeFromIter`](https://doc.rust-lang.org/stable/core/range/struct.RangeFromIter.html)
+- [`core::range::Range`](https://doc.rust-lang.org/stable/core/range/struct.Range.html)
+- [`core::range::RangeIter`](https://doc.rust-lang.org/stable/core/range/struct.RangeIter.html)
 
 ### Two Cargo advisories
 
