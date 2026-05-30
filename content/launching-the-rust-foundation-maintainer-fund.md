@@ -1,5 +1,5 @@
 +++
-path = "2026/06/01/launching-the-rust-foundation-maintainer-fund"
+path = "2026/06/02/launching-the-rust-foundation-maintainer-fund"
 title = "Launching the Rust Foundation Maintainer Fund"
 authors = ["Funding team"]
 
