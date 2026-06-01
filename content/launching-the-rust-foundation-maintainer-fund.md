@@ -49,4 +49,4 @@ Thank you for considering sponsoring the development and maintenance of Rust! Yo
 [rustnl-maintainers]: https://rustnl.org/maintainers
 [individual-contributors]: https://blog.rust-lang.org/2025/12/08/making-it-easier-to-sponsor-rust-contributors/
 [funding-page]: https://rust-lang.org/funding/
-[project-goals-funding]: https://rust-lang.github.io/rust-project-goals/2026/help-wanted.html#looking-for-funds
+[project-goals-funding]: https://rust-lang.github.io/rust-project-goals/2026/funding.html
