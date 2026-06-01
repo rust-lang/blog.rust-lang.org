@@ -1,6 +1,6 @@
 +++
-path = "2026/06/02/launching-the-rust-foundation-maintainer-fund"
-title = "Launching the Rust Foundation Maintainer Fund"
+path = "2026/06/02/launching-the-rust-foundation-maintainers-fund"
+title = "Launching the Rust Foundation Maintainers Fund"
 authors = ["Funding team"]
 
 [extra]
@@ -8,9 +8,9 @@ team = "Leadership Council"
 team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
 +++
 
-> If you want to financially support the development of Rust, please consider [donating][rfmf-sponsors] to the Rust Foundation Maintainer Fund.
+> If you want to financially support the development of Rust, please consider [donating][rfmf-sponsors] to the Rust Foundation Maintainers Fund.
 
-A few months ago, the Rust Foundation announced the [Rust Foundation Maintainer Fund][rfmf-announcement] (RFMF). Since then, the Rust Project has been closely cooperating with the Rust Foundation to determine how exactly this fund will be used to support Rust maintainers. This resulted in the acceptance of [RFC #3931][rfmf-rfc], which established the [Funding team][funding-team] and the [Maintainer in Residence][mir] program.
+A few months ago, the Rust Foundation announced the [Rust Foundation Maintainers Fund][rfmf-announcement] (RFMF). Since then, the Rust Project has been closely cooperating with the Rust Foundation to determine how exactly this fund will be used to support Rust maintainers. This resulted in the acceptance of [RFC #3931][rfmf-rfc], which established the [Funding team][funding-team] and the [Maintainer in Residence][mir] program.
 
 The primary goal of the Funding team is to ensure that maintainers who work on Rust and its toolchain will be properly supported. We will talk to Rust Project members to figure out their funding situation, meet Rust team leads to learn about their maintenance needs, approach companies to find opportunities for them to invest into Rust by supporting Rust maintainers, coordinate various funding efforts and ensure that the beneficial effects of funded maintenance are visibly promoted, with the help of the [Content team][content-team].
 
@@ -28,7 +28,7 @@ We expect to hire the first Maintainer in Residence in the upcoming months and a
 
 If you are an individual who wants to help Rust succeed and thrive, you can donate to the RFMF through [GitHub Sponsors][rfmf-sponsors][^sponsors]. Companies who would like to invest in better maintenance of Rust can also donate through GitHub Sponsors or they can contact the Rust Foundation [directly](mailto:contact@rustfoundation.org).
 
-[^sponsors]: Note that the fact that GitHub Sponsors is currently enabled on the `rustfoundation` GitHub organization, and not the `rust-lang` organization, is an implementation detail that might change in the future. All donations raised on this Sponsors page will be routed to the Rust Foundation Maintainer Fund and will be spent on directly supporting Rust Project maintainers.
+[^sponsors]: Note that the fact that GitHub Sponsors is currently enabled on the `rustfoundation` GitHub organization, and not the `rust-lang` organization, is an implementation detail that might change in the future. All donations raised on this Sponsors page will be routed to the Rust Foundation Maintainers Fund and will be spent on directly supporting Rust Project maintainers.
 
 The important thing is that **all proceeds from this fund will be directly used to support Rust Project maintainers**. We currently expect that to happen primarily through the Maintainer in Residence program, but it can also be done in the form of smaller-scale grants or other mechanisms, as determined by the Funding team. We will figure this out on the go, as this is also quite new for us.
 
