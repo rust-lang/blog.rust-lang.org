@@ -55,15 +55,9 @@ This workflow conceptually worked pretty well for us, but we had a severe proble
 The official upstream version is entirely unusable for a repo of our size.
 There exists a patch that was never merged upstream that made git subtree fast enough for Clippy and a few other tools. However, on Miri, likely due to its complex history that involves moving a large chunk of code from Miri to rustc in a history-preserving way many years ago, git subtree became entirely unusable: even after many hours of waiting, the sync would simply not finish.
 
-Another disadvantage of git subtree is that it breaks git blame when working on subproject changes in the parent repository:
-git subtree reflects the subproject changes back to the parent repo by copying the original commits, which, however, of course, use the wrong path (they are relative to the subproject, not the parent).
-Therefore, it synthesizes a gigantic commit that applies all subproject changes to the actual files in the parent repo. git blame will always point at that commit, making it impossible to figure out what actually happened.
+Apart from performance, we also encountered some other issues with subtrees, such as git blame not working properly or commits being duplicated when the subproject is changed in the parent repository.
 
-Furthermore, whenever a change to a subproject is made in the parent repo, that commit ends up being duplicated.
-If a parent repo commit changes multiple subprojects, the commit will be duplicated multiple times.
-And finally, we noticed that sometimes our subtrees get out of sync: even after doing a full push and pull, there are still differences between the subproject and the parent repo.
-
-Luckily, we found an alternative that is much faster and avoids all the other problems.
+Luckily, we found an alternative that is much faster and avoids the other problems.
 
 ## Josh comes to the rescue
 
