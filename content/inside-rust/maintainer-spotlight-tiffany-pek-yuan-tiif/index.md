@@ -76,7 +76,7 @@ At that point, I already interacted with the Rust community a lot, so it didn't 
 
 I am very happy about it! The people in the Project are really nice, and we frequently talk with one another, which is great.
 
-I was able to attend the [RustWeek](https://rustweek.org) conference and the Rust All Hands in 2025 and 2026, which was super nice. I'm grateful for the travel grant that I got from the Rust Foundation, which allowed me to travel to these events. I made so many friends there, which is part of the reason why I am still staying with the Rust Project. All my Rust friends were there!
+I was able to attend the [RustWeek](https://rustweek.org) conference and the Rust All Hands in 2025 and 2026, which was super nice. I'm grateful for the travel grant that I got from the Rust Project and Foundation, which allowed me to travel to these events. I made so many friends there, which is part of the reason why I am still staying with the Rust Project. All my Rust friends were there!
 
 **What excites you about working on the Rust compiler?**
 
