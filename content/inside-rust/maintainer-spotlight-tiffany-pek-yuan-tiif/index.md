@@ -1,7 +1,7 @@
 +++
 path = "inside-rust/2026/06/03/maintainer-spotlight-tiffany-pek-yuan-tiif"
 title = "Maintainer spotlight: Tiffany Pek Yuan (@tiif)"
-authors = ["Jakub Beránek, Lori Lorusso"]
+authors = ["Jakub Beránek", "Lori Lorusso"]
 
 [extra]
 team = "the Content team"
