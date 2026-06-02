@@ -112,7 +112,7 @@ I hope to finish my studies soon, and after that I will have to get a full-time 
 
 Right now, I have an internship in the RustNL Maintainers Team. It will be awesome if I can find a full-time job which allows me to work on Rust as I really love what I am doing now.
 
-I think the upcoming funding efforts, such as the RustNL Maintainers Team and the Rust Foundation Maintainer Fund, will be able to financially support more Rust Project contributors. Though I am slightly worried about the incentives of companies funding maintenance work. Company interests are not always necessarily the same as the community's interests, which can create a bit of a conflict of interest. But I'm sure that there are ways to mitigate this.
+I think the upcoming funding efforts, such as the RustNL Maintainers Team and the Rust Foundation Maintainers Fund, will be able to financially support more Rust Project contributors. Though I am slightly worried about the incentives of companies funding maintenance work. Company interests are not always necessarily the same as the community's interests, which can create a bit of a conflict of interest. But I'm sure that there are ways to mitigate this.
 
 <hr style="height: 1px; background-color: black;" />
 
