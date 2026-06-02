@@ -1,5 +1,5 @@
 +++
-path = "inside-rust/9999/12/31/how-josh-helps-rust-manage-code-across-multiple-repositories"
+path = "inside-rust/2026/06/04/how-josh-helps-rust-manage-code-across-multiple-repositories"
 title = "How Josh helps Rust manage code across multiple repositories"
 authors = ["Jakub Beránek", "Ralf Jung"]
 +++
