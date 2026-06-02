@@ -58,7 +58,7 @@ I added two [tests](https://github.com/rust-lang/miri/pull/3398) to Miri. While 
 
 **Would you recommend that approach for new contributors?**
 
-Yes, I think that improving documentation is a good way to start contributing to Rust. It is also important to first locate areas that you are interested in, because the Rust Project is huge, there is Miri, the compiler, rustdoc, rust-analyzer, Cargo, and many other areas in need of contributions. Before making larger changes, it is always good to discuss them first with the corresponding maintainers before you open a PR.
+Yes, I think that improving documentation is a good way to start contributing to Rust. It is also important to first locate areas that you are interested in, because the Rust Project is huge, there is Miri, the compiler, rustfmt, rustdoc, rust-analyzer, Cargo, and many other areas in need of contributions. Before making larger changes, it is always good to discuss them first with the corresponding maintainers before you open a PR.
 
 If you are just starting with Rust, always read the error messages, because they are really nice. And if you find the error message difficult to understand, it might be a bug, so go open an issue!
 
