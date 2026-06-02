@@ -53,13 +53,12 @@ Performing a sync means that someone has to run a script to do a pull or a push,
 
 This workflow conceptually worked pretty well for us, but we had a severe problem with the implementation of git subtree: it is *painfully* slow.
 The official upstream version is entirely unusable for a repo of our size.
-There exists a patch that was never merged upstream that made git subtree fast enough for Clippy and a few other tools.
-However, on Miri, likely due to its complex history that involves moving a large chunk of code from Miri to rustc in a history-preserving way many years ago, git subtree became entirely unusable: even after many hours of waiting, the sync would simply not finish.
+There exists a patch that was never merged upstream that made git subtree fast enough for Clippy and a few other tools. However, on Miri, likely due to its complex history that involves moving a large chunk of code from Miri to rustc in a history-preserving way many years ago, git subtree became entirely unusable: even after many hours of waiting, the sync would simply not finish.
 
 Another disadvantage of git subtree is that it breaks git blame when working on subproject changes in the parent repository:
-git subtree reflects the subproject changes back to the parent repo by copying the original commits, which however of course use the wrong path (they are relative to the subproject, not the parent).
-Therefore, it synthesizes a gigantic commit that applies all subproject changes to the actual files in the parent repo.
-git blame will always point at that commit, making it impossible to figure out what actually happened.
+git subtree reflects the subproject changes back to the parent repo by copying the original commits, which, however, of course, use the wrong path (they are relative to the subproject, not the parent).
+Therefore, it synthesizes a gigantic commit that applies all subproject changes to the actual files in the parent repo. git blame will always point at that commit, making it impossible to figure out what actually happened.
+
 Furthermore, whenever a change to a subproject is made in the parent repo, that commit ends up being duplicated.
 If a parent repo commit changes multiple subprojects, the commit will be duplicated multiple times.
 And finally, we noticed that sometimes our subtrees get out of sync: even after doing a full push and pull, there are still differences between the subproject and the parent repo.
@@ -75,6 +74,7 @@ To make our subproject handling even easier, we built a small Rust tool on top o
 We currently use Josh to handle subtree synchronization for [Miri][miri], [Rust Analyzer][rust-analyzer], [compiler-builtins][compiler-builtins], [stdarch][stdarch] and the [Rust Compiler Development Guide][rustc-dev-guide]. While there are still a few subprojects that use git subtrees (e.g. Clippy), our plan is to eventually migrate all these remaining subprojects from git subtree to Josh, and improve our tooling to make the bidirectional sync even easier and faster for the maintainers of our developer tools.
 
 We started using Josh a few years ago, and we are very happy that something like it exists; otherwise we would probably have to build it ourselves to deal with the scale of our repositories. Thankfully, Josh's maintainers, especially [Christian Schilling](https://github.com/christian-schilling), are very cooperative, and they are continuously improving Josh to meet our (sometimes quite challenging) demands.
+
 For instance, the main downside of Josh that we ran into is that a "pull" sync creates a huge amount of merge commits in the subproject. In response to that, the Josh developers improved the logic for avoiding trivial merges, and they are currently helping us with the non-trivial migration to these better filters.
 Conversely, over the years, our use-cases helped uncover several edge-cases in Josh, and they often serve as a stress test for its performance.
 
