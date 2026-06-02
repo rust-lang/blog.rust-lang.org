@@ -61,7 +61,7 @@ Luckily, we found an alternative that is much faster and avoids the other proble
 
 ## Josh comes to the rescue
 
-[Josh][Josh] is a tool written in Rust that implements sophisticated and performant filtering operations on git repositories. It provides a set of reversible git [algebraic filters][josh-filters] that allow manipulating the history of git repos, which enables several cool use-cases. For example, it offers a git proxy that can transparently split a repository into a set of subrepositories on demand, compose several repositories into a virtualized monorepo or linearize the history of a repository that uses merge commits. We mostly simply use it as a very fast "git subtree on steroids". In fact, our Josh workflow is very similar to the way we use git subtrees, with the biggest difference being that the sync operations are an order of magnitude faster and the resulting history is (mostly) cleaner.
+[Josh][Josh] is a tool written in Rust that implements sophisticated and performant filtering operations on git repositories. It provides a set of reversible git [algebraic filters][josh-filters] that allow manipulating the history of git repos, which enables several cool use-cases. For example, it offers a git proxy that can transparently split a repository into a set of subrepositories on demand, rearrange, exclude or extract the git history of specific directories or linearize the history of a repository that uses merge commits. We mostly simply use it as a very fast "git subtree on steroids". In fact, our Josh workflow is very similar to the way we use git subtrees, with the biggest difference being that the sync operations are an order of magnitude faster and the resulting history is (mostly) cleaner.
 
 To make our subproject handling even easier, we built a small Rust tool on top of Josh, called [josh-sync][josh-sync]. This tool provides a lightweight interface on top of the powerful Josh engine, which allows us to unify the way we handle [pulls](https://github.com/rust-lang/rust-analyzer/pull/22389) and [pushes](https://github.com/rust-lang/rust/pull/156437) across all our subprojects that use Josh. We even prepared a reusable GitHub Actions [workflow][ci-action] that is used in several subproject repositories to periodically perform the `pull` operation, open a PR directly from CI, and [let us know][miri-zulip] on Zulip if the sync cannot be performed without manual intervention.
 
@@ -72,10 +72,10 @@ We started using Josh a few years ago, and we are very happy that something like
 For instance, the main downside of Josh that we ran into is that a "pull" sync creates a huge amount of merge commits in the subproject. In response to that, the Josh developers improved the logic for avoiding trivial merges, and they are currently helping us with the non-trivial migration to these better filters.
 Conversely, over the years, our use-cases helped uncover several edge-cases in Josh, and they often serve as a stress test for its performance.
 
-So, with that being said, we would like to thank Josh maintainers for enabling us to scale our complex development workflows! If terms like fast git history filtering or stacked changes sound interesting to you, then check out [Josh][Josh] to see if it might also help your versioning use-cases.
+So, with that being said, we would like to thank Josh maintainers for enabling us to scale our complex development workflows! If scaling git repos and workflows sounds interesting to you, then check out [Josh][Josh] to see if it might also help your versioning use-cases.
 
 [rust-lang/rust]: https://github.com/rust-lang/rust
-[Josh]: https://josh-project.github.io/josh/intro.html
+[Josh]: https://github.com/josh-project/josh
 [josh-sync]: https://github.com/rust-lang/josh-sync
 [submodules]: https://github.com/rust-lang/rust/blob/4530eac197dfc6975c23d5d01e85e44bf7f18d69/.gitmodules
 [josh-filters]: https://josh-project.github.io/josh/reference/filters.html
