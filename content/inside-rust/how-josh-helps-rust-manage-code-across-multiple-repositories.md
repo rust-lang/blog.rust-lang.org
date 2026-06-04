@@ -57,6 +57,7 @@ There exists a patch that was never merged upstream that made git subtree fast e
 
 Apart from performance, we also encountered some other issues with subtrees, such as git blame not working properly or commits being duplicated when the subproject is changed in the parent repository.
 
+git subtree has served us well for many years, but we have outgrown what it can handle.
 Luckily, we found an alternative that is much faster and avoids the other problems.
 
 ## Josh comes to the rescue
