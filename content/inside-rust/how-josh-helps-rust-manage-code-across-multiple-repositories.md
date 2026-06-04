@@ -73,7 +73,7 @@ We started using Josh a few years ago, and we are very happy that something like
 For instance, the main downside of Josh that we ran into is that a "pull" sync creates a huge amount of merge commits in the subproject. In response to that, the Josh developers improved the logic for avoiding trivial merges, and they are currently helping us with the non-trivial migration to these better filters.
 Conversely, over the years, our use-cases helped uncover several edge-cases in Josh, and they often serve as a stress test for its performance.
 
-So, with that being said, we would like to thank Josh maintainers for enabling us to scale our complex development workflows! If scaling git repos and workflows sounds interesting to you, then check out [Josh][Josh] to see if it might also help your versioning use-cases.
+So, with that being said, we would like to thank the Josh maintainers for enabling us to scale our complex development workflows! If scaling git repos and workflows sounds interesting to you, then check out [Josh][Josh] to see if it might also help your versioning use-cases.
 
 [rust-lang/rust]: https://github.com/rust-lang/rust
 [Josh]: https://github.com/josh-project/josh
