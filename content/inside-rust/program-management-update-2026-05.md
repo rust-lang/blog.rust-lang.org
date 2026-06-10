@@ -90,7 +90,7 @@ Jieyou Xu wanted to clarify what exactly the Linux team needs to remove the ["tr
 
 The team runs rustfmt in CI, but they're currently only looking for crashes (ICE — internal compiler error). They want get to a place where they could catch unintentional differences in code formatting, and enforce consistent style in CI.
 
-Alejandra González mentioned that getting changes into clippy is now bottlenecked by reviewers. Reviewing rustfmt code is complex. There's a lot of things to check, and edge cases to investigate. But Alejandra stressed that if someone is interested, they'd be happy to teach them, and they'd appreciate the help.
+Alejandra González mentioned that getting changes into clippy is now bottlenecked by reviewers. Reviewing clippy code is complex. There's a lot of things to check, and edge cases to investigate. But Alejandra stressed that if someone is interested, they'd be happy to teach them, and they'd appreciate the help.
 
 ### Recoverable integer overflow
 
