@@ -11,9 +11,9 @@ team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-progra
 
 ## RustWeek and All Hands!
 
-It finally happened: Nurzhan, Tomáš, and hundreds of Rustaceans all met up in Utrecht, the Netherlands, for [RustWeek and All Hands](https://2026.rustweek.org/).
+It finally happened. Nurzhan, Tomáš, and hundreds of Rustaceans all met up in Utrecht, the Netherlands, for [RustWeek and All Hands](https://2026.rustweek.org/).
 
-RustWeek is a week-long conference organized by [RustNL](https://rustnl.org/). It typically features two days of talks, three to four days of workshops, an unconference, and a hackathon. It's absolutely fantastic and open to everyone. The All Hands is a three-day event of team- and topic-specific sessions, bringing Project members together to meet, collaborate, resolve issues, and plan ahead. For the last two years, these events have been co-located, so most Project members have been able to attend both.
+RustWeek is a week-long conference organized by [RustNL](https://rustnl.org/). It typically features two days of talks, three to four days of workshops, an unconference, and a hackathon. It's absolutely fantastic and open to everyone. The All Hands is a three-day event of team- and topic-specific sessions, bringing Project members together to meet, collaborate, resolve issues, and plan ahead. For the last two years, these events have been co-located, so most Project members got to attend both.
 
 The dates for [RustWeek 2027](https://2027.rustweek.org/) are already set: May 24–29, in Utrecht again. The dates and location for the All Hands have not yet been announced.
 
@@ -23,7 +23,7 @@ We'll post a retrospective later, but in the meantime, it was fantastic to meet 
 
 During the conference, the Content team recorded 12 interviews with some of the speakers and people in the Project. We got involved, too: Nurzhan was really excited (and anxious!) to meet and interview Alice Cecile (Bevy Engine) about program and project management. The interviews have been fully produced by a videographer hired from the team's budget, and they should be posted in the next month or so.
 
-Apart from that, the team has a backlog of interviews recorded at the last Kangrejos and RustConf that is now more than nine months old. They hired an editor to handle them, so we're excited to see more interviews posted soon.
+Apart from that, the team has a backlog of interviews recorded at the last Kangrejos and RustConf that is over nine months old now. They hired an editor to take care of them, so we're excited to see more interviews posted soon.
 
 ## Program management
 
@@ -36,13 +36,13 @@ We're now working on displaying funding information (goals looking for funding, 
 Some other things we're looking into:
 
 * The feasibility of using goals ubiquitously instead of the current Compiler MCPs (Major Change Proposals), Library ACPs (API Change Proposals), and Language experiments.
-  * The Types team recently set a precedent by [deciding](https://github.com/rust-lang/types-team/issues/134) to move away from MCPs in favor of goals.
-* Making the creation of new goals more straightforward and lightweight
-* Streamlining goal updates and making them more useful
-* Refactoring the tooling for managing goals
+  * The Types team set a precedent for this recently by [deciding](https://github.com/rust-lang/types-team/issues/134) to move away from MCPs in favor of goals.
+* Making the creation of new goals more straightforward and lightweight.
+* Streamlining goal updates and making them more useful.
+* Refactoring the tooling for managing goals.
 * Closer integration with the Funding team, grants, etc.
 
-Basically, we expect goals to be opened throughout the year on a rolling basis. How should we handle that?
+Basically, we expect goals to be opened throughout the year on a rolling basis. How do we handle that?
 
 We have also expanded our meeting coverage. The Rustdoc team used to have chat-based meetings, but recently decided to try video calls instead and asked us to take minutes. We also reached out to the Types team, asking them to move their meeting to a nonconflicting time slot (30 minutes earlier) so that we could start attending those, too. Hopefully, this will help us keep the teams more connected.
 
@@ -50,19 +50,19 @@ We have also expanded our meeting coverage. The Rustdoc team used to have chat-b
 
 The [Rust Foundation Maintainer Fund (RFMF) RFC](https://rust-lang.github.io/rfcs/3931-rfmf-rust-foundation-maintainer-fund.html) has been merged.
 
-The Foundation will begin raising money for the Maintainer Fund. This money will be dedicated to people doing maintenance work. This includes work such as reviewing, triaging, large-scale refactoring, and development that is largely invisible but critical to the Project's future or needed to unlock new features.
+The Foundation will begin raising money for the Maintainer Fund. This money will be dedicated to people doing maintenance work. This includes work such as reviewing, triaging, and large-scale refactoring, but also work that is largely invisible yet has far-reaching effects, e.g., unblocking new features.
 
 The RFC establishes a Maintainer in Residence program (MiR — not to be confused with [MIR](https://rustc-dev-guide.rust-lang.org/mir/index.html)) to provide long-term, mostly full-time support for maintainers — complementing the shorter-term [Grants program](https://github.com/rust-lang/rfcs/pull/3919).
 
 This program was heavily inspired by Python's [Developers in Residence](https://www.python.org/psf/developersinresidence/).
 
-The [Funding team](https://rust-lang.org/governance/teams/launching-pad/#team-funding) wrote about the program [here](https://blog.rust-lang.org/2026/06/02/launching-the-rust-foundation-maintainers-fund/), and the Foundation published a [companion piece on its site](https://rustfoundation.org/media/help-fund-the-people-who-build-rust/).
+The [Funding team](https://rust-lang.org/governance/teams/launching-pad/#team-funding) wrote about the program [here](https://blog.rust-lang.org/2026/06/02/launching-the-rust-foundation-maintainers-fund/), and the Foundation published a [companion piece on their site](https://rustfoundation.org/media/help-fund-the-people-who-build-rust/).
 
 If you're an individual, you can [donate money to the Maintainer Fund via this GitHub Sponsors page](https://github.com/sponsors/rustfoundation). If you're a company or larger organization, reach out to <maintainers-fund@rustfoundation.org>. All proceeds will go directly to maintainers.
 
 If you want to support specific people, head to the [Funding page](https://rust-lang.org/funding/).
 
-And last but not least, RustNL has recently hired several Rust maintainers as well. [Visit its page to learn more](https://rustnl.org/maintainers/).
+And last but not least, RustNL has recently hired several Rust maintainers as well. [Visit their page to learn more](https://rustnl.org/maintainers/).
 
 ## Mirroring
 
@@ -86,7 +86,7 @@ Rustup doesn't have the same constraints, so we'll be following the spec there.
 
 The Rust for Linux team was invited to the All Hands and hosted an office-hours session there. There were rustfmt and clippy representatives in [the room](https://github.com/rust-lang/all-hands-2026/issues/18).
 
-Jieyou Xu wanted to clarify exactly what the Linux team needs to remove the ["trailing double slash hack"](https://docs.kernel.org/rust/coding-guidelines.html#imports). The team wants this option to be stabilized at some point, but in the meantime, they would be okay with using something like `RUSTC_BOOTSTRAP` (which allows unstable features to be used with a stable toolchain). Rustfmt, however, does not have a way to do this today.
+Jieyou Xu wanted to clarify what exactly the Linux team needs to remove the ["trailing double slash hack"](https://docs.kernel.org/rust/coding-guidelines.html#imports). The team wants this option to be stabilized at some point, but in the meantime, they would be okay with using something like `RUSTC_BOOTSTRAP` (which allows unstable features to be used with a stable toolchain). Rustfmt, however, does not have a way to do this today.
 
 The team runs rustfmt in CI, but they're currently looking only for crashes (ICEs — internal compiler errors). They want to get to a place where they can catch unintentional differences in code formatting, and enforce consistent style in CI.
 
