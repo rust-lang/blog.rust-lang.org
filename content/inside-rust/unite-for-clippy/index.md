@@ -34,8 +34,8 @@ get their pull request reviewed and merged *faster*.
 
 ## What does this mean
 
-Once a contributor opens a pull request, we propose them to review another
-contributor’s pull request. That way each contributor reviews at least once pull
+Once a contributor opens a pull request, we propose they review another
+contributor’s pull request. That way each contributor reviews at least one pull
 request and nobody’s contributions get stale.
 
 The underlying mechanism looks like this: Once a contributor opens a pull request,
