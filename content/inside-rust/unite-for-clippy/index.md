@@ -39,10 +39,10 @@ contributor’s pull request. That way each contributor reviews at least once pu
 request and nobody’s contributions get stale.
 
 The underlying mechanism looks like this: Once a contributor opens a pull request,
-our dear bot [@bors](https://github.com/bors) will prompt them to look at other
+our dear bot [@rustbot](https://github.com/rustbot) will prompt them to look at other
 pull requests (preferably ones without any other reviews). After they’ve reviewed
 a pull request, the contributor gets on a special *secret* list of cool ones, and
-they’ll both remove burden from the maintainers and get a grateful message from bors.
+priority on their pull request from the team's reviewers.
 
 ## Together, we make Clippy healthier
 
