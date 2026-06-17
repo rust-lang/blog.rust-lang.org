@@ -44,7 +44,7 @@ pull requests (preferably ones without any other reviews). After they’ve revie
 a pull request, the contributor gets on a special *secret* list of cool ones, and
 priority on their pull request from the team's reviewers.
 
-> We want to thank the Bevy project and their ["Open Code Review"] system a
+> We want to thank the Bevy project and their ["Open Code Review"] system as an
 > inspiration for this new initiative.
 
 ## Together, we make Clippy healthier
