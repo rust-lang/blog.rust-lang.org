@@ -44,6 +44,9 @@ pull requests (preferably ones without any other reviews). After they’ve revie
 a pull request, the contributor gets on a special *secret* list of cool ones, and
 priority on their pull request from the team's reviewers.
 
+> We want to thank the Bevy project and their ["Open Code Review"] system a
+> inspiration for this new initiative.
+
 ## Together, we make Clippy healthier
 
 Clippy is no stranger to health updates of this kind, last year we had the
@@ -58,3 +61,4 @@ makes this linter (and language) so loved, and with the help of the community
 
 [donating]: https://github.com/sponsors/rustfoundation
 [Feature Freeze]: https://blog.rust-lang.org/inside-rust/2025/10/22/clippys-feature-warming-up/
+["Open Code Review"]: https://shaping.systems/blog/open-code-review/
