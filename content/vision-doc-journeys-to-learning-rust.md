@@ -32,7 +32,7 @@ Others needed more passes and more formats, sometimes reaching for resources the
 
 > "Rust book, Rustlings, Zero to Production in Rust, Jon Gjengset tutorials. A bunch of books. It's not a one-pass reading. Can't say how many times I've gone through it." -- Software engineer working on video streaming and storage
 
-These resources have brought up an entire generation of Rust programmers. But, to some, there is a perception that these resources have trouble keeping pace with the langauge.
+These resources have brought up an entire generation of Rust programmers. But, to some, there is a perception that these resources have trouble keeping pace with the language.
 
 > "We'd like to use [The Rust Programming Language/'the book'], but we've found that it's out of date, unfortunately. We've looked at the GitHub repo and found it's got a lot of unresolved issues and unmerged PRs" -- Principal Software Engineering work on Rust adoption in a regulated industry
 
@@ -153,7 +153,7 @@ We heard in at least one case, that while the language was challenging and there
 > "Well, I think my early impressions of Rust - one is I find C++ so intimidating, and I think a big part of why I was able to succeed at [..] learning Rust is the tooling. I mean, all this makes sense [..] but it's like, for me, getting started with Rust, the language was challenging, but the tooling was incredibly easy." -- Founder of another startup built on Rust
 
 While it might be considered more of a community concern, if there are interactions online and in spaces that point to learners having 
-so-called "skill issues" this feeds into the narrative that Rust must be hard to learn. We may be unintentially turning away Rust Project contributors and maintainers due to the vibes being put out when new learners show up in certain spaces.
+so-called "skill issues" this feeds into the narrative that Rust must be hard to learn. We may be unintentionally turning away Rust Project contributors and maintainers due to the vibes being put out when new learners show up in certain spaces.
 
 > "People are very helpful, but generally the attitude is: if your program is very complicated, it's mostly a skill issue. There's not that much empathy when people get stuck learning, and a lot of people are just pushed away by it. There's probably a huge number of people who silently stop wanting to write Rust, because at some point it gets complicated and the feedback they get is 'you just need to be a better programmer, obviously'." -- Software Engineer at a SaaS Provider
 
