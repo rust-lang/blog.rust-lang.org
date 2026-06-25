@@ -1,6 +1,6 @@
 +++
 path = "2026/06/25/vision-doc-journeys-to-learning-rust"
-title = "What the Rust Vision Doc tells us about the journey(s!) of learning Rust"
+title = "The many journeys of learning Rust"
 authors = ["Pete LeVasseur"]
 
 [extra]
