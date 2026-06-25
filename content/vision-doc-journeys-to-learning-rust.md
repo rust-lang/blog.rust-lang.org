@@ -78,6 +78,8 @@ Some learners arrive with the assumption that good Rust means zero clones, zero 
 
 The experienced Rust developers we spoke with consistently said the same thing: clone freely while you're learning, then optimize when you understand the problem. Rust's reputation for performance and correctness feeds this. Newcomers assume anything less than optimal is wrong before they've written a first working program, and clone guilt is how that shows up.
 
+We think it could be an interesting area of future study to check into the patterns Rust programmers employ at different levels of experience and under which circumstances. One member of the Rust Vision doc team that's very experienced with Rust noted that there's kind of an "expected shape" they understand as passing the compiler. This knowledge influences how they approach writing code which wouldn't take that shape and they naturally find themselves understanding when to use so-called workarounds, such as passing around indices into arrays or `Vec`s.
+
 # Multi-paradigm, but not the OOP some are used to
 
 The Rust programming language is multi-paradigm, and how that lands depends on what you're coming from. We heard some that came from a functional background were delighted with digging into learning how much Rust inherits from that lineage. Some others noted that they and others on their teams struggled to unlearn the object-oriented style they'd come to use heavily in other languages like C++ and Java.
