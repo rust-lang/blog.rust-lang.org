@@ -94,7 +94,7 @@ Developers coming from functional programming had less to unlearn: strong typing
 
 # Teaching Rust in academia
 
-We spoke with a university professor that's been teaching Rust generally and used it in an embedded development class. In the academic environment, they were able to use proxies for some things such as "traits are like interfaces in Java" because the students had already gone through a set of courses in their first and second years that taught them Java. They introduced concepts slowly throughout the course, choosing to deal with some more complex topics like generics later. The outcome generally was that students had no problem picking up Rust in this setting.
+We spoke with a university professor that's been teaching Rust generally. In the academic environment, they were able to use proxies for some things such as "traits are like interfaces in Java" because the students had already gone through a set of courses in their first and second years that taught them Java. They introduced concepts slowly throughout the course, choosing to deal with some more complex topics like generics later. The outcome generally was that students had no problem picking up Rust in this setting.
 
 > "I couldn't see any big difference on the embedded side. We also teach an embedded class, and we did an experiment. Half of the students' feedback was worse on the Rust class, mostly because they needed to build the project themselves. The C students just got one from [an LLM], absolutely no problem." -- University Professor, on teaching Rust
 
