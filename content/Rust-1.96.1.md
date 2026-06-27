@@ -30,9 +30,9 @@ Rust 1.96.1 fixes:
 It also [fixes](https://github.com/rust-lang/cargo/pull/17140) three CVEs
 affecting libssh2 (which is compiled into Cargo):
 
-- [CVE-2025-15661](https://nvd.nist.gov/vuln/detail/cve-2025-15661)
-- [CVE-2026-55199](https://nvd.nist.gov/vuln/detail/cve-2026-55199)
-- [CVE-2026-55200](https://nvd.nist.gov/vuln/detail/cve-2026-55200)
+- [CVE-2025-15661](https://www.cve.org/CVERecord?id=CVE-2025-15661)
+- [CVE-2026-55199](https://www.cve.org/CVERecord?id=CVE-2026-55199)
+- [CVE-2026-55200](https://www.cve.org/CVERecord?id=CVE-2026-55200)
 
 ### Contributors to 1.96.1
 
