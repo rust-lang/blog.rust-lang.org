@@ -45,31 +45,22 @@ current plan is to fully remove it.
 
 See the previous [blog post](https://blog.rust-lang.org/2025/11/20/switching-to-v0-mangling-on-nightly/) for more details.
 
-### Cargo stabilizes configuring lint levels
+### Cargo support for denying warnings
 
-It's common practice to deny warnings in CI. Historically, doing so is typically done through `RUSTFLAGS=-Dwarnings`.
+It's common practice to deny warnings in CI. Historically, doing so is
+typically done through `RUSTFLAGS=-Dwarnings`. With Rust 1.97, Cargo controls
+how warnings interact with build success: either silencing them (via `allow`
+level), rendering without failing (default, `warn`), or denying them (via `deny`).
 
-Building this functionality into Cargo allows for no longer invalidating the
-build cache when toggling the configuration of warnings, allowing for switching
-it on and off dynamically. For example, while working on introducing a new
-feature, you may prefer to silence warnings to focus only on error messages. This can now be toggled on by editing `.cargo/config.toml`:
+As a  result of Cargo configuration determining the behavior, using this
+feature doesn't invalidate the underlying build cache, meaning that it's easy
+to temporarily opt-in. For example, if warnings are adding unwanted noise while
+working through fixing errors after a refactor, you can run
+`CARGO_BUILD_WARNINGS=allow cargo check`, temporarily silencing them.
 
-```toml
-build.warnings = "allow"
-```
-
-or by setting an environment variable:
-
-```shell
-CARGO_BUILD_WARNINGS=allow cargo check
-```
-
-Note that changing these won't recompile anything: Cargo handles whether or not
-to fail the build rather than re-running rustc with altered lint levels.
-
-In CI, you can use `CARGO_BUILD_WARNINGS=deny` to deny warnings, optionally with
-`--keep-going` to collect all errors and warnings rather than stopping on the
-first failing package.
+In CI, jobs can instead set `CARGO_BUILD_WARNINGS=deny` to deny warnings. This
+can be combined with `--keep-going` to collect all errors and warnings rather
+than stopping on the first failing package.
 
 See the [documentation](https://doc.rust-lang.org/cargo/reference/config.html#buildwarnings) for more details.
 
@@ -89,6 +80,23 @@ warning: linker stderr: ignoring deprecated linker optimization setting '1'
 Common linker messages that have been diagnosed as false positives or intentional behavior
 are filtered out by rustc. Several defects have already been fixed as a result
 of no longer hiding this output on nightly.
+
+Note that currently, `linker_messages` is a special lint that is *not* affected
+by the `warnings` lint group. This is intentional as rustc generally doesn't
+control linker output as precisely, and it's not uncommon for output to only
+appear on some platforms. If you are seeing what you think is a false positive
+output from the linker, please [file an issue].
+
+To silence the warning in the mean time, you can configure the lint level to
+allow. This can be done through `Cargo.toml` by adding a [lints section] like this:
+
+```toml
+[lints.rust]
+linker_messages = "allow"
+```
+
+[file an issue]: https://github.com/rust-lang/rust/issues/new/choose
+[lints section]: https://doc.rust-lang.org/nightly/cargo/reference/manifest.html#the-lints-section
 
 ### Stabilized APIs
 
