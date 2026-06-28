@@ -40,7 +40,7 @@ The new mangling scheme resolves a number of drawbacks from the previous one:
 Since Rust 1.59, the compiler has supported opting into a Rust-specific
 mangling scheme via `-Csymbol-mangling-version=v0`. Since November 2025, this
 scheme has been enabled by default on nightly, and 1.97 is now enabling it on
-stable Rust. The legacy mangling scheme can only be enabled on nightly and the
+stable Rust. The legacy mangling scheme can only be enabled on nightly, and the
 current plan is to fully remove it.
 
 See the previous [blog post](https://blog.rust-lang.org/2025/11/20/switching-to-v0-mangling-on-nightly/) for more details.
@@ -67,7 +67,7 @@ CARGO_BUILD_WARNINGS=allow cargo check
 Note that changing these won't recompile anything: Cargo handles whether or not
 to fail the build rather than re-running rustc with altered lint levels.
 
-In CI, you can use CARGO_BUILD_WARNINGS=deny to deny warnings, optionally with
+In CI, you can use `CARGO_BUILD_WARNINGS=deny` to deny warnings, optionally with
 `--keep-going` to collect all errors and warnings rather than stopping on the
 first failing package.
 
@@ -86,7 +86,7 @@ warning: linker stderr: ignoring deprecated linker optimization setting '1'
   = note: `#[warn(linker_messages)]` on by default
 ```
 
-Common messages from linkers that have been diagnosed as false-positives or intentional behavior
+Common linker messages that have been diagnosed as false positives or intentional behavior
 are filtered out by rustc. Several defects have already been fixed as a result
 of no longer hiding this output on nightly.
 
