@@ -1,6 +1,6 @@
 +++
 path = "inside-rust/9999/12/31/unite-for-clippy"
-title = "United for a strong Clippy"
+title = "Together for a healthier Clippy"
 authors = ["blyxyas"]
 
 [extra]
@@ -8,7 +8,7 @@ team = "the Clippy team"
 team_url = "https://www.rust-lang.org/governance/teams/dev-tools#team-clippy"
 +++
 
-# United for a strong Clippy
+# Together for a healthier Clippy
 
 Clippy is a very loved piece of software, with the fortune of having many
 contributors willing to do high-quality pull requests with very needed features
@@ -47,7 +47,7 @@ priority on their pull request from the team's reviewers.
 > We want to thank the Bevy project and their ["Open Code Review"] system as an
 > inspiration for this new initiative.
 
-## Together, we make Clippy healthier
+## We've done this in the past
 
 Clippy is no stranger to health updates of this kind, last year we had the
 [Feature Freeze], which was an absolute success. In that process, we gained
@@ -57,7 +57,7 @@ Clippy, and Clippy doing things *right.*
 Once again, the team wants to thank and congratulate every single person,
 contributor or not, that cares about Clippy. Striving for excellence is what
 makes this linter (and language) so loved, and with the help of the community
-(of YOU), we can help Clippy become stronger.
+(of YOU), we can help Clippy become stronger and healthier.
 
 [donating]: https://github.com/sponsors/rustfoundation
 [Feature Freeze]: https://blog.rust-lang.org/inside-rust/2025/10/22/clippys-feature-warming-up/
