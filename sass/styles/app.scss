@@ -38,7 +38,7 @@ $header-font: 'Alfa Slab One', serif;
   --gray: #2a3439;
   --red: #a72145;
   --yellow: #ffc832;
-  --code-color: white;
+  --code-color: #d6dadb;
   --code-bg-color: rgba(213, 203, 198, 0.05);
   --code-border-color: rgba(213, 203, 198, 0.25);
   --blockquote-color: rgb(195, 205, 210);
@@ -46,13 +46,13 @@ $header-font: 'Alfa Slab One', serif;
   --blockquote-left-border-color: rgb(195, 205, 210);
   --body-background-color: #181a1b;
   --body-foreground-color: #e8e6e3;
-  --body-color: white;
-  --div-brand-a-color: white;
-  --white-elem-color: white;
+  --body-color: #d6dadb;
+  --div-brand-a-color: #d6dadb;
+  --white-elem-color: #d6dadb;
   --white-elem-a: #d5cbc6;
   --nav-links-a: #d5cbc6;
   --publish-date-author: #d5cbc6;
-  --section-header-h2-color: white;
+  --section-header-h2-color: #d6dadb;
   --theme-icon: #43484d;
   --theme-popup-border: #43484d;
   --theme-popup-bg: #141617;
@@ -301,7 +301,7 @@ table.post-list a:hover {
 footer.footer {
   padding: 30px 0;
   background-color: black;
-  color: white;
+  color: #ccc;
 
   ul {
     list-style-type: none;
@@ -317,6 +317,10 @@ footer.footer {
       text-decoration: underline;
     }
   }
+}
+
+footer img {
+  filter: brightness(80%);
 }
 
 footer h4 {
