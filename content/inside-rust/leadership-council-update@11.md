@@ -16,18 +16,18 @@ Hello again from the Rust Leadership Council! We wanted to share an update on wh
 
 ### Rust Foundation Maintainers Fund
 
-The [Funding team] has been established from [RFC#3931] to work with the Rust Foundation to administer the [Rust Foundation Maintainer Fund][rfmf] ([#294](https://github.com/rust-lang/leadership-council/issues/294)). This fund is directed towards supporting Rust Project maintainers with long-term funding so that maintainers can focus on important work that ensures the long-term health of Rust. More information can be found in the [launch announcement].
+The [Funding team] has been established from [RFC#3931] to work with the Rust Foundation to administer the [Rust Foundation Maintainers Fund][rfmf] ([#294](https://github.com/rust-lang/leadership-council/issues/294)). This fund is directed towards supporting Rust Project maintainers with long-term funding so that maintainers can focus on important work that ensures the long-term health of Rust. More information can be found in the [launch announcement].
 
-Additionally, the Council approved delegating the management of the Project grants program to the Funding team ([#301](https://github.com/rust-lang/leadership-council/issues/301)). As part of that we have allocated $50k for them to start the program ([#304](https://github.com/rust-lang/leadership-council/issues/304)).
+We have allocated $50k for them to spend on maintainer support ([#304](https://github.com/rust-lang/leadership-council/issues/304)). Additionally, the Council delegated the management of the Project grants program to the Funding team ([#301](https://github.com/rust-lang/leadership-council/issues/301)).
 
 [Funding team]: https://github.com/rust-lang/funding/
 [RFC#3931]: https://github.com/rust-lang/rfcs/pull/3931
 [rfmf]: https://rustfoundation.org/media/announcing-the-rust-foundation-maintainers-fund/
 [launch announcement]: https://blog.rust-lang.org/2026/06/02/launching-the-rust-foundation-maintainers-fund/
 
-### All-hands 2027
+### All-Hands 2027
 
-The Council approved to have an All-hands event in 2027 ([#300](https://github.com/rust-lang/leadership-council/issues/300)). This event is an opportunity for Project members to meet in person to collaborate on the future of Rust. The event is scheduled to take place during [RustWeek 2027](https://2027.rustweek.org/) in The Netherlands on May 27-29. More information will be coming soon.
+The Council approved an All-Hands event in 2027 ([#300](https://github.com/rust-lang/leadership-council/issues/300)). This event is an opportunity for Project members to meet in person to collaborate on the future of Rust. The event will take place during [RustWeek 2027](https://2027.rustweek.org/) in the Netherlands on May 27-29. More information will be coming soon.
 
 ### Comprehensibility team
 
@@ -43,7 +43,7 @@ Initial work will involve setting up a structure for documenting team charters a
 
 Since 2024, the Project has managed a *Project Priorities* budget. The council spends funds from this budget on activities that support the work of the Project. Since the last update, the Council approved the following additional allocations.
 
-As mentioned above, $50k was allocated to the [Funding team] for the Project grants program ([#304](https://github.com/rust-lang/leadership-council/issues/304)).
+As mentioned above, $50k was allocated to the [Funding team] for spending on maintainer support ([#304](https://github.com/rust-lang/leadership-council/issues/304)).
 
 An additional $7k was allocated to the [Mentors team] to support an extra [Outreachy] intern, bringing the total up to four interns. ([#288](https://github.com/rust-lang/leadership-council/issues/288)).
 
