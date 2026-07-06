@@ -1,5 +1,5 @@
 +++
-path = "inside-rust/2026/07/06/maintainer-spotlight-gen-li-rami3l"
+path = "inside-rust/2026/07/07/maintainer-spotlight-gen-li-rami3l"
 title = "Maintainer spotlight: Gen Li (@rami3l)"
 authors = ["Jakub Beránek", "Lori Lorusso"]
 
