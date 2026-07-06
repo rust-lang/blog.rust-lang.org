@@ -1,5 +1,5 @@
 +++
-path = "inside-rust/9999/12/31/unite-for-clippy"
+path = "inside-rust/2026/07/06/unite-for-clippy"
 title = "Together for a healthier Clippy"
 authors = ["blyxyas"]
 
