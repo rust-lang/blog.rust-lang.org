@@ -107,18 +107,16 @@ linker_messages = "allow"
 - [`<{integer}>::isolate_lowest_one`](https://doc.rust-lang.org/stable/std/primitive.u32.html#method.isolate_lowest_one)
 - [`<{integer}>::highest_one`](https://doc.rust-lang.org/stable/std/primitive.u32.html#method.highest_one)
 - [`<{integer}>::lowest_one`](https://doc.rust-lang.org/stable/std/primitive.u32.html#method.lowest_one)
-- [`<{integer}>::bit_width`](https://doc.rust-lang.org/stable/std/primitive.u32.html#method.bit_width)
+- [`<{uN}>::bit_width`](https://doc.rust-lang.org/stable/std/primitive.u32.html#method.bit_width)
 - [`NonZero<{integer}>::isolate_highest_one`](https://doc.rust-lang.org/stable/std/num/struct.NonZero.html#method.isolate_highest_one)
 - [`NonZero<{integer}>::isolate_lowest_one`](https://doc.rust-lang.org/stable/std/num/struct.NonZero.html#method.isolate_lowest_one)
 - [`NonZero<{integer}>::highest_one`](https://doc.rust-lang.org/stable/std/num/struct.NonZero.html#method.highest_one)
 - [`NonZero<{integer}>::lowest_one`](https://doc.rust-lang.org/stable/std/num/struct.NonZero.html#method.lowest_one)
-- [`NonZero<{integer}>::bit_width`](https://doc.rust-lang.org/stable/std/num/struct.NonZero.html#method.bit_width)
-
+- [`NonZero<{uN}>::bit_width`](https://doc.rust-lang.org/stable/std/num/struct.NonZero.html#method.bit_width)
 
 These previously stable APIs are now stable in const contexts:
 
 - [`char::is_control`](https://doc.rust-lang.org/stable/std/primitive.char.html#method.is_control)
-
 
 ### Other changes
 
