@@ -62,7 +62,7 @@ These were some of the more visible changes to crates.io over the past six month
 
 - **Search performance**: Relevance-sorted search queries previously ranked every crate matching the query, which could take 1-2 seconds for short or common search terms. Ranking is now bounded to the 1,000 matching crates with the highest recent download counts.
 
-- **Reverse dependencies performance**: The reverse dependencies endpoint no longer recomputes the full dependent set on every request. It is now served from a precomputed table kept in sync by database triggers, turning an expensive join into a bounded index scan.
+- **Reverse dependencies performance**: The reverse dependencies endpoint no longer recomputes the full dependent set on every request. It is now served from a precomputed table kept in sync by database triggers, turning an expensive join into a bounded index scan and greatly reducing the chance of getting a timeout error.
 
 - **New ARCHITECTURE.md**: If you've ever wondered how crates.io actually works, our [`ARCHITECTURE.md`](https://github.com/rust-lang/crates.io/blob/main/docs/ARCHITECTURE.md) document got a complete rewrite. It is now organized around the high-level systems that make up crates.io and how they fit together, and includes walkthroughs of what happens when you run `cargo publish`, why a typical crate download never touches our API servers, and how download counts are derived from CDN access logs.
 
