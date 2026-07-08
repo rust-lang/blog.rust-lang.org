@@ -12,7 +12,7 @@ Another six months have passed since our [last development update](https://blog.
 
 ## Source Code Viewer
 
-Crate pages now have a "Code" tab that lets you browse the contents of published crate versions directly on crates.io. This shows you the exact files that cargo downloads when you add a crate as a dependency, not whatever happens to be in the linked repository. This makes it much easier to audit your dependencies, including files that never appear in the repository, like the normalized `Cargo.toml` files that `cargo` generates.
+Crate pages now have a "Code" tab that lets you browse the contents of published crate versions directly on crates.io. This shows you the exact files that cargo downloads when you add a crate as a dependency, which might differ from the linked repository. This makes it much easier to audit your dependencies, including files that never appear in the repository, like the normalized `Cargo.toml` files that `cargo` generates.
 
 ![Source code viewer showing the "Code" tab of the serde crate](code-tab.png)
 
