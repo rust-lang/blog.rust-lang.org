@@ -72,7 +72,7 @@ These were some of the more visible changes to crates.io over the past six month
 
 - **Caching improvements**: We removed a global `Vary: Cookie` response header that was preventing our CDNs from caching public API responses and frontend assets effectively. Per-user responses now use `Cache-Control: no-store` instead, resulting in better cache hit rates at the CDN edge.
 
-- **Accessibility**: We have put a bit of effort into making crates.io friendlier to screen readers: decorative icons are now hidden from the accessibility tree, heading hierarchies have been fixed, and lists are marked up as proper lists. ARIA snapshot tests now ensure that regressions can't slip in unnoticed.
+- **Accessibility**: We have made crates.io friendlier to screen readers: decorative icons are now hidden from the accessibility tree, heading hierarchies have been fixed, and lists are marked up as proper lists. ARIA snapshot tests now ensure that regressions can't slip in unnoticed. We plan to continue to improve crates.io accessibility over the coming months.
 
 - **Git index performance**: The background worker's local clone of the git index is now a bare and shallow repository, eliminating roughly 250,000 checked-out files and the full commit history from its disk. The periodic index squashing now goes through the GitHub API instead of generating large git packs locally, which had previously caused out-of-memory failures on the production worker.
 
