@@ -74,7 +74,7 @@ These were some of the more visible changes to crates.io over the past six month
 
 - **Accessibility**: We have made crates.io friendlier to screen readers: decorative icons are now hidden from the accessibility tree, heading hierarchies have been fixed, and lists are marked up as proper lists. ARIA snapshot tests now ensure that regressions can't slip in unnoticed. We plan to continue to improve crates.io accessibility over the coming months.
 
-- **Git index performance**: The background worker's local clone of the git index is now a bare and shallow repository, eliminating roughly 250,000 checked-out files and the full commit history from its disk. The periodic index squashing now goes through the GitHub API instead of generating large git packs locally, which had previously caused out-of-memory failures on the production worker.
+- **Git index performance**: The background worker's local clone of the git index is now a bare and shallow repository, eliminating roughly 250,000 checked-out files and the full commit history from its disk, improving its performance as we see increased rates of crate publication. The periodic index squashing now goes through the GitHub API instead of generating large git packs locally, which had previously caused out-of-memory failures on the production worker.
 
 ## Feedback
 
