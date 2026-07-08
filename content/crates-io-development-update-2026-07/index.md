@@ -26,7 +26,7 @@ The rendering library behind the code viewer is a diff renderer at heart, and th
 
 At the end of May, [RFC #3946](https://github.com/rust-lang/rfcs/pull/3946) was accepted by the crates.io team. Since the very beginning, crates.io accounts have been tightly coupled to GitHub: signing in means "Log in with GitHub", and your crates.io identity is your GitHub username. The RFC changes that. It introduces usernames that are native to crates.io and independent of any linked GitHub account, as a prerequisite for eventually supporting login via other identity providers.
 
-The implementation has started, but there is still a lot left to do, most visibly the ability to change your crates.io username, and eventually signing in without GitHub. Since all of this touches authentication and account security, we are deliberately taking it slow and rolling these changes out in small, carefully reviewed steps.
+The implementation of crates.io usernames has started, but there is still a lot left to do, most visibly the ability to change your crates.io username. After that is complete, there will be future RFCs and implementation for signing in with identity providers other than GitHub. Since all of this touches authentication and account security, we are deliberately taking it slow and rolling these changes out in small, carefully reviewed steps.
 
 ## Advisories and Suggestions
 
