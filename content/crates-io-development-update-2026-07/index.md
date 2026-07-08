@@ -54,7 +54,7 @@ In our [January update], we announced that we were experimenting with porting th
 
 We designed this change to be invisible for our users, since the new frontend is a 1:1 port of the previous design and functionality. For the team and our contributors, however, it is a big deal: the frontend is now built on a more modern framework, which should make it easier for new contributors to get started. It also allows us to iterate faster, as the source code viewer above demonstrates.
 
-We want to thank the [Ember.js team](https://emberjs.com/teams/) for a framework that served crates.io well for many years, and the [Svelte team](https://svelte.dev/) for making the transition so enjoyable.
+We want to thank the [Ember.js team](https://emberjs.com/teams/) for a framework that served crates.io well for many years, and the Svelte team for making the transition so enjoyable.
 
 ## Miscellaneous
 
