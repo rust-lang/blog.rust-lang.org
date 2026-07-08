@@ -38,7 +38,7 @@ Related to this, some popular crates have been largely absorbed into the Rust st
 
 !["You might not need this dependency" banner on the lazy_static crate page](std-replacement-banner.png)
 
-The dataset behind this feature lives in the new [rust-lang/std-replacement-data](https://github.com/rust-lang/std-replacement-data) repository, together with a documented inclusion policy: standard library replacements only, every entry must cite the stable `std` API and Rust version, and crate maintainers get a notice-and-comment window before an entry is added. New entries can be proposed upstream and can benefit other tools too.
+The dataset behind this feature lives in the new [rust-lang/std-replacement-data](https://github.com/rust-lang/std-replacement-data) repository, together with a documented inclusion policy: standard library replacements only, every entry must cite the stable `std`, `core`, or `alloc` API and Rust version, and crate maintainers get a notice-and-comment window before an entry is added. New entries can be proposed upstream and can benefit other tools too.
 
 ## Ferris
 
