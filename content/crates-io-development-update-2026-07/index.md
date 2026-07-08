@@ -60,7 +60,7 @@ We want to thank the [Ember.js team](https://emberjs.com/teams/) for a framework
 
 These were some of the more visible changes to crates.io over the past six months, but a lot has happened "under the hood" as well:
 
-- **Search performance**: Relevance-sorted search queries previously ranked every crate matching the query, which could take 1-2 seconds for short or common search terms. Ranking is now bounded to the 1,000 matching crates with the most recent downloads.
+- **Search performance**: Relevance-sorted search queries previously ranked every crate matching the query, which could take 1-2 seconds for short or common search terms. Ranking is now bounded to the 1,000 matching crates with the highest recent download counts.
 
 - **Reverse dependencies performance**: The reverse dependencies endpoint no longer recomputes the full dependent set on every request. It is now served from a precomputed table kept in sync by database triggers, turning an expensive join into a bounded index scan.
 
