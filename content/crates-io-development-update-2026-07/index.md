@@ -50,7 +50,7 @@ Getting a 404 error on crates.io is now slightly less sad.
 
 ## Svelte Frontend Migration Completed
 
-In our January update, we announced that we were experimenting with porting the crates.io frontend from Ember.js to [Svelte](https://svelte.dev/). This experiment has concluded successfully: the new frontend reached feature parity, went through a [public testing phase](https://blog.rust-lang.org/inside-rust/2026/04/17/crates-io-svelte-public-testing/) in April, became the default at the beginning of May, and the Ember.js app has been removed from our repository shortly after.
+In our [January update], we announced that we were experimenting with porting the crates.io frontend from Ember.js to [Svelte](https://svelte.dev/). This experiment has concluded successfully: the new frontend reached feature parity, went through a [public testing phase](https://blog.rust-lang.org/inside-rust/2026/04/17/crates-io-svelte-public-testing/) in April, became the default at the beginning of May, and the Ember.js app has been removed from our repository.
 
 For our users this change was designed to be invisible, since the new frontend is a 1:1 port of the previous design and functionality. For the team and our contributors, however, it is a big deal: the frontend is now built on a more modern framework, which should make it easier for new contributors to get started. It also allows us to iterate faster, as the source code viewer above demonstrates.
 
