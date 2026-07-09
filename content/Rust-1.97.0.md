@@ -16,7 +16,7 @@ If you have a previous version of Rust installed via `rustup`, you can get 1.97.
 $ rustup update stable
 ```
 
-If you don't have it already, you can [get `rustup`](https://www.rust-lang.org/install.html) from the appropriate page on our website, and check out the [detailed release notes for 1.97.0](https://doc.rust-lang.org/stable/releases.html#version-1960-2026-05-28).
+If you don't have it already, you can [get `rustup`](https://www.rust-lang.org/install.html) from the appropriate page on our website, and check out the [detailed release notes for 1.97.0](https://doc.rust-lang.org/stable/releases.html#version-1970-2026-07-09).
 
 If you'd like to help us out by testing future releases, you might consider updating locally to use the beta channel (`rustup default beta`) or the nightly channel (`rustup default nightly`). Please [report](https://github.com/rust-lang/rust/issues/new/choose) any bugs you might come across!
 
