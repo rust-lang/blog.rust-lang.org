@@ -11,9 +11,9 @@ team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-progra
 
 ## Program management — meetings
 
-We started attending the Types meetings. The topic is something neither of us are deeply familiar with, but the team was extremely welcoming, and kept stressing that we ask questions any time we don't follow something. To understand the recent topics, they pointed us to the [Well-formedness article on the Rust Compiler Development Guide page](https://rustc-dev-guide.rust-lang.org/analysis/well-formed.html).
+We started attending the Types meetings. The topic is something neither of us are deeply familiar with, but the team was extremely welcoming, and kept stressing that we ask questions any time we can't follow something. To help us better understand recent topics, they pointed us to the [Well-formedness article on the Rust Compiler Development Guide page](https://rustc-dev-guide.rust-lang.org/analysis/well-formed.html).
 
-The Rustdoc team wanted to consider having a virtual face-to-face meeting in place of the async ones they'd been having over Zulip. We joined, and minuted the meeting, but the team decided to stick with async for now. They did raise an interest in doing something akin to the Language Design meetings — and they would appreciate PM presence there.
+The Rustdoc team considered having virtual face-to-face meetings in place of the async ones they've been having over Zulip. We joined, and minuted the meeting, but the team decided to stick with async for now. They did raise an interest in doing something akin to the Language Design meetings — and they would appreciate a PM presence there.
 
 Finally, the Types team started a [library trait evolution experiment](https://rust-lang.github.io/rust-project-goals/2026/library-trait-evolution-experiment.html) to explore designs for evolving the standard library types (e.g. [supertrait auto-impl](https://rust-lang.github.io/rust-project-goals/2026/supertrait-auto-impl.html), [`Sized` hierarchy](https://rust-lang.github.io/rust-project-goals/2026/scalable-vectors.html), and [immobile types](https://rust-lang.github.io/rust-project-goals/2026/move-trait.html)). There is a [Zulip channel](https://rust-lang.zulipchat.com/#narrow/channel/612373-t-lang.2Flibrary-trait-evolution) for discussion, and a [recurring meeting](https://github.com/rust-lang/calendar/pull/123) we set up.
 
@@ -27,7 +27,7 @@ If you have a Project goal that needs financial support, add a funding section a
 
 ### Help wanted
 
-We have an analogous page for goals that are [looking for contributors](https://rust-lang.github.io/rust-project-goals/2026/contributors.html). If you're interested in joining an effort, please check it out, and contact the goal owner.
+We also have a page for goals that are [looking for contributors](https://rust-lang.github.io/rust-project-goals/2026/contributors.html), analogous to the funding page. If you're interested in joining an effort, please check it out, and contact the goal owner.
 
 If your goal needs help, add a `Help wanted` section using the [template](https://github.com/rust-lang/rust-project-goals/blob/a2d4a0ca701794550cb6072ce0ed355c53bb3f83/src/TEMPLATE.md?plain=1#L89).
 
@@ -41,11 +41,11 @@ We've accepted several new goal proposals:
 * [Library Trait Evolution Experiment](https://rust-lang.github.io/rust-project-goals/2026/library-trait-evolution-experiment.html)
 * [View types experiment](https://rust-lang.github.io/rust-project-goals/2026/view-types-experiment.html)
 
-We're considering new Project goal proposals all year-round! [Here's how to propose a new goal](https://rust-lang.github.io/rust-project-goals/how_to/propose_a_goal.html). Once you open the pull request, we'll work with you to make sure everything is set.
+We're considering new Project goal proposals year-round! Here's [how to propose a new goal](https://rust-lang.github.io/rust-project-goals/how_to/propose_a_goal.html). Once you open the pull request, we'll work with you to make sure everything is set.
 
 Note that we still require that the teams with asks on them sign off, and that teams with medium or larger asks have a champion. This is a way to make sure the teams aren't over-committing their capacity.
 
-We're also looking for ways to streamline the current process, let teams handle their goals more directly, and look for larger long-term improvements.
+We're also looking for ways to streamline the current process, let teams handle their goals more directly, and make larger long-term improvements.
 
 ## Leadership Council
 
@@ -63,19 +63,19 @@ If you don't know who your representative is, look your name up in the [All Rust
 
 > Comprehensibility is a long-standing deficiency of the Rust Project. New contributors and organisations interested in participating in the project have a difficult time understanding how to contribute, and cross-team collaboration is impeded by mismatched expectations and working practices. Teams retain the ultimate decision making power about the content of their charters, process and policies, but t-comprehensibility will be involved in the drafting and updating to ensure that the project's documentation is consistent and coherent overall.
 
-Documentation (especially process documentation) is something that must be actively maintained, and without a sustained effort it's among the first things to go. Having a team of individuals with an interest to keep this up sounds like a great idea.
+Documentation (especially process documentation) is something that must be actively maintained, and without a sustained effort it's among the first things to become stale. Having a team of individuals with an interest to keep it updated sounds like a great idea.
 
 The [proposal](https://github.com/rust-lang/leadership-council/issues/298) has finished its final comment period (FCP) and is expected to merge. The team creation will follow.
 
 ### The next All Hands
 
-[Mara Bos proposed](https://github.com/rust-lang/leadership-council/issues/300), and the [Council accepted](https://github.com/rust-lang/leadership-council/issues/300#issuecomment-4642685220), to hold the next All Hands in 2027, and collocate it with RustWeek, organized by RustNL, once again. They have also agreed to reserve $50,000 for the All Hands out of the next year's Council budget, if there is money left after PMs are paid. This will be in addition to funding the travel grants (again, pending funds availability).
+[Mara Bos proposed](https://github.com/rust-lang/leadership-council/issues/300), and the [Council accepted](https://github.com/rust-lang/leadership-council/issues/300#issuecomment-4642685220), to hold the next All Hands in 2027, and collocate it with RustWeek, organized by RustNL, once again. They have also agreed to reserve $50,000 for the All Hands out of the next year's Council budget, if there is money left after PMs are paid. This will be in addition to funding the travel grants (again, contingent on the availability of funds).
 
 Based on the feedback received from the All Hands attendees, this is fantastic news for a huge number of people.
 
 ### LLM committee
 
-oli proposed [creating an LLM committee](https://github.com/rust-lang/leadership-council/issues/308) that would have the power (delegated by the Council) to write and edit the LLM policy for the Project. It would be composed of a 4-5 people that would represent the diverse views on the topic across the Project, be trusted by the Council and the Project, and have the ability to work together, and make progress despite disagreement.
+oli proposed [creating an LLM committee](https://github.com/rust-lang/leadership-council/issues/308) that would have the power (delegated by the Council) to write and edit the LLM policy for the Project. It would be composed of 4-5 people representing the diverse views on the topic across the Project, be trusted by the Council and the Project, and have the ability to work together and make progress despite disagreement.
 
 The team is explicitly designed such that everyone should feel comfortable reaching out to at least one committee member. It should also be able to adapt to the frequent changes in the AI industry without causing too much churn.
 
@@ -90,9 +90,9 @@ There were two proposals concerning Program management opened in the last couple
 * [Discuss long-term place for Program Management program](https://github.com/rust-lang/leadership-council/issues/307) by TC
 * [Charter Program Management Team](https://github.com/rust-lang/leadership-council/issues/309) by Rémy Rakic (lqd)
 
-The first one is focusing on who's responsible for the funding and management of the Program managers (presently Nurzhan and Tomáš, and possibly Antonio Piraino serving as compiler-ops). Josh Triplett suggests this be the same team that would manage the Maintainers in Residence.
+The first one focuses on who's responsible for the funding and management of the Program managers (presently Nurzhan and Tomáš, and possibly Antonio Piraino serving as compiler-ops). Josh Triplett suggests this be the same team that would manage the Maintainers in Residence.
 
-The second one is concerned with chartering the PM team, listing their responsibilities and expectations. People management is work that plenty people (e.g. TC, Niko Matsakis, Eric Huss) have done before we joined, and it will keep happening. The proposal acknowledges this and formalizes the role.
+The second one is concerned with chartering the PM team, listing their responsibilities and expectations. People management is work that plenty of people (e.g. TC, Niko Matsakis, Eric Huss) have done before we joined, and it will keep happening. The proposal acknowledges this and formalizes the role.
 
 ## Rust for Linux
 
@@ -100,7 +100,7 @@ Our regular meetings resumed after the All Hands.
 
 Miguel Ojeda mentioned that [zerocopy](https://github.com/google/zerocopy) is now the first (third-party) crate they [vendor](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/rust/zerocopy) that can directly generate code in the kernel image \o/.
 
-The team would also like to have a [runtime toggle in Rustdoc that would let them show private and hidden items](https://github.com/rust-lang/rust/issues/149106) in the documentation. Rustdoc can show this information already, but only at build-time using the `--document-private-items` and `--document-hidden-items`. [We've opened a discussion on Zulip](https://rust-lang.zulipchat.com/#narrow/channel/266220-t-rustdoc/topic/Runtime.20toggle.20for.20private.2Fhidden.20items/with/606458092), but it's not resolved yet.
+The team would also like to have a [runtime toggle in Rustdoc that would let them show private and hidden items](https://github.com/rust-lang/rust/issues/149106) in the documentation. Rustdoc can show this information already, but only at build-time using the `--document-private-items` and `--document-hidden-items`. We've opened a [discussion on Zulip](https://rust-lang.zulipchat.com/#narrow/channel/266220-t-rustdoc/topic/Runtime.20toggle.20for.20private.2Fhidden.20items/with/606458092), but it hasn't been resolved yet.
 
 Finally, Benno Lossin shared an [example](https://github.com/BennoLossin/field-projections-designs/blob/5bb55ed33ad8bbb947be25a0661bbe003c7353c0/examples/simple/src/main.rs) of what field access would desugar to using the Field projection mechanism of places and handles. This is important because it lets us validate it on existing field projections (e.g. for shared and mutable references), and see exactly what any proposed syntax for extending this to other kinds of pointers would do in normal Rust code that we ship today.
 
@@ -116,7 +116,7 @@ We came up with some goals worth considering:
 * Stabilizing macro metavar
 * Stabilizing the Rust dylib format
 
-In some cases, people are either currently working or have looked into similar areas in the past, so the team will have those conversations first and then start opening goals.
+In some cases, people are either currently working on or have looked into similar areas in the past, so the team will have those conversations first and then start opening goals.
 
 ## Worth a look
 
