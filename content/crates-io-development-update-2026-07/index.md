@@ -12,13 +12,13 @@ Another six months have passed since our [last development update](https://blog.
 
 ## Source Code Viewer
 
-Crate pages now have a "Code" tab that lets you browse the contents of published crate versions directly on crates.io. This shows you the exact files that cargo downloads when you add a crate as a dependency, which might differ from the linked repository. This makes it much easier to audit your dependencies, including files that never appear in the repository, like the normalized `Cargo.toml` files that `cargo` generates.
+Crate pages now have a "Code" tab that lets you browse the contents of published crate versions directly on crates.io. This shows you the exact files that `cargo` downloads when you add a crate as a dependency, which might differ from the linked repository. This makes it much easier to audit your dependencies, including files that never appear in the repository, like the normalized `Cargo.toml` files that `cargo` generates.
 
 ![Source code viewer showing the "Code" tab of the serde crate](code-tab.png)
 
 The viewer comes with a file tree sidebar with search functionality, syntax highlighting, and GitHub-style line selection, where clicking or dragging line numbers produces shareable `#L10-L20` URLs.
 
-Under the hood, the server now builds a zip file for every published version. Since the `.crate` files that cargo consumes are gzipped tarballs without random access support, a background job re-packs each of them into a seekable zip archive plus a JSON manifest describing the contained files. Both are served from our static CDN. The frontend then fetches only the manifest and loads each file on demand with an HTTP range request. Because of this architecture, browsing crate sources essentially adds no load on the crates.io API servers. Existing crate versions have been backfilled, so this works for old releases too.
+Under the hood, the server now builds a zip file for every published version. Since the `.crate` files that `cargo` consumes are gzipped tarballs without random access support, a background job re-packs each of them into a seekable zip archive plus a JSON manifest describing the contained files. Both are served from our static CDN. The frontend then fetches only the manifest and loads each file on demand with an HTTP range request. Because of this architecture, browsing crate sources essentially adds no load on the crates.io API servers. Existing crate versions have been backfilled, so this works for old releases too.
 
 The rendering library behind the code viewer is a diff renderer at heart, and that's no accident: a version-to-version diff viewer built on the same infrastructure is currently in the works. This will allow you to review exactly what changed between two published versions, right on crates.io. Stay tuned!
 
@@ -30,7 +30,7 @@ The implementation of crates.io usernames has started, but there is still a lot 
 
 ## Advisories and Suggestions
 
-In our January update we introduced the "Security" tab, which shows security advisories from the [RustSec](https://rustsec.org/) database. We have since taken this integration one step further: crates that RustSec has flagged as unmaintained now show a warning banner directly on their crate pages, linking to the corresponding advisory for details and possible alternatives. Thanks to [Dirkjan Ochtman](https://github.com/djc) for implementing this feature!
+In our [January update](https://blog.rust-lang.org/2026/01/21/crates-io-development-update/) we introduced the "Security" tab, which shows security advisories from the [RustSec](https://rustsec.org/) database. We have since taken this integration one step further: crates that RustSec has flagged as unmaintained now show a warning banner directly on their crate pages, linking to the corresponding advisory for details and possible alternatives. Thanks to [Dirkjan Ochtman](https://github.com/djc) for implementing this feature!
 
 ![Unmaintained warning banner on the ansi_term crate page](unmaintained-banner.png)
 
@@ -50,7 +50,7 @@ Getting a 404 error on crates.io is now slightly less sad.
 
 ## Svelte Frontend Migration Completed
 
-In our [January update], we announced that we were experimenting with porting the crates.io frontend from Ember.js to [Svelte](https://svelte.dev/). This experiment has concluded successfully: the new frontend reached feature parity, went through a [public testing phase](https://blog.rust-lang.org/inside-rust/2026/04/17/crates-io-svelte-public-testing/) in April, became the default at the beginning of May, and the Ember.js app has been removed from our repository.
+In our [January update](https://blog.rust-lang.org/2026/01/21/crates-io-development-update/), we announced that we were experimenting with porting the crates.io frontend from Ember.js to [Svelte](https://svelte.dev/). This experiment has concluded successfully: the new frontend reached feature parity, went through a [public testing phase](https://blog.rust-lang.org/inside-rust/2026/04/17/crates-io-svelte-public-testing/) in April, became the default at the beginning of May, and the Ember.js app has been removed from our repository.
 
 We designed this change to be invisible for our users, since the new frontend is a 1:1 port of the previous design and functionality. For the team and our contributors, however, it is a big deal: the frontend is now built on a more modern framework, which should make it easier for new contributors to get started. It also allows us to iterate faster, as the source code viewer above demonstrates.
 
@@ -66,7 +66,7 @@ These were some of the more visible changes to crates.io over the past six month
 
 - **New ARCHITECTURE.md**: If you've ever wondered how crates.io actually works, our [`ARCHITECTURE.md`](https://github.com/rust-lang/crates.io/blob/main/docs/ARCHITECTURE.md) document got a complete rewrite. It is now organized around the high-level systems that make up crates.io and how they fit together, and includes walkthroughs of what happens when you run `cargo publish`, why a typical crate download never touches our API servers, and how download counts are derived from CDN access logs.
 
-- **Definition lists**: READMEs now render Markdown definition lists, a widely used Markdown extension. Our markdown renderer [comrak](https://crates.io/crates/comrak) already supported them, the extension just wasn't enabled yet. Thanks to [@mistaste](https://github.com/mistaste) for this contribution!
+- **Definition lists**: READMEs now render Markdown [definition lists](https://github.com/rust-lang/crates.io/pull/13950), a widely used Markdown extension. Our markdown renderer [comrak](https://crates.io/crates/comrak) already supported them, the extension just wasn't enabled yet. Thanks to [@mistaste](https://github.com/mistaste) for this contribution!
 
 - **CDN cache tags**: Files uploaded to our static CDN now carry cache-tag metadata, allowing us to invalidate all cached files of a crate or a specific release in a single operation, instead of issuing one invalidation per file URL.
 
