@@ -90,7 +90,7 @@ Here are some of the things they shared:
 >
 > — Josh Triplett
 
-> As someone totally new to the Project getting to meet people in person was really good and totally overwhelming but in a good way. I really enjoyed getting to have discussions with so many different people about a variety of rust and non rust topics. I really appreciate and can't thank the team reps enough that not only supported my session but created it (no way it would have worked if you all didn't step up to the stage) and for Mara giving me the opportunity to thank everyone in the closing session. This event and Mara's support did a lot for me and for what my position hopes to achieve. Now get those funding intake forms in!!!!
+> As someone totally new to the Project getting to meet people in person was really good and totally overwhelming but in a good way. I really enjoyed getting to have discussions with so many different people about a variety of rust and non rust topics. I really appreciate and can't thank the team reps enough that not only supported my session but created it (no way it would have worked if you all didn't step up to the stage) and for Mara giving me the opportunity to thank everyone in the closing session. This event and Mara's support did a lot for me and for what my position hopes to achieve.
 >
 > — Lori Lorusso
 
