@@ -151,13 +151,13 @@ Our range-diff now shows the list of commits and diffs them with the previous on
 
 New commits:
 
-<img width="786" height="688" alt="Range-diff showing new added commits and their commit messages" src="commit-messages-diff.png" />
+<img alt="Range-diff showing new added commits and their commit messages" src="commit-messages-diff.png" />
 
 #### Warning against Unicode Bidi characters
 
 Following what GitHub does when it detects Unicode Bidi characters in a PR diff, we now also warn since [triagebot#2440](https://github.com/rust-lang/triagebot/pull/2440).
 
-<img width="1446" height="1292" alt="Range-diff warning that a file contains bidirectional or hidden Unicode text" src="unicode-bidi-warning.png" />
+<img alt="Range-diff warning that a file contains bidirectional or hidden Unicode text" src="unicode-bidi-warning.png" />
 
 ## Small tweaks to the triagebot
 
