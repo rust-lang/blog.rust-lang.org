@@ -1,5 +1,5 @@
 +++
-path = "inside-rust/9999/12/31/program-management-update--june-2026"
+path = "inside-rust/2026/07/14/program-management-update--june-2026"
 title = "Program management update — June 2026"
 authors = ["Tomáš Šedovič"]
 
