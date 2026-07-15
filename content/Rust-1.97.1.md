@@ -24,7 +24,7 @@ If you don't have it already, you can [get `rustup`][rustup] from the appropriat
 
 Rust 1.97.1 fixes a [miscompilation in an LLVM optimization](https://github.com/rust-lang/rust/issues/159035).
 
-We have backported both an LLVM fix and a disable of the underlying change in
+We have backported both an LLVM fix and a disable of the underlying change in Rust 1.97.0 of
 Rust's generated IR that increased the likelihood of this happening. However,
 note that the underlying miscompilation has been present since at least Rust
 1.87.
