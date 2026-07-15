@@ -119,7 +119,7 @@ pull request mergeability check times from an average of 30 minutes to just 1 mi
 
 As part of multiple discussions that happened during the 2026 All-hands, the Clippy team asked the Triagebot team to be able to delay the assignment of a reviewer until one or multiple community reviews were done.
 
-That work was carried out in [triagebot#2426](https://github.com/rust-lang/triagebot/pull/2426) ([docs](https://forge.rust-lang.org/triagebot/pr-assignment.html#community-reviews)) and has just been enabled in [Clippy repository](https://github.com/rust-lang/rust-clippy/issues?q=state%3Aopen%20label%3AS-waiting-on-community-reviews).
+That work was carried out in [triagebot#2426](https://github.com/rust-lang/triagebot/pull/2426) ([docs](https://forge.rust-lang.org/triagebot/pr-assignment.html#community-reviews)) and has just been enabled in the [Clippy repository](https://github.com/rust-lang/rust-clippy/issues?q=state%3Aopen%20label%3AS-waiting-on-community-reviews).
 
 ### Reintroduce delegation approval for merge queue repositories
 
@@ -127,9 +127,9 @@ When we switched our repositories to GitHub merge queues instead of bors (our cu
 
 That functionality is quite useful when there are only some nits left and the reviewer feels confident about the author's ability to resolve them without having to re-review and approve the changes.
 
-Work was carried out in [triagebot#2412](https://github.com/rust-lang/triagebot/pull/2412) and [triagebot#2436](https://github.com/rust-lang/triagebot/pull/2436) to add such functionality back. It's currently only enabled on the Clippy repository:
- - `@rustbot delegate[=@handle]`
- - `@rustbot merge`
+Work was carried out in [triagebot#2412](https://github.com/rust-lang/triagebot/pull/2412) and [triagebot#2436](https://github.com/rust-lang/triagebot/pull/2436) to add such functionality back. It's currently only enabled in the Clippy repository:
+- `@rustbot delegate[=@handle]`
+- `@rustbot merge`
 
 ### Continue supporting the moderation team with locking/unlocking of issues
 
@@ -151,13 +151,13 @@ Our range-diff now shows the list of commits and diffs them with the previous on
 
 New commits:
 
-<img width="786" height="688" alt="Image" src="commit-messages-diff.png" />
+<img width="786" height="688" alt="Range-diff showing new added commits and their commit messages" src="commit-messages-diff.png" />
 
 #### Warning against Unicode Bidi characters
 
 Following what GitHub does when it detects Unicode Bidi characters in a PR diff, we now also warn since [triagebot#2440](https://github.com/rust-lang/triagebot/pull/2440).
 
-<img width="1446" height="1292" alt="Image" src="unicode-bidi-warning.png" />
+<img width="1446" height="1292" alt="Range-diff warning that a file contains bidirectional or hidden Unicode text" src="unicode-bidi-warning.png" />
 
 ## Small tweaks to the triagebot
 
