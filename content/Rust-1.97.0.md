@@ -48,7 +48,7 @@ See the previous [blog post](https://blog.rust-lang.org/2025/11/20/switching-to-
 ### Cargo support for denying warnings
 
 It's common practice to deny warnings in CI. Historically, doing so is
-typically done through `RUSTFLAGS=-Dwarnings`. With Rust 1.97, Cargo controls
+typically done through `RUSTFLAGS=-Dwarnings`. With Rust 1.97, Cargo (except for MIRI) controls
 how warnings interact with build success: either silencing them (via `allow`
 level), rendering without failing (default, `warn`), or denying them (via `deny`).
 
