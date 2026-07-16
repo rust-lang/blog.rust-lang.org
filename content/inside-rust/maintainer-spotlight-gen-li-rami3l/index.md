@@ -19,7 +19,7 @@ There are [hundreds][all-members-page] of people who [maintain][maintenance-post
 
 In this post, we would like to introduce **Gen Li** ([@rami3l](https://github.com/rami3l/)). Gen started contributing to Rust around four years ago. In 2023, he joined the Rustup team, and in 2025 he became the lead of this team. Apart from working on Rustup, Gen Li also mentored several Rust contributors as a part of Google Summer of Code (GSoC).
 
-We interviewed Gen to find out what how he joined the Rustup team and what are his thoughts on coding as a social activity. Read more below!
+We interviewed Gen to find out how he joined the Rustup team and what are his thoughts on coding as a social activity. Read more below!
 
 **Can you briefly introduce yourself?**
 
