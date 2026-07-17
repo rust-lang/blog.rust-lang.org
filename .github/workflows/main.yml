@@ -4,6 +4,8 @@ on:
     branches:
       - main
   pull_request:
+    branches:
+      - main
 
 env:
   # renovate: datasource=github-tags depName=rust lookupName=rust-lang/rust
@@ -53,12 +55,10 @@ jobs:
 
   pub_date:
     name: Check publication date for placeholder
-    if: ${{ github.ref == 'refs/heads/main' }}
 
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-
       - run: rustup override set ${{ env.RUST_VERSION }}
       - uses: Swatinem/rust-cache@c19371144df3bb44fab255c43d04cbc2ab54d1c4 # v2.9.1
 
