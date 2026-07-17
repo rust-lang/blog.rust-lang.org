@@ -9,7 +9,7 @@ team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-progra
 +++
 # Program management update — June 2026
 
-## Program management — meetings
+## Meetings
 
 We started attending the Types meetings. The topic is something neither of us are deeply familiar with, but the team was extremely welcoming, and kept stressing that we ask questions any time we can't follow something. To help us better understand recent topics, they pointed us to the [Well-formedness article on the Rust Compiler Development Guide page](https://rustc-dev-guide.rust-lang.org/analysis/well-formed.html).
 
