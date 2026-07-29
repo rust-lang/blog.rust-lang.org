@@ -86,7 +86,7 @@ We want to hear *your* thoughts, not a machine's.
 Before this policy, we had a "wild west" approach to moderation.
 We had dozens of LLM PRs; no disclosure rules; people trying to add MIR optimizations as their first PR;
 and people posting "Verification: `git diff --check`" in their PR description as if that did something.
-While we had *something* for moderators to point to in the form of ["Empower reviewers to reject burdensome PRs"](https://github.com/rust-lang/compiler-team/issues/893),
+While we had *something* for moderators to point to in the form of ["Empower reviewers to reject burdensome PRs"](https://triagebot.infra.rust-lang.org/gh-comments/rust-lang/compiler-team/issues/893),
 our enforcement was inconsistent and our rules were not published anywhere.
 In practice, the rule was "anything goes, as long as it's not *obviously* horrible".
 Compared to the previous situation, the new policy is both much more strict and much more clear.
@@ -114,7 +114,7 @@ Rust operates by consensus. As the policy says:
 > - Building an inclusive community where all feel welcome and respected.
 
 We want it to be possible to change the policy in the future—
-the proposed [LLM committee](https://github.com/rust-lang/leadership-council/issues/308) is one possible way for that to happen;
+the proposed [LLM committee](https://triagebot.infra.rust-lang.org/gh-comments/rust-lang/leadership-council/issues/308) is one possible way for that to happen;
 the provisions in the policy about how to make amendments are another.
 
 I do not think every rule in this policy is wholly good.
@@ -214,4 +214,3 @@ The [official policy][forge-page] remains canonical.
 [forge-page]: https://forge.rust-lang.org/policies/llm-usage.html
 [#llm-mentoring]: https://rust-lang.zulipchat.com/join/rlfvpemsaacs3pfi6kwqnqjb/
 [read-only FCP link]: https://triagebot.infra.rust-lang.org/gh-comments/rust-lang/rust-forge/pull/1040#issuecomment-4438128685
-[t-content]: https://github.com/rust-lang/content-team/blob/main/TEAM-MISSION.md
