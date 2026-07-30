@@ -35,7 +35,7 @@ Some of those uses, sometimes unintentionally, did not.
 I've seen LLMs causing three main issues for our community:
 1. Polished technical products no longer indicate effort and understanding.
 2. Making code easier to write exacerbates our existing issues with review bandwidth.
-3. People blindly copy-pasting to and from an LLM is a waste of our time.
+3. People mechanically copy-pasting to and from an LLM is a waste of our time.
 
 As time went on, these issues grew and grew, until we had to create dedicated channels and moderation policy for how to deal with them.
 However, those channels work against our goals of being transparent and welcoming, because new contributors have no idea what the rules are.
@@ -74,7 +74,7 @@ the code itself is the smallest and in some ways least important part of the cha
 We care much more about authors *understanding* what the code does, *planning* how it will change in the future, and *deciding* what it should look like.
 The code itself cannot help with any of those.
 
-### Blindly copy-pasting LLM output is a waste of time
+### Mechanically copy-pasting LLM output is a waste of time
 
 We will often get people who respond to review comments by copy-pasting them into their LLM, then copy-pasting its response back onto GitHub.
 Bluntly: **this is a waste of everyone's time**.
