@@ -214,6 +214,22 @@ You may request that the author redo it without LLM-generated code, in which cas
 There's a more detailed summary of the rules you're expected to enforce in [the dev guide][llm-reviewing].
 The [official policy][forge-page] remains canonical.
 
+## What next?
+
+Quite a lot of work has been put into this by moderators, team leads, reviewers, council representatives, and various other people inside and outside the project.
+Some of that work started months ago before the policy itself was written.
+I'd like to thank everyone who contributed, whether directly or indirectly.
+
+This is not the end of the story.
+One of the goals of the policy is to help us gather data:
+Are people doing interesting and useful things with LLMs? Are they learning? Are they making repeat contributions?
+The answers to those questions will help us determine how the policy changes in the future.
+
+This is not the first LLM policy published by teams in the Rust project,
+and hopefully it will not be the last.
+While the current policy only applies to the `rust-lang/rust` monorepo,
+I still believe that Rust would benefit from a project-wide policy that specifies what we expect in chats, forums, public communications, repositories without an explicit policy, and other cross-project areas.
+
 [llm-reviewing]: https://rustc-dev-guide.rust-lang.org/llm-guidance/reviewing.html
 [forge-page]: https://forge.rust-lang.org/policies/llm-usage.html
 [#llm-mentoring]: https://rust-lang.zulipchat.com/join/rlfvpemsaacs3pfi6kwqnqjb/
