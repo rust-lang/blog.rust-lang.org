@@ -113,9 +113,9 @@ Rust operates by consensus. As the policy says:
 > - Building a community of deep experts in our collective projects.
 > - Building an inclusive community where all feel welcome and respected.
 
-We want it to be possible to change the policy in the future—
-the proposed [LLM committee](https://triagebot.infra.rust-lang.org/gh-comments/rust-lang/leadership-council/issues/308) is one possible way for that to happen;
-the provisions in the policy about how to make amendments are another.
+We want it to be possible to change the policy in the future.
+The policy has several provisions that make it easier to change than it was to originally adopt.
+The leadership council is also considering creating a sub-team that would handle LLM policy so we have fewer "nightmare" 30-person FCPs.
 
 I do not think every rule in this policy is wholly good.
 I *do* think that writing our rules down is better than not writing them down,
