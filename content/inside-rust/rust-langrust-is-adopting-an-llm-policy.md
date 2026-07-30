@@ -199,7 +199,7 @@ We will add a PR template that asks authors whether they use an LLM so that this
 
 If an author claims their code is not LLM-generated, but you're still not sure, please report the PR *privately* to moderation.
 Style is not evidence; please do not accuse people of using an LLM.
-Reporting is not intended to be a penalty; the mod team is interested in seeing non-violations as well as violations
+Reporting is not intended to be a penalty; the mod team is interested in seeing non-violations as well as violations.
 
 #### Review of LLM code
 
