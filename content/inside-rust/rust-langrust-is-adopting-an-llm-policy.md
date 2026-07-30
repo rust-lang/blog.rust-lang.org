@@ -81,6 +81,10 @@ Bluntly: **this is a waste of everyone's time**.
 If we wanted an LLM's opinion, we could have asked it ourselves.
 We want to hear *your* thoughts, not a machine's.
 
+Moreover, this is a breach of trust between the reviewer and the author.
+Our assumption when we review is that we're talking to a real person who wants to do their best work.
+Pasting LLM text creates suspicion: does the author actually care? Is there a person here at all?
+
 ### So why a policy?
 
 Before this policy, we had a "wild west" approach to moderation.
@@ -144,6 +148,8 @@ We welcome messages posted in your native language; English translation is not r
 
 There are very strict guidelines on LLM-generated code changes:
 > Pre-arranged, non-critical, high-quality, well-tested, and well-reviewed code changes that are originally created by an LLM are allowed, **with disclosure**.
+
+In general, the policy focuses on *understanding*, helping to ensure that we have a mental model of our code, not just artifacts that mechanically do the right thing.
 
 ### Moderation rules
 
