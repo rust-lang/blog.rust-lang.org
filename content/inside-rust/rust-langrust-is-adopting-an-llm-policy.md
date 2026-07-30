@@ -66,7 +66,7 @@ With the advent of LLMs, this problem only gets worse.
 
 Most of the work of reviewing is not simply catching bugs.
 A great deal of it is deciding *whether this direction is a good approach*, whether the PR is a good idea at all.
-In other words, [reviewing is made of decisions](https://siderea.dreamwidth.org/1219758.html).
+In other words, [reviewing is made of decisions](https://web.archive.org/web/20260213080731/https://siderea.dreamwidth.org/1219758.html).
 
 "Shotgunning" PRs at reviewers incurs a high mental cost for them.
 I think most authors of LLM PRs believe that they are sincerely helping, but from our perspective,
