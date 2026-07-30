@@ -115,7 +115,7 @@ Rust operates by consensus. As the policy says:
 
 We want it to be possible to change the policy in the future.
 The policy has several provisions that make it easier to change than it was to originally adopt.
-The leadership council is also considering creating a sub-team that would handle LLM policy so we have fewer "nightmare" 30-person FCPs.
+The leadership council is also considering creating a sub-team that would handle LLM policy so we have fewer "nightmare" 30-person approval requirements.
 
 I do not think every rule in this policy is wholly good.
 I *do* think that writing our rules down is better than not writing them down,
@@ -135,7 +135,7 @@ reviewers aren't required to look at LLM PRs if they don't want to.
 
 LLMs are not allowed to become an implicit requirement for contributing to `rust-lang/rust`:
 policies must be written first for humans, and only summarized for machines;
-LLM PRs without disclosure can be closed for that reason alone.
+LLM reviews cannot substitute for human review or self-review.
 
 LLMs are allowed for your own personal use without disclosure, as long as you do not post LLM output that you expect us to read or review.
 
