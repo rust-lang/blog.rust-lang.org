@@ -129,11 +129,11 @@ The policy holds LLM-generated changes to a *higher* bar than human-authored cha
 LLM PRs are required to have tests, full stop, regardless of how hard that is, as well as various other restrictions;
 LLMs cannot be used for soundness-critical changes unless the author is already a domain expert, and even then it's strongly discouraged.
 
-No one is required to read LLM output unless they choose to:
+No one except the author is required to read LLM output unless they choose to:
 LLM output isn't allowed in public docs, PR descriptions, and comments unless it's clearly marked;
 reviewers aren't required to look at LLM PRs if they don't want to.
 
-LLMs are not allowed to become an implicit requirement for contributing to the Rust project:
+LLMs are not allowed to become an implicit requirement for contributing to `rust-lang/rust`:
 policies must be written first for humans, and only summarized for machines;
 LLM PRs without disclosure can be closed for that reason alone.
 
