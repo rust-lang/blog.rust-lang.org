@@ -185,7 +185,7 @@ See [rustc-dev-guide][llm-writing] for the full list of guidelines.
 
 [llm-writing]: https://rustc-dev-guide.rust-lang.org/llm-guidance/writing.html
 
-### Reviewers and moderators
+### Reviewers
 
 #### General review
 
@@ -195,8 +195,11 @@ See [the dev guide][llm-reviewing] for exact circumstances and suggested wording
 
 You are not responsible for determining whether a PR is LLM-generated;
 that responsibility lies with the author.
-Style is not evidence; please do not accuse people of using an LLM.
 We will add a PR template that asks authors whether they use an LLM so that this rarely comes up.
+
+If an author claims their code is not LLM-generated, but you're still not sure, please report the PR *privately* to moderation.
+Style is not evidence; please do not accuse people of using an LLM.
+Reporting is not intended to be a penalty; the mod team is interested in seeing non-violations as well as violations
 
 #### Review of LLM code
 
