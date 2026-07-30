@@ -59,7 +59,7 @@ and because it's become so much easier to write code, a polished PR no longer in
 
 ### Making code easier to write causes review issues
 
-At time of writing, there are **1,281 open PRs** to rust-lang/rust.
+At the time of writing, there are **1,281 open PRs** to rust-lang/rust.
 This represents a staggering amount of time invested by both authors and reviewers.
 We have long had the problem that there are more people who want to write code than people willing to review it.
 With the advent of LLMs, this problem only gets worse.
