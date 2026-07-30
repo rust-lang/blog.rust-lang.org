@@ -181,9 +181,9 @@ You can avoid thinking about them, or indeed reading the list at all, if you fol
 > It's fine to use LLMs to answer questions, analyze, distill, refine, check, suggest, review. But not to **create**.
 
 See the ["Allowed" section of the policy](https://forge.rust-lang.org/policies/llm-usage.html) for a full list of what's meant by that.
-See [rustc-dev-guide][llm-guidance] for the full list of guidelines.
+See [rustc-dev-guide][llm-writing] for the full list of guidelines.
 
-[llm-guidance]: https://rustc-dev-guide.rust-lang.org/llm-guidance.html
+[llm-writing]: https://rustc-dev-guide.rust-lang.org/llm-guidance/writing.html
 
 ### Reviewers and moderators
 
@@ -191,7 +191,7 @@ See [rustc-dev-guide][llm-guidance] for the full list of guidelines.
 
 You are allowed to close PRs that don't follow the policy, no questions asked.
 Please point the author to [#llm-mentoring] at the same time.
-See [the dev guide][llm-guidance] for exact circumstances and suggested wording.
+See [the dev guide][llm-reviewing] for exact circumstances and suggested wording.
 
 You are not responsible for determining whether a PR is LLM-generated;
 that responsibility lies with the author.
@@ -208,9 +208,10 @@ That means it is **your responsibility** to check whether an LLM-created PR touc
 such as docs, diagnostics, or soundness-critical changes.
 You may request that the author redo it without LLM-generated code, in which case this section doesn't apply.
 
-There's a more detailed summary of the rules you're expected to enforce in [the dev guide][llm-guidance].
+There's a more detailed summary of the rules you're expected to enforce in [the dev guide][llm-reviewing].
 The [official policy][forge-page] remains canonical.
 
+[llm-reviewing]: https://rustc-dev-guide.rust-lang.org/llm-guidance/reviewing.html
 [forge-page]: https://forge.rust-lang.org/policies/llm-usage.html
 [#llm-mentoring]: https://rust-lang.zulipchat.com/join/rlfvpemsaacs3pfi6kwqnqjb/
 [read-only FCP link]: https://triagebot.infra.rust-lang.org/gh-comments/rust-lang/rust-forge/pull/1040#issuecomment-4438128685
