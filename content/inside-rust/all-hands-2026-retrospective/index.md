@@ -1,5 +1,5 @@
 +++
-path = "inside-rust/9999/12/31/all-hands-2026-retrospective"
+path = "inside-rust/2026/07/31/all-hands-2026-retrospective"
 title = "All Hands 2026 retrospective"
 authors = ["Nurzhan Saken"]
 
