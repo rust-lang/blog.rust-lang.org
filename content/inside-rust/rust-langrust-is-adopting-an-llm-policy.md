@@ -5,9 +5,11 @@ authors = ["Jynn Nelson"]
 +++
 
 Recently, [five teams in the Rust project][read-only FCP link] adopted a [policy][forge-page] that I originally authored,
-governing how LLMs can be used when contributing to the `rust-lang/rust` monorepo.
+governing how [Large Language Models][llms] can be used when contributing to the `rust-lang/rust` monorepo.
 Notably, the new policy is *not* an official stance on LLMs, and does *not* apply everywhere in the Rust project.
 I wrote it for a very specific purpose, described below.
+
+[llms]: https://en.wikipedia.org/wiki/Large_language_model
 
 This post talks about why we ratified that policy, what it says, and how this will affect contributors.
 
@@ -89,12 +91,15 @@ Pasting LLM text creates suspicion: does the author actually care? Is there a pe
 ### So why a policy?
 
 Before this policy, we had a "wild west" approach to moderation.
-We had dozens of LLM PRs; no disclosure rules; people trying to add MIR optimizations as their first PR;
-and people posting "Verification: `git diff --check`" in their PR description as if that did something.
+We had dozens of LLM PRs; no disclosure rules; people trying to add risky [MIR optimizations] as their first PR;
+and people posting "Verification: [`git diff --check`][diff-check]" in their PR description as if that did something.
 While we had *something* for moderators to point to in the form of ["Empower reviewers to reject burdensome PRs"](https://triagebot.infra.rust-lang.org/gh-comments/rust-lang/compiler-team/issues/893),
 our enforcement was inconsistent and our rules were not published anywhere.
 In practice, the rule was "anything goes, as long as it's not *obviously* horrible".
 Compared to the previous situation, the new policy is both much more strict and much more clear.
+
+[MIR optimizations]: https://rustc-dev-guide.rust-lang.org/mir/optimizations.html
+[diff-check]: https://git-scm.com/docs/git-diff#Documentation/git-diff.txt---check
 
 Regardless of your opinions on whether LLMs are good, bad, or a secret third thing, they can no longer be *ignored*.
 Our choices are not "no policy" or "policy".
