@@ -127,11 +127,14 @@ and that having a policy that everyone kinda dislikes pushes us to improve our g
 
 ## What does the policy say?
 
-### General rules
+The shortest summary of the policy is this:
 
-The policy holds LLM-generated changes to a *higher* bar than human-authored changes, not a lower one:
-LLM PRs are required to have tests, full stop, regardless of how hard that is, as well as various other restrictions;
-LLMs cannot be used to generate soundness-critical changes unless the author is already a domain expert, and even then it's strongly discouraged.
+> It's fine to use LLMs to answer questions, analyze, distill, refine, check, suggest, review. But not to **create**.
+
+Uses in the first category are allowed, sometimes requiring disclosure.
+Uses in the second category are heavily restricted.
+
+### General rules
 
 No one except the author is required to read LLM output unless they choose to:
 LLM output isn't allowed in public docs, PR descriptions, and comments unless it's clearly marked;
@@ -149,6 +152,10 @@ We welcome messages posted in your native language; English translation is not r
 
 There are very strict guidelines on LLM-generated code changes:
 > Pre-arranged, non-critical, high-quality, well-tested, and well-reviewed code changes that are originally created by an LLM are allowed, **with disclosure**.
+
+The policy holds LLM-generated changes to a *higher* bar than human-authored changes, not a lower one:
+LLM PRs are required to have tests, full stop, regardless of how hard that is, as well as various other restrictions;
+LLMs cannot be used to generate soundness-critical changes unless the author is already a domain expert, and even then it's strongly discouraged.
 
 In general, the policy focuses on *understanding*, helping to ensure that we have a mental model of our code, not just artifacts that mechanically do the right thing.
 
