@@ -13,8 +13,9 @@ This post talks about why we ratified that policy, what it says, and how this wi
 
 The policy affects the following groups of people:
 - People who review or moderate PRs on `rust-lang/rust`.
-- People who author LLM-assisted PRs on `rust-lang/rust`.
+- People who author PRs with LLM-generated code on `rust-lang/rust`.
 - People who discover issues using LLMs and post them on `rust-lang/rust`.
+- People who write issues or comments that directly quote an LLM on `rust-lang/rust`.
 
 If you are not in one of those groups, you don't have to change anything about how you work.
 
@@ -140,14 +141,14 @@ No one except the author is required to read LLM output unless they choose to:
 LLM output isn't allowed in public docs, PR descriptions, and comments unless it's clearly marked;
 reviewers aren't required to look at LLM PRs if they don't want to.
 
-LLMs are not allowed to become an implicit requirement for contributing to `rust-lang/rust`:
+People must not be disadvantaged if they do not use an LLM for contributing to `rust-lang/rust`:
 policies must be written first for humans, and only summarized for machines;
 LLM reviews cannot substitute for human review or self-review.
 
 You are allowed to generate LLM content that only you see, without disclosure,
 as long as you do not post it anywhere that you expect us to read or review.
 
-Disclosure is required for machine translation, "trivial" changes, discovering bugs, and reviewing using an LLM.
+Disclosure is required for machine translation, "trivial" changes, discovering bugs, and reviewing other people's work using an LLM.
 We welcome messages posted in your native language; English translation is not required to contribute.
 
 There are very strict guidelines on LLM-generated code changes:
@@ -155,9 +156,13 @@ There are very strict guidelines on LLM-generated code changes:
 
 The policy holds LLM-generated changes to a *higher* bar than human-authored changes, not a lower one:
 LLM PRs are required to have tests, full stop, regardless of how hard that is, as well as various other restrictions;
-LLMs cannot be used to generate soundness-critical changes unless the author is already a domain expert, and even then it's strongly discouraged.
+LLMs must not generate soundness-critical changes unless the author is already a domain expert, and even then it's strongly discouraged.
 
 In general, the policy focuses on *understanding*, helping to ensure that we have a mental model of our code, not just artifacts that mechanically do the right thing.
+Our motivation is influenced by [Profession by Isaac Asimov][asimov].
+No programmer tapes.
+
+[asimov]: https://web.archive.org/web/20201109034130/https://www.abelard.org/asimov.php
 
 ### Moderation rules
 
@@ -183,12 +188,12 @@ This allows moderators to identify violations based on *actions*, not on intent,
 
 ### Issue reporters
 
-You must disclose your use of LLMs.
+You must disclose any LLM involvement in discovering or reporting issues.
 You must tell us if you found an issue using an LLM.
 You must clearly quote and indicate which parts of your report were LLM-generated;
 the "no LLM-generated comments" rule applies to you too.
 
-### Authors who use LLMs
+### Authors who post LLM-generated code
 
 I have written a list of guidelines you should follow if you make a PR to `rust-lang/rust` with LLM-generated code.
 You can avoid thinking about them, or indeed reading the list at all, if you follow this simple guideline from the policy:
