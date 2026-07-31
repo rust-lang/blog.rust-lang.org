@@ -8,19 +8,19 @@ team = "the Program team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-program"
 +++
 
-In May 2026, 166 Rustaceans gathered in Utrecht for the Rust All Hands. This event is an opportunity for the Rust Project members and guests to work on Rust in person for several days — discuss its future, resolve blockers, build connections between teams, and so on (but not make any final decisions!).
+In May 2026, 166 Rustaceans gathered in Utrecht for the *Rust All Hands*. This event is an opportunity for the Rust Project members and invited guests to work on Rust in person for several days — discuss its future, resolve blockers, build connections between teams, and so on (but not make any final decisions!).
 
-This was the second All Hands organized by [RustNL](https://rustnl.org/), after [the one last year](https://blog.rust-lang.org/inside-rust/2025/09/30/all-hands-2026/) revived the tradition after a six-year hiatus. It was co-located with RustWeek both times, closing it off after the conference. And yes, the All Hands will happen again in 2027! More details on that at the end.
+This was the second All Hands organized by [RustNL](https://rustnl.org/), after [the one last year](https://blog.rust-lang.org/inside-rust/2025/09/30/all-hands-2026/) revived the tradition after a six-year hiatus. It was part of [RustWeek](https://2026.rustweek.org/) both times, with the Rust All Hands following directly after the conference days. And yes, the All Hands will happen again in 2027! More details on that at the end.
 
 ![A large room full of Rustaceans and friends smiling into the camera](allhands.jpeg)
 
-Also co-located with the All Hands was the Unconference, where invited ecosystem maintainers and contributors collaborated with each other and with Rust Project members. This year, there were six participating groups: [Bevy Engine](https://bevy.org/), [Ariel OS](https://ariel-os.org/), [Linebender](https://linebender.org/), the [Safety-Critical Rust Consortium](https://github.com/Safety-Critical-Rust-Consortium), [Rust GPU](https://github.com/Rust-GPU), and [Rust Embedded](https://github.com/rust-embedded) — with around 60 members in total.
+Also co-located with the All Hands was the RustWeek Unconference, where invited ecosystem maintainers and contributors collaborated with each other and with Rust Project members. This year, there were six participating groups: [Bevy Engine](https://bevy.org/), [Ariel OS](https://ariel-os.org/), [Linebender](https://linebender.org/), the [Safety-Critical Rust Consortium](https://github.com/Safety-Critical-Rust-Consortium), [Rust GPU](https://github.com/Rust-GPU), and [Rust Embedded](https://github.com/rust-embedded) — with around 60 members in total.
 
-Similarly to last year, there was a Rust Project track on the second day of the conference, with talks presented by Project members (see the [recordings](https://www.youtube.com/playlist?list=PL8Q1w7Ff68DBkk0ddSEqdf97swuDvMSKS)). The talks touched on some of the topics that the Rust teams discussed in greater depth in the All Hands sessions.
+Similarly to last year, the conference day right before the All Hands had a special track, the "Rust Project Track", with talks presented by Project members. (See the [recordings](https://www.youtube.com/playlist?list=PL8Q1w7Ff68DBkk0ddSEqdf97swuDvMSKS).). The talks touched on some of the topics that the Rust teams discussed in greater depth in the All Hands sessions.
 
 ## Sessions
 
-There were 73 sessions spread across 3 days and 11 rooms, most of which were [pre-scheduled](https://raw.githubusercontent.com/rust-lang/all-hands-2026/main/all-hands-schedule.pdf), though some happened spontaneously. You can find the session notes in [rust-lang/all-hands-2026](https://github.com/rust-lang/all-hands-2026/issues).
+At the All Hands, there were 73 sessions spread across 3 days and 11 rooms, most of which were [pre-scheduled](https://raw.githubusercontent.com/rust-lang/all-hands-2026/main/all-hands-schedule.pdf), though some happened spontaneously. You can find the session notes in [rust-lang/all-hands-2026](https://github.com/rust-lang/all-hands-2026/issues).
 
 The [State of the Rust teams](https://github.com/rust-lang/all-hands-2026/issues/37) session kicked off the All Hands and provided a (literal) platform for teams to tell everyone about their activities.
 
