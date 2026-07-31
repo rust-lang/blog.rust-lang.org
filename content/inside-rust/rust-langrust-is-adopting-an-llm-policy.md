@@ -168,7 +168,7 @@ No programmer tapes.
 
 **You must disclose LLM-generated content.**
 You can choose to not post LLM content, or you can choose to post it and disclose its origin.
-You may not hide that you used an LLM.
+You may not hide LLM involvement.
 
 **Harassment is not allowed.**
 You may not harass people for using an LLM, regardless of whether or not their use is banned by the policy.
