@@ -133,7 +133,7 @@ and that having a policy that everyone kinda dislikes pushes us to improve our g
 
 ## What does the policy say?
 
-The shortest summary of the policy is this:
+The policy summarizes itself this way:
 
 > It's fine to use LLMs to answer questions, analyze, distill, refine, check, suggest, review. But not to **create**.
 
