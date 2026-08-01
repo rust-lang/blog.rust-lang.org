@@ -124,8 +124,11 @@ Rust operates by consensus. As the policy says:
 > - Building an inclusive community where all feel welcome and respected.
 
 We want it to be possible to change the policy in the future.
-The policy has several provisions that make it easier to change than it was to originally adopt.
-The leadership council is also considering creating a sub-team that would handle LLM policy so we have fewer "nightmare" 30-person approval requirements.
+The policy has [several provisions][modification-rules] that make it easier to change than it was to originally adopt.
+The leadership council is also [considering creating a sub-team][llm-committee] that would handle LLM policy so we have fewer "nightmare" 30-person approval requirements.
+
+[modification-rules]: https://forge.rust-lang.org/policies/llm-usage.html#conditions-for-modification-or-dissolution
+[llm-committee]: https://triagebot.infra.rust-lang.org/gh-comments/rust-lang/leadership-council/issues/308
 
 I do not think every rule in this policy is wholly good.
 I *do* think that writing our rules down is better than not writing them down,
@@ -205,7 +208,7 @@ You can avoid thinking about them, or indeed reading the list at all, if you fol
 
 > It's fine to use LLMs to answer questions, analyze, distill, refine, check, suggest, review. But not to **create**.
 
-See the ["Allowed" section of the policy](https://forge.rust-lang.org/policies/llm-usage.html) for a full list of what's meant by that.
+See the ["Allowed" section of the policy](https://forge.rust-lang.org/policies/llm-usage.html#-allowed) for a full list of what's meant by that.
 See [rustc-dev-guide][llm-writing] for the full list of guidelines.
 
 [llm-writing]: https://rustc-dev-guide.rust-lang.org/llm-guidance/writing.html
