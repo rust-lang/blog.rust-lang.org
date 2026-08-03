@@ -149,7 +149,7 @@ No one except the author is required to read LLM output unless they choose to:
 LLM output isn't allowed in public docs, PR descriptions, and comments unless it's clearly marked;
 reviewers aren't required to look at LLM PRs if they don't want to.
 
-Avoid making LLMs a requirement to contribute to `rust-lang/rust`:
+No one is required to use LLMs to contribute to `rust-lang/rust`:
 policies must be written first for humans, and only summarized for machines;
 LLM reviews cannot substitute for human review or self-review.
 
