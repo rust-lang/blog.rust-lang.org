@@ -28,7 +28,7 @@ it is also a *community* of people who work together to build, maintain, and ext
 When we talk about "contributing to the Rust project", we partly mean work on those artifacts,
 but we also mean joining that community and collaborating with the people already there.
 
-Even before this policy was created, people were using LLMs to contribute to rust-lang/rust.
+Even before this policy was created, people were using LLMs to contribute to `rust-lang/rust`.
 Some of those uses respected our community:
 translating messages to English so people could draft them in their native language;
 finding poor diagnostics for code snippets that new contributors to Rust might write;
@@ -62,7 +62,7 @@ and because it's become so much easier to write code, a polished PR no longer in
 
 ### Making code easier to write causes review issues
 
-At the time of writing, there are **1,281 open PRs** to rust-lang/rust.
+At the time of writing, there are **1,281 open PRs** to `rust-lang/rust`.
 This represents a staggering amount of time invested by both authors and reviewers.
 We have long had the problem that there are more people who want to write code than people willing to review it.
 With the advent of LLMs, this problem only gets worse.
