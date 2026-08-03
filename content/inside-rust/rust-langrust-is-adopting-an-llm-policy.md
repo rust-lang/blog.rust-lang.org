@@ -11,7 +11,7 @@ I wrote it for a very specific purpose, described below.
 
 [llms]: https://en.wikipedia.org/wiki/Large_language_model
 
-This post talks about why we ratified that policy, what it says, and how this will affect contributors.
+This post talks about why we created that policy, what it says, and how this will affect contributors.
 
 The policy affects the following groups of people:
 - People who review or moderate PRs on `rust-lang/rust`.
