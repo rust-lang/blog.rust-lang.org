@@ -23,7 +23,7 @@
             pattern=`(?P<newline>\n)<li><input disabled="" type="checkbox"(?P<checked>( checked="")?)/>\n`,
             rep=`$newline<li class="task-list-item"><span class="task-list-item-span" role="img" aria-label="Incomplete task"><input$checked inert="" type="checkbox"/></span>`,
           )
-        | replace(from=`"Incomplete task"><input checked`, to=`"Complete task"><input checked`)
+        | replace(from=`"Incomplete task"><input checked`, to=`"Completed task"><input checked`)
         | safe
       }}
     </div>
