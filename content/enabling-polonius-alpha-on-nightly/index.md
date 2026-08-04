@@ -1,6 +1,6 @@
 +++
 path = "2026/08/04/enabling-polonius-alpha-on-nighty"
-title = "Enable the next iteration of the borrow checker on nightly"
+title = "Enabling the next iteration of the borrow checker on nightly"
 authors = ["Jack Huey"]
 
 [extra]
@@ -31,7 +31,7 @@ You can report any issues [on Github](https://github.com/rust-lang/rust/issues/1
 
 ## Okay, what's new?
 
-The key thing that Polonius Alpha enables that NLL does not is *flow-sensitive* borrow checking.
+The key thing that Polonius Alpha enables that NLL does not is *flow-sensitive* borrow checking of lifetime outlives relationships.
 
 Perhaps the smallest example demonstrating what will pass with Polonius Alpha but not the current NLL is:
 
@@ -63,7 +63,7 @@ The issue is that the `Some(value) => value` branch causes the borrow checker to
 
 Polonius Alpha passes this because its analysis is *flow-sensitive*, and it knows that the borrow isn't live in the `None` branch.
 
-Now, Polonius Alpha is not *perfect*; some programs that would compile under legacy Polonius (the slow original implementation) don't compile with Polonius Alpha. For example:
+Now, Polonius Alpha is not *perfect*; some programs that would compile under legacy Polonius (the slow original implementation) don't compile with Polonius Alpha. (This is of course why we call it "Polonius Alpha"). For example:
 
 ```rust
 struct X { next: Option<Box<X>> }
@@ -79,9 +79,11 @@ fn conditional() {
 }
 ```
 
+(As a slight note: we have also found programs that compile with Polonius Alpha but not legacy Polonius, so it's not really a full subset.)
+
 ## So, what about performance?
 
-Polonius Alpha does strictly equal or more work compared to NLL, so we have been paying particular attention to potential performance regressions.
+Polonius Alpha currently does strictly equal or more work compared to NLL, so we have been paying particular attention to potential performance regressions.
 
 From the top ten thousand crates by downloads on crates.io, we have seen relatively few "significant" regressions, and even crates that have a "significant" regression are typically *relatively* minimal:
 
@@ -99,10 +101,17 @@ We have done some initial triage of the causes of these regressions and are thin
 
 ## I really don't want this. How do I opt-out?
 
-To reiterate: this is only being enabled on nightly. But, if you want to disable Polonius Alpha, and only use the stable NLL. You can pass `-Zpolonius=off` to `rustc` or use `RUSTFLAGS=-Zpolonius=off`.
+To reiterate: this is only being enabled on nightly. But if you want to disable Polonius Alpha, and only use the stable NLL, you can pass `-Zpolonius=off` to `rustc`, use `RUSTFLAGS=-Zpolonius=off`, or with a project's [`.cargo/config.toml`](https://doc.rust-lang.org/cargo/reference/config.html) configuration file:
+
+```toml
+[target.x86_64-unknown-linux-gnu]
+rustflags = ["-Zpolonius=off"]
+```
 
 If you have to do this, for some reason, please do tell us why [on Github](https://github.com/rust-lang/rust/issues/160456) or [on Zulip](https://rust-lang.zulipchat.com/#narrow/channel/186049-t-types.2Fpolonius/topic/Polonius.20Alpha.20enabled.20on.20nightly/near/614373312).
 
 ## What's next?
 
 Over the next few months, we will be monitoring Github and Zulip for any reported issues about Polonius Alpha. We will also be working to address known performance regressions. Finally, we will be working on internal documentation about the implementation. All prior to stabilization. Then, we are aiming to stabilize prior to the end of the year!
+
+Although some programs that we *want* to compile don't work with Polonius Alpha (nor NLL today), we don't currently have any concrete plans to continue active feature work on the Polonius implementation after the stabilization of Polonius Alpha. We expect to continue to optimize the implementation and address any performance regressions for a little while. We will likely come back to Polonius feature-work *at some point*, but given that Polonius Alpha solves the most-encountered borrow-check issues, we are shifting our time to other high-priority work for the near future.
