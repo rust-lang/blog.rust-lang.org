@@ -1,7 +1,8 @@
 +++
-path = "2026/08/04/enabling-polonius-alpha-on-nighty"
+path = "2026/08/04/enabling-polonius-alpha-on-nightly"
 title = "Enabling the next iteration of the borrow checker on nightly"
 authors = ["Jack Huey"]
+aliases = ["2026/08/04/enabling-polonius-alpha-on-nighty"]
 
 [extra]
 team = "Polonius working area"
