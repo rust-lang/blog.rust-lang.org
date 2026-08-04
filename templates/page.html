@@ -20,8 +20,8 @@
     <div class="post">
       {{ page.content
         | regex_replace(
-            pattern=`(?m)^<li><input disabled="" type="checkbox"(?P<checked>( checked="")?)/>(?P<ctx2>)$`,
-            rep=`<li class="task-list-item"><span role="img" aria-label="Incomplete task"><input$checked inert="" type="checkbox"/></span>`,
+            pattern=`(?P<newline>\n)<li><input disabled="" type="checkbox"(?P<checked>( checked="")?)/>\n`,
+            rep=`$newline<li class="task-list-item"><span class="task-list-item-span" role="img" aria-label="Incomplete task"><input$checked inert="" type="checkbox"/></span>`,
           )
         | replace(from=`"Incomplete task"><input checked`, to=`"Complete task"><input checked`)
         | safe

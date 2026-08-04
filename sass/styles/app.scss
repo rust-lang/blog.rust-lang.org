@@ -255,10 +255,18 @@ ul, ol {
 
 ul {
   list-style-type: disc;
-}
 
-ul:has(> li.task-list-item) {
-  list-style-type: none;
+  > li.task-list-item {
+    list-style-type: none;
+    > span.task-list-item-span {
+      width: 0;
+      display: inline-block;
+      > input {
+        float: right;
+        margin-right: 0.25em;
+      }
+    }
+  }
 }
 
 .posts {
