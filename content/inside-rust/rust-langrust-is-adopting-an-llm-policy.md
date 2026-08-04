@@ -1,5 +1,5 @@
 +++
-path = "inside-rust/9999/12/31/rust-langrust-is-adopting-an-llm-policy"
+path = "inside-rust/2026/08/05/rust-langrust-is-adopting-an-llm-policy"
 title = "rust-lang/rust is adopting an LLM policy"
 authors = ["Jynn Nelson"]
 +++
