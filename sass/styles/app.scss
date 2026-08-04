@@ -257,6 +257,10 @@ ul {
   list-style-type: disc;
 }
 
+ul:has(> li.task-list-item) {
+  list-style-type: none;
+}
+
 .posts {
   background-color: var(--gray);
   color: var(--body-foreground-color);

@@ -18,7 +18,14 @@
     </div>
 
     <div class="post">
-      {{ page.content | safe }}
+      {{ page.content
+        | regex_replace(
+            pattern=`(?m)^<li><input disabled="" type="checkbox"(?P<checked>( checked="")?)/>(?P<ctx2>)$`,
+            rep=`<li class="task-list-item"><span role="img" aria-label="Incomplete task"><input$checked inert="" type="checkbox"/></span>`,
+          )
+        | replace(from=`"Incomplete task"><input checked`, to=`"Complete task"><input checked`)
+        | safe
+      }}
     </div>
   </div>
 </section>
