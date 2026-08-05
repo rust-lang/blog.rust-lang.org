@@ -257,6 +257,25 @@ ul {
   list-style-type: disc;
 }
 
+/* Remove bullet from task lists. */
+/* The checkbox we render afterwards serves that purpose. */
+ul:has(> li > input[type="checkbox"]) {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+/* Add checkbox emoji in front of task list item and hide regular checkbox. */
+/* The regular checkbox is disabled, which is rendered with an unreadable gray color. */
+li > input[type="checkbox"] {
+  display: none
+}
+li:has(> input[type="checkbox"]:checked)::before {
+    content: "✅ ";
+}
+li:has(> input[type="checkbox"]:not(:checked))::before {
+    content: "⬜ ";
+}
+
 .posts {
   background-color: var(--gray);
   color: var(--body-foreground-color);
