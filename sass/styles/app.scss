@@ -76,7 +76,7 @@ body {
   background-color: var(--body-background-color);
   color: var(--body-color);
 
-  /* Ensure the footer is always at the bottom of the screen */
+  // Ensure the footer is always at the bottom of the screen
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -255,6 +255,38 @@ ul, ol {
 
 ul {
   list-style-type: disc;
+}
+
+// Special handling of item markers for lists that contain task items (checkboxes).
+ul:has(> li > input[type="checkbox"]) {
+  // Create enough space to the left of the items for custom markers.
+  padding-left: 2cap;
+
+  > li:has(> input[type="checkbox"]) {
+    // Hide default markers from task items.
+    list-style-type: none;
+    // Set position to relative, so we can offset the custom marker relative to this element. 
+    position: relative;
+
+    // Hide default checkbox, which is rendered with an unreadable gray color.
+    > input[type="checkbox"] {
+      display: none
+    }
+  }
+  // Add custom emoji markers to task items.
+  > li:has(> input[type="checkbox"]:checked)::before {
+    content: "✅ ";
+  }
+  > li:has(> input[type="checkbox"]:not(:checked))::before {
+      content: "⬜ ";
+  }
+  // Position custom markers for proper alignment.
+  > li:has(> input[type="checkbox"])::before {
+    position: absolute;
+    left: -1.8em;
+    top: calc(1em - 1cap);
+    font-size: 1cap;
+  }
 }
 
 .posts {
