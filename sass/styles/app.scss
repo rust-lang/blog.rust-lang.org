@@ -276,6 +276,17 @@ li:has(> input[type="checkbox"]:not(:checked))::before {
     content: "⬜ ";
 }
 
+/* Make paragraph next to checkbox aligned as if checkbox was a list bullet. */
+li:has(> input[type="checkbox"]) {
+  position: relative;
+  padding-left: 1.8em;
+}
+li:has(> input[type="checkbox"])::before {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
 .posts {
   background-color: var(--gray);
   color: var(--body-foreground-color);
