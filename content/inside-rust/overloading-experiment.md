@@ -157,8 +157,9 @@ As stated above, splat is currently an incomplete compiler feature, and is only 
 nightly Rust compiler. Splat is also unergonomic, and we want to change that as part of the next
 design phase.
 
-Splat isn’t currently supported [on function pointers][fnptr-bug], but hopefully
-[that implementation][fnptr-pr] will be merged soon. If you want overloading support for function
+We've just merged [splat support for function pointers][fnptr-pr], if you're seeing
+[an internal compiler error][fnptr-bug], please update to the latest nightly.
+If you want overloading support for function
 pointers, please let us know about your use case in the
 [#t-lang/interop channel on Zulip][t-lang-interop].
 
