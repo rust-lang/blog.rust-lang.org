@@ -240,7 +240,9 @@ _(This example is a variant of a design shared by [Taylor Cramer][gh-taylor].)_
 
 In the shiny future, Rust might have an `#[overload]` attribute that "just works" to call
 overloaded foreign functions with the same name. No traits, tuples, or `#[rustc_splat]` required,
-the compiler handles it all for you.
+the compiler handles it all for you. Since this work is targeted at interop, overloading might be
+limited to `extern` blocks to start with. Extending it to native Rust could be a separate feature,
+stabilised on a longer timeframe (or not at all).
 
 This might happen through macros that hide compiler implementation internals, or it might not need
 any macros. It's hard to guess what the final shape of the feature will be: we’ve only just started
