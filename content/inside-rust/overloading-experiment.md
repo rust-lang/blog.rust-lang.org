@@ -2,6 +2,10 @@
 path = "inside-rust/2026/08/10/overloading-experiment"
 title = "Rust Function Overloading - Call for Experimentation"
 authors = ["teor"]
+
+[extra]
+team = "The Language Team"
+team_url = "https://www.rust-lang.org/governance/teams/lang"
 +++
 
 In partnership with the [Rust Foundation's Rust-C++ Interop Initiative][interop-initiative],
