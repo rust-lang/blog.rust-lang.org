@@ -1,5 +1,5 @@
 +++
-path = "inside-rust/2026/08/10/overloading-experiment"
+path = "inside-rust/2026/08/18/overloading-experiment"
 title = "Rust Function Overloading - Call for Experimentation"
 authors = ["teor"]
 
