@@ -157,18 +157,38 @@ As stated above, splat is currently an incomplete compiler feature, and is only 
 nightly Rust compiler. Splat is also unergonomic, and we want to change that as part of the next
 design phase.
 
-We've just merged [splat support for function pointers][fnptr-pr], if you're seeing
+Support for splatted function arguments in rustdoc [just merged on 12 August][rustdoc-pr]. Splatted
+arguments display as an ellipsis (`…`), rather than the argument name. This syntax is unstable,
+currently only used for display in rustdoc, and can change at any time. For example:
+
+```rust
+fn example(#[rustc_splat] args: (u32, String));
+```
+
+Is displayed as:
+
+```rust
+fn example(…: (u32, String));
+```
+
+We've also recently merged [splat support for function pointers][fnptr-pr], if you're seeing
 [an internal compiler error][fnptr-bug], please update to the latest nightly.
-If you want overloading support for function
-pointers, please let us know about your use case in the
-[#t-lang/interop channel on Zulip][t-lang-interop].
+If you want overloading support for function pointers, please let us know about your use case in
+the [#t-lang/interop channel on Zulip][t-lang-interop].
+
+And there is an ongoing [Rust standard library experiment][variadic-tracking] using splat for
+variable-argument `smallest` and `greatest` functions. Hopefully they will be
+[available soon on nightly][variadic-pr].
 
 Experimenters will find other bugs – [some have already been found in the last few months][f-splat]
 – and some overloading functionality is out of scope for now. If you think you've found a bug or
 limitation, ask us about it in the [#t-lang/interop channel on Zulip][t-lang-interop].
 
+[rustdoc-pr]: https://github.com/rust-lang/rust/pull/160882
 [fnptr-bug]: https://github.com/rust-lang/rust/issues/158603
 [fnptr-pr]: https://github.com/rust-lang/rust/pull/158645
+[variadic-tracking]: https://github.com/rust-lang/rust/issues/160728
+[variadic-pr]: https://github.com/rust-lang/rust/pull/160687
 [t-lang-interop]: https://rust-lang.zulipchat.com/#narrow/channel/427678-t-lang.2Finterop
 [f-splat]: https://github.com/rust-lang/rust/issues?q=label:F-splat
 
@@ -185,8 +205,9 @@ Rust Project goal, and it is an outcome of the
 
 Thank you also to everyone who has contributed to the overloading work, including [Oli][gh-oli],
 [Ajay][gh-ajay], [Nadrieril][gh-nadri], [Scott][gh-scott], [Taylor][gh-taylor], [Tyler][gh-tyler],
-[Matthias][gh-matthias], [Tim][gh-tim], [Devin][gh-devin], [Ralf][gh-ralf], [Jacob][gh-jacob], and
-the many project members who have given suggestions, feedback, testing, bug reports, and reviews.
+[Matthias][gh-matthias], [Tim][gh-tim], [Devin][gh-devin], [Ralf][gh-ralf], [Jacob][gh-jacob],
+[Zachary][gh-zachary] and the many project members who have given suggestions, feedback, testing,
+bug reports, and reviews.
 
 [gh-oli]: https://github.com/oli-obk
 [gh-nadri]: https://github.com/nadrieril
@@ -198,6 +219,7 @@ the many project members who have given suggestions, feedback, testing, bug repo
 [gh-devin]: https://github.com/ssbr
 [gh-ralf]: https://github.com/RalfJung
 [gh-jacob]: https://github.com/programmerjake
+[gh-zachary]: https://github.com/bushrat011899
 
 ## Future Work
 
