@@ -15,6 +15,7 @@ The following teams are up to choose their representative for the next year:
 
 * [Infra]
 * [Lang]
+* [Libs]
 * [Mods]
 
 We are aiming to have the teams confirm their choices by September 23, 2026, and for any possible new members to be ready to join the council meetings starting September 25th.
