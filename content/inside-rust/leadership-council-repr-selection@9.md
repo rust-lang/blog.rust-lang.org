@@ -22,6 +22,7 @@ We are aiming to have the teams confirm their choices by September 23, 2026, and
 
 [Infra]: https://www.rust-lang.org/governance/teams/infra
 [Lang]: https://www.rust-lang.org/governance/teams/lang
+[Libs]: https://www.rust-lang.org/governance/teams/library
 [Mods]: https://www.rust-lang.org/governance/teams/moderation
 [Leadership Council]: https://www.rust-lang.org/governance/teams/leadership-council
 
