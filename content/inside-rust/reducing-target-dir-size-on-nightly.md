@@ -80,7 +80,7 @@ If you are using a different build system than Cargo, then this change will not 
 
 ## How to opt out?
 
-If you want to opt out, you can either pass `-Zembed-metadata=yes` to Cargo (note that this is passed as a Cargo flag, not as a compiler flag in `RUSTFLAGS`, because Cargo must be aware of the flag's value).
+If you want to opt out, you can either pass the `-Zembed-metadata=yes` command-line argument to Cargo (note that this is passed as a Cargo flag, not as a compiler flag in `RUSTFLAGS`, because Cargo must be aware of the flag's value) or set the environment variable `CARGO_UNSTABLE_EMBED_METADATA=true`.
 
 You can also opt out using a `.cargo/config.toml` file:
 ```toml
