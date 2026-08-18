@@ -92,7 +92,7 @@ embed-metadata = true
 
 By enabling this feature on the `nightly` channel by default, we want to figure out how will it work in practice, and if Cargo users run into any unexpected issues with it. After we gather feedback about the feature, and learn of any potential issues, the Cargo team will decide how to move forward: whether the feature can be stabilized as-is, changes need to be made, or if there are significant issues that would require us to return to the drawing board.
 
-Therefore, if you run into any issues with this new default, please [open an issue][open-an-issue] in the Cargo repository, so that we get to know about them. Thank you!
+Therefore, if you run into any issues with this new default, please [open an issue][open-an-issue] in the Cargo repository, so that we get to know about them. We cannot fix issues that we do not know about, thank you!
 
 And if you are interested in how is this feature moving forward, you can observe its progress in its [tracking issue][tracking-issue].
 
