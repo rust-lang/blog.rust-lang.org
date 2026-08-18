@@ -1,6 +1,6 @@
 +++
 path = "inside-rust/2026/08/18/reducing-target-dir-size-on-nightly"
-title = "Reducing target directory size on nightly"
+title = "Experiment in reducing target directory size on nightly"
 authors = ["Jakub Beránek"]
 
 [extra]
@@ -8,7 +8,7 @@ team = "The Cargo Team"
 team_url = "https://www.rust-lang.org/governance/teams/dev-tools#cargo"
 +++
 
-TL;DR: Soon the Cargo Team will be doing an experiment to determine if a proposed change breaks users. Cargo will enable the `-Zembed-metadata=no` feature on the _nightly_ channel by default, which can help reduce the size of the target directory somewhat. This is an experiment designed to gather feedback about this feature. See [here](#how-to-opt-out) for ways to opt out, in case you run into any issues.
+TL;DR: The Cargo Team will be rolling out an experiment to identify user impact for a proposed change. Cargo will enable the `-Zembed-metadata=no` feature on the _nightly_ channel by default, which can help reduce the size of the target directory somewhat. This is an experiment designed to gather feedback about viability of this feature. Users are not expected to migrate to support this feature, but to report any issues and [opt-out](#how-to-opt-out) if needed in the meantime.
 
 ## What is this about?
 
@@ -65,7 +65,7 @@ This does not fully solve the problem of large `target` directories, but it can 
 
 ## Does this affect me?
 
-In the vast majority of situations, you should not notice anything different when `-Zembed-metadata=no` is used, other than the `target` directory becoming smaller. However, if you for some reason link to `.rlib` files manually, you might now also have to pass the corresponding `.rmeta` file to the compiler using the `--extern` flag to get access to the crate's metadata.
+In the vast majority of situations, you should not notice anything different when `-Zembed-metadata=no` is used, other than the `target` directory becoming smaller. However, if you for some reason link to `.rlib` files manually, you might now also have to pass the corresponding `.rmeta` file to the compiler using the `--extern` flag to get access to the crate's metadata. Please [let us know][open-an-issue] if you have a use-case like this!
 
 If you do not do that correctly, you might be greeted with an error similar to this one:
 
@@ -90,7 +90,7 @@ embed-metadata = true
 
 ## Future work
 
-By enabling this feature on the `nightly` channel by default, we want to figure out how will it work in practice, and if Cargo users run into any unexpected issues with it. After we gather feedback about the feature, and learn of any potential issues, the Cargo team will decide how to move forward: whether the feature can be stabilized as-is, changes need to be made, or if there are significant issues that would require us to return to the drawing board.
+By enabling this feature on the `nightly` channel by default, we want to figure out how will it work in practice, and if Cargo users are negatively affected by this change. After we gather feedback about the feature, and learn of any potential issues, the Cargo team will decide how to move forward: whether the feature can be stabilized as-is, changes need to be made, or if there are significant issues that would require us to return to the drawing board.
 
 Therefore, if you run into any issues with this new default, please [open an issue][open-an-issue] in the Cargo repository, so that we get to know about them. We cannot fix issues that we do not know about, thank you!
 
