@@ -8,7 +8,7 @@ team = "The Cargo Team"
 team_url = "https://www.rust-lang.org/governance/teams/dev-tools#cargo"
 +++
 
-TL;DR: Soon, Cargo will enable the `-Zembed-metadata=no` feature on the nightly channel by default, which can help reduce the size of the `target` directory somewhat. See [here](#how-to-opt-out) for ways to opt out, in case you run into any issues.
+TL;DR: Soon, Cargo will enable the `-Zembed-metadata=no` feature on the nightly channel by default, which can help reduce the size of the `target` directory somewhat. This is an experiment designed to gather feedback about this feature. See [here](#how-to-opt-out) for ways to opt out, in case you run into any issues.
 
 ## What is this about?
 
@@ -31,7 +31,7 @@ Which means that after the compilation finishes, the metadata of each library cr
 
 In order to reduce unnecessary data duplication in the built artifacts, last year we introduced an unstable compiler [flag][rust-pr] called `-Zembed-metadata`, together with a corresponding [Cargo flag](https://github.com/rust-lang/cargo/pull/15378) with the same name. When using `-Zembed-metadata=no`, the compiler will stop putting the metadata into the `.rlib` files, thus reducing their file size.
 
-Soon, Cargo will start defaulting to using `-Zembed-metadata=no` when *both* Cargo and the used `rustc` have the `nightly` channel.
+Soon, Cargo will start defaulting to using `-Zembed-metadata=no` when *both* Cargo and the used `rustc` have the `nightly` channel. Note that this is an experiment, the feature is not currently headed for stabilization. We want to evaluate how does this change fare in practice, and gather feedback from nightly users.
 
 ## How much does it help?
 
@@ -90,9 +90,9 @@ embed-metadata = true
 
 ## Future work
 
-By enabling this feature on the `nightly` channel by default, we want to figure out how will it work in practice, and if Cargo users run into any unexpected issues with it. If everything goes smoothly, we would like to stabilize the compiler side of this feature, and then make the `embed-metadata=no` behavior be used by default also on the stable toolchain.
+By enabling this feature on the `nightly` channel by default, we want to figure out how will it work in practice, and if Cargo users run into any unexpected issues with it. If everything goes smoothly, we would like to stabilize the compiler side of this feature, and then make the `embed-metadata=no` behavior be used by default also on the stable toolchain. However, this is not set in stone; it is possible that the feature and/or the flags might change before stabilization, or that they will not be stabilized at all, if we run into significant issues.
 
-If you run into any issues with this new default, please [open an issue][open-an-issue] in the Cargo repository. Thank you!
+Therefore, if you run into any issues with this new default, please [open an issue][open-an-issue] in the Cargo repository, so that we get to know about them. Thank you!
 
 And if you are interested in how is this feature moving forward, you can observe its progress in its [tracking issue][tracking-issue].
 
