@@ -8,7 +8,7 @@ team = "The Cargo Team"
 team_url = "https://www.rust-lang.org/governance/teams/dev-tools#cargo"
 +++
 
-TL;DR: Soon, the `-Zembed-metadata=no` compiler/Cargo feature, which can help reduce the size of the `target` directory somewhat, will be enabled _only_ on the nightly channel by default. **This is an experiment designed to gather feedback about this feature, it is not currently headed for stabilization.** See [here](#how-to-opt-out) for ways to opt out, in case you run into any issues.
+TL;DR: Soon the Cargo Team will be doing an experiment to determine if a proposed change breaks users. Cargo will enable the `-Zembed-metadata=no` feature on the _nightly_ channel by default, which can help reduce the size of the target directory somewhat. This is an experiment designed to gather feedback about this feature. See [here](#how-to-opt-out) for ways to opt out, in case you run into any issues.
 
 ## What is this about?
 
