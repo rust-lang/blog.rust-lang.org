@@ -41,8 +41,6 @@ We compiled two crates (`serde` and `cargo` itself) on the `x86_64-unknown-linux
 
 We can see the results in the table below. The `Before` column shows the size of the `target` directory when using the previous default (`-Zembed-metadata=yes`), while the `After` column shows the `target` disk size with `-Zembed-metadata=no`, which will soon be the default on the nightly channel.
 
-As expected, the disk size wins depend a lot on how much of the `target` directory is taken up by the crate metadata itself. If there are no incremental artifacts and no debuginfo, such as when using the default configuration of the `release` profile, the wins are substantial, in this case almost 30%. On the other hand, if we use the defaults of the `dev` profile, which enables both incremental compilation and generation of debug information, then the wins are more modest (in this case around 5%), because the debug information and incremental build artifacts dwarf the size of the crate metadata.
-
 | Profile   | Incremental | Debuginfo | Before [MiB] | After [MiB] | Reduction |
 |-----------|-------------|-----------|--------------|-------------|-----------|
 | `dev`     | Yes         | Yes       | 179.70       | 171.29      | -4.7%     |
@@ -50,6 +48,8 @@ As expected, the disk size wins depend a lot on how much of the `target` directo
 | `dev`     | No          | Yes       | 81.12        | 72.68       | -10.4%    |
 | `dev`     | No          | No        | 31.06        | 22.62       | -27.2%    |
 | `release` | No          | No        | 40.88        | 28.68       | -29.8%    |
+
+As expected, the disk size wins depend a lot on how much of the `target` directory is taken up by the crate metadata itself. If there are no incremental artifacts and no debuginfo, such as when using the default configuration of the `release` profile, the wins are substantial, in this case almost 30%. On the other hand, if we use the defaults of the `dev` profile, which enables both incremental compilation and generation of debug information, then the wins are more modest (in this case around 5%), because the debug information and incremental build artifacts dwarf the size of the crate metadata.
 
 Below are the results for compiling Cargo itself, which are slightly better than for serde. In the best case, the new default reduced the size of the `target` directory by approximately 33%, almost 300 MiB in absolute terms!
 
