@@ -1,6 +1,6 @@
 +++
 path = "inside-rust/2026/08/18/reducing-target-dir-size-on-nightly"
-title = "Reducing target directory size on nightly"
+title = "Experiment in reducing target directory size on nightly"
 authors = ["Jakub Beránek"]
 
 [extra]
@@ -8,7 +8,7 @@ team = "The Cargo Team"
 team_url = "https://www.rust-lang.org/governance/teams/dev-tools#cargo"
 +++
 
-TL;DR: Soon, Cargo will enable the `-Zembed-metadata=no` feature on the nightly channel by default, which can help reduce the size of the `target` directory somewhat. See [here](#how-to-opt-out) for ways to opt out, in case you run into any issues.
+TL;DR: The Cargo Team will be rolling out an experiment to identify user impact for a proposed change. Cargo will enable the `-Zembed-metadata=no` feature on the _nightly_ channel by default, which can help reduce the size of the target directory somewhat. This is an experiment designed to gather feedback about viability of this feature. Users are not expected to migrate to support this feature, but to report any issues and [opt-out](#how-to-opt-out) if needed in the meantime.
 
 ## What is this about?
 
@@ -31,7 +31,7 @@ Which means that after the compilation finishes, the metadata of each library cr
 
 In order to reduce unnecessary data duplication in the built artifacts, last year we introduced an unstable compiler [flag][rust-pr] called `-Zembed-metadata`, together with a corresponding [Cargo flag](https://github.com/rust-lang/cargo/pull/15378) with the same name. When using `-Zembed-metadata=no`, the compiler will stop putting the metadata into the `.rlib` files, thus reducing their file size.
 
-Soon, Cargo will start defaulting to using `-Zembed-metadata=no` when *both* Cargo and the used `rustc` have the `nightly` channel.
+Soon, Cargo will start defaulting to using `-Zembed-metadata=no` when *both* Cargo and the used `rustc` have the `nightly` channel. Note that this is an experiment, the feature is not currently headed for stabilization. We want to evaluate how does this change fare in practice, and gather feedback from nightly users. So if you encounter any issues with this change, please do [report them][open-an-issue]!
 
 ## How much does it help?
 
@@ -65,7 +65,7 @@ This does not fully solve the problem of large `target` directories, but it can 
 
 ## Does this affect me?
 
-In the vast majority of situations, you should not notice anything different when `-Zembed-metadata=no` is used, other than the `target` directory becoming smaller. However, if you for some reason link to `.rlib` files manually, you might now also have to pass the corresponding `.rmeta` file to the compiler using the `--extern` flag to get access to the crate's metadata.
+In the vast majority of situations, you should not notice anything different when `-Zembed-metadata=no` is used, other than the `target` directory becoming smaller. However, if you for some reason link to `.rlib` files manually, you might now also have to pass the corresponding `.rmeta` file to the compiler using the `--extern` flag to get access to the crate's metadata. Please [let us know][open-an-issue] if you have a use-case like this!
 
 If you do not do that correctly, you might be greeted with an error similar to this one:
 
@@ -90,9 +90,9 @@ embed-metadata = true
 
 ## Future work
 
-By enabling this feature on the `nightly` channel by default, we want to figure out how will it work in practice, and if Cargo users run into any unexpected issues with it. If everything goes smoothly, we would like to stabilize the compiler side of this feature, and then make the `embed-metadata=no` behavior be used by default also on the stable toolchain.
+By enabling this feature on the `nightly` channel by default, we want to figure out how will it work in practice, and if Cargo users are negatively affected by this change. After we gather feedback about the feature, and learn of any potential issues, the Cargo team will decide how to move forward: whether the feature can be stabilized as-is, changes need to be made, or if there are significant issues that would require us to return to the drawing board.
 
-If you run into any issues with this new default, please [open an issue][open-an-issue] in the Cargo repository. Thank you!
+Therefore, if you run into any issues with this new default, please [open an issue][open-an-issue] in the Cargo repository, so that we get to know about them. We cannot fix issues that we do not know about, thank you!
 
 And if you are interested in how is this feature moving forward, you can observe its progress in its [tracking issue][tracking-issue].
 
