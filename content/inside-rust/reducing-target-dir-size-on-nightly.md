@@ -8,7 +8,7 @@ team = "The Cargo Team"
 team_url = "https://www.rust-lang.org/governance/teams/dev-tools#cargo"
 +++
 
-TL;DR: Soon, Cargo will enable the `-Zembed-metadata=no` feature on the nightly channel by default, which can help reduce the size of the `target` directory somewhat. This is an experiment designed to gather feedback about this feature. See [here](#how-to-opt-out) for ways to opt out, in case you run into any issues.
+TL;DR: Soon, the `-Zembed-metadata=no` compiler/Cargo feature, which can help reduce the size of the `target` directory somewhat, will be enabled _only_ on the nightly channel by default. **This is an experiment designed to gather feedback about this feature, it is not currently headed for stabilization.** See [here](#how-to-opt-out) for ways to opt out, in case you run into any issues.
 
 ## What is this about?
 
@@ -31,7 +31,7 @@ Which means that after the compilation finishes, the metadata of each library cr
 
 In order to reduce unnecessary data duplication in the built artifacts, last year we introduced an unstable compiler [flag][rust-pr] called `-Zembed-metadata`, together with a corresponding [Cargo flag](https://github.com/rust-lang/cargo/pull/15378) with the same name. When using `-Zembed-metadata=no`, the compiler will stop putting the metadata into the `.rlib` files, thus reducing their file size.
 
-Soon, Cargo will start defaulting to using `-Zembed-metadata=no` when *both* Cargo and the used `rustc` have the `nightly` channel. Note that this is an experiment, the feature is not currently headed for stabilization. We want to evaluate how does this change fare in practice, and gather feedback from nightly users.
+Soon, Cargo will start defaulting to using `-Zembed-metadata=no` when *both* Cargo and the used `rustc` have the `nightly` channel. Note that this is an experiment, the feature is not currently headed for stabilization. We want to evaluate how does this change fare in practice, and gather feedback from nightly users. So if you encounter any issues with this change, please do [report them][open-an-issue]!
 
 ## How much does it help?
 
