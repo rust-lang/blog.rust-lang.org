@@ -74,7 +74,7 @@ error: only metadata stub found for `rlib` dependency `foo`
 please provide path to the corresponding .rmeta file with full metadata
 ```
 
-Note that Cargo does not currently ["uplift"][rmeta-uplift] the corresponding `.rmeta` file, even when using `-Zembed-metadata=no`. That means that the `.rmeta` file (unlike the `.rlib` file) will not appear in the `target/<profile>` directory after the build of a leaf library completes, and so you must find its location in the nested build directories, e.g. using Cargo's JSON output, if you want to locate it.
+Note that Cargo does not currently ["uplift"][rmeta-uplift] the corresponding `.rmeta` file, even when using `-Zembed-metadata=no`. That means that the `.rmeta` file (unlike the `.rlib` file) will not appear as [a final build artifact](https://doc.rust-lang.org/cargo/reference/build-cache.html) in the `target/<profile>` directory after the build of a leaf library completes, and so you must find its location in the nested build directories, e.g. using Cargo's [JSON output](https://doc.rust-lang.org/cargo/reference/external-tools.html#json-messages), if you want to locate it.
 
 If you are using a different build system than Cargo, then this change will not affect you.
 
