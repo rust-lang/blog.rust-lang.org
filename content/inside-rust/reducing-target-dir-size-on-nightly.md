@@ -1,5 +1,5 @@
 +++
-path = "inside-rust/2026/08/24/reducing-target-dir-size-on-nightly"
+path = "inside-rust/2026/08/18/reducing-target-dir-size-on-nightly"
 title = "Reducing target directory size on nightly"
 authors = ["Jakub Beránek"]
 
