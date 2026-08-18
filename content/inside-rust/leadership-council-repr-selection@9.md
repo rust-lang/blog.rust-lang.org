@@ -1,5 +1,5 @@
 +++
-path = "inside-rust/2026/08/19/leadership-council-repr-selection"
+path = "inside-rust/2026/08/18/leadership-council-repr-selection"
 title = "Leadership Council September 2026 Representative Selections"
 authors = ["Jakub Beránek"]
 
