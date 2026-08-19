@@ -24,7 +24,7 @@ If you'd like to help us out by testing future releases, you might consider upda
 
 ### Algebraic floating-point methods
 
-The floating-point types `f32` and `f64` (as well as unstable `f16` and `f128`) now have "algebraic" methods for addition, subtraction, multiplication, division, and remainder. These allow optimizations on these operations using the algebraic properties of real numbers, even though these properties do not hold with the limitations of floating-point representations. The exact set of optimizations is not specified, but may be similar to the kind of optimization you would see with the `-ffast-math` option in other languages.
+The floating-point types `f32` and `f64` now have "algebraic" methods for addition, subtraction, multiplication, division, and remainder. These allow optimizations on these operations using the algebraic properties of real numbers, even though these properties do not hold with the limitations of floating-point representations. The exact set of optimizations is not specified, but may be similar to the kind of optimization you would see with the `-ffast-math` option in other languages.
 
 For example, floating-point addition is [not associative](https://en.wikipedia.org/wiki/Associative_property#Nonassociativity_of_floating-point_calculation), so a sum like `a + b + c + d` must be evaluated in the left-associative order in which it is parsed, like `((a + b) + c) + d`. If you write the same sum as a chain of `algebraic_add` calls, then the compiler is free to reorder it, perhaps like `(a + b) + (c + d)` to evaluate the partial sums simultaneously. Broader loop-vectorization is often enabled by using these algebraic methods as well.
 
@@ -36,7 +36,7 @@ All of the primitive integer types now have a [`format_into`](https://doc.rust-l
 
 This method also bypasses much of the dynamic dispatch that you would get with buffered `write!` formatting, which can be a boon to performance. The [`itoa-benchmark`](https://github.com/dtolnay/itoa-benchmark) repo now shows that `format_into` performs similarly to `itoa` itself, so this could serve as a standard replacement for that dependency and others like it.
 
-### Fix to the `ManuallyDrop` and `Box` interaction
+### Fix interaction between `ManuallyDrop` and `Box`
 
 Prior to Rust 1.96.0, there was a bug in the Rust compiler, which made the following code undefined behavior:
 
@@ -48,7 +48,7 @@ let x = x; // UB!
 
 This is because the compiler considers it undefined behavior to move a `Box` that has been dropped (deallocated), and `ManuallyDrop` used to propagate that, such that moving `ManuallyDrop<Box<_>>` where the box has been dropped would also be considered UB.
 
-In Rust 1.96.0 we fixed this, so this code is no longer UB. In this release we have updated the `ManuallyDrop` documentation, providing a stable guarantee that this code will not be UB in the future as well. See [`ManuallyDrop` docs](https://doc.rust-lang.org/stable/std/mem/struct.ManuallyDrop.html#pre-196-interaction-with-box) and the related [RFC 3336](https://rust-lang.github.io/rfcs/3336-maybe-dangling.html) for more information.
+In Rust 1.96.0 we fixed this, so this code was no longer UB. In this release we have updated the `ManuallyDrop` documentation, providing a stable guarantee that this code will continue to not be UB in the future. See [`ManuallyDrop` docs](https://doc.rust-lang.org/stable/std/mem/struct.ManuallyDrop.html#pre-196-interaction-with-box) and the related [RFC 3336](https://rust-lang.github.io/rfcs/3336-maybe-dangling.html) for more information.
 
 ### Stabilized APIs
 
