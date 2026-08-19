@@ -45,7 +45,7 @@ And now, without further ado, let's meet our newly funded maintainers!
     </div>
 </div>
 
-> Turning volunteering into an actual job has really been an empowering experience so far! I finally have the bandwidth to take a careful look at my inbox and can actually look at each message without the fear of missing crucial details while rushing prompt replies, which has really helped me retain the essential compassion as a maintainer. I also get to interact with regular contributors a lot more often. Finally, I can't wait to see what I can come up with in terms of Project Goals :)
+> Turning volunteering into an actual job has really been an empowering experience so far! I finally have the bandwidth to take a careful look at my inbox and can actually read each message without the fear of missing crucial details while rushing prompt replies, which has really helped me retain the essential compassion as a maintainer. I also get to interact with regular contributors a lot more often. Finally, I can't wait to see what I can come up with in terms of Project Goals :)
 
 ## Chris Denton (@ChrisDenton)
 <div>
