@@ -92,12 +92,12 @@ And now, without further ado, let's meet our newly funded maintainers!
         <img src="jonas-boettiger.jpg" style="width: 200px; margin: 0 20px 20px 0; align-self: flex-start;" />
         <div>
             <div>Jonas Böttiger (<a href="https://github.com/joboet">@joboet</a>) is a maintainer grantee focusing on the standard library.</div>
-            <div style="margin-top: 1em;">He is a musicology student from Germany. When he is not playing the Cello or reading about Fanny Hensel, he applies his research skills to ensure that programs written in Rust run quickly and soundly on all platforms, no matter how quirky the operating system may be.</div>
+            <div style="margin-top: 1em;">He is a musicology student from Germany. When he is not playing the Cello or reading about Fanny Hensel, he applies his research skills to ensure that programs written in Rust run quickly and soundly on all platforms, no matter how quirky the operating system may be. He loves helping contributors write excellent code that they can be proud of; and considers it to be just as much fun as writing it himself.</div>
         </div>
     </div>
 </div>
 
-> Getting funding for my work is a dream come true. It will allow me to continue doing the thing I love instead of worrying about whether I should rather invest all that time in a money-earning job with much less positive impact on the world around me. I will also be able to help contributors write excellent code that they can be proud of; that’s even more fun than writing it myself!
+> Getting funding for my work is a dream come true. It will allow me to continue doing the thing I love instead of worrying about whether I should rather invest all that time in a money-earning job with much less positive impact on the world around me. 
 
 ## Jason Newcomb (@Jarcho)
 <div>
