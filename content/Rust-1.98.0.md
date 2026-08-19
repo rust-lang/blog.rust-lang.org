@@ -28,7 +28,7 @@ The floating-point types `f32` and `f64` now have "algebraic" methods for additi
 
 For example, floating-point addition is [not associative](https://en.wikipedia.org/wiki/Associative_property#Nonassociativity_of_floating-point_calculation), so a sum like `a + b + c + d` must be evaluated in the left-associative order in which it is parsed, like `((a + b) + c) + d`. If you write the same sum as a chain of `algebraic_add` calls, then the compiler is free to reorder it, perhaps like `(a + b) + (c + d)` to evaluate the partial sums simultaneously. Broader loop-vectorization is often enabled by using these algebraic methods as well.
 
-See the [library documentation](https://doc.rust-lang.org/stable/core/primitive.f32.html#algebraic-operators) and the original [API change proposal](https://github.com/rust-lang/libs-team/issues/532) for more details.
+These methods are non-deterministic, since the compiler is free to choose different optimizations, but they never cause undefined behavior. See the [library documentation](https://doc.rust-lang.org/stable/core/primitive.f32.html#algebraic-operators) and the original [API change proposal](https://github.com/rust-lang/libs-team/issues/532) for more details.
 
 ### Buffered integer formatting
 
