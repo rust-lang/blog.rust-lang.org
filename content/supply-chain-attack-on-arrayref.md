@@ -24,9 +24,9 @@ Furthermore, we discovered that the popular [`arrayref`](https://crates.io/crate
 We recommend you check your local dependencies to ensure these crates were not pulled in.
 Here are the malicious versions that we deleted from crates.io:
 
-* `append-only-vec@0.1.9`.
+* `append-only-vec@0.1.9`: published at `2026-08-20T07:37:49Z`, deleted at `2026-08-20T09:25:24Z`. Online for 107 minutes.
 * `arrayref@0.3.10`: published at `2026-08-20T07:15:00Z`, deleted at `2026-08-20T08:41:40Z`. Online for 86 minutes.
-* `internment@0.8.7`.
+* `internment@0.8.7`: published at `2026-08-20T07:34:07Z`, deleted at `2026-08-20T09:04:11Z`. Online for 90 minutes.
 * `proc-macro1`, `proc-macro-en`, `aovine`, `arone`, `aronenao`, `tinymember` (any versions).
 
 You can quickly check if these crates have been used locally by going through `~/.cargo/registry/cache` with this command:
