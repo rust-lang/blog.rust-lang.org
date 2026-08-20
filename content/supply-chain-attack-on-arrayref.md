@@ -25,7 +25,7 @@ We recommend you check your local dependencies to ensure these crates were not p
 Here are the malicious versions that we deleted from crates.io:
 
 * `append-only-vec@0.1.9`.
-* `arrayref@0.3.10`.
+* `arrayref@0.3.10`: published at `2026-08-20T07:15:00Z`, deleted at `2026-08-20T08:41:40Z`. Online for 86 minutes.
 * `internment@0.8.7`.
 * `proc-macro1`, `proc-macro-en`, `aovine`, `arone`, `aronenao`, `tinymember` (any versions).
 
