@@ -97,18 +97,20 @@ And now, without further ado, let's meet our newly funded maintainers!
     </div>
 </div>
 
-> Getting funding for my work is a dream come true. It will allow me to continue doing the thing I love instead of worrying about whether I should rather invest all that time in a money-earning job with much less positive impact on the world around me. 
+> Getting funding for my work is a dream come true. It will allow me to continue doing the thing I love instead of worrying about whether I should rather invest all that time in a money-earning job with much less positive impact on the world around me.
 
 ## Jason Newcomb (@Jarcho)
 <div>
     <div class="mir">
-        <img src="jarcho.png" style="width: 200px; margin: 0 20px 20px 0; align-self: flex-start;" />
+        <img src="jason-newcomb.jpg" style="width: 200px; margin: 0 20px 20px 0; align-self: flex-start;" />
         <div>
             <div>Jason Newcomb (<a href="https://github.com/Jarcho">@Jarcho</a>) is a maintainer grantee focusing on Clippy.</div>
-            <div style="margin-top: 1em;">TODO</div>
+            <div style="margin-top: 1em;">He is primarily working on fixing bugs and making it easier to develop and contribute to Clippy. He is also focusing on making the review process as smooth as possible.</div>
         </div>
     </div>
 </div>
+
+> Being funded allows me to work on something I care about and want to work on instead of what will get me paid. I'm looking forward to seeing how this will impact Clippy and the Rust project in general.
 <!-- mir-list -->
 
 ## Conclusion
