@@ -8,7 +8,7 @@ team = "The Rustc Trait System Refactor Initiative"
 team_url = "https://github.com/rust-lang/trait-system-refactor-initiative/"
 +++
 
-After nearly 4 years of active development, [the next-generation trait solver](https://github.com/rust-lang/rust-project-goals/issues/113) is close to stabilization. We are enabling it by default on nightly to surface any remaining issues and plan to stabilize it in the next months. This is the largest single change to the Rust compiler since its initial release. It completely replaces the existing type system components responsible for proving where-clauses, normalizing associated types, and much more. **Please try out the latest nightly and [open an issue](https://github.com/rust-lang/rust/issues) if you encounter any bugs or regressions.**
+After nearly 4 years of active development, [the next-generation trait solver](https://github.com/rust-lang/rust-project-goals/issues/113) is close to stabilization. We are enabling it by default on nightly to surface any remaining issues and plan to stabilize it in the next months. This is the largest single change to the Rust compiler since its initial release. It completely replaces how we prove where-clauses, normalize associated types, and much more. **Please try out the latest nightly and [open an issue](https://github.com/rust-lang/rust/issues) if you encounter any bugs or regressions.**
 
 This is an internal component of the compiler. The main benefits of this rework will come in the future. The removal of the old implementation will unblock features such as [Type Alias Impl Trait and Return Type Notation][RTN], allow us to add new implicit default trait bounds (e.g., [`Move` and `Forget`]), and enable us to fix [the remaining type system unsoundnesses][Project Zero].
 
@@ -23,7 +23,7 @@ Please update to the latest nightly version by using `rustup update nightly` and
 
 > ⚠️ While the next-generation trait solver has been enabled on our `main` branch, this change will only be accessible on the nightly channel starting from Saturday 22nd August. You can already test it before then by providing `-Znext-solver=globally` as a command-line argument ⚠️
 
-Please tell us if you encounter any breakage, compile-time performance regression, or bad diagnostics. We have not spent too much time on error messages for the next-generation trait solver, so we would also appreciate you using this nightly for development to find poor diagnostics and other bugs in our error handling.
+Please tell us if you encounter any breakage, compile-time performance regression, or bad diagnostics. We have not yet spent too much time on error messages for the next-generation trait solver, so we would also appreciate you using this nightly for development to find poor diagnostics and other bugs in our error handling.
 
 If you encounter any issue, take a quick look at [the pinned GitHub issue](https://github.com/rust-lang/rust/issues/160895) to see if the affected crate is already listed, and if not, please open [a new issue](https://github.com/rust-lang/rust/issues/new?template=bug_report.md)! To disable the next-generation trait solver on nightly, you can pass `-Znext-solver=coherence` to `rustc`, use `RUSTFLAGS=-Znext-solver=coherence`, or change your project's [`.cargo/config.toml`](https://doc.rust-lang.org/cargo/reference/config.html) configuration file:
 
@@ -38,8 +38,7 @@ We will go into more detail about the next-generation trait solver, how we got h
 
 ### `impl Trait` handling
 
-The way opaque types (return-position `impl Trait`, but also the unstable [Type Alias Impl Trait and Return Type Notation][RTN]) are handled in the type system has nearly completely changed. This fixes a lot of bugs and edge cases with them and should make their behavior a lot more consistent in general. This change is why the next-generation trait solver is necessary to stabilize TAIT and RTN.
-
+The way opaque types — return-position `impl Trait` (RPIT), but also the unstable [Type Alias Impl Trait (TAIT) and Return Type Notation (RTN)][RTN] — are handled in the type system has nearly completely changed. This fixes a lot of bugs and edge cases with them and should make their behavior a lot more consistent in general. This change is why the next-generation trait solver is necessary to stabilize TAIT and RTN.
 
 The implementation change mostly does not matter for RPIT as we special-cased `impl Trait` from the method signature when type checking the method body. This means the only way to observe the old behavior is via recursive function calls. The following snippet errors with the existing implementation, but compiles with `-Znext-solver` enabled: [godbolt](https://rust.godbolt.org/z/3faWKn4aE)
 
@@ -56,7 +55,7 @@ fn foo(b: bool) -> impl Sized {
 
 ### Associated types in higher-ranked types
 
-The most impactful change is to the way we handle associated types referencing bound variables, i.e., lifetimes from a `for<'a>` binder, for example, the type `for<'a> fn(<T as Trait>::Assoc<'a>)`. While most users don't encounter such types directly, there are widely used crates which do. This change impacts existing code by removing incorrect type inference, such as in [bevy](https://github.com/bevyengine/bevy/pull/18840) and [minijinja](https://github.com/mitsuhiko/minijinja/pull/787).
+The most impactful change is way we handle associated types referencing bound variables, i.e., lifetimes from a `for<'a>` binder, for example, the type `for<'a> fn(<T as Trait>::Assoc<'a>)`. While most users don't encounter such types directly, there are widely used crates which do. This change impacts existing code by removing incorrect type inference, such as in [bevy](https://github.com/bevyengine/bevy/pull/18840) and [minijinja](https://github.com/mitsuhiko/minijinja/pull/787).
 
 It also fixes a bunch of unnecessary errors like in the following example: [godbolt](https://rust.godbolt.org/z/MMsEjTxeE)
 ```rust
