@@ -42,7 +42,7 @@ Prior to Rust 1.96.0, there was a bug in the Rust compiler, which made the follo
 
 ```rust
 let mut x = ManuallyDrop::new(Box::new(1));
-unsafe { ManuallyDrop::drop(&mut x) }
+unsafe { ManuallyDrop::drop(&mut x) };
 let x = x; // UB!
 ```
 
