@@ -28,7 +28,7 @@ Please tell us if you encounter any breakage, compile-time performance regressio
 If you encounter any issue, take a quick look at [the pinned GitHub issue](https://github.com/rust-lang/rust/issues/160895) to see if the affected crate is already listed, and if not, please open [a new issue](https://github.com/rust-lang/rust/issues/new?template=bug_report.md)! To disable the next-generation trait solver on nightly, you can pass `-Znext-solver=coherence` to `rustc`, use `RUSTFLAGS=-Znext-solver=coherence`, or change your project's [`.cargo/config.toml`](https://doc.rust-lang.org/cargo/reference/config.html) configuration file:
 
 ```toml
-[target.x86_64-unknown-linux-gnu]
+[build]
 rustflags = ["-Znext-solver=coherence"]
 ```
 
