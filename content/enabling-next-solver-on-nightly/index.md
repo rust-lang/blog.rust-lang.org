@@ -21,8 +21,6 @@ This is an incredibly big change which results in a non-trivial amount of breaka
 
 Please update to the latest nightly version by using `rustup update nightly` and use it to test your existing projects and libraries.
 
-> ⚠️ While the next-generation trait solver has been enabled on our `main` branch, this change will only be accessible on the nightly channel starting from Saturday 22nd August. You can already test it before then by providing `-Znext-solver=globally` as a command-line argument ⚠️
-
 Please tell us if you encounter any breakage, compile-time performance regression, or bad diagnostics. We have not yet spent too much time on error messages for the next-generation trait solver, so we would also appreciate you using this nightly for development to find poor diagnostics and other bugs in our error handling.
 
 If you encounter any issue, take a quick look at [the pinned GitHub issue](https://github.com/rust-lang/rust/issues/160895) to see if the affected crate is already listed, and if not, please open [a new issue](https://github.com/rust-lang/rust/issues/new?template=bug_report.md)! To disable the next-generation trait solver on nightly, you can pass `-Znext-solver=coherence` to `rustc`, use `RUSTFLAGS=-Znext-solver=coherence`, or change your project's [`.cargo/config.toml`](https://doc.rust-lang.org/cargo/reference/config.html) configuration file:
