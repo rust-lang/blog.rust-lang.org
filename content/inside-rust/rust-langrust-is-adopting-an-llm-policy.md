@@ -146,7 +146,7 @@ Uses in the second category are heavily restricted.
 ### General rules
 
 No one except the author is required to read LLM output unless they choose to:
-LLM output isn't allowed in public docs, PR descriptions, or Github comments unless it's clearly marked;
+LLM output isn't allowed in public docs, PR descriptions, or GitHub comments unless it's clearly marked;
 reviewers aren't required to look at LLM PRs if they don't want to.
 
 No one is required to use LLMs to contribute to `rust-lang/rust`:
