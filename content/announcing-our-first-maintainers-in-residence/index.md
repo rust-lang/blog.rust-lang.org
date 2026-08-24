@@ -53,7 +53,8 @@ And now, without further ado, let's meet our newly funded maintainers!
         <img src="chrisdenton.png" style="width: 200px; margin: 0 20px 20px 0; align-self: flex-start;" />
         <div>
             <div>Chris Denton (<a href="https://github.com/ChrisDenton">@ChrisDenton</a>) is a half-time MiR focusing on the standard library, compiler, Rustup and anything Windows-related.</div>
-            <div style="margin-top: 1em;">He is somewhat of a unicorn, because he is one of the few people in the Project who has deep knowledge of Windows. He will be unblocking other contributors in various Windows use cases, performing refactoring and code reviews and implementing new features across several areas of the Project.</div>
+            <div style="margin-top: 1em;">For the past five years Chris has been bringing his deep knowledge of Windows to help Rust sustain and improve its great cross-platform support. He will be unblocking other contributors in various Windows use cases, performing refactoring and code reviews and implementing new features across several areas of the Project.
+</div>
         </div>
     </div>
 </div>
