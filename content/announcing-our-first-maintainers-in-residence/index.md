@@ -1,5 +1,5 @@
 +++
-path = "9999/12/31/announcing-our-first-maintainers-in-residence"
+path = "2026/08/26/announcing-our-first-maintainers-in-residence"
 title = "Announcing our first Maintainers in Residence"
 authors = ["Lori Lorusso", "Jakub Beránek"]
 
@@ -13,7 +13,9 @@ We are very happy to announce the Rust Project's first round of Maintainers in R
 
 The funding of the Maintainer in Residence (MiR) and Maintainer Grantee roles is possible thanks to generous donations to the Rust Foundation Maintainers Fund (RFMF) from Google, AWS, OpenAI, the Rust Project Leadership Council and also individual sponsors. We also want to thank the people who advocated for maintainer funding within their companies; Tyler Mandry from Google, Niko Matsakis and Jess Izen from AWS and Predrag Gruevski from OpenAI, and also the whole [Rust Leadership Council][leadership-council] and our [funding advisors][funding-advisors-team]. If you would like to help us support even more Rust contributors, consider [donating][gh-sponsors] to RFMF.
 
-Below, you can learn more about the MiR program and how we chose the funded contributors, and also [get to know them](#gen-li-rami3l).
+The Rust Foundation has published a [press release][rf-press-release] and a [blog post][rf-blog-post], where you can learn more about the sponsors and the supported contributors.
+
+Read more below to learn about the MiR program, how we chose the funded contributors, and of course [who they are](#gen-li-rami3l)!
 
 ## Background
 
@@ -146,6 +148,8 @@ margin: 0;
 [funding-page]: https://rust-lang.org/funding/
 [leadership-council]: https://rust-lang.org/governance/teams/leadership-council/
 [gh-sponsors]: https://github.com/sponsors/rustfoundation
+[rf-press-release]: https://rustfoundation.org/media/rust-project-and-rust-foundation-announce-first-maintainers-in-residence/
+[rf-blog-post]: https://rustfoundation.org/media/congratulations-to-the-first-round-of-rust-project-maintainers-in-residence/
 [rfmf-rfc]: https://rust-lang.github.io/rfcs/3931-rfmf-rust-foundation-maintainer-fund.html
 [@rami3l]: https://github.com/rami3l
 [@ChrisDenton]: https://github.com/ChrisDenton
