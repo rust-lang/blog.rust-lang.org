@@ -233,16 +233,18 @@ aren't necessarily "problems with debuggers".
 
 The most commonly reported reason was that it was easier or faster to use logs
 or print debugging to solve problems, reported by a little over 81% of
-respondents. This isn't all that surprising; one would expect a lot of small
-simple problems just don't really need a debugger. It does leave one wondering
-if the user experience could be made convenient enough to dethrone print
-debugging, but it seems hard to beat something so intuitive. This is followed by
-roughly 37% of respondents who write code that Just Works. Fair enough. After
-that, about 26% of respondents indicated that they've decided not to use
-debuggers in situations where the language features they were working with had
-poor support. This is slightly more than issues with standard library types, at
-about 22%, which is slightly more than issues with external library types, at
-about 20%:
+respondents. This could partially be explained by the open responses, which
+featured complaints that debuggers were too difficult to set up and/or use
+(especially on Windows, when dealing with Web Assembly, or in embedded
+contexts) and sentiment suggesting that small and/or simple problems just don't
+really need a debugger. It does leave one wondering if the user experience could
+be made convenient enough to dethrone print debugging, but it seems hard to beat
+something so intuitive. This is followed by roughly 37% of respondents who write
+code that Just Works. Fair enough. After that, about 26% of respondents
+indicated that they've decided not to use debuggers in situations where the
+language features they were working with had poor support. This is slightly more
+than issues with standard library types, at about 22%, which is slightly more
+than issues with external library types, at about 20%:
 
 <!-- Chart when-you-dont-use-a-debugger-why-dont-you start -->
 <div>
