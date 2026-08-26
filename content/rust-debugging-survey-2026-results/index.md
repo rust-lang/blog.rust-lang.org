@@ -1,5 +1,5 @@
 +++
-path = "9999/12/31/rust-debugging-survey-2026-results"
+path = "2026/08/31/rust-debugging-survey-2026-results"
 title = "Rust debugging survey 2026 results"
 authors = ["Sam Kellam"]
 
