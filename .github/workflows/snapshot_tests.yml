@@ -18,7 +18,7 @@ jobs:
         with:
           env-vars: CARGO RUST ZOLA_VERSION
       - name: Install Zola
-        run: cargo install --locked --git https://github.com/getzola/zola --rev ${{ env.ZOLA_VERSION }}
+        run: cargo install --locked --git https://github.com/getzola/zola --rev ${{ env.ZOLA_VERSION }} --debug
 
       - run: git fetch --depth 2
       - run: git checkout origin/main

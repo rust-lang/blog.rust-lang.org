@@ -42,7 +42,9 @@ jobs:
         with:
           env-vars: CARGO RUST ZOLA_VERSION
       - name: Install Zola
-        run: cargo install --locked --git https://github.com/getzola/zola --rev ${{ env.ZOLA_VERSION }}
+        # Installing in release can take >5 minutes (in case the GitHub cache is not primed).
+        # We don't really need the performance, so we prefer faster compilation.
+        run: cargo install --locked --git https://github.com/getzola/zola --rev ${{ env.ZOLA_VERSION }} --debug
 
       - run: zola build
       - run: cp CNAME ./public/
