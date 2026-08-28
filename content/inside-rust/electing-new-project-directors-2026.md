@@ -8,7 +8,7 @@ team = "Leadership Council"
 team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
 +++
 
-Today we are launching the process to elect three Project Directors to the Rust Foundation Board of Directors. This is the fourth round of slots, following from [last year's election](https://blog.rust-lang.org/inside-rust/2025/08/20/electing-new-project-directors-2025/).
+Today we are launching the process to elect two Project Directors to the Rust Foundation Board of Directors. This is the fourth round of slots, following from [last year's election](https://blog.rust-lang.org/inside-rust/2025/08/20/electing-new-project-directors-2025/).
 
 We will briefly explain the goals and procedures here, but this is mostly copy-pasted from [last year's post](https://blog.rust-lang.org/inside-rust/2025/08/20/electing-new-project-directors-2025/) and the [official process documentation][pde-process].
 
