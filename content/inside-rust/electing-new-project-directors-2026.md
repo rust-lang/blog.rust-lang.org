@@ -4,11 +4,11 @@ title = "Electing new Project Directors 2026"
 authors = ["Manish Goregaokar"]
 
 [extra]
-team = "leader"
+team = "Leadership Council"
 team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
 +++
 
-Today we are launching the process to elect three Project Directors to the Rust Foundation Board of Directors. This is the third round of slots, following from [last year's election](https://blog.rust-lang.org/inside-rust/2025/08/20/electing-new-project-directors-2025/).
+Today we are launching the process to elect three Project Directors to the Rust Foundation Board of Directors. This is the fourth round of slots, following from [last year's election](https://blog.rust-lang.org/inside-rust/2025/08/20/electing-new-project-directors-2025/).
 
 We will briefly explain the goals and procedures here, but this is mostly copy-pasted from [last year's post](https://blog.rust-lang.org/inside-rust/2025/08/20/electing-new-project-directors-2025/) and the [official process documentation][pde-process].
 
@@ -18,7 +18,7 @@ We ask all Project members to begin working with their Leadership Council repres
 
 ## What are Project Directors?
 
-The Rust Foundation Board of Directors has five seats reserved for Project Directors. These Project Directors serve as representatives of the Rust Project itself on the Board. Like all directors on the Foundation board, the Project Directors are elected by the entity they represent, which in the case of the Rust Project means they are elected by the Rust Leadership Council. Project Directors serve for a term of two years and will have staggered terms. This year we will appoint three directors and next year we will appoint two directors.
+The Rust Foundation Board of Directors has five seats reserved for Project Directors. These Project Directors serve as representatives of the Rust Project itself on the Board. Like all directors on the Foundation board, the Project Directors are elected by the entity they represent, which in the case of the Rust Project means they are elected by the Rust Leadership Council. Project Directors serve for a term of two years and will have staggered terms. This year we will appoint two directors and next year we will appoint three directors.
 
 See the [role description] document for more details about what is involved in being a Project Director.
 
@@ -42,7 +42,7 @@ The Council will announce the set of nominees by September 22 and the feedback p
 
 ## Election
 
-The Council will meet on October 2 to complete the election process. In this meeting we will discuss each candidate and once we have done this the facilitator will propose a set of three to be the new Project Directors. The facilitator puts this to a vote, and if the Council unanimously agrees with the proposed set of candidates then the process is complete. Otherwise, we will give another opportunity for council members to express their objections and we will continue with another proposal. This process repeats until we find a set of nominees to whom the Council can unanimously consent. The Council will then confirm these nominees through an official vote delivered to the Foundation.
+The Council will meet on October 2 to complete the election process. In this meeting we will discuss each candidate and once we have done this the facilitator will propose a set of two to be the new Project Directors. The facilitator puts this to a vote, and if the Council unanimously agrees with the proposed set of candidates then the process is complete. Otherwise, we will give another opportunity for council members to express their objections and we will continue with another proposal. This process repeats until we find a set of nominees to whom the Council can unanimously consent. The Council will then confirm these nominees through an official vote delivered to the Foundation.
 
 Once this is done, we will announce the new Project Directors. In addition, we will contact each of the nominees, including those who were not elected, to offer feedback. For those who accept feedback we will follow up to tell them a little bit more about what we saw as their strengths and opportunities for growth to help them serve better in similar roles in the future.
 
