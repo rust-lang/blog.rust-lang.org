@@ -1,5 +1,5 @@
 +++
-path = "inside-rust/9999/12/31/electing-new-project-directors-2026"
+path = "inside-rust/2026/08/28/electing-new-project-directors-2026"
 title = "Electing new Project Directors 2026"
 authors = ["Manish Goregaokar"]
 
