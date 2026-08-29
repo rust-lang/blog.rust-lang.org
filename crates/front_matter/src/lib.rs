@@ -283,12 +283,12 @@ The post {post} has abnormal front matter.
             let (front_matter, _) = parse(&content).unwrap();
 
             if front_matter.path.starts_with("9999/12/31") {
+                let post = std::fs::canonicalize(post).unwrap().to_path_buf();
                 panic!(
                     "\n\
-                    The post {slug} has a placeholder publication date.\n\
+                    The post {post:?} has a placeholder publication date.\n\
                     If you're about to publish it, please set it to today.\n\
                     ",
-                    slug = post.file_stem().unwrap().to_str().unwrap(),
                 );
             }
         }
