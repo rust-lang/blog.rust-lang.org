@@ -115,7 +115,9 @@ Seems like we've accidentally created a rite of passage in which a program manag
 
 The content team [has started publishing interviews from RustConf and Kangrejos 2025][youtube-kangrejos] as well.
 
-Apart from that, the team has been producing a series about Rust release changelogs. [Here's the 1.97 episode!][youtube-changelog] Fun fact: I actually met [Chris Biscardi][chris-biscardi] at RustWeek and invited him to a content team meeting about the series. One thing led to another, and Chris ended up joining the team and has been bringing in a lot of valuable content-making experience since! This makes me happy.
+Apart from that, the team has been producing a series about Rust release changelogs. [Here's the 1.97 episode!][youtube-changelog] They're hoping to involve more people from across the Project in future episodes (and other videos), so that maintainers and contributors can talk about their work directly. Be on the lookout for a call for participation if you're interested or know someone who might!
+
+Fun fact: I actually met [Chris Biscardi][chris-biscardi] at RustWeek and invited him to a content team meeting about the changelog series. One thing led to another, and Chris ended up joining the team and has been bringing in a lot of valuable content-making experience since! This makes me happy.
 
 [alice-cecile]: https://github.com/alice-i-cecile
 [bevy]: https://bevy.org/
