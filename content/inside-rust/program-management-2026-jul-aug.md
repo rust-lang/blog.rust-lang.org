@@ -86,7 +86,7 @@ The Goals repository has been renamed to [rust-lang/goals][goals] from the verbo
 
 Triagebot used to ping every [#goals] topic twice a month, which was [incredibly noisy][ping-noise] to anyone following that channel. Many of the goal owners weren't even subscribed to it, so they never received the reminders. [This was finally reworked][ping-rework], and now goal owners receive one private message with an aggregate of all their goals needing updates. Some wanted triagebot to [ping them more often][ping-often], and it's now possible to configure the reporting frequency per goal (weekly, biweekly, or the default of every four weeks). [Let us know][ping-reports] how you like it!
 
-We've set up automatic creation of Zulip topics for [labeled goal proposals][goal-proposals] in [#goals/proposed] so that there's less friction in soliciting team champions and collecting feedback.
+We've set up the automatic creation of Zulip topics for [labeled goal proposals][goal-proposals] in [#goals/proposed] so that there's less friction in soliciting team champions and collecting feedback.
 
 [ping-noise]: https://rust-lang.zulipchat.com/#narrow/channel/478266-goals.2Fmeta/topic/changing.20the.20way.20we.20update/with/610622235
 [ping-rework]: https://github.com/rust-lang/triagebot/pull/2469
@@ -95,9 +95,9 @@ We've set up automatic creation of Zulip topics for [labeled goal proposals][goa
 
 ### Team building
 
-The Goals team now has a [regular meeting][goals-meeting] every Thursday at 14:00 UTC. We use that time to figure out what the program should mean, how it should be implemented, and how we can communicate it better to the various audiences involved.
+The Goals team now has a [regular meeting][goals-meeting] every Thursday at 14:00 UTC. We use that time to figure out what the program should mean, how it should be implemented, and how we can communicate it better to the audiences involved.
 
-If you have any wishes, complaints, or thoughts about the Goals program, please [join the meeting][goals-calendar] or [reach out to us][goals-members]!
+If you have any wishes, complaints, or thoughts about the Goals program, you can [join the meetings][goals-calendar] or [reach out to us][goals-members]!
 
 [goals]: https://github.com/rust-lang/goals
 [goals-web]: https://goals.rust-lang.org
@@ -111,7 +111,7 @@ If you have any wishes, complaints, or thoughts about the Goals program, please 
 
 ## Content
 
-Seems like we've accidentally created a rite of passage in which a program manager has to [anxiously get involved in at least one t-content production][pm-2025-09] :-). I've mentioned before that I got to interview [Alice Cecile][alice-cecile] ([Bevy Engine][bevy]) at RustWeek. This and twelve other interviews are now [available on YouTube][youtube-rustweek], so please check them out!
+Seems like we've accidentally created a rite of passage in which a program manager has to [anxiously get involved in at least one t-content production][pm-2025-09] :-). I've mentioned before that I got to interview [Alice Cecile][alice-cecile] ([Bevy Engine][bevy]) at RustWeek. This and twelve other interviews are now [available on YouTube][youtube-rustweek], so feel free to check them out!
 
 The content team [has started publishing interviews from RustConf and Kangrejos 2025][youtube-kangrejos] as well.
 
@@ -135,7 +135,7 @@ This cycle, Rust for Linux brought up some more interesting feature requests.
 
 One of the topics Rust for Linux [has been tracking][rfl-core-wanted] is _modularization of `core`_. This is the ability to remove parts of the [core standard library][core] that the kernel doesn't need because of semantic differences or duplication. This includes standard atomics, IO, 128-bit numbers, floating-point numbers, and Unicode tables.
 
-There are different ways to support such modularization, each with its own caveats. Perhaps, the most fundamental one is to keep every feature under its own flag, but that requires building the standard library ([see the build-std goal][build-std]) and introduces a combinatorial explosion that's difficult to test. The standard library could also expose a small number of "feature layers" instead, but then it becomes hard to find a partitioning that makes sense for everyone.
+There are different ways to support such modularization, each with its own caveats. Perhaps the most fundamental one is keeping every feature under its own flag, but that requires building the standard library ([see the build-std goal][build-std]) and introduces a combinatorial explosion that's difficult to test. The standard library could also expose a small number of "feature layers" instead, but then it becomes hard to find a partitioning that makes sense for everyone.
 
 Another approach is to define the smallest possible subset of `core` that's needed for the language to work. This subset, tentatively named `lang`, would only include things like [lang items][lang-items] and could lead to a stable alternative to the internal [`#![no_core]` feature][no-core]. For now, that seems most realistic, and the RfL team is willing to experiment with it and possibly develop a proposal. Can we get a Project Goal out of this?
 
