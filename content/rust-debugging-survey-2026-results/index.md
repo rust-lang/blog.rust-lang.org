@@ -369,7 +369,7 @@ survey!
 
 [state-of-rust-2025]: https://blog.rust-lang.org/2026/03/02/2025-State-Of-Rust-Survey-results/#challenges-and-wishes-about-rust
 [rust-debugging-survey]: https://blog.rust-lang.org/2026/02/23/rust-debugging-survey-2026/
-[report]: TODO-LINK-TO-REPORT
+[report]: https://raw.githubusercontent.com/rust-lang/surveys/main/surveys/2026/debugging/report/debugging-survey-2026-report.pdf
 [debugger-attributes]: https://doc.rust-lang.org/reference/attributes/debugger.html
 [ongoing Google Summer of Code project]: https://summerofcode.withgoogle.com/programs/2026/projects/gzkF5BG0
 <!-- TODO: Is this the best link to use for the GSoC project? -->
