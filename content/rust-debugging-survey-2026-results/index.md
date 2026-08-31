@@ -307,8 +307,6 @@ they were aware of and using the `debugger_visualizer` attribute. Nearly 62% of
 respondents indicated that they were library authors who were not aware of this
 attribute:
 
-<!-- TODO: Fix this chart in the script, then consider rewriting this section. -->
-
 <!-- Chart if-you-are-a-library-author-are-you-aware-of-and-using-the-debugger-visualizer-attribute start -->
 <div>
     <div class id="if-you-are-a-library-author-are-you-aware-of-and-using-the-debugger-visualizer-attribute"><noscript>
