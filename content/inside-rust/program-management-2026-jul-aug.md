@@ -1,5 +1,5 @@
 +++
-path = "inside-rust/9999/12/31/program-management-2026-jul-aug"
+path = "inside-rust/2026/08/31/program-management-2026-jul-aug"
 title = "Program management in July–August 2026"
 authors = ["Nurzhan Saken"]
 
