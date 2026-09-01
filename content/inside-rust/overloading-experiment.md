@@ -89,6 +89,7 @@ is well known, and has significant existing interop tooling.
 Here is some Rust code that calls the overloaded C++ `hypot` (hypotenuse) function, using "splat"
 to create corresponding overloads in Rust.
 
+{% raw %}
 ```rust
 #![feature(splat, tuple_trait)]
 #![expect(incomplete_features)]
@@ -141,6 +142,7 @@ fn main() {
     println!("|(2, 3, 6)| = {}", hypot(2.0, 3.0, 6.0));
 }
 ```
+{% endraw %}
 
 This example uses [the cpp crate][cpp-crate] to inline C++ code in a Rust file. A full runnable
 example [is available on GitHub][overloading-examples]. You can also run a minimal Rust-only

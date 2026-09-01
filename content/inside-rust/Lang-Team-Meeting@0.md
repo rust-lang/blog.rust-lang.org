@@ -31,7 +31,7 @@ in good time.
     * created a [zulip] stream (`#wg-ffi-unwind`)
     * preparing an RFC that creates the group official and lays out the roadmap
 * "object safety" group (e.g., [#57893])
-    * no major updates, still iterating on the "in progress" branch 
+    * no major updates, still iterating on the "in progress" branch
 * re-rebalance coherence
     * we have a spreadsheet mapping out all the possible tests
     * we'll fill out the matrix, but probably ready to stabilize 🎉

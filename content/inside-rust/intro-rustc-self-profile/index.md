@@ -206,7 +206,7 @@ Now in the Chromium profiler, if you click on a node, you can see additional dat
 
 [![Image of Chrome profiler details][chrome profiler img2]][chrome profiler img2]
 
-Which shows this `optimized_mir` query was processing the `regex::compile::{{impl}}::new` function body.
+Which shows this `optimized_mir` query was processing the {% raw %}`regex::compile::{{impl}}::new`{% endraw %} function body.
 
 #### Profiling an entire crate graph
 

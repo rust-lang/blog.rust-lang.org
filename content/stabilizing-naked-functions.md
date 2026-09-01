@@ -96,6 +96,7 @@ Naked functions usually get the `extern "C"` calling convention. But often that 
 
 The [`abi_custom`](https://github.com/rust-lang/rust/issues/140829) feature adds `extern "custom"` functions and blocks, which allows us to correctly write code like this example from [compiler-builtins](https://github.com/rust-lang/compiler-builtins/blob/267ae1fa43785448bfb0aebafc4e352c936dd4cf/compiler-builtins/src/arm.rs#L52-L63):
 
+{% raw %}
 ```rust
 #![feature(abi_custom)]
 
@@ -120,6 +121,7 @@ pub unsafe extern "custom" fn __aeabi_idivmod() {
     );
 }
 ```
+{% endraw %}
 
 A consequence of using a custom calling convention is that such functions cannot be called using a Rust call expression; the compiler simply does not know how to generate correct code for such a call. Instead the compiler will error when the program does try to call an `extern "custom"` function, and the only way to execute the function is using inline assembly.
 
