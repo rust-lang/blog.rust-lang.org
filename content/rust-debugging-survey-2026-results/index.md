@@ -280,7 +280,7 @@ We also directly asked respondents which types in the standard library were hard
 to work with, if any. This was an open-response question, and reading through
 the responses, some particularly common complaints were with `enum`s and
 collections, particularly `std::collections::HashMap` and `std::vec::Vec`. This
-is also visible in the wordcloud in the full report.
+is also visible in the wordcloud in the [full report][report].
 
 As the survey was being created, we interviewed a few community members and did
 some brainstorming to think of a handful of pain points people might experience
