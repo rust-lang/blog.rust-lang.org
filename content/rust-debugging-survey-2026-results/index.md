@@ -271,12 +271,10 @@ the responses, some particularly common complaints were with `enum`s and
 collections, particularly `std::collections::HashMap` and `std::vec::Vec`. This
 is also visible in the word cloud in the [full report][report].
 
-As the survey was being created, we interviewed a few community members and did
-some brainstorming to think of a handful of pain points people might experience
-when using debuggers with Rust. We asked respondents to indicate which, if any,
-they have encountered. At slightly over 74%, poor representation of values was
-the most common pain point by a decent margin, followed by being unable to print
-variables at just over 55%:
+We asked respondents to indicate which pain points, if any, they have
+encountered when using debuggers with Rust. At slightly over 74%, poor
+representation of values was the most common pain point by a decent margin,
+followed by being unable to print variables at just over 55%:
 
 <!-- Chart which-of-these-pain-points-have-you-experienced-using-a-debugger-with-rust start -->
 <div>
