@@ -199,17 +199,6 @@ The final bit of insight into how Rustaceans use debuggers is if they are
 debugging programs that use Rust alongside other programming languages. For 44%
 of respondents, the answer is "yes", which is a pretty high number!
 
-<!-- Chart do-you-debug-programs-that-combine-rust-with-other-languages start -->
-<div>
-    <div class="bar-chart" id="do-you-debug-programs-that-combine-rust-with-other-languages"><noscript>
-<img alt="do-you-debug-programs-that-combine-rust-with-other-languages" src="do-you-debug-programs-that-combine-rust-with-other-languages.png"/>
-</noscript></div>
-    <div style="display: flex; margin-bottom: 10px;">
-        <span>[<a href="do-you-debug-programs-that-combine-rust-with-other-languages.png" target="_href_" title="Download chart as PNG">PNG</a>]</span>&nbsp;<span>[<a href="do-you-debug-programs-that-combine-rust-with-other-languages.svg" target="_href_" title="Download chart as SVG">SVG</a>]</span>
-    </div>
-</div>
-<!-- Chart do-you-debug-programs-that-combine-rust-with-other-languages end -->
-
 As for which languages those are, C dominates the scene at a little over 70%,
 followed by C++ at about 43% and Python at about 20%:
 
