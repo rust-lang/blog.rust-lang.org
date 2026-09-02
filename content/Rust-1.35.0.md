@@ -39,7 +39,7 @@ Read on for a few highlights, or see the [detailed release notes][notes] for add
 
 [fn-pr]: https://github.com/rust-lang/rust/pull/55431
 [`FnBox`]: https://doc.rust-lang.org/1.34.0/std/boxed/trait.FnBox.html
-[unsized locals]: https://doc.rust-lang.org/nightly/unstable-book/language-features/unsized-locals.html
+[unsized locals]: https://dev-doc.rust-lang.org/beta/unstable-book/language-features/unsized-locals.html
 
 In Rust 1.35.0, the `FnOnce`, `FnMut`, and the `Fn` traits [are now implemented][fn-pr] for `Box<dyn FnOnce>`,
 `Box<dyn FnMut>`, and `Box<dyn Fn>` respectively.
