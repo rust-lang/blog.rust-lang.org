@@ -343,6 +343,33 @@ are causing issues, knowing that many library authors haven't heard of the
 don't use it either don't know how or don't have time to maintain visualizer
 scripts.
 
+Looking to the future, the survey results have suggested that there are a few
+notable ways we could most significantly improve the debugging experience in
+Rust, such as:
+
+- Fixing the way `enum`s are represented by debuggers so they show actual
+  variants
+- Fixing the way collections (such as `HashMap`) are represented by debuggers so
+  they show their contents, rather than their implementation details
+- Fixing the way string types (such as `String` and `CString`) are represented
+  by debuggers so they render as text, rather than heir implementation details
+- Improving the `async` debugging experience, particularly with stack traces
+- Improving stepping through certain state machines (such as iterators and
+  `Future`s)
+- Providing documentation on basic set up and use of some common debuggers
+
+A common suggestion that could resolve those first three points is to use the
+`Debug` implementation of types to display them in debuggers. There are
+challenges to that approach, such as the fact that the `Debug` implementation is
+not present in the final binary unless it is actually used somewhere in the
+program, but it isn't impossible. Notably, this is already supported by the
+[`BugStalker`] debugger (given the same condition that the `Debug`
+implementation must actually be used), which some of you first heard about from
+the survey! It also appears to have some support for `async`, with plans to
+expand. It would still be ideal for Rust to have improved support with common
+debuggers such as `gdb` and `lldb`, of course, but perhaps consider checking it
+out!
+
 One notable way the debugger experience is currently being improved is through
 the [ongoing Google Summer of Code project] improving how we test debug info and
 visualizer scripts, making it easier to maintain and improve our own visualizer
@@ -358,6 +385,7 @@ survey!
 [rust-debugging-survey]: https://blog.rust-lang.org/2026/02/23/rust-debugging-survey-2026/
 [report]: https://raw.githubusercontent.com/rust-lang/surveys/main/surveys/2026/debugging/report/debugging-survey-2026-report.pdf
 [debugger-attributes]: https://doc.rust-lang.org/reference/attributes/debugger.html
+[`BugStalker`]: https://github.com/godzie44/BugStalker
 [ongoing Google Summer of Code project]: https://summerofcode.withgoogle.com/programs/2026/projects/gzkF5BG0
 <!-- TODO: Is this the best link to use for the GSoC project? -->
 <!-- Chart scripts -->
