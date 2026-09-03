@@ -31,8 +31,7 @@ pointer being loaded, but it is possible for it to be justification for
 arbitrary effects (as is typical for UB).
 
 If you'd like to help us out by testing future releases, you might consider
-running your code's CI or locally using the beta channel (`rustup default beta`) or the nightly
-channel (`rustup default nightly`). Please
+using the beta (`rustup default beta`) and nightly (`rustup default nightly`) channels locally and in your CI. Please
 [report](https://github.com/rust-lang/rust/issues/new/choose) any bugs you
 might come across!
 
