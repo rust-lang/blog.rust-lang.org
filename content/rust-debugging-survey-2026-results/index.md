@@ -366,9 +366,7 @@ program, but it isn't impossible. Notably, this is already supported by the
 [`BugStalker`] debugger (given the same condition that the `Debug`
 implementation must actually be used), which some of you first heard about from
 the survey! It also appears to have some support for `async`, with plans to
-expand. It would still be ideal for Rust to have improved support with common
-debuggers such as `gdb` and `lldb`, of course, but perhaps consider checking it
-out!
+expand.
 
 One notable way the debugger experience is currently being improved is through
 the [ongoing Google Summer of Code project] improving how we test debug info and
