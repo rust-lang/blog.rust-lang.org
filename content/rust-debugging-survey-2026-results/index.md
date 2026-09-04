@@ -352,7 +352,7 @@ Rust, such as:
 - Fixing the way collections (such as `HashMap`) are represented by debuggers so
   they show their contents, rather than their implementation details
 - Fixing the way string types (such as `String` and `CString`) are represented
-  by debuggers so they render as text, rather than heir implementation details
+  by debuggers so they render as text, rather than their implementation details
 - Improving the `async` debugging experience, particularly with stack traces
 - Improving stepping through certain state machines (such as iterators and
   `Future`s)
