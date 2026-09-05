@@ -374,8 +374,6 @@ visualizer scripts, making it easier to maintain and improve our own visualizer
 scripts and general compatibility with visualizer scripts without silent
 breakage or regressions.
 
-<!-- TODO: Citation needed; am I accurately representing the GSoC project? -->
-
 Once again, we'd like to thank everyone who took the time to participate in the
 survey!
 
@@ -385,7 +383,6 @@ survey!
 [debugger-attributes]: https://doc.rust-lang.org/reference/attributes/debugger.html
 [`BugStalker`]: https://github.com/godzie44/BugStalker
 [ongoing Google Summer of Code project]: https://summerofcode.withgoogle.com/programs/2026/projects/gzkF5BG0
-<!-- TODO: Is this the best link to use for the GSoC project? -->
 <!-- Chart scripts -->
 
 <script charset="utf-8" src="/scripts/plotly-basic-2.29.0.min.js"></script>
