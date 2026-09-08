@@ -1,4 +1,4 @@
-{% macro nav(section) -%}
+{% component nav(section) -%}
 <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
   <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
     <a href="{{ config.base_url | safe }}{{ section.path | safe }}">
@@ -24,4 +24,4 @@
     <script src="{{ config.base_url | safe }}/scripts/theme-switch-post.js"></script>
   </ul>
 </nav>
-{% endmacro %}
+{% endcomponent %}
