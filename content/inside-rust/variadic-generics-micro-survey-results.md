@@ -2,7 +2,6 @@
 path = "inside-rust/2026/99/99/variadic-generics-micro-survey-results"
 title = "Variadic Generics Micro Survey results"
 authors = ["Olivier Faure"]
-aliases = ["inside-rust/2026/99/99/variadic-generics-micro-survey-results.html"]
 +++
 
 **TODO: Replace answer lists with charts**
