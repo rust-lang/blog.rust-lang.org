@@ -131,7 +131,7 @@ Some quotes (copied verbatim):
 > Almost any time you implement a trait for a tuple you almost always want to implement it for all tuple sizes. I've usually seen this done with macros up to some fixed size.
 
 > I have a parser combinator library.
-As a parser combinator sugar i had to overload varying number of tuples with their own trait impls. That was annoying
+> As a parser combinator sugar i had to overload varying number of tuples with their own trait impls. That was annoying
 
 > Mainly around querying (sql) with variable number of columns and / or parameters. This is worked around with macros (a la sqlx) but could be more elegant with tuples.
 
