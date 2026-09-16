@@ -47,11 +47,11 @@ It is important to note that all benchmark results presented above measured only
 
 At the start, the nightly toolchain will default to the parallel frontend using only `2` threads. This is a conservative choice that should still allow us to find potential issues.
 
-If you want to test out the performance with different thread counts, you can override the number of threads used for the frontend using the `--frontend-jobs` compiler flag. It can be specified either in the `RUSTFLAGS` environment variable, or you can put it into a [`.cargo/config.toml`][cargo-config] file:
+If you want to test out the performance with different thread counts, you can override the number of threads used for the frontend using the `--jobs-frontend` compiler flag. It can be specified either in the `RUSTFLAGS` environment variable, or you can put it into a [`.cargo/config.toml`][cargo-config] file:
 
 ```toml
 [build]
-rustflags = ["--frontend-jobs=8"]
+rustflags = ["-Zunstable-options", "--jobs-frontend=8"]
 ```
 
 Currently, the performance of the parallel frontend will likely not scale very well above ~8 threads, but you can try it on your workload to test what happens. Note that using higher thread counts will likely lead to higher memory usage of the compiler, and in extreme cases might cause you to run out of memory.
@@ -68,11 +68,11 @@ There are currently some [known issues][parallel-frontend-reproducibility-issues
 
 To reiterate: this is only being enabled on nightly for now. If you are using the stable toolchain, you will still be using the sequential frontend by default.
 
-If you want to disable the parallel frontend on the nightly channel, pass `--frontend-jobs=1` to `rustc`, either via the `RUSTFLAGS` environment variable, or with the [`.cargo/config.toml`][cargo-config] configuration file:
+If you want to disable the parallel frontend on the nightly channel, pass `-Zunstable-options --jobs-frontend=1` to `rustc`, either via the `RUSTFLAGS` environment variable, or with the [`.cargo/config.toml`][cargo-config] configuration file:
 
 ```toml
 [build]
-rustflags = ["--frontend-jobs=1"]
+rustflags = ["-Zunstable-options", "--jobs-frontend=1"]
 ```
 
 If you have to do this for some reason, please do tell us why [on GitHub][tracking-issue] or [on Zulip][zulip-topic]. We would especially like to know about any compiler crashes that you encounter, or the produced binaries not being reproducible when the parallel frontend is enabled.
