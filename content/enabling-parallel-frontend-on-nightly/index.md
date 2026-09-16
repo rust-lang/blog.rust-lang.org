@@ -13,7 +13,7 @@ to find remaining issues in preparation for its stabilization.
 
 ## Context
 
-The Rust compiler has been using multiple threads to compile code in its "backend" part (using LLVM) for a long time. However, its "frontend" part (which includes type checking or borrow checking) has been executing in serial, on a single thread, which of course limits the performance of the compiler. If you are interested in a more in-depth explanation of parallelism in the Rust compiler, see this [previous post][previous-post-backend].
+The Rust compiler has been using multiple threads to compile code in its "backend" part (using LLVM) for a long time. However, its "frontend" part (which includes type checking and borrow checking) has been executing in serial, on a single thread, which of course limits the performance of the compiler. If you are interested in a more in-depth explanation of parallelism in the Rust compiler, see this [previous post][previous-post-backend].
 
 The compiler frontend actually had support for running in parallel for a long time, but it was not enabled by default due to various issues. [Three years ago][previous-post], we made it possible to opt into the parallel frontend on the nightly channel, with the plan to stabilize it in 2024. Clearly, we did not achieve that goal, but work on the parallel frontend was still slowly progressing in the meantime.
 
@@ -90,7 +90,7 @@ If you have to do this for some reason, please do tell us why [on GitHub][tracki
 
 Over the next few months, we will be monitoring GitHub and Zulip for any reported issues about the parallel frontend. Once we have enough confidence that it is working well, and there are no major issues, we would like to move forward and finally stabilize it.
 
-We would also like to improve its performance, and make more things parallel. So far, a lot of the work on the parallel frontend so far has been focused on making it work correctly, rather than tuning its performance down to the last percent. We thus expect that we might still be able to make further performance improvements to it.
+We would also like to improve its performance, and make more things parallel. So far, a lot of the work on the parallel frontend has been focused on making it work correctly, rather than tuning its performance down to the last percent. We thus expect that we might still be able to make further performance improvements to it.
 
 We would also like to make more parts of the frontend actually parallel, as some parts are currently still sequential even if parallelism is enabled. Last year, we had a Google Summer of Code project focused on enabling [parallel macro expansion and name resolution][gsoc-project]. This work is still ongoing, and once completed, it would make the compiler frontend even more parallel.
 
