@@ -43,6 +43,15 @@ What is interesting to note is that enabling the parallel frontend can actually 
 
 It is important to note that all benchmark results presented above measured only the compilation of a single crate. When compiling a whole crate graph, your CPU cores might already be saturated because of backend (LLVM) parallelism or by Cargo compiling multiple crates in parallel. So the final performance effect will vary heavily based on the workload that you are running, and on the number of cores that you have available.
 
+We also benchmarked `cargo check` end-to-end (checking the whole crate graph) on the `cargo` crate itself on a machine with 8 CPU cores. With 8 threads, it resulted in a ~15% end-to-end improvement:
+
+- 36.7s with 1 frontend thread
+- 35.1s with 2 frontend threads
+- 31.9s with 4 frontend threads
+- 30.8s with 8 frontend threads
+
+As can be seen from the results above, when the CPU cores are already saturated with parallel crate compilation and LLVM, the positive effect of the parallel frontend is reduced.
+
 ## Tuning the thread count
 
 At the start, the nightly toolchain will default to the parallel frontend using only `2` threads. This is a conservative choice that should still allow us to find potential issues.
