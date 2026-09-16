@@ -54,7 +54,7 @@ As can be seen from the results above, when the CPU cores are already saturated 
 
 ## Tuning the thread count
 
-At the start, the nightly toolchain will default to the parallel frontend using only `2` threads. This is a conservative choice that should still allow us to find potential issues.
+At the start, the nightly toolchain will default to the parallel frontend using only `2` threads. This is a conservative choice that should still allow us to find potential issues while not increasing memory usage a lot at the same time.
 
 If you want to test out the performance with different thread counts, you can override the number of threads used for the frontend using the `--jobs-frontend` compiler flag. It can be specified either in the `RUSTFLAGS` environment variable, or you can put it into a [`.cargo/config.toml`][cargo-config] file:
 
