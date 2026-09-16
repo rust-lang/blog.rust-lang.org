@@ -91,7 +91,7 @@ We would also like to make more parts of the frontend actually parallel, as some
 [petrochenkov]: https://github.com/petrochenkov
 [gsoc-project]: https://blog.rust-lang.org/2025/11/18/gsoc-2025-results/#improving-the-rustc-parallel-frontend-parallel-macro-expansion
 [zulip-topic]: https://rust-lang.zulipchat.com/#narrow/channel/187679-t-compiler.2Fparallel-rustc/topic/Parallel.20frontend.20issues/with/624551811
-[tracking-issue]: TODO
+[tracking-issue]: https://github.com/rust-lang/rust/issues/113349
 [rustc-perf]: https://github.com/rust-lang/rustc-perf
 [cargo-config]: https://doc.rust-lang.org/cargo/reference/config.html
 [parallel-frontend-reproducibility-issues]: https://github.com/rust-lang/rust/issues?q=state%3Aopen%20label%3AA-reproducibility%20label%3AA-parallel-compiler
