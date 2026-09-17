@@ -20,8 +20,8 @@ either get the target to install something on your computer (such as a
 purportedly missing audio codec) and/or attempt to compromise them using a
 browser 0-day.
 
-These attackers are setting up new but legitimate seeming company profiles —
-including plausible LinkedIn presences — in order to pass cursory inspection.
+These attackers are setting up new but legitimate seeming company profiles,
+including plausible LinkedIn presences, in order to pass cursory inspection.
 
 ## What you can do
 
