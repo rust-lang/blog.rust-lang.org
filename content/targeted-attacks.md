@@ -23,6 +23,13 @@ putting a command on the clipboard).
 These attackers are setting up new but legitimate seeming company profiles,
 including plausible LinkedIn presences, in order to pass cursory inspection.
 
+A [previous attack of this form][grack] targeted many prominent Rust developers in
+June, and, last month, the [`arrayref` crate was briefly compromised through similar
+attacks][arrayref]. At this moment we do not know if these are all a part of the same
+campaign.
+
+This attack style is [known to be used by the DPRK][dprk], and has been [seen outside of the Rust community as well][ashishb].
+
 ## What you can do
 
 Please take extra care in the near term. Be appropriately suspicious of cold
@@ -38,15 +45,6 @@ If you have any concerns about your accounts, please reach out to
 [security@rust-lang.org](mailto:security@rust-lang.org) (for any other
 concerns). We're very happy to help.
 
-## Prior art
-
-We and others have previously written about attacks that we believe are part of
-this campaign. If you want to read more, these blogs are good places to start:
-
-- [Anatomy of a failed (nation-state?) attack][grack]
-- [How DPRK’s Contagious Interview Campaign Targets Developers][dprk]
-- [I was asked to install malware during a fake interview][ashishb]
-- [Supply chain attack on arrayref][arrayref]
 
 [arrayref]: https://blog.rust-lang.org/2026/08/20/supply-chain-attack-on-arrayref/
 [ashishb]: https://ashishb.net/security/contagious-interview/
