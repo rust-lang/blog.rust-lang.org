@@ -37,3 +37,18 @@ If you have any concerns about your accounts, please reach out to
 [help@crates.io](mailto:help@crates.io) (for crates.io account concerns) and/or
 [security@rust-lang.org](mailto:security@rust-lang.org) (for any other
 concerns). We're very happy to help.
+
+## Prior art
+
+We and others have previously written about attacks that we believe are part of
+this campaign. If you want to read more, these blogs are good places to start:
+
+- [Anatomy of a failed (nation-state?) attack][grack]
+- [How DPRK’s Contagious Interview Campaign Targets Developers][dprk]
+- [I was asked to install malware during a fake interview][ashishb]
+- [Supply chain attack on arrayref][arrayref]
+
+[arrayref]: https://blog.rust-lang.org/2026/08/20/supply-chain-attack-on-arrayref/
+[ashishb]: https://ashishb.net/security/contagious-interview/
+[dprk]: https://kudelskisecurity.com/research/how-dprks-contagious-interview-campaign-targets-developers
+[grack]: https://grack.com/blog/2026/06/25/dissecting-a-failed-nation-state-attack/
