@@ -8,7 +8,9 @@ team = "the Compiler team"
 team_url = "https://www.rust-lang.org/governance/teams/compiler#team-compiler"
 +++
 
-With Rust 1.100.0, the Tier 1 with host tools target `i686-pc-windows-msvc` will be demoted to Tier 1 without host tools. Respectively, the Tier 2 with host tools target `i686-pc-windows-gnu` will be demoted to Tier 2 without host tools.
+With Rust 1.100.0, the following changes to 32-bit Windows targets will happen:
+- `i686-pc-windows-msvc` Tier 1 with host tools target will be demoted to Tier 1 without host tools.
+- `i686-pc-windows-gnu` Tier 2 with host tools target will be demoted to Tier 2 without host tools.
 
 Builds of the standard library will continue to be distributed, but host tools such as the compiler will be no longer available. `i686-pc-windows-msvc` as a Tier 1 target still undergoes CI testing.
 
