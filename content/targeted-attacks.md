@@ -16,9 +16,9 @@ in order to use them to publish malware.
 
 A video call is set up for something positive — maybe for a job, maybe for a
 project, maybe for a contract opportunity — and then that's used as a vector to
-either get the target to install something on your computer (such as a
-purportedly missing audio codec) and/or attempt to compromise them using a
-browser 0-day.
+either get the target to install something on their computer (such as a
+purportedly missing audio codec) or execute another command (for example, via
+putting a command on the clipboard).
 
 These attackers are setting up new but legitimate seeming company profiles,
 including plausible LinkedIn presences, in order to pass cursory inspection.
