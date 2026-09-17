@@ -1,14 +1,14 @@
-{% macro headers(title, section) -%}
+{% component headers(title, section) -%}
  <!-- Twitter card -->
  <meta name="twitter:card" content="summary">
  <meta name="twitter:site" content="@rustlang">
  <meta name="twitter:creator" content="@rustlang">
- <meta name="twitter:title" content="{{ macros::escape_hbs(input=title) }}">
+ <meta name="twitter:title" content="{{ <escape_hbs input={title} /> }}">
  <meta name="twitter:description" content="{{ section.description }}">
 <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
 
 <!-- Facebook OpenGraph -->
-<meta property="og:title" content="{{ macros::escape_hbs(input=title) }}" />
+<meta property="og:title" content="{{ <escape_hbs input={title} /> }}" />
 <meta property="og:description" content="{{ section.description }}">
 <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
 <meta property="og:type" content="website" />
@@ -43,4 +43,4 @@
 
 <!-- theme switcher -->
 <script src="{{ config.base_url | safe }}/scripts/theme-switch.js"></script>
-{% endmacro %}
+{% endcomponent %}

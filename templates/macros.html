@@ -1,4 +1,4 @@
-{% macro month_name(num) %}
+{% component month_name(num: integer) %}
     {%- if     num == 1 %}Jan.
     {%- elif num == 2 %}Feb.
     {%- elif num == 3 %}Mar.
@@ -13,16 +13,16 @@
     {%- elif num == 12 %}Dec.
     {%- else %}{{ throw(message="invalid month! " ~ num) }}
     {%- endif %}
-{%- endmacro month_name %}
+{%- endcomponent month_name %}
 
 {#
     The blog templates used to be written in Handlebars, but Tera and Handlebars
     escape HTML differently by default:
     Tera:       &<>"'/
     Handlebars: &<>"'`=
-    To keep the output identical, this macro matches the behavior of Handlebars.
+    To keep the output identical, this component matches the behavior of Handlebars.
 #}
-{% macro escape_hbs(input) -%}
+{% component escape_hbs(input: string) -%}
     {{ input
         | replace(from="&", to="&amp;")
         | replace(from="<", to="&lt;")
@@ -33,11 +33,11 @@
         | replace(from="=", to="&#x3D;")
         | safe
     }}
-{%- endmacro escape_hbs %}
+{%- endcomponent escape_hbs %}
 
-{% macro show_year(year, post_name="Posts") -%}
+{% component show_year(year: integer, post_name: string = "Posts") -%}
       <tr>
         <td class="bn"></td>
         <td class="bn"><h3 class="f0-l f1-m f2-s mt4 mb0">{{ post_name }} in {{ year }}</h3></td>
       </tr>
-{%- endmacro show_year %}
+{%- endcomponent show_year %}
