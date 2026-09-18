@@ -24,6 +24,6 @@ Considering all these things, cross-compiling these targets from a better suppor
 
 ## What Changes?
 
-After Rust 1.100, it will no longer be possible to install toolchains on 32-bit Windows hosts. We recommend cross-compiling from a 64-bit Windows host instead. Other 32-bit platforms that we already provide host tools for are not impacted by this change.
+After Rust 1.100, it will no longer be possible to install toolchains on 32-bit Windows hosts. We recommend cross-compiling from a still-supported host (such as a 64-bit Windows toolchains) instead. Other 32-bit platforms that we already provide host tools for are not impacted by this change.
 
 For more details about these demotions, see [RFC 3999](https://github.com/rust-lang/rfcs/blob/51783df9a76c355de7ceebeae101cba47f8ca463/text/3999-std-only-i686-msvc.md) for `i686-pc-windows-msvc` demotion, and [MCP 1020](https://github.com/rust-lang/compiler-team/issues/1020) for `i686-pc-windows-gnu` demotion.
