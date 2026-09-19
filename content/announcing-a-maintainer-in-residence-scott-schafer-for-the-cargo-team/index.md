@@ -25,7 +25,7 @@ Even though we know that a single full-time maintainer will not completely solve
 ## Introducing Scott Schafer
 
 <aside style="float: right; clear: both; margin-left: 10px;">
-  <img alt="A photo of Gen Li" src="scott.jpg" width="460" style="width: 12em; border: 1px solid white;" />
+  <img alt="A photo of Scott Schafer" src="scott.jpg" width="460" style="width: 12em; border: 1px solid white;" />
 </aside>
 
 We are very happy to welcome Scott Schafer ([@muscraft][muscraft]) into the Maintainer in Residence role! Scott has joined the Cargo team [three years ago][scott-cargo-team-invitation], and apart from working on Cargo, he is also the lead of the Rust [Docker team][docker-team], which prepares official Docker images for every Rust version.
