@@ -45,7 +45,7 @@ While working on my first pull request, I created a lot of weird and broken Git 
 
 It is a bit weird to look back at it today, now that I am helping other contributors make their own Clippy PRs.
 
-Overall, I think that contributing to Clippy is much easier to contribute to it than to add a new feature to the Rust compiler, for example. It is thanks to Clippy's architecture that even though we have over 800 lints, each one of them is standalone, and you can understand most of them just by reading a single Rust file. When you think of a new lint, it's almost guaranteed that someone in the codebase has already had a similar idea to yours, so you can mix and match parts of other lints to make a new creation.
+Overall, I think that contributing to Clippy is much easier than to add a new feature to the Rust compiler, for example. It is thanks to Clippy's architecture that even though we have over 800 lints, each one of them is standalone, and you can understand most of them just by reading a single Rust file. When you think of a new lint, it's almost guaranteed that someone in the codebase has already had a similar idea to yours, so you can mix and match parts of other lints to make a new creation.
 
 **How did you join the Clippy team? Did you have a mentor?**
 
@@ -59,7 +59,7 @@ The thing that keeps me going since then are the people in the Rust Project. It 
 
 There are people reaching out to me, wanting to get started contributing to Clippy. They bring expertise from different sectors, with different personalities, and all are coming together to make a code linter a bit better. I think that it is really great when beginners call out to you to help them solve their problem.
 
-Even without going into mentoring, meeting so many cool people feels great. On the last 2 years, I've been in contact with the Rust-for-Linux team. And I really like that there is a mutual relationship with the Rust for Linux project, having a portion of Linux developers reach to teams at Rust is amazing. I love Linux, I use it every day, and I think it is one of the most important pieces of technology ever created. So seeing that they are adopting Rust fills me with pride. It kind of validates that what we're doing is having a real, positive impact in the world.
+Even without going into mentoring, meeting so many cool people feels great. In the past two years, I've been in contact with the [Rust for Linux][rfl] team. And I really like that there is a mutual relationship with the Rust for Linux project, having a portion of Linux developers reach to teams at Rust is amazing. I love Linux, I use it every day, and I think it is one of the most important pieces of technology ever created. So seeing that they are adopting Rust fills me with pride. It kind of validates that what we're doing is having a real, positive impact in the world.
 
 **What are you working on in Rust at the moment?**
 
