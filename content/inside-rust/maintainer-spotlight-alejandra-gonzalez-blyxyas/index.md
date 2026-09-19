@@ -25,7 +25,7 @@ We interviewed Alejandra to find out how she started contributing to Rust, and w
 
 Hi, I am Alejandra González, also known as `@blyxyas`. I was born breathing the mediterranean sea brew, or, in other words, I am from Spain. When I was around thirteen, I thought that I should learn something that will pay off in the long run, and what better than programming?
 
-I started with JavaScript and web development, but it didn't feel like my thing, because I like to make fast things, and this technology didn't allow me to do that. I also tried C++ for a while, but didn't like it very much. Then I discovered Rust through a YouTube channel, at around version 1.45, and I was immediately hooked. The borrow checker, traits, macros, it was mind-bending at first, and it felt great.
+I started with JavaScript and web development, but it didn't feel like my thing, because I like to make fast things, and this technology didn't allow me to do that. I also tried C++ for a while, but didn't like it very much. Then I discovered Rust through a YouTube channel, on the archaic version 1.45, and I was immediately hooked. The borrow checker, traits, macros, it was mind-bending at first, and it felt great.
 
 **How did you learn Rust?**
 
@@ -59,19 +59,21 @@ The thing that keeps me going since then are the people in the Rust Project. It 
 
 There are people reaching out to me, wanting to get started contributing to Clippy. They bring expertise from different sectors, with different personalities, and all are coming together to make a code linter a bit better. I think that it is really great when beginners call out to you to help them solve their problem.
 
-I am also mentoring some contributors from the [Rust for Linux][rfl] project, who want to create lints specific to Rust code in the Linux kernel. I really like that there is a mutual relationship with the Rust for Linux project, having a portion of Linux developers reach out to me and to the Clippy and other Rust teams is amazing. I love Linux, I use it every day, and I think it is one of the most important pieces of technology ever created. So seeing that they are adopting Rust fills me with pride.
+Even without going into mentoring, meeting so many cool people feels great. On the last 2 years, I've been in contact with the Rust-for-Linux team. And I really like that there is a mutual relationship with the Rust for Linux project, having a portion of Linux developers reach to teams at Rust is amazing. I love Linux, I use it every day, and I think it is one of the most important pieces of technology ever created. So seeing that they are adopting Rust fills me with pride. It kind of validates that what we're doing is having a real, positive impact in the world.
 
 **What are you working on in Rust at the moment?**
 
-My primary goal is to improve the performance of the Rust compiler and Clippy. Apart from Clippy, I am currently working on a [Project Goal][project-goal] which is focused on improving the incremental machine inside in the compiler, as to reduce useless recompilations, and make it overall faster. It's a big task and an exciting plan, but it takes a lot of work and cross-team discussions to make progress in this area.
+My primary goal is to improve the performance of the Rust compiler and Clippy. We've talked a lot about Clippy, so apart from it I'm currently working on a [Project Goal][project-goal] which is focused on improving the incremental machinary inside in the compiler, as to reduce useless recompilations, and make it overall faster. It's a big task and an exciting plan, but it takes a lot of work and cross-team discussions to make progress in this area.
+
+It's both much easier and much harder than you think.
 
 **Why are you interested in improving performance?**
 
-When I started programming, I had a really slow computer, with a Pentium 4 CPU, so my hardware was extremely underpowered for the things I wanted to do. Because of the money I had available, I was limited to the things I could achieve.
+When I started programming, I had a really slow computer, with the (in)famous Pentium 4 CPU, so my hardware was extremely underpowered for the things I wanted to do. Simply because of the money I had available, I was limited to the things I could achieve.
 
-I find that horrible, because we are essentially gate-keeping a language that has turned into a very important technology in recent years, to people who can afford powerful hardware. I want people to not have to spend their whole fortune to get a computer powerful enough for programming in Rust. It would be wonderful if even a Raspberry Pi could compile a whole Rust workspace in less than a minute. But that is certainly not currently possible.
+Today, I find that horrible, because we are essentially gate-keeping a language that has turned into a very important technology in recent years, to people who can afford powerful hardware. I want people to not have to spend their whole fortune to get a computer powerful enough for programming in Rust.  The day that a Raspberry Pi could compile a whole Rust workspace in less than a minute, that day I can retire with a clean conscience (and go improve performance at Zig). But that is certainly not currently possible.
 
-And also there is the whole aspect of not killing our planet as fast by producing more performant software.
+And also there is the whole aspect of not killing our planet as fast by producing more performant software. I fundamentally think that we are not entitled to kill the planet just to further our technology, without thinking about the impact.
 
 **You recently became one of the first Maintainers in Residence. How does that feel?**
 
@@ -81,7 +83,7 @@ Being a [Maintainer in Residence][mir-announcement] means having financial suppo
 
 Before, whenever I was doing maintenance, I always had this doubt: should I do something else with my life? Should I get a boring office job and work in a corporate environment, or maybe go back to studying? Now I don't have to worry about that, which really helped reshape my life. I live in a medium-sized town in Spain, so the help that the MiR program provides is huge in comparison to my expenses. It completely takes off that anxiety and those doubts. For now, I'm able to do what I love, and I have no words to describe how great that feels.
 
-That being said, I also have to remind me that it is okay not to work *all the time*. Sometimes, I have anxiety and insecurity about the value I bring to Rust and the people and companies funding me. To combat that, I really like this quote: "You are able to take a break, and Rust will not break without you."
+That being said, I also have to remind me that it is okay not to work *all the time*. Sometimes, I'm insecure about the value I bring to Rust and the people and companies funding me. To combat that, I really like this quote: "You are able to take a break, and Rust will not break without you."
 
 **Would you like to share anything else with the Rust community?**
 
