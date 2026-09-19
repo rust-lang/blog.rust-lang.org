@@ -63,7 +63,7 @@ Even without going into mentoring, meeting so many cool people feels great. On t
 
 **What are you working on in Rust at the moment?**
 
-My primary goal is to improve the performance of the Rust compiler and Clippy. We've talked a lot about Clippy, so apart from it I'm currently working on a [Project Goal][project-goal] which is focused on improving the incremental machinary inside in the compiler, as to reduce useless recompilations, and make it overall faster. It's a big task and an exciting plan, but it takes a lot of work and cross-team discussions to make progress in this area.
+My primary goal is to improve the performance of the Rust compiler and Clippy. We've talked a lot about Clippy, so apart from it I'm currently working on a [Project Goal][project-goal] which is focused on improving the incremental machinery inside in the compiler, as to reduce useless recompilations, and make it overall faster. It's a big task and an exciting plan, but it takes a lot of work and cross-team discussions to make progress in this area.
 
 It's both much easier and much harder than you think.
 
