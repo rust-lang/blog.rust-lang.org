@@ -163,7 +163,7 @@ A few answers mentioned implementing the macro workaround for tuples up to a giv
 
 The most interesting answers are people who explicitly mentioned they gave up on a feature or an approach because of the lack of variadics.
 
-> These days it's more about the opportunity loss: I know this is impossible, so I don't even think about reaching out for tuples of items implementing the same trait. I'm sure I've written situations where I had to use `Vec<Box<dyn Trait>>` not because I *wanted* boxed elements, but because the more natural thing (tuples of dierently-typed values all implementing a single trait of arbitrary length) doesn't exist.
+> These days it's more about the opportunity loss: I know this is impossible, so I don't even think about reaching out for tuples of items implementing the same trait. I'm sure I've written situations where I had to use `Vec<Box<dyn Trait>>` not because I *wanted* boxed elements, but because the more natural thing (tuples of differently-typed values all implementing a single trait of arbitrary length) doesn't exist.
 
 > Sometimes I have also wanted to implement some crate-local trait for tuples but have found it too cumbersome due to the necessity to use a macro to do it, so I never bothered, even though I sort of wanted to.
 
