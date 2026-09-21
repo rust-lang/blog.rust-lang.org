@@ -1,6 +1,6 @@
 +++
 path = "2026/09/21/github-actions-leaking-secrets-when-miri-output-is-cached"
-title = "GitHub Actions leaking secrets when miri output is cached"
+title = "GitHub Actions leaking secrets when Miri output is cached"
 authors = ["Manish Goregaokar"]
 
 [extra]
@@ -23,13 +23,13 @@ PR CI can be triggered by anyone who can open PRs on your repository. GitHub req
 
 GitHub sometimes hides overwritten commits in its UI, making this kind of attack harder to detect. CI run logs and overwritten commits are also deleted after a few months.
 
-When `cargo miri` is invoked, miri needs to retain build-relevant environment variables between runs[^1]. The current code to do so achieves this by storing [all environment variables to `target/`](https://github.com/rust-lang/miri/blob/165a9c3c96f0f4e6232278e62cb64648215bbc37/cargo-miri/src/util.rs#L40-L42). This, of course, persists when `target/` is cached. 
+When `cargo miri` is invoked, Miri needs to retain build-relevant environment variables between runs[^1]. The current code to do so achieves this by storing [all environment variables to `target/`](https://github.com/rust-lang/miri/blob/165a9c3c96f0f4e6232278e62cb64648215bbc37/cargo-miri/src/util.rs#L40-L42). This, of course, persists when `target/` is cached. 
 
 If your environment contained secrets, these can now be accessed by PRs via the cache.
  
 ## Our fix
 
-Our [short term fix][miri-fix] for this is to make miri only preserve `CARGO_*` environment variables (excepting `CARGO_*_TOKEN`) and `OUT_DIR`. In the longer term, miri and cargo may figure out better ways to inform miri of the relevant list of environment variables. Note that this patch may not be available on nightly yet.
+Our [short term fix][miri-fix] for this is to make Miri only preserve `CARGO_*` environment variables (excepting `CARGO_*_TOKEN`) and `OUT_DIR`. In the longer term, Miri and cargo may figure out better ways to inform Miri of the relevant list of environment variables. Note that this patch may not be available on nightly yet.
 
 We also performed an ecosystem scan of GitHub repositories and identified 1 repository with this issue and 7 repositories that do not appear to be vulnerable but should be cautious anyway. We have reached out to those maintainers.
 
@@ -38,7 +38,7 @@ We also performed an ecosystem scan of GitHub repositories and identified 1 repo
 
 ## Am I affected?
 
-It is likely that our scan was imperfect, so we recommend you check your own GitHub Actions setups if you run miri.
+It is likely that our scan was imperfect, so we recommend you check your own GitHub Actions setups if you run Miri.
 
 You are vulnerable if:
 
@@ -52,9 +52,9 @@ You are vulnerable if:
 
 Possible quick fixes include:
 
- * Disabling cache for that job
- * Scoping secrets to steps in that job that do not call miri
- * Temporarily disabling miri.
+ * Disabling cache for that job.
+ * Scoping secrets to steps in that job that do not call Miri.
+ * Temporarily disabling Miri.
 
 Once done, [please clear the cache](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manage-caches#deleting-cache-entries). Consider rotating any secrets that might have leaked.
 
