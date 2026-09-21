@@ -78,6 +78,6 @@ Thanks to [Predrag Gruevski](https://github.com/obi1kenobi) of OpenAI for report
 Issue triage and remediation was performed by Manish Goregaokar, Ralf Jung, Ben Kimock, Weihang Lo, Jacob Finkelman, Walter Pearce, Josh Stone, and Mark Rousskov.
 
 
-[^1]: Miri is invoked multiple times by `cargo miri`  for complicated reasons
+[^1]: Miri is invoked multiple times by `cargo miri` for complicated reasons
 [^2]: In theory it could come up with build scripts reading from the network
 
