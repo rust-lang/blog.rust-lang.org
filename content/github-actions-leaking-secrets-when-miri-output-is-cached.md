@@ -21,6 +21,8 @@ GitHub Actions makes it possible to cache directories between runs. Typical setu
 
 PR CI can be triggered by anyone who can open PRs on your repository. GitHub requires maintainer approval for the *first* PR, but future PRs will rerun CI on every push. Anyone who has previously landed a change can trigger a CI run extracting information from cached `target/` and then cover their tracks by pushing a second commit to the PR.
 
+GitHub sometimes hides overwritten commits in its UI, making this kind of attack harder to detect. CI run logs and overwritten commits are also deleted after a few months.
+
 When `cargo miri` is invoked, miri needs to retain build-relevant environment variables between runs[^1]. The current code to do so achieves this by storing [all environment variables to `target/`](https://github.com/rust-lang/miri/blob/165a9c3c96f0f4e6232278e62cb64648215bbc37/cargo-miri/src/util.rs#L40-L42). This, of course, persists when `target/` is cached. 
 
 If your environment contained secrets, these can now be accessed by PRs via the cache.
