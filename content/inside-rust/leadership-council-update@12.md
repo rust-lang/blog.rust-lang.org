@@ -1,7 +1,7 @@
 +++
 path = "inside-rust/2026/09/25/leadership-council-update"
 title = "Leadership Council update — September 2026"
-authors = ["Jaku Beránek"]
+authors = ["Jakub Beránek"]
 
 [extra]
 team = "Leadership Council"
@@ -23,7 +23,7 @@ The election process started in August, and facilitators of the four teams worke
 - Jakub Beránek ([@kobzol][kobzol]) will represent the Infrastructure team
 - TODO will represent the Language team
 - TODO will represent the Library team
-- TODO will represent the Moderation team
+- Oli Scherer ([@oli-obk][oli-obk]) will represent the Moderation team
 
 We welcome them to the Leadership Council!
 
@@ -31,6 +31,7 @@ We welcome them to the Leadership Council!
 [lc-election-announcement-post]: https://blog.rust-lang.org/inside-rust/2026/08/18/leadership-council-repr-selection/
 [lc-election-results-post]: TODO
 [kobzol]: https://github.com/kobzol
+[oli-obk]: https://github.com/oli-obk
 
 ### Project Director Elections
 
