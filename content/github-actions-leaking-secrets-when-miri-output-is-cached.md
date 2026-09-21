@@ -61,7 +61,7 @@ Once done, [please clear the cache](https://docs.github.com/en/actions/how-tos/m
 The miri release in the upcoming nightly (DATE) will no longer have this problem.
 
 
-**Even if you do not run miri** we would recommend you ensure that secrets are unavailable to jobs that can influence the content of public caches, since few tools are written under the assumption that the environment contains secrets that must not be leaked to the file system.
+**Even if you do not run miri** ensure jobs that can write to public caches do not have access to secrets. Many tools do not have special handling for secrets, and assume the entire environment can be written to the filesystem.
 
 ## Threat model
 
