@@ -58,7 +58,7 @@ Possible quick fixes include:
 
 Once done, [please clear the cache](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manage-caches#deleting-cache-entries). Consider rotating any secrets that might have leaked.
 
-The Miri release in the upcoming nightly (DATE) will no longer have this problem.
+The Miri release in the upcoming nightly (2026-09-22) will no longer have this problem.
 
 
 **Even if you do not run Miri,** ensure jobs that can write to public caches do not have access to secrets. Many tools do not have special handling for secrets, and assume the entire environment can be written to the filesystem.
