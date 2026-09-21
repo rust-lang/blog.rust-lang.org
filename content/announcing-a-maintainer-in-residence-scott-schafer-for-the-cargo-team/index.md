@@ -1,5 +1,5 @@
 +++
-path = "2026/09/28/announcing-a-maintainer-in-residence-scott-schafer-for-the-cargo-team"
+path = "2026/09/22/announcing-a-maintainer-in-residence-scott-schafer-for-the-cargo-team"
 title = "Announcing a Maintainer in Residence: Scott Schafer for the Cargo team"
 authors = ["Jakub Beránek"]
 
