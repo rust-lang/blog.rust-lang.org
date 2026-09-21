@@ -36,7 +36,7 @@ Everyone we talked about was very excited about Scott becoming a Cargo Maintaine
 
 Here is what Scott thinks about it:
 
-> TODO: quote
+> I am incredibly excited to work on Cargo full-time! There have been so many things that I wish I could've worked on over the years, that I will now be able to get to. I hope that my efforts will bring Cargo into a more maintainable state.
 
 ## Conclusion
 
