@@ -73,7 +73,8 @@ Cargo/Miri/Rust does not guarantee that environment variables will be safe from 
 
 ## Acknowledgements
 
-Thanks to [Predrag Gruevski](https://github.com/obi1kenobi) of OpenAI for reporting this issue to us.
+Thanks to [Predrag Gruevski](https://github.com/obi1kenobi) of OpenAI for reporting this issue to us. Furthermore, the ecosystem scan was performed using Codex access and credits donated by OpenAI, which we also thank them for.
+
 
 Issue triage and remediation was performed by Manish Goregaokar, Ralf Jung, Ben Kimock, Weihang Lo, Jacob Finkelman, Walter Pearce, Josh Stone, and Mark Rousskov.
 
