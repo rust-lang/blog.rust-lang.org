@@ -56,8 +56,8 @@ non-"C" ABIs, which must be written via inline assembly.
 ### Layout information from raw pointers
 
 This release settles the safety requirements for retrieving the size and
-alignment on raw pointers to both Sized (trivially safe, already possible on
-stable) and non-Sized types.
+alignment on raw pointers to both `Sized` (trivially safe, already possible on
+stable) and non-`Sized` types.
 
 This is done by stabilizing three functions:
 
