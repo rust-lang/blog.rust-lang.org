@@ -1,7 +1,7 @@
 +++
 path = "9999/12/31/demoting-i686-windows-targets-to-std-only"
 title = "Demoting i686 Windows targets to std-only"
-authors = ["Mateusz Mikuła"]
+authors = ["Mateusz Mikuła", "Ralf Jung"]
 
 [extra]
 team = "the Compiler team"
