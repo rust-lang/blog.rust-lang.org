@@ -27,7 +27,7 @@ The September representative selections have completed. Here are the results:
 
 We welcome Pete and Mark to the Leadership Council!
 
-We would also like to thank our outgoing representatives [Travis Cross][travis-cross] and [Josh Triplett][josh-triplett] for their time on the Council. We appreciate your help and support!
+We would also like to thank our outgoing representatives [TC][] and [Josh Triplett][josh-triplett] for their time on the Council. We appreciate your help and support!
 
 Thanks to everyone who participated in the process! The next representative selections will be in March 2027 for the other half of the Council.
 
@@ -38,7 +38,7 @@ Thanks to everyone who participated in the process! The next representative sele
 [pete-levasseur]: https://github.com/PLeVasseur
 [kobzol]: https://github.com/kobzol
 [oli-obk]: https://github.com/oli-obk
-[travis-cross]: https://github.com/traviscross
+[TC]: https://github.com/traviscross
 [josh-triplett]: https://github.com/joshtriplett
 
 ### Project Director Elections
