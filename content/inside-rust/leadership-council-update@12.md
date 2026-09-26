@@ -1,5 +1,5 @@
 +++
-path = "inside-rust/2026/09/25/leadership-council-update"
+path = "inside-rust/2026/09/28/leadership-council-update"
 title = "Leadership Council update — September 2026"
 authors = ["Jakub Beránek"]
 
@@ -27,13 +27,12 @@ The September representative selections have completed. Here are the results:
 
 We welcome Pete and Mark to the Leadership Council!
 
-We would also like to thank our outgoing representatives [TC][] and [Josh Triplett][josh-triplett] for their time on the Council. We appreciate your help and support!
+We would also like to thank our outgoing representatives [TC] and [Josh Triplett][josh-triplett] for their time on the Council. We appreciate your help and support!
 
 Thanks to everyone who participated in the process! The next representative selections will be in March 2027 for the other half of the Council.
 
 [issue-321]: https://github.com/rust-lang/leadership-council/issues/321
 [lc-election-announcement-post]: https://blog.rust-lang.org/inside-rust/2026/08/18/leadership-council-repr-selection/
-[lc-election-results-post]: TODO
 [mark-simulacrum]: http://github.com/Mark-Simulacrum
 [pete-levasseur]: https://github.com/PLeVasseur
 [kobzol]: https://github.com/kobzol
