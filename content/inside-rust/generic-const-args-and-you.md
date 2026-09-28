@@ -82,7 +82,7 @@ use core::gca;
 fn accepts_arrays<const N: [usize; 2]>() {}
 
 fn example<const N1: usize>() {
-    accepts_tuple::<gca!([N1, 12])>();
+    accepts_arrays::<gca!([N1, 12])>();
 }
 ```
 
@@ -106,7 +106,7 @@ fn accepts_arrays<const N: [usize; 2]>() {}
 
 fn example<const N1: usize>() {
     // currently disallowed :(
-    accepts_tuple::<gca!([N1; 2])>();
+    accepts_arrays::<gca!([N1; 2])>();
 }
 ```
 
