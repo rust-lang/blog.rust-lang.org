@@ -10,11 +10,11 @@ team_url = "https://rust-lang.org/governance/teams/lang/#team-project-const-gene
 
 # Generic Const Args and You
 
-Back in June of 2024 at RustFest Zürich, the Const Generics project group first discussed a new design for supporting uses of generic parameters in const generic arguments. Since then, we've continued to refine the initial design and have implemented the new design as a family of features dubbed "Generic Const Arguments" (GCA for short).
+Back in June of 2024 at RustFest Zürich, the Const Generics project group first discussed a new design for supporting more complex uses of generic parameters in Const Generics. Since then, we've continued to refine the initial design and have implemented the new design as a family of features dubbed "Generic Const Arguments" (GCA for short).
 
 These features are intended to replace the existing `generic_const_exprs` feature which has existed in some form or another since `min_const_generics` was stabilized back in 2021. Even though GCA obviates `generic_const_exprs` it was still incredibly valuable to have invested the time into it that we did as the design and implementation of GCA was informed quite significantly by `generic_const_exprs`.
 
-Each feature in the GCA family introduces support for a specific set of expressions to the type system. This post will go over all of the features part of the GCA family and explain their design and how to use them.
+Each feature in the GCA family introduces support for a specific set of expressions to be used in Const Generics with generic parameters. This post will go over all of the features part of the GCA family and explain their design and how to use them.
 
 ---
 
@@ -26,7 +26,9 @@ Finally there have been a tonne of other people who have made contributions to g
 
 ## What is GCA
 
-Generic Const Arguments is a family of features introducing support for more kinds of expressions to Const Generics. For example, the `gca_adts` feature adds support for Struct Expressions to Const Generics:
+On stable, only generic parameters by themselves (e.g. `{ N }`) or fully concrete constants (e.g. `{ 1 + 1 }`) are supported by Const Generics. It's not possible to have arrays like `[u8; T::NUM_BYTES]` or `[u8; N + 1]`. This limitation prevents a lot of useful abstractions and pushes users to rely on the typenum crate instead.
+
+Generic Const Arguments is a family of features introducing support for more kinds of expressions involving generic parameters to Const Generics. For example, the `gca_adts` feature adds support for Struct Expressions involving generic parameters to Const Generics:
 ```rust
 #![feature(adt_const_params, gca_adts)]
 use core::gca;
@@ -38,6 +40,8 @@ type BarWrapper<const N: usize> = Bar<gca!(Foo { field: N })>;
 ```
 
 In this example the `gca!(Foo { field: N })` is the new functionality introduced by `gca_adts`. The `adt_const_params` feature is separate and instead allows defining the `const N: Foo` generic parameter.
+
+On stable the const argument `Foo { field: N }` would be disallowed as using the generic parameter `N` is not allowed in const generics other than as a standalone usage such as `Bar<{ N }>`.
 
 All GCA features require any newly supported expressions to be written inside of a `gca!` macro call. The `gca_macroless_*` features lift this restriction and will be talked more about later, as well as why we have this restriction in the first place.
 
