@@ -33,11 +33,11 @@ use core::gca;
 
 /* some details omitted */
 
-struct Bar<const N: Struct>;
-type BarWrapper<const N: usize> = Bar<gca!(Struct { field: N })>;
+struct Bar<const N: Foo>;
+type BarWrapper<const N: usize> = Bar<gca!(Foo { field: N })>;
 ```
 
-In this example the `gca!(Struct { field: N })` is the new functionality introduced by `gca_adts`. The `adt_const_params` feature is separate and instead allows defining the `const N: Struct` generic parameter.
+In this example the `gca!(Foo { field: N })` is the new functionality introduced by `gca_adts`. The `adt_const_params` feature is separate and instead allows defining the `const N: Foo` generic parameter.
 
 All GCA features require any newly supported expressions to be written inside of a `gca!` macro call. The `gca_macroless_*` features lift this restriction and will be talked more about later, as well as why we have this restriction in the first place.
 
@@ -189,7 +189,7 @@ fn make_dyn<const N: usize, T: Trait<ASSOC = { N }>>(
 }
 ```
 
-On stable, the above example would fail to compile for two reasons. Firstly, unlike associated types we don't support bounding associated constants (e.g. `T: Trait<ASSOC = { N }`). Secondly, unlike associated types, we don't allow trait objects for traits which have associated consts. With `gca_const_items` enabled both of these are supported.
+On stable, the above example would fail to compile for two reasons. Firstly, unlike associated types we don't support bounding associated constants (e.g. `T: Trait<ASSOC = { N }>`). Secondly, unlike associated types, we don't allow trait objects for traits which have associated consts. With `gca_const_items` enabled both of these are supported.
 
 ### Minimal Const Item Generic Const Args
 
@@ -222,7 +222,7 @@ trait Trait<const N: usize> {
     const ASSOC: usize;
 }
 
-impl<const N: usize> Trait<N> {
+impl<const N: usize> Trait<N> for () {
     // Not OK! not a `gca!(..)` expression
     const ASSOC: usize = N;
     
@@ -233,7 +233,7 @@ impl<const N: usize> Trait<N> {
 
 Requiring all const items in the type system to be defined as a `gca!(..)` expression allows us to limit the expressiveness of Const Generics in some desirable ways.
 
-For example, without the full `gca_const_items` feature it is not (at the time of writing) possible to get a post-mono error from Const Generics, however it would be with `gca_const_items`. With `gca_min_const_items` we're able to retain this property at the cost of expressiveness.
+For example, `gca_const_items` introduces the chance of post-mono errors coming from Const Generics, something which is (at the time of writing) not otherwise possible when using Const Generics. With `gca_min_const_items`, we exclude the aspects of `gca_const_items` which can cause these errors, at the cost of expressiveness.
 
 As another example, the full `gca_const_items` feature can have quite confusing errors where two constants are considered unequal even though we as humans can tell that they're obviously equal. With `gca_min_const_items` there are fairly straight forward rules for determining when two constants are equal without any big surprises.
 
@@ -280,7 +280,7 @@ trait Trait {
 
 impl<const N: usize> Trait for [u8; N] {
     // OK even without an explicit `gca!(..)`
-    const ASSOC: usisze = N;
+    const ASSOC: usize = N;
 }
 ```
 
