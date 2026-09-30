@@ -65,12 +65,6 @@ This is done by stabilizing three functions:
 - [`mem::size_of_val_raw`](https://doc.rust-lang.org/stable/core/mem/fn.size_of_val_raw.html)
 - [`mem::align_of_val_raw`](https://doc.rust-lang.org/stable/core/mem/fn.align_of_val_raw.html)
 
-TODO: Maybe we can come up with more to say here? I think the actual meaningful
-thing here is validity rules on wide pointers
-(https://doc.rust-lang.org/nightly/reference/behavior-considered-undefined.html#r-undefined.validity.wide),
-which I think were not previously directly exposed in std but documented in the
-reference a while back?
-
 ### Recommend against round-trip unleaking after `Box::leak`
 
 While there are no changes to the language semantics in Rust 1.99, we have
@@ -87,35 +81,27 @@ This guidance also applies to other `leak` functions in the standard library.
 
 ### Stabilized APIs
 
-TODO: To be updated (uplifted in current form from https://github.com/rust-lang/rust/issues/162306):
-
-- [Implement `IntoIterator` for `&mut Box<[T; N], A>`, `&Box<[T; N]>` and `Box<[T; N]>`](https://github.com/rust-lang/rust/pull/134021)
-  [:pencil:](https://github.com/rust-lang/rust/issues/153661)
+- [`IntoIterator` for `Box<[T; N]>`](https://doc.rust-lang.org/stable/std/iter/trait.IntoIterator.html#impl-IntoIterator-for-Box%3C%5BT;+N%5D,+A%3E)
+- [`IntoIterator` for `&Box<[T; N]>`](https://doc.rust-lang.org/stable/std/iter/trait.IntoIterator.html#impl-IntoIterator-for-%26Box%3C%5BT;+N%5D,+A%3E)
+- [`IntoIterator` for `&mut Box<[T; N]>`](https://doc.rust-lang.org/stable/std/iter/trait.IntoIterator.html#impl-IntoIterator-for-%26mut+Box%3C%5BT;+N%5D,+A%3E)
 - [`VecDeque::retain_back`](https://doc.rust-lang.org/stable/std/collections/struct.VecDeque.html#method.retain_back)
-  [:pencil:](https://github.com/rust-lang/rust/issues/156329)
-- [`Step::forward_overflowing`](https://doc.rust-lang.org/stable/std/iter/trait.Step.html#tymethod.forward_overflowing)
-- [`Step::backward_overflowing`](https://doc.rust-lang.org/stable/std/iter/trait.Step.html#tymethod.backward_overflowing)
-  [:pencil:](https://github.com/rust-lang/rust/issues/155633)
+- [`core::ffi::VaList`](https://doc.rust-lang.org/stable/core/ffi/struct.VaList.html)
 - [`Box::into_non_null`](https://doc.rust-lang.org/stable/std/boxed/struct.Box.html#method.into_non_null)
 - [`Box::from_non_null`](https://doc.rust-lang.org/stable/std/boxed/struct.Box.html#method.from_non_null)
 - [`Vec::into_parts`](https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#method.into_parts)
 - [`Vec::from_parts`](https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#method.from_parts)
-  [:pencil:](https://github.com/rust-lang/rust/issues/159851)
 - [`core::mem::size_of_val_raw`](https://doc.rust-lang.org/stable/core/mem/fn.size_of_val_raw.html)
 - [`core::mem::align_of_val_raw`](https://doc.rust-lang.org/stable/core/mem/fn.align_of_val_raw.html)
 - [`core::alloc::Layout::for_value_raw`](https://doc.rust-lang.org/stable/core/alloc/struct.Layout.html#method.for_value_raw)
-  [:pencil:](https://github.com/rust-lang/rust/issues/159912)
 - [`String::from_utf8_lossy_owned`](https://doc.rust-lang.org/stable/std/string/struct.String.html#method.from_utf8_lossy_owned)
-  [:pencil:](https://github.com/rust-lang/rust/issues/161921)
-- [`FusedIterator for StepBy<I>`](https://github.com/rust-lang/rust/pull/159963)
-  [:pencil:](https://github.com/rust-lang/rust/issues/161389)
+- [`string::FromUtf8Error::into_utf8_lossy`](https://doc.rust-lang.org/stable/std/string/struct.FromUtf8Error.html#method.into_utf8_lossy)
+- [`FusedIterator for StepBy<I>`](https://doc.rust-lang.org/stable/std/iter/struct.StepBy.html#impl-FusedIterator-for-StepBy%3CI%3E)
 - [`std::fs::set_times`](https://doc.rust-lang.org/stable/std/fs/fn.set_times.html)
 - [`std::fs::set_times_nofollow`](https://doc.rust-lang.org/stable/std/fs/fn.set_times_nofollow.html)
-  [:pencil:](https://github.com/rust-lang/rust/issues/160822)
 
 ### Other changes
 
-Check out everything that changed in [Rust](https://github.com/rust-lang/rust/releases/tag/1.99.0), [Cargo](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-199-2026-10-01), and [Clippy](https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-199).
+Check out everything that changed in [Rust](https://github.com/rust-lang/rust/releases/tag/1.99.0) and [Cargo](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-199-2026-10-01).
 
 ## Contributors to 1.99.0
 
