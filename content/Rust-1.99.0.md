@@ -89,7 +89,7 @@ This guidance also applies to other `leak` functions in the standard library.
 
 TODO: To be updated (uplifted in current form from https://github.com/rust-lang/rust/issues/162306):
 
-- [Implement `IntoIterator` for `[&[mut]] Box<[T; N], A>`](https://github.com/rust-lang/rust/pull/134021)
+- [Implement `IntoIterator` for `&mut Box<[T; N], A>`, `&Box<[T; N]>` and `Box<[T; N]>`](https://github.com/rust-lang/rust/pull/134021)
   [:pencil:](https://github.com/rust-lang/rust/issues/153661)
 - [`VecDeque::retain_back`](https://doc.rust-lang.org/stable/std/collections/struct.VecDeque.html#method.retain_back)
   [:pencil:](https://github.com/rust-lang/rust/issues/156329)
