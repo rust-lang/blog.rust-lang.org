@@ -46,7 +46,7 @@ fn foo() -> i32 {
 
 The type of `...` is [`VaList`](https://doc.rust-lang.org/std/ffi/struct.VaList.html),
 which is ABI-compatible with the C `va_list` type across targets. What types can be read from a `VaList` is guarded by the
-[`VaArgSafe`](https://doc.rust-lang.org/std/ffi/struct.VaArgSafe.html) trait.
+[`VaArgSafe`](https://doc.rust-lang.org/std/ffi/trait.VaArgSafe.html) trait.
 
 For more details on c-variadic functions, see the
 [reference](https://doc.rust-lang.org/reference/items/functions.html#c-variadic-functions).
