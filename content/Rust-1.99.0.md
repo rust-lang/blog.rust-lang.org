@@ -75,7 +75,10 @@ reference a while back?
 
 While there are no changes to the language semantics in Rust 1.99, we have
 updated the documentation on [`Box::leak`] to recommend against patterns that
-later deallocate that memory. Instead, [`Box::into_non_null`] should be preferred.
+later deallocate that memory. This was done because such code was found to have
+problematic interactions with current and future potential compiler optimizations,
+and is especially problematic with the upcoming stabilization of custom allocators.
+Instead, [`Box::into_non_null`] should be preferred.
 
 This guidance also applies to other `leak` functions in the standard library.
 
