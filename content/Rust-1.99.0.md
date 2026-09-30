@@ -71,7 +71,7 @@ thing here is validity rules on wide pointers
 which I think were not previously directly exposed in std but documented in the
 reference a while back?
 
-### Recommend against `Box::leak` as one-way function
+### Recommend against round-trip unleaking after `Box::leak`
 
 While there are no changes to the language semantics in Rust 1.99, we have
 updated the documentation on [`Box::leak`] to recommend against patterns that
