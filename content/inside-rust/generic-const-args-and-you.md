@@ -49,6 +49,8 @@ First, `gca!(..)` Const Arguments allow for uses of generic parameters within th
 
 Secondly, `gca!(..)` Const Arguments support much fewer kinds of expressions inside them than normal Const Arguments do. For example at the time of writing `gca!` arguments do not support arithmetic or function calls. Writing `gca!(1 + 1)` or `gca!(foo())` would result in an error, but just writing `{ 1 + 1 }` or `{ foo() }` would not. 
 
+Using such unsupported expressions while also using generic parameters can be accomplished via the `gca_const_items` feature which we will talk more about later.
+
 ### ADT Generic Const Args
 
 Support for constructing arrays, tuples, and ADTs are all lumped into the `gca_adts` feature. We might split this into multiple features at some point but for now it's just the one.
@@ -120,7 +122,7 @@ fn example<const N1: usize>() {
 
 ### Const Item Generic Const Args
 
-Support for using const items in the type system is part of the `gca_const_items` feature.
+Support for using const items in the type system is part of the `gca_const_items` feature. This feature also requires the `-Znext-solver` unstable flag to be enabled.
 
 By allowing arbitrary const items to be used in the type system, we are allowing arbitrary expressions to *indirectly* be used in the type system. For example `gca!(N + 1)` cannot be used in the type system, but a const item defined as `const FOO: usize = N + 1;` could be.
 
