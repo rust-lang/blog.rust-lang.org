@@ -41,9 +41,13 @@ type BarWrapper<const N: usize> = Bar<gca!(Foo { field: N })>;
 
 In this example the `gca!(Foo { field: N })` is the new functionality introduced by `gca_adts`. The `adt_const_params` feature is separate and instead allows defining the `const N: Foo` generic parameter.
 
-On stable the const argument `Foo { field: N }` would be disallowed as using the generic parameter `N` is not allowed in const generics other than as a standalone usage such as `Bar<{ N }>`.
+All GCA features require any newly supported expressions to be written inside of a `gca!` macro call. We are aware that this requirement poses significant ergonomic problems and are currently looking into ways to avoid this, though have not arrived at a good solution yet (more on this later). 
 
-All GCA features require any newly supported expressions to be written inside of a `gca!` macro call. The `gca_macroless_*` features lift this restriction and will be talked more about later, as well as why we have this restriction in the first place.
+`gca!` Const Arguments have slightly different semantics than other const arguments.
+
+First, `gca!(..)` Const Arguments allow for uses of generic parameters within them, Const Arguments are otherwise usually not allowed to do so. In the above example the usage of the Const Parameter `N` in `gca!(Foo { field: N })` is legal as it is within a `gca!(..)` expression, if we had written `Bar<{ Foo { field: N } }>` then the compiler would error.
+
+Secondly, `gca!(..)` Const Arguments support much fewer kinds of expressions inside them than normal Const Arguments do. For example at the time of writing `gca!` arguments do not support arithmetic or function calls. Writing `gca!(1 + 1)` or `gca!(foo())` would result in an error, but just writing `{ 1 + 1 }` or `{ foo() }` would not. 
 
 ### ADT Generic Const Args
 
@@ -173,9 +177,9 @@ fn make_array2<const N: usize>() -> [u8; FREE_GCA::<N>] {
 }
 ```
 
-In the above example, the compiler is unable to determine that the type `[u8; N]` and the type `[u8; FREE_OPAQUE::<N>]` are the same. This is because the constant `FREE_OPAQUE` is not defined as having a `gca!(..)`  right hand side and so the compiler cannot see that it is equal to `N`.
+In the above example, the `FREE_GCA` constant is defined as having a `gca!(..)` right hand side, allowing the type system to reason about the const item transparently. This lets the compiler determine that `FREE_GCA::<N>` is equivalent to `N` and therefore that the types `[u8; N]` and `[u8; FREE_GCA::<N>]` are equal.
 
-On the other hand, the compiler *can* tell that the type `[u8; N]` and the type `[u8; FREE_GCA::<N>]` are the same. This is because unlike `FREE_OPAQUE`, the constant `FREE_GCA` is defined as having a `gca!(..)` right hand side.
+On the other hand, the `FREE_OPAQUE` constant is not defined as having a `gca!(..)` right hand side, and so the type system treats it "opaquely", unable to reason about it being equivalent to `N`. Ultimately, this causes the types `[u8; N]` and `[u8; FREE_OPAQUE::<N>]` to be considered unequal.
 
 With support for const items in the type system present, `gca_const_items` also supports associated const bindings and traits with associated constants being dyn compatible:
 
@@ -193,7 +197,7 @@ fn make_dyn<const N: usize, T: Trait<ASSOC = { N }>>(
 }
 ```
 
-On stable, the above example would fail to compile for two reasons. Firstly, unlike associated types we don't support bounding associated constants (e.g. `T: Trait<ASSOC = { N }>`). Secondly, unlike associated types, we don't allow trait objects for traits which have associated consts. With `gca_const_items` enabled both of these are supported.
+On stable, the above example would fail to compile for two reasons. Firstly, unlike associated types we don't support bounding associated constants (e.g. `T: Trait<ASSOC = { N }>`). Secondly, unlike associated types, we don't allow creating `dyn` types for traits which have associated consts. With `gca_const_items` enabled both of these are supported.
 
 ### Minimal Const Item Generic Const Args
 
@@ -245,11 +249,39 @@ Finally, it's also significantly easier to implement `gca_min_const_items` than 
 
 ## What is Macroless
 
-While the GCA family of features currently requires all new syntax to be placed within a `gca!(..)` expression, this limitation is undesirable in the long term as it results in significant ergonomic issues in Const Generics heavy code. 
+While the GCA family of features currently introduces new explicit `gca!(..)` const arguments, this being *explicit* is undesirable in the long term as it results in significant ergonomic issues in Const Generics heavy code. However, there are a number of design and implementation complexities when it comes to implicitly inserting the `gca!(..)` macro. 
 
-However, there are a number of design and implementation complexities for *not* having the `gca!(..)` macro (though we won't talk about them in this blog post). To let us handle these complexities independently, there are separate feature gates for removing the need for the `gca!(..)` macro, rather than having it part of the main GCA features.
+First, the implementation side, it's hard for the compiler to be able to correctly determine when an argument needs to be a `gca!(..)` Const Argument. Naive syntactic methods of doing this result in false-positives where arguments are incorrectly considered to be `gca!(..)` arguments resulting in knock-on errors. 
 
-There are currently two features relating to the removal of the `gca!(..)` macro, `gca_macroless_args` and `gca_macroless_items`. Each feature allows omitting the `gca!(..)` macro in different positions where it's currently required.
+```rust
+#![feature(
+    gca_adts,
+    gca_macroless_args
+)]
+
+struct Foo(usize);
+fn Bar(_: usize) -> usize { 1 }
+
+fn accepts_usize<const N: usize>() {}
+fn accepts_foo<const N: Foo>() {}
+
+fn example<const N: usize>() {
+    const ONE: usize = 1;
+    accepts_usize::<Bar(ONE)>();
+
+    accepts_foo::<Foo(N)>();
+}
+
+```
+In this example both `::<Bar(ONE)>` and `::<Foo(N)>` are wholly syntactically equivalent, and yet `Foo(N)` *must* be a `gca!(..)` Const Argument as it contains a path to a generic parameter (`N`), and `Bar(ONE)` must *not* be a `gca!(..)` Const Argument as it is a function call which is not supported in `gca!(..)` Const Arguments.
+
+Secondly, from a design perspective having `gca!(..)` Const Arguments be implicit muddies the waters about what Const Arguments are accepted. Without `gca!(..)` there is no clear distinction between const arguments which can use generic parameters and those which cannot. It also means that the SemVer commitment of a `gca!(..)` Const Argument in a public API not being changed is made implicit which could cause accidental breaking changes. 
+
+To allow us to handle these complexities independently from the core semantic challenges of GCA, there are separate feature gates for implicitly adding the `gca!(..)` macro, rather than having it part of the main GCA features. 
+
+There are currently two features relating to this, `gca_macroless_args` and `gca_macroless_items`. Each feature implicitly adds the `gca!(..)` macro in different positions where it's currently required to write out explicitly. These features are very experimental and don't work particularly well, and, to be honest, we would probably recommend *not* using them and instead *do* recommend using explicit `gca!(..)` Const Arguments for the time being.
+
+It's also important to note that despite the `gca!(..)` macro being implicit under these features, the Const Arguments are still subject to the same restrictions as when writing `gca!(..)` by hand. This means, for example, macroless does not introduce support for writing `N + 1` as Const Argument as `gca!(N + 1)` is similarly not (yet) supported.
 
 ### Macroless Const Arguments
 
