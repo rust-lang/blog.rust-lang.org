@@ -101,7 +101,7 @@ This guidance also applies to other `leak` functions in the standard library.
 
 ### Other changes
 
-Check out everything that changed in [Rust](https://github.com/rust-lang/rust/releases/tag/1.99.0) and [Cargo](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-199-2026-10-01).
+Check out everything that changed in [Rust](https://github.com/rust-lang/rust/releases/tag/1.99.0), [Cargo](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-199-2026-10-01), and [Clippy](https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-199).
 
 ## Contributors to 1.99.0
 
