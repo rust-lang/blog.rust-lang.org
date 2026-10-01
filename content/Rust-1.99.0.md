@@ -72,12 +72,13 @@ updated the documentation on [`Box::leak`] to recommend against patterns that
 later deallocate that memory. This was done because such code was found to have
 problematic interactions with current and future potential compiler optimizations,
 and is especially problematic with the upcoming stabilization of custom allocators.
-Instead, [`Box::into_non_null`] should be preferred.
+Instead, [`Box::into_non_null`] or [`Box::into_raw`] should be preferred.
 
 This guidance also applies to other `leak` functions in the standard library.
 
 [`Box::leak`]: https://doc.rust-lang.org/std/boxed/struct.Box.html#method.leak
 [`Box::into_non_null`]: https://doc.rust-lang.org/std/boxed/struct.Box.html#method.into_non_null
+[`Box::into_raw`]: https://doc.rust-lang.org/std/boxed/struct.Box.html#method.into_raw
 
 ### Stabilized APIs
 
