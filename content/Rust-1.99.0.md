@@ -49,7 +49,7 @@ which is ABI-compatible with the C `va_list` type across targets. What types can
 [`VaArgSafe`](https://doc.rust-lang.org/std/ffi/trait.VaArgSafe.html) trait.
 
 For more details on c-variadic functions, see the
-[reference](https://doc.rust-lang.org/reference/items/functions.html#c-variadic-functions).
+[Reference](https://doc.rust-lang.org/reference/items/functions.html#c-variadic-functions).
 This release also stabilizes support for defining naked variadic functions with
 non-"C" ABIs, which must be written via inline assembly.
 
