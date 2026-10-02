@@ -209,7 +209,7 @@ We renamed the branch of 19 repositories to `main`:
 - [std-dev-guide](https://github.com/rust-lang/team/pull/2768)
 
 Now `main` is used by 120 repositories.
-There are still 73 repositories using `master`.
+There are still 56 public repositories using `master`.
 
 ### Trusted publishing
 
