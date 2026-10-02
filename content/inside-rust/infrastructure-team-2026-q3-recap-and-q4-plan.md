@@ -186,7 +186,7 @@ As a result, we [rotated](https://github.com/rust-lang/infra-team/pull/301) one 
 
 ### Main branch
 
-We renamed the branch of 19 repositories to `main`:
+We renamed the default branch of 25 repositories to `main`:
 
 - [lang-team](https://github.com/rust-lang/team/pull/2517)
 - [rustc-hash](https://github.com/rust-lang/team/pull/2554)
@@ -207,13 +207,20 @@ We renamed the branch of 19 repositories to `main`:
 - [portable-simd](https://github.com/rust-lang/team/pull/2759)
 - [rustup-components-history](https://github.com/rust-lang/team/pull/2758)
 - [std-dev-guide](https://github.com/rust-lang/team/pull/2768)
+- [polonius](https://github.com/rust-lang/team/pull/2807)
+- [cargo-bisect-rustc](https://github.com/rust-lang/team/pull/2803)
+- [rust-mode](https://github.com/rust-lang/rust-mode/pull/594)
+- [rust.vim](https://github.com/rust-lang/rust.vim/pull/535#issuecomment-5954813612)
+- [types-team](https://github.com/rust-lang/types-team/pull/135)
+- [rfcs](https://github.com/rust-lang/team/pull/2809)
 
-Now `main` is used by 120 repositories.
-There are still 56 public repositories using `master`.
+Among public repositories in the `rust-lang` organization that are neither archived nor forks,
+113 use `main` and 56 still use `master`.
 
 ### Trusted publishing
 
-We converted 6 crates to use [trusted publishing](https://crates.io/docs/trusted-publishing):
+We converted 7 crates to use
+[trusted publishing](https://crates.io/docs/trusted-publishing):
 
 - [rustc-hash](https://github.com/rust-lang/team/pull/2555)
 - [jobserver](https://github.com/rust-lang/team/pull/2595)
@@ -221,6 +228,7 @@ We converted 6 crates to use [trusted publishing](https://crates.io/docs/trusted
 - [ctest](https://github.com/rust-lang/team/pull/2619)
 - [docs_rs_crates_io](https://github.com/rust-lang/team/pull/2686)
 - [font-awesome-as-a-crate](https://github.com/rust-lang/team/pull/2686)
+- [cargo-bisect-rustc](https://github.com/rust-lang/team/pull/2803)
 
 ## Q4 2026 Plans
 
