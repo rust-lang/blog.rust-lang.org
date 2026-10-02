@@ -1,5 +1,5 @@
 +++
-path = "inside-rust/2026/10/01/generic-const-args-and-you"
+path = "inside-rust/2026/10/02/generic-const-args-and-you"
 title = "Generic Const Args and You"
 authors = ["BoxyUwU"]
 
