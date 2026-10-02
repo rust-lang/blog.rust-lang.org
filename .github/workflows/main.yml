@@ -68,7 +68,7 @@ jobs:
       - run: cargo test -p front_matter -- --include-ignored date_is_set
 
   deploy:
-    if: ${{ github.event_name == 'merge_group' }}
+    if: ${{ github.ref == 'refs/heads/main' }}
 
     needs: [ pub_date, build ]
 
