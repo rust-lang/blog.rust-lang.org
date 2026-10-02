@@ -8,8 +8,6 @@ team = "The Const Generics Project Group"
 team_url = "https://rust-lang.org/governance/teams/lang/#team-project-const-generics"
 +++
 
-# Generic Const Args and You
-
 Back in June of 2024 at RustFest Zürich, the Const Generics project group first discussed a new design for supporting more complex uses of generic parameters in Const Generics. Since then, we've continued to refine the initial design and have implemented the new design as a family of features dubbed "Generic Const Arguments" (GCA for short).
 
 These features are intended to replace the existing `generic_const_exprs` feature which has existed in some form or another since `min_const_generics` was stabilized back in 2021. Even though GCA obviates `generic_const_exprs` it was still incredibly valuable to have invested the time into it that we did as the design and implementation of GCA was informed quite significantly by `generic_const_exprs`.
