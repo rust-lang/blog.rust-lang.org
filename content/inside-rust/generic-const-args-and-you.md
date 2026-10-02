@@ -124,7 +124,7 @@ fn example<const N1: usize>() {
 
 Support for using const items in the type system is part of the `gca_const_items` feature. This feature also requires the `-Znext-solver` unstable flag to be enabled.
 
-By allowing arbitrary const items to be used in the type system, we are allowing arbitrary expressions to *indirectly* be used in the type system. For example `gca!(N + 1)` cannot be used in the type system, but a const item defined as `const FOO: usize = N + 1;` could be.
+By allowing arbitrary const items to be used in the type system, we are allowing arbitrary expressions to *indirectly* be used in the type system. For example `gca!(N + 1)` cannot be used in the type system, but a const item defined as `const FOO: usize = N + 1;` can be.
 
 Using an associated constant as a const argument looks like the following:
 ```rust
@@ -203,7 +203,7 @@ On stable, the above example would fail to compile for two reasons. Firstly, unl
 
 ### Minimal Const Item Generic Const Args
 
-We also have a minimal version of the `gca_const_items` feature, `gca_min_const_items`. It supports much the same as the full feature, except that instead of supporting *all* const items, only ones defined as `gca!(..)` expressions are supported.
+We also have a minimal version of the `gca_const_items` feature, `gca_min_const_items`. It supports much the same as the full feature, except that instead of supporting *all* const items, only ones defined as `gca!(..)` expressions are supported. The unstable `-Znext-solver` flag is *not* required to use this feature.
 
 ```rust
 #![feature(gca_min_const_items, generic_const_args)]
@@ -243,7 +243,7 @@ impl<const N: usize> Trait<N> for () {
 
 Requiring all const items in the type system to be defined as a `gca!(..)` expression allows us to limit the expressiveness of Const Generics in some desirable ways.
 
-For example, `gca_const_items` introduces the chance of post-mono errors coming from Const Generics, something which is (at the time of writing) not otherwise possible when using Const Generics. With `gca_min_const_items`, we exclude the aspects of `gca_const_items` which can cause these errors, at the cost of expressiveness.
+For example, `gca_const_items` introduces the chance of post-mono errors coming from Const Generics, something which is (at the time of writing) not otherwise possible when using Const Generics. With `gca_min_const_items`, at the cost of some expressiveness, we exclude the aspects of `gca_const_items` which can cause these errors.
 
 As another example, the full `gca_const_items` feature can have quite confusing errors where two constants are considered unequal even though we as humans can tell that they're obviously equal. With `gca_min_const_items` there are fairly straight forward rules for determining when two constants are equal without any big surprises.
 
@@ -283,11 +283,11 @@ To allow us to handle these complexities independently from the core semantic ch
 
 There are currently two features relating to this, `gca_macroless_args` and `gca_macroless_items`. Each feature implicitly adds the `gca!(..)` macro in different positions where it's currently required to write out explicitly. These features are very experimental and don't work particularly well, and, to be honest, we would probably recommend *not* using them and instead *do* recommend using explicit `gca!(..)` Const Arguments for the time being.
 
-It's also important to note that despite the `gca!(..)` macro being implicit under these features, the Const Arguments are still subject to the same restrictions as when writing `gca!(..)` by hand. This means, for example, macroless does not introduce support for writing `N + 1` as Const Argument as `gca!(N + 1)` is similarly not (yet) supported.
+It's also important to note that despite `gca!(..)` being implicit under these features, the Const Arguments are still subject to the same restrictions as when writing `gca!(..)` by hand. This means, for example, macroless does not introduce support for writing `N + 1` as a Const Argument, as `gca!(N + 1)` is similarly not (yet) supported.
 
 ### Macroless Const Arguments
 
-`feature(gca_macroless_args)` allow arguments to const generics to be written without the use of the `gca!(..)` macro:
+`feature(gca_macroless_args)` allows Const Arguments to be written with `gca!(..)` left implicit:
 ```rust
 #![feature(
     gca_macroless_args,
@@ -304,7 +304,7 @@ Without this feature enabled the compiler would require the return type of `make
 
 ### Macroless Const Items
 
-`feature(gca_macroless_items)` allows const items under `gca_const_items` and `gca_min_const_items` to be written without the `gca!(..)` macro:
+`feature(gca_macroless_items)` allows const items under `gca_const_items` and `gca_min_const_items` to be written with `gca!(..)` left implicit:
 ```rust
 #![feature(
     gca_macroless_items,
@@ -322,7 +322,7 @@ impl<const N: usize> Trait for [u8; N] {
 }
 ```
 
-Without this feature enabled the compiler would require the right hand side of `const ASSOC` to be written as `gca!(N)` to satisfy the `rustc_always_gca` attribute in the trait definition.
+In this example the implementation of `ASSOC` must be a `gca!(..)` expression due to the `rustc_always_gca` attribute. With the macroless feature this is added implicitly, without it the implementation would have to be written as `const ASSOC: usize = gca!(N);`.
 
 ## Concluding it
 
@@ -330,6 +330,6 @@ We're not currently ready to stabilize any of the features talked about in this 
 
 We would very much like to hear about any issues you run into with any of the GCA features. Whether that be compiler crashes, design issues making it hard to write code that you want to write, or if you're just struggling to get your code working with these features.
 
-The best way to reach us would be to either open an issue on the [project-const-generics github repo](https://github.com/rust-lang/project-const-generics/issues/new/), or open a thread in the [project-const-generics zulip channel](https://rust-lang.zulipchat.com/#topics/channel/260443-project-const-generics).
+The best way to reach us would be to either open an issue on the [project-const-generics github repo](https://github.com/rust-lang/project-const-generics/issues/new?template=gca-experience-report.md), or open a thread in the [project-const-generics zulip channel](https://rust-lang.zulipchat.com/#topics/channel/260443-project-const-generics).
 
 [^1]: Introducing new attributes is technically a breaking change unless it has a `rustc_` prefix so we are using the name `rustc_always_gca` until stabilization at which point it would be renamed to `always_gca`.
