@@ -204,7 +204,7 @@ On stable, the above example would fail to compile for two reasons. Firstly, unl
 We also have a minimal version of the `gca_const_items` feature, `gca_min_const_items`. It supports much the same as the full feature, except that instead of supporting *all* const items, only ones defined as `gca!(..)` expressions are supported. The unstable `-Znext-solver` flag is *not* required to use this feature.
 
 ```rust
-#![feature(gca_min_const_items, generic_const_args)]
+#![feature(gca_min_const_items, generic_const_items)]
 
 const BAD<const N: usize>: usize = N;
 const GOOD<const N: usize>: usize = gca!(N);
