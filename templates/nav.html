@@ -1,8 +1,8 @@
-{% macro nav(section) -%}
+{% component nav(section) -%}
 <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
   <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
-    <a href="{{ config.base_url | safe }}{{ section.path | safe }}">
-      <img class="v-mid ml0-l rust-logo" alt="" src="{{ config.base_url | safe }}/images/rust-logo-blk.svg">
+    <a href="{{ base_url | safe }}{{ section.path | safe }}">
+      <img class="v-mid ml0-l rust-logo" alt="" src="{{ base_url | safe }}/images/rust-logo-blk.svg">
       <span class="dib ml1 ml0-l">{{ section.title }}</span>
     </a>
   </div>
@@ -21,7 +21,7 @@
         <li class="theme-item" onclick="changeThemeTo('system');">System</li>
       </ul>
     </button>
-    <script src="{{ config.base_url | safe }}/scripts/theme-switch-post.js"></script>
+    <script src="{{ base_url | safe }}/scripts/theme-switch-post.js"></script>
   </ul>
 </nav>
-{% endmacro %}
+{% endcomponent %}

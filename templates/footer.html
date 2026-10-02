@@ -1,4 +1,4 @@
-{% macro footer() -%}
+{% component footer() -%}
 <footer class="footer">
   <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
     <div class="row">
@@ -22,16 +22,16 @@
       <div class="four columns mt3 mt0-l">
         <h4>Social</h4>
         <div class="flex flex-row flex-wrap">
-          <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener"><img src="{{ config.base_url | safe }}/images/mastodon.svg" alt="Mastodon"/></a>
-          <a rel="me" href="https://bsky.app/profile/rust-lang.org" target="_blank" rel="noopener"><img src="{{ config.base_url | safe }}/images/bluesky.svg" alt="Bluesky"/></a>
-          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener"><img style="padding-top: 6px; padding-bottom:6px" src="{{ config.base_url | safe }}/images/youtube.svg" alt="YouTube"/></a>
-          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener"><img src="{{ config.base_url | safe }}/images/discord.svg" alt="Discord"/></a>
-          <a href="https://github.com/rust-lang" target="_blank" rel="noopener"><img src="{{ config.base_url | safe }}/images/github.svg" alt="GitHub"/></a>
+          <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener"><img src="{{ base_url | safe }}/images/mastodon.svg" alt="Mastodon"/></a>
+          <a rel="me" href="https://bsky.app/profile/rust-lang.org" target="_blank" rel="noopener"><img src="{{ base_url | safe }}/images/bluesky.svg" alt="Bluesky"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener"><img style="padding-top: 6px; padding-bottom:6px" src="{{ base_url | safe }}/images/youtube.svg" alt="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener"><img src="{{ base_url | safe }}/images/discord.svg" alt="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener"><img src="{{ base_url | safe }}/images/github.svg" alt="GitHub"/></a>
         </div>
         <h4 class="mt4 mb3">RSS</h4>
         <ul>
-          <li><a href="{{ config.base_url | safe }}/feed.xml">Main Blog</a></li>
-          <li><a href="{{ config.base_url | safe }}/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+          <li><a href="{{ base_url | safe }}/feed.xml">Main Blog</a></li>
+          <li><a href="{{ base_url | safe }}/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
         </ul>
       </div>
 
@@ -42,4 +42,4 @@
     </div>
   </div>
 </footer>
-{% endmacro %}
+{% endcomponent %}

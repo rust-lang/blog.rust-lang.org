@@ -237,6 +237,7 @@ your preferences.
 Backtraces [now have nicer formatting](https://github.com/rust-lang/rust/pull/38165), eliding
 some things by default. For example, the full backtrace:
 
+{% raw %}
 ```
 thread 'main' panicked at 'explicit panic', foo.rs:2
 stack backtrace:
@@ -261,9 +262,11 @@ stack backtrace:
   11:     0x55c39a22e6b8 - _start
   12:                0x0 - <unknown>
 ```
+{% endraw %}
 
 is now instead
 
+{% raw %}
 ```
 thread 'main' panicked at 'explicit panic', foo.rs:2
 stack backtrace:
@@ -290,6 +293,7 @@ stack backtrace:
   10: __libc_start_main
   11: _start
 ```
+{% endraw %}
 
 By default. You can set the environment variable `RUST_BACKTRACE=full` to get the full
 backtrace. We may be able to do more cleanup in the future; see [this bug](https://github.com/rust-lang/rust/pull/40264) for more.

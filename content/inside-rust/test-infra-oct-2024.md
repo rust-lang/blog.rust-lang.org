@@ -109,7 +109,7 @@ ignore-mode-coverage-run` to `//@ ignore-coverage-map` and `//@
 ignore-coverage-run` because only `coverage-map` and `coverage-run` were special
 in that the same test source files ran under two test suite configurations.
 
-- compiletest: [Add `{{rust-src-base}}` (for sysroot src base)
+- compiletest: [Add {% raw %}`{{rust-src-base}}`{% endraw %} (for sysroot src base)
   #129687](https://github.com/rust-lang/rust/pull/129687)
 - compiletest: [Restrict `ignore-mode-*` directives
   #131346](https://github.com/rust-lang/rust/pull/131346)
@@ -171,7 +171,7 @@ the [compiletest directives listing][dev-guide-directives-listing].
   #2075](https://github.com/rust-lang/rustc-dev-guide/pull/2075)
 - rustc-dev-guide: [Purge `run-pass-valgrind mentions`
   #2091](https://github.com/rust-lang/rustc-dev-guide/pull/2091)
-- rustc-dev-guide: [Add documentation for `{{rust-src-base}}`
+- rustc-dev-guide: [Add documentation for {% raw %}`{{rust-src-base}}`{% endraw %}
   #2079](https://github.com/rust-lang/rustc-dev-guide/pull/2079)
 
 There's still a lot of room for improvement in our testing docs -- in

@@ -103,6 +103,7 @@ fn main() {
 
 would give you a backtrace that looks like this:
 
+{% raw %}
 ```
 thread 'main' panicked at 'explicit panic', src/main.rs:2:5
 stack backtrace:
@@ -150,6 +151,7 @@ stack backtrace:
   21: __libc_start_main
   22: _start
 ```
+{% endraw %}
 
 Now, in Rust 1.47.0, you'll see this instead:
 

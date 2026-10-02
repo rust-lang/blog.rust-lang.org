@@ -22,6 +22,7 @@ To get started with Trusted Publishing, you'll need to publish your first releas
 
 Here's an example of how to set up GitHub Actions to use Trusted Publishing:
 
+{% raw %}
 ```yaml
 name: Publish to crates.io
 
@@ -45,6 +46,7 @@ jobs:
       env:
         CARGO_REGISTRY_TOKEN: ${{ steps.auth.outputs.token }}
 ```
+{% endraw %}
 
 ## OpenGraph Images
 
