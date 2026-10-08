@@ -1,3 +1,8 @@
 {% set section_path = feed_url | trim_start(pat=config.base_url ~ "/") | trim_end(pat="releases.json") -%}
 {% set section = get_section(path=section_path ~ "_index.md") -%}
-{"releases":[{% filter trim_end(pat=",") %}{%- for page in section.pages | reverse -%}{% if page.extra is containing(pat="release") %}{"title":"{{ page.title }}","url":"{{ page.path | trim_start(pat="/") }}"},{% endif %}{% endfor %}{% endfilter %}],"feed_updated":"{{ now() | date(format="%Y-%m-%dT%H:%M:%S+00:00") }}"}
+{% set releases = [
+    {"title": page.title, "url": page.path | trim_start(pat="/")}
+    for page in section.pages | reverse
+    if page.extra is containing(pat="release")
+] -%}
+{{ {"releases": releases, "feed_updated": now() | date(format="%Y-%m-%dT%H:%M:%S+00:00")} | json_encode }}
