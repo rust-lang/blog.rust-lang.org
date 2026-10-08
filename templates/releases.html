@@ -1,4 +1,3 @@
-{% import "macros.html" as macros -%}
 {% extends "layout.html" -%}
 {% block page -%}
 <header class="mt3 mt0-ns mb4-ns">
@@ -31,14 +30,14 @@
       {%- set month = page.components | nth(n=num_comps - 3) | int %}
       {%- set day = page.components | nth(n=num_comps - 2) | int %}
       {%- if loop.index0 == 0 %}
-      {{ macros::show_year(year=year, post_name="Releases") }}
+      {{<show_year year={year} post_name="Releases" />}}
       {%- set_global prev_year = year %}
       {%- endif %}
 
-      {%- if page.extra is containing("release") %}
+      {%- if page.extra is containing(pat="release") %}
       {%- if loop.index0 != 0 %}
         {%- if prev_year != year %}
-      {{ macros::show_year(year=year, post_name="Releases") }}
+      {{<show_year year={year} post_name="Releases" />}}
         {%- set_global prev_year = year %}
         {%- endif %}
       {%- endif %}
@@ -47,8 +46,8 @@
         <td class="bn"><h3 class="f0-l f1-m f2-s mt4 mb0">Posts in {{ year }}</h3></td>
       </tr>{% endif %}
       <tr>
-        <td class="tr o-60 pr4 pr5-l bn">{{ macros::month_name(num=month) }}&nbsp;{{ day }}</td>
-        <td class="bn"><a href="{{ config.base_url | safe }}{{ page.path | safe }}">{{ macros::escape_hbs(input=page.title) }}</a></td>
+        <td class="tr o-60 pr4 pr5-l bn">{{<month_name num={month} />}}&nbsp;{{ day }}</td>
+        <td class="bn"><a href="{{ config.base_url | safe }}{{ page.path | safe }}">{{<escape_hbs input={page.title} />}}</a></td>
       </tr>
       {%- endif %}
     {%- endfor %}

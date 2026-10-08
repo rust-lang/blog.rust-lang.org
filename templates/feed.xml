@@ -1,5 +1,4 @@
-{% import "macros.html" as macros -%}
-{% set section_path = feed_url | trim_start_matches(pat=config.base_url ~ "/") | trim_end_matches(pat="feed.xml") -%}
+{% set section_path = feed_url | trim_start(pat=config.base_url ~ "/") | trim_end(pat="feed.xml") -%}
 {% set section = get_section(path=section_path ~ "_index.md") -%}
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
@@ -17,8 +16,8 @@
 
     {% for page in section.pages | reverse %}
     <entry>
-        <title>{{ macros::escape_hbs(input=page.title) | safe }}</title>
-        <link rel="alternate" href="https://blog.rust-lang.org{{ macros::escape_hbs(input=page.path) | safe }}" type="text/html" title="{{ macros::escape_hbs(input=page.title) | safe }}" />
+        <title>{{<escape_hbs input={page.title} />}}</title>
+        <link rel="alternate" href="https://blog.rust-lang.org{{<escape_hbs input={page.path} />}}" type="text/html" title="{{<escape_hbs input={page.title} />}}" />
         {%- set num_comps = page.components | length %}
         {%- if num_comps < 4 %}{{ throw(message="Missing date in 'path' key, required format: '[inside-rust/]YYYY/MM/DD/slug-of-your-choice'") }}{% endif %}
         {%- set year = page.components | nth(n=num_comps - 4) %}
@@ -26,11 +25,11 @@
         {%- set day = page.components | nth(n=num_comps - 2) %}
         <published>{{ year }}-{{ month }}-{{ day }}T00:00:00+00:00</published>
         <updated>{{ year }}-{{ month }}-{{ day }}T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org{{ macros::escape_hbs(input=page.path) | safe }}</id>
-        <content type="html" xml:base="https://blog.rust-lang.org{{ macros::escape_hbs(input=page.path) | safe }}">{{ macros::escape_hbs(input=page.content) }}</content>
+        <id>https://blog.rust-lang.org{{<escape_hbs input={page.path} />}}</id>
+        <content type="html" xml:base="https://blog.rust-lang.org{{<escape_hbs input={page.path} />}}">{{<escape_hbs input={page.content} />}}</content>
 
         <author>
-            <name>{{ macros::escape_hbs(input=page.authors | join(sep=", ")) }}</name>
+            <name>{{<escape_hbs input={page.authors | join(sep=", ")} />}}</name>
         </author>
     </entry>
     {%- if loop.index == 10 %}{% break %}{% endif %}
