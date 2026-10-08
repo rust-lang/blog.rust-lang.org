@@ -5,6 +5,7 @@ compile_sass = true
 generate_feeds = true
 feed_filenames = ["feed.xml", "releases.json"]
 build_search_index = false
+skip_content_templating = ["**"]
 
 [markdown]
 bottom_footnotes = true

@@ -1,5 +1,5 @@
 {% set section = get_section(path="_index.md") -%}
-{%- for page in section.pages | reverse -%}{% if page.extra is containing("release") -%}
+{%- for page in section.pages | reverse -%}{% if page.extra is containing(pat="release") -%}
 <!DOCTYPE html>
 <meta charset="utf-8">
 <title>Redirect</title>
