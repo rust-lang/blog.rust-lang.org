@@ -7,8 +7,8 @@ aliases = [
     "releases/1.6.0",
 ]
 
-[extra]
-release = true
+[taxonomies]
+tags = ["release"]
 +++
 
 Hello 2016! We’re happy to announce the first Rust release of the year, 1.6.

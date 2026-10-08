@@ -1,5 +1,5 @@
 {% set section = get_section(path="_index.md") -%}
-{%- for page in section.pages | reverse -%}{% if page.extra is containing(pat="release") -%}
+{%- for page in section.pages | reverse -%}{% if "release" in page.taxonomies.tags | default(value=[]) -%}
 <!DOCTYPE html>
 <meta charset="utf-8">
 <title>Redirect</title>

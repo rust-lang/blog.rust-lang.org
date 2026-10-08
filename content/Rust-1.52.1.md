@@ -7,10 +7,12 @@ aliases = [
     "releases/1.52.1",
 ]
 
+[taxonomies]
+tags = ["release"]
+
 [extra]
 team = "the compiler team"
 team_url = "https://www.rust-lang.org/governance/teams/compiler"
-release = true
 +++
 
 The Rust team has prepared a new release, 1.52.1, working around a bug in

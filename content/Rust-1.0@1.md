@@ -7,8 +7,8 @@ aliases = [
     "releases/1.0.0",
 ]
 
-[extra]
-release = true
+[taxonomies]
+tags = ["release"]
 +++
 
 Today we are very proud to announce the

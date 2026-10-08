@@ -6,6 +6,7 @@ generate_feeds = true
 feed_filenames = ["feed.xml", "releases.json"]
 build_search_index = false
 skip_content_templating = ["**"]
+taxonomies = [{ name = "tags", render = false }]
 
 [markdown]
 bottom_footnotes = true

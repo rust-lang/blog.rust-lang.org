@@ -7,8 +7,8 @@ aliases = [
     "releases/1.34.1",
 ]
 
-[extra]
-release = true
+[taxonomies]
+tags = ["release"]
 +++
 
 The Rust team is happy to announce a new version of Rust, 1.34.1, and a new version of rustup, 1.18.1.

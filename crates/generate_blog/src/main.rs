@@ -123,10 +123,17 @@ fn main() -> Result<(), Box<dyn Error>> {
         title,
         authors: vec![author],
         aliases,
+        taxonomies: front_matter::Taxonomies {
+            tags: if release {
+                vec!["release".into()]
+            } else {
+                vec![]
+            },
+        },
         extra: front_matter::Extra {
             team,
             team_url,
-            release,
+            ..Default::default()
         },
         ..Default::default()
     };

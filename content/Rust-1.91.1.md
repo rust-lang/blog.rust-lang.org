@@ -4,8 +4,8 @@ title = "Announcing Rust 1.91.1"
 authors = ["The Rust Release Team"]
 aliases = ["releases/1.91.1"]
 
-[extra]
-release = true
+[taxonomies]
+tags = ["release"]
 +++
 
 The Rust team has published a new point release of Rust, 1.91.1. Rust is a

@@ -7,8 +7,8 @@ aliases = [
     "releases/1.22.0",
 ]
 
-[extra]
-release = true
+[taxonomies]
+tags = ["release"]
 +++
 
 The Rust team is happy to announce *two* new versions of Rust, 1.22.0 and

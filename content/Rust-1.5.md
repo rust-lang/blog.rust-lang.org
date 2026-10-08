@@ -7,8 +7,8 @@ aliases = [
     "releases/1.5.0",
 ]
 
-[extra]
-release = true
+[taxonomies]
+tags = ["release"]
 +++
 
 Today we're releasing [Rust 1.5 stable][install]. This post gives the

@@ -7,8 +7,8 @@ aliases = [
     "releases/1.56.0",
 ]
 
-[extra]
-release = true
+[taxonomies]
+tags = ["release"]
 +++
 
 The Rust team is happy to announce a new version of Rust, 1.56.0. This stabilizes the 2021 edition as well.

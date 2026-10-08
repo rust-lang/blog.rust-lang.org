@@ -7,8 +7,8 @@ aliases = [
     "releases/1.2.0",
 ]
 
-[extra]
-release = true
+[taxonomies]
+tags = ["release"]
 +++
 
 Today marks the [completion][install] of the Rust 1.2 stable and 1.3 beta

@@ -7,8 +7,8 @@ aliases = [
     "releases/1.9.0",
 ]
 
-[extra]
-release = true
+[taxonomies]
+tags = ["release"]
 +++
 
 The Rust team is happy to announce the latest version of Rust, 1.9. Rust is a

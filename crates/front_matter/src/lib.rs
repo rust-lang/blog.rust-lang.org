@@ -2,6 +2,8 @@ use eyre::{ContextCompat, bail};
 use serde::{Deserialize, Serialize};
 use toml::value::Date;
 
+const RELEASE_TAG: &str = "release";
+
 /// The front matter of a markdown blog post.
 #[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
 pub struct FrontMatter {
@@ -37,24 +39,46 @@ pub struct FrontMatter {
     /// Moved to the `extra` table.
     #[serde(default, skip_serializing)]
     pub team: Option<String>,
-    /// Moved to the `extra` table.
-    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    /// Moved to the `tags` taxonomy.
+    #[serde(default, skip_serializing)]
     pub release: bool,
+    #[serde(default, skip_serializing_if = "Taxonomies::is_empty")]
+    pub taxonomies: Taxonomies,
     #[serde(default, skip_serializing_if = "Extra::is_empty")]
     pub extra: Extra,
+}
+
+#[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
+pub struct Taxonomies {
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub tags: Vec<String>,
+}
+
+impl Taxonomies {
+    fn is_empty(&self) -> bool {
+        self.tags.is_empty()
+    }
 }
 
 #[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
 pub struct Extra {
     pub team: Option<String>,
     pub team_url: Option<String>,
-    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    /// Moved to the `tags` taxonomy.
+    #[serde(default, skip_serializing)]
     pub release: bool,
 }
 
 impl Extra {
     fn is_empty(&self) -> bool {
-        self.team.is_none() && !self.release
+        self.team.is_none()
+    }
+}
+
+impl FrontMatter {
+    /// Whether the post is an official Rust release announcement.
+    pub fn is_release(&self) -> bool {
+        self.taxonomies.tags.iter().any(|t| t == RELEASE_TAG)
     }
 }
 
@@ -96,10 +120,13 @@ pub fn normalize(
         front_matter.extra.team = Some(team.into());
         front_matter.extra.team_url = Some(url.into());
     }
-    // migrate "release" to "extra" section
-    if front_matter.release {
+    // migrate "release" and "extra.release" to the "tags" taxonomy
+    if front_matter.release || front_matter.extra.release {
         front_matter.release = false;
-        front_matter.extra.release = true;
+        front_matter.extra.release = false;
+        if !front_matter.is_release() {
+            front_matter.taxonomies.tags.push(RELEASE_TAG.into());
+        }
     }
     // migrate "date" to "path" key
     if let Some(date) = front_matter.date.take() {
@@ -177,7 +204,7 @@ pub fn normalize(
         bail!("invalid release alias: releases/?.??.?");
     }
 
-    if front_matter.extra.release && !front_matter.aliases.iter().any(|a| a.contains("releases")) {
+    if front_matter.is_release() && !front_matter.aliases.iter().any(|a| a.contains("releases")) {
         // Make sure release posts have a matching `releases/X.XX.X` alias.
         let version = guess_version_from_path(&front_matter.path).unwrap_or("?.??.?".into());
         front_matter.aliases.push(format!("releases/{version}"));
