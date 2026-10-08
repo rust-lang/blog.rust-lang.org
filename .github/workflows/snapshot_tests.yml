@@ -3,7 +3,7 @@ on:
   pull_request
 
 env:
-  # renovate: datasource=github-tags depName=rust lookupName=rust-lang/rust
+  # renovate: datasource=rust-version depName=rust
   RUST_VERSION: 1.97.1
   ZOLA_VERSION: 1969d846a7ca7536dc547da500bcf9be9c631f40 # v0.23.6
 
