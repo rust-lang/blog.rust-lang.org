@@ -16,28 +16,22 @@ fn snapshot() {
             return;
         }
         let path = path.display().to_string();
-        if timestamped_files
+        if inexplicably_non_deterministic_files
             .into_iter()
-            .chain(inexplicably_non_deterministic_files)
             .any(|f| path.ends_with(f))
         {
-            // Skip troublesome files, e.g. they might contain timestamps.
-            // If possible, they are tested separately below.
             return;
         }
-        let content = std::fs::read(path).unwrap();
+        let content = std::fs::read(&path).unwrap();
         // insta can't deal with non-utf8 strings?
         let content = String::from_utf8_lossy(&content).into_owned();
-        insta::assert_snapshot!(content);
-    });
-
-    // test files with timestamps filtered
-    insta::with_settings!({filters => vec![
-        (r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+\d{2}:\d{2}", "(filtered timestamp)"),
-    ]}, {
-        for file in timestamped_files {
-            let content = std::fs::read(format!("public/{file}")).unwrap();
-            let content = String::from_utf8_lossy(&content).into_owned();
+        if timestamped_files.into_iter().any(|f| path.ends_with(f)) {
+            insta::with_settings!({filters => vec![
+                (r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+\d{2}:\d{2}", "(filtered timestamp)"),
+            ]}, {
+                insta::assert_snapshot!(content);
+            });
+        } else {
             insta::assert_snapshot!(content);
         }
     });
