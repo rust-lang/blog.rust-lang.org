@@ -57,16 +57,14 @@ relevant to the error with annotations describing what went wrong.
 For example, in 1.11 if a implementation of a trait didn't match the trait
 declaration, you would see an error like the one below:
 
-![An old mismatched trait
-error](old-mismatched-trait-error.png)
+![An old mismatched trait error](old-mismatched-trait-error.png)
 
 In the new error format we represent the error by instead showing the points in
 the code that matter the most. Here is the relevant line in the trait
 declaration, and the relevant line in the implementation, using labels to
 describe why they don't match:
 
-![A new mismatched trait
-error](mismatched-trait-error.png)
+![A new mismatched trait error](mismatched-trait-error.png)
 
 Initially, this error design was built to aid in understanding borrow-checking
 errors, but we found, as with the error above, the format can be broadly
