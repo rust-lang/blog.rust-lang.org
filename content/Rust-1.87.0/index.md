@@ -4,8 +4,8 @@ title = "Announcing Rust 1.87.0 and ten years of Rust!"
 authors = ["The Rust Release Team"]
 aliases = ["releases/1.87.0"]
 
-[extra]
-release = true
+[taxonomies]
+tags = ["release"]
 +++
 
 Live from the [10 Years of Rust celebration](https://2025.rustweek.org/celebration/) in Utrecht, Netherlands,

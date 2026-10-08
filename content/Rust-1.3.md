@@ -7,8 +7,8 @@ aliases = [
     "releases/1.3.0",
 ]
 
-[extra]
-release = true
+[taxonomies]
+tags = ["release"]
 +++
 
 The gear keeps turning: we're releasing Rust 1.3 stable today! As always, read

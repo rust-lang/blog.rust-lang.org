@@ -7,8 +7,8 @@ aliases = [
     "releases/1.1.0",
 ]
 
-[extra]
-release = true
+[taxonomies]
+tags = ["release"]
 +++
 
 We're happy to announce the completion of the first release cycle after Rust

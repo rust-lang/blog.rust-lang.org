@@ -7,8 +7,8 @@ aliases = [
     "releases/1.68.2",
 ]
 
-[extra]
-release = true
+[taxonomies]
+tags = ["release"]
 +++
 
 The Rust team has published a new point release of Rust, 1.68.2. Rust is a

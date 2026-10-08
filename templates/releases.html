@@ -34,7 +34,7 @@
       {%- set_global prev_year = year %}
       {%- endif %}
 
-      {%- if page.extra is containing(pat="release") %}
+      {%- if "release" in page.taxonomies.tags | default(value=[]) %}
       {%- if loop.index0 != 0 %}
         {%- if prev_year != year %}
       {{<show_year year={year} post_name="Releases" />}}

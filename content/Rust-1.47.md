@@ -7,8 +7,8 @@ aliases = [
     "releases/1.47.0",
 ]
 
-[extra]
-release = true
+[taxonomies]
+tags = ["release"]
 +++
 
 The Rust team is happy to announce a new version of Rust, 1.47.0. Rust is a

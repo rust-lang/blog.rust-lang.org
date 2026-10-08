@@ -3,6 +3,6 @@
 {% set releases = [
     {"title": page.title, "url": page.path | trim_start(pat="/")}
     for page in section.pages | reverse
-    if page.extra is containing(pat="release")
+    if "release" in page.taxonomies.tags | default(value=[])
 ] -%}
 {{ {"releases": releases, "feed_updated": now() | date(format="%Y-%m-%dT%H:%M:%S+00:00")} | json_encode }}
