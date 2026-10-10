@@ -1,4 +1,4 @@
-{% component headers(title, section, @config) -%}
+{% component headers(title, section, feed_path, feed_title, @config) -%}
  <!-- Twitter card -->
  <meta name="twitter:card" content="summary">
  <meta name="twitter:site" content="@rustlang">
@@ -39,7 +39,7 @@
 <meta name="theme-color" content="#ffffff">
 
  <!-- atom -->
- <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org{{ section.path | safe }}feed.xml" title="{{ section.title }}" />
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org{{ feed_path | safe }}feed.xml" title="{{ feed_title }}" />
 
 <!-- theme switcher -->
 <script src="{{ config.base_url | safe }}/scripts/theme-switch.js"></script>
