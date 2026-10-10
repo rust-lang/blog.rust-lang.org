@@ -1,12 +1,25 @@
-{% set section_path = feed_url | trim_start(pat=config.base_url ~ "/") | trim_end(pat="feed.xml") -%}
-{% set section = get_section(path=section_path ~ "_index.md") -%}
+{% if term -%}
+  {% set section = get_section(path="_index.md", metadata_only=true) -%}
+  {% set tag = get_taxonomy_term(kind=taxonomy.name, term=term.name) -%}
+  {% set feed_path = tag.path -%}
+  {% set feed_title = 'Posts tagged "' ~ tag.name ~ '" | ' ~ section.title -%}
+  {#- Blog posts have no Zola `date`, so sort them by the date in their path. -#}
+  {% set dated_pages = [{"date": page.components[-4:], "page": page} for page in tag.pages] -%}
+  {% set posts = [entry.page for entry in dated_pages | sort(attribute="date") | reverse] -%}
+{% else -%}
+  {% set section_path = feed_url | trim_start(pat=config.base_url ~ "/") | trim_end(pat="feed.xml") -%}
+  {% set section = get_section(path=section_path ~ "_index.md") -%}
+  {% set feed_path = section.path -%}
+  {% set feed_title = section.title -%}
+  {% set posts = section.pages | reverse -%}
+{% endif -%}
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-    <generator uri="https://blog.rust-lang.org{{ section.path | safe }}" version="0.1.0">{{ section.title }}</generator>
-    <link href="https://blog.rust-lang.org{{ section.path | safe }}feed.xml" rel="self" type="application/atom+xml" />
-    <link href="https://blog.rust-lang.org{{ section.path | safe }}" rel="alternate" type="text/html" />
-    <id>https://blog.rust-lang.org{{ section.path | safe }}</id>
-    <title>{{ section.title }}</title>
+    <generator uri="https://blog.rust-lang.org{{ feed_path | safe }}" version="0.1.0">{{ feed_title }}</generator>
+    <link href="https://blog.rust-lang.org{{ feed_path | safe }}feed.xml" rel="self" type="application/atom+xml" />
+    <link href="https://blog.rust-lang.org{{ feed_path | safe }}" rel="alternate" type="text/html" />
+    <id>https://blog.rust-lang.org{{ feed_path | safe }}</id>
+    <title>{{ feed_title }}</title>
     <subtitle>{{ section.description }}</subtitle>
     <author>
         <name>Maintained by {{ section.extra.maintained_by }}.</name>
@@ -14,7 +27,7 @@
     </author>
     <updated>{{ now() | date(format="%Y-%m-%dT%H:%M:%S+00:00") }}</updated>
 
-    {% for page in section.pages | reverse %}
+    {% for page in posts %}
     <entry>
         <title>{{<escape_hbs input={page.title} />}}</title>
         <link rel="alternate" href="https://blog.rust-lang.org{{<escape_hbs input={page.path} />}}" type="text/html" title="{{<escape_hbs input={page.title} />}}" />
