@@ -1,6 +1,13 @@
 {% if page -%}
   {% set section = get_section(path=(page.ancestors | last), metadata_only=true) -%}
   {% set title = page.title ~ " | " ~ section.title -%}
+{% elif taxonomy -%}
+  {% set section = get_section(path="_index.md", metadata_only=true) -%}
+  {% if term -%}
+    {% set title = 'Posts tagged "' ~ term.name ~ '" | ' ~ section.title -%}
+  {% else -%}
+    {% set title = "Tags | " ~ section.title -%}
+  {% endif -%}
 {% else -%}
   {% set title = section.extra.index_title -%}
 {% endif -%}
