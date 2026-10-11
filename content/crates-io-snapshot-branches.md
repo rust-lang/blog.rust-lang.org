@@ -3,6 +3,9 @@ path = "2022/02/14/crates-io-snapshot-branches"
 title = "Crates.io Index Snapshot Branches Moving"
 authors = ["The Crates.io Team"]
 aliases = ["2022/02/14/crates-io-snapshot-branches.html"]
+
+[taxonomies]
+tags = ["crates.io"]
 +++
 
 Every so often, the [crates.io index](https://github.com/rust-lang/crates.io-index)'s Git history

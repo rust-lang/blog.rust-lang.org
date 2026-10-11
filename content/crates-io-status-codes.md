@@ -4,6 +4,9 @@ title = "crates.io: API status code changes"
 authors = ["Tobias Bieniek"]
 aliases = ["2024/02/06/crates-io-status-codes.html"]
 
+[taxonomies]
+tags = ["crates.io"]
+
 [extra]
 team = "the crates.io team"
 team_url = "https://www.rust-lang.org/governance/teams/crates-io"

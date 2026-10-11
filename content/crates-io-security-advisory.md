@@ -3,6 +3,9 @@ path = "2020/07/14/crates-io-security-advisory"
 title = "crates.io security advisory"
 authors = ["Rust Security Response WG"]
 aliases = ["2020/07/14/crates-io-security-advisory.html"]
+
+[taxonomies]
+tags = ["crates.io"]
 +++
 
 This is a cross-post of [the official security advisory][ml]. The official post
