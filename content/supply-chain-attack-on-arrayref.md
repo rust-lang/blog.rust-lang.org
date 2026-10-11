@@ -3,6 +3,9 @@ path = "2026/08/20/supply-chain-attack-on-arrayref"
 title = "Supply chain attack on arrayref"
 authors = ["Manish Goregaokar"]
 
+[taxonomies]
+tags = ["crates.io"]
+
 [extra]
 team = "security-response"
 team_url = "https://www.rust-lang.org/governance/teams/#team-security-response"

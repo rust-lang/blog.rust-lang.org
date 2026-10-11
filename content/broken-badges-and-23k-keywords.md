@@ -4,6 +4,9 @@ title = "A tale of broken badges and 23,000 features"
 authors = ["Tobias Bieniek"]
 aliases = ["2023/10/26/broken-badges-and-23k-keywords.html"]
 
+[taxonomies]
+tags = ["crates.io"]
+
 [extra]
 team = "the crates.io team"
 team_url = "https://www.rust-lang.org/governance/teams/crates-io"

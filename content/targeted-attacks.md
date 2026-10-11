@@ -3,6 +3,9 @@ path = "2026/09/17/targeted-attacks"
 title = "Be alert: targeted attacks on prominent Rustaceans"
 authors = ["Adam Harvey"]
 
+[taxonomies]
+tags = ["crates.io"]
+
 [extra]
 team = "the crates.io team and security response working group"
 team_url = "https://www.rust-lang.org/governance/teams/crates-io"

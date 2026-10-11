@@ -3,6 +3,9 @@ path = "2025/12/05/crates.io-malicious-crates-finch-rust-and-sha-rust"
 title = "crates.io: Malicious crates finch-rust and sha-rust"
 authors = ["Carol Nichols and Adam Harvey"]
 
+[taxonomies]
+tags = ["crates.io"]
+
 [extra]
 team = "the crates.io team"
 team_url = "https://www.rust-lang.org/governance/teams/dev-tools#team-crates-io"
