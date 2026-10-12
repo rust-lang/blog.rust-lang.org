@@ -56,7 +56,8 @@ jobs:
 
   pub_date:
     name: Check publication date for placeholder
-    if: ${{ github.event_name == 'merge_group' }}
+    # Deployment depends on this check, so it must also run on main.
+    if: ${{ github.event_name == 'merge_group' || github.ref == 'refs/heads/main' }}
 
     runs-on: ubuntu-latest
     steps:
