@@ -1,8 +1,22 @@
 {% if page -%}
   {% set section = get_section(path=(page.ancestors | last), metadata_only=true) -%}
   {% set title = page.title ~ " | " ~ section.title -%}
+{% elif taxonomy -%}
+  {% set section = get_section(path="_index.md", metadata_only=true) -%}
+  {% if term -%}
+    {% set title = 'Posts tagged "' ~ term.name ~ '" | ' ~ section.title -%}
+  {% else -%}
+    {% set title = "Tags | " ~ section.title -%}
+  {% endif -%}
 {% else -%}
   {% set title = section.extra.index_title -%}
+{% endif -%}
+{% if term -%}
+  {% set feed_path = term.path -%}
+  {% set feed_title = title -%}
+{% else -%}
+  {% set feed_path = section.path -%}
+  {% set feed_title = section.title -%}
 {% endif -%}
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +25,7 @@
     <title>{{<escape_hbs input={title} />}}</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="description" content="Empowering everyone to build reliable and efficient software.">
-     {% filter indent(blank=true) %}{{<headers title={title} section={section} />}}{% endfilter %}
+     {% filter indent(blank=true) %}{{<headers title={title} section={section} feed_path={feed_path} feed_title={feed_title} />}}{% endfilter %}
   </head>
   <body>
     {% filter indent(blank=true) %}{{<nav section={section} />}}{% endfilter %}

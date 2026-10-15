@@ -3,6 +3,9 @@ path = "2025/09/24/crates.io-malicious-crates-fasterlog-and-asyncprintln"
 title = "crates.io: Malicious crates faster_log and async_println"
 authors = ["Walter Pearce"]
 
+[taxonomies]
+tags = ["crates.io"]
+
 [extra]
 team = "the crates.io team"
 team_url = "https://www.rust-lang.org/governance/teams/dev-tools#team-crates-io"

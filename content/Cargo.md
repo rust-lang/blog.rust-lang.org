@@ -4,6 +4,9 @@ title = "Cargo: Rust's community crate host"
 authors = ["Alex Crichton"]
 description = "Today it is my pleasure to announce that crates.io is online and ready for action."
 aliases = ["2014/11/20/Cargo.html"]
+
+[taxonomies]
+tags = ["crates.io"]
 +++
 
 Today it is my pleasure to announce that [crates.io](https://crates.io/) is

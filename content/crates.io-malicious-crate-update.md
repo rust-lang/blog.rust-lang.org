@@ -3,6 +3,9 @@ path = "2026/02/13/crates.io-malicious-crate-update"
 title = "crates.io: an update to the malicious crate notification policy"
 authors = ["Adam Harvey"]
 
+[taxonomies]
+tags = ["crates.io"]
+
 [extra]
 team = "the crates.io team"
 team_url = "https://www.rust-lang.org/governance/teams/dev-tools#team-crates-io"

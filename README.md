@@ -47,6 +47,18 @@ To use it, run:
 cargo blog
 ```
 
+### Tags
+
+Posts can be classified with tags in their front matter:
+
+```toml
+[taxonomies]
+tags = ["crates.io"]
+```
+
+Every tag gets a listing at `/tags/<tag>/` and an Atom feed at `/tags/<tag>/feed.xml`.
+Zola slugifies tag names, so the `crates.io` tag is listed at `/tags/crates-io/`.
+
 ### Snapshot testing
 
 If you're making changes to how the site is generated, you may want to check the impact your changes have on the output.

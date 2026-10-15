@@ -4,6 +4,9 @@ title = "crates.io Policy Update RFC"
 authors = ["Tobias Bieniek"]
 aliases = ["2023/09/22/crates-io-usage-policy-rfc.html"]
 
+[taxonomies]
+tags = ["crates.io"]
+
 [extra]
 team = "the crates.io team"
 team_url = "https://www.rust-lang.org/governance/teams/crates-io"

@@ -3,6 +3,9 @@ path = "2026/07/13/crates-io-development-update"
 title = "crates.io: development update"
 authors = ["Tobias Bieniek"]
 
+[taxonomies]
+tags = ["crates.io"]
+
 [extra]
 team = "the crates.io team"
 team_url = "https://www.rust-lang.org/governance/teams/crates-io"
