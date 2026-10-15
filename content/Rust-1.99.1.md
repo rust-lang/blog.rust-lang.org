@@ -28,7 +28,7 @@ Rust 1.99.1 fixes the following regressions from prior releases:
 
   The LLVM `loop-idiom-wcslen` pass may introduce calls to `wcslen` as an optimization, and some Rust targets did not have that function readily available in `libc` or elsewhere. The UEFI targets in particular were broken for any project using `std`, as some of these calls were introduced in the precompiled standard library, but the issue was also reproducible for similar user code patterns.
 
-* [Miscompilation of FFI `bool` return values on x86_64](https://github.com/rust-lang/rust/issues/163911): Rust functions returning `bool` through FFI could leave bits 1-7 of the return register unspecified, causing callers to observe raw values other than `0` or `1`. These return types are now marked for zero-extension again, ensuring those extra bits are clear as required by the ABI.
+* [Miscompilation of FFI `bool` return values on x86_64](https://github.com/rust-lang/rust/issues/163911): Rust functions returning `bool` through FFI could leave bits 1-7 of the return register unspecified, causing callers to observe raw values other than `0` or `1`. This return type is now marked for zero-extension again, as required by the ABI.
 
 * [`rust-lld` failed to load `libLLVM` on macOS](https://github.com/rust-lang/rust/issues/163947): This linker could fail to run if the compiler was invoked without the `rustup` proxy, as there was no direct setting for the appropriate library search path. Now `rust-lld` is built with an `rpath` entry for the directory containing `libLLVM.dylib`.
 
