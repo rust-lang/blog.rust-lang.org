@@ -42,60 +42,70 @@ And now strap in, as there is a ton of great content to read about here!
 ### A Frontend for Safe GPU Offloading in Rust
 - Contributor: [Marcelo Domínguez](https://github.com/sa4dus)
 - Mentor: [Manuel Drehwald](https://github.com/ZuseZ4)
+- [Final report](https://sa4dus.github.io/posts/gsoc2026-final-report/)
 
 TODO
 
 ### Adding WebAssembly Linking Support to Wild
 - Contributor: [Kei Akiyama](https://github.com/lapla-cogito)
 - Mentor: [David Lattimore](https://github.com/davidlattimore)
+- [Final report](https://lapla.dev/posts/gsoc_final2)
 
 TODO
 
 ### Bringing autodiff and offload into Rust CI
 - Contributor: [Shota Sugano](https://github.com/sgasho)
 - Mentor: [Manuel Drehwald](https://github.com/ZuseZ4)
+- [Final report](https://sgasho.github.io/posts/gsoc-2026-final-report/)
 
 TODO
 
 ### Debugger for Miri
 - Contributor: [Mohamed Ali Mohamed](https://github.com/moabo3li)
 - Mentor: [Oli Scherer](https://github.com/oli-obk)
+- [Final report](https://gist.github.com/moabo3li/10b6ca701cb998ab36781e81ac0f100d)
 
 TODO
 
 ### Implementing impl and mut restrictions
 - Contributor: [Ryosuke Yamano](https://github.com/CoCo-Japan-pan)
 - Mentors: [Jacob Pratt](https://github.com/jhpratt), [Urgau](https://github.com/Urgau)
+- [Final report](https://gist.github.com/CoCo-Japan-pan/ced54db688080b94ec777bd750e87b34)
 
 TODO
 
 ### Improving Ergonomics and Safety of serialport-rs
 - Contributor: [Tanmay](https://github.com/NONnonHere)
 - Mentor: [Christian Meusel](https://github.com/sirhcel)
+- [Final report](https://nonnonhere.github.io/posts/gsoc2026-report/)
 
 TODO
 
 ### libc: transition differing bit-width time and offset variants and deprecate bug-prone constants
 - Contributor: [Adam Martinez](https://github.com/dybucc)
 - Mentor: [Trevor Gross](https://github.com/tgross35)
+- [Final report](https://dybucc.github.io/gsoc-2026-report/)
 
 TODO
 
 ### Link Linux kernel and its Modules with Wild
 - Contributor: [Vishruth Thimmaiah](https://github.com/vishruth-thimmaiah)
 - Mentor: [David Lattimore](https://github.com/davidlattimore)
+- [Final report](https://vishthimmaiah.dev/blog/gsoc-26/)
 
 TODO
 
 ### Migrating rust-analyzer assists to SyntaxEditor
 - Contributor: [Shourya Sharma](https://github.com/Shourya742)
 - Mentors: [Chayim Refael Friedman](https://github.com/ChayimFriedman2), [Lukas Wirth](https://github.com/Veykril)
+- [Final report](TODO)
 
 TODO
 
 ### Port std::arch test suite to rust-lang/rust
 - Contributor: [Sumit Kumas](https://github.com/xonx4l)
 - Mentors: [Jakub Beránek](https://github.com/Kobzol), [Folkert de Vries](https://github.com/folkertdev)
+- [Final report](https://hackmd.io/@7qtUS4O9Qqadcel1SvxXiQ/BySYQX7vMe)
 
 The `std::arch` module of the Rust standard library contains various intrinsic functions that provide architecture and vendor-specific functionality. Their implementation lives in the [stdarch](https://github.com/rust-lang/stdarch) repository, which is included as a [Josh][josh-post] subtree in the main compiler repo (`rust-lang/rust`).
 
@@ -118,12 +128,14 @@ You can check Sumit's `rust-lang` PRs [here][xonx4l-prs]; notice that he was als
 ### Reorganizing tests/ui/issues
 - Contributor: [zedddie](https://github.com/zedddie)
 - Mentors: [Teapot](https://github.com/Teapot4195), [Kivooeo](https://github.com/Kivooeo)
+- [Final report](https://gist.github.com/zedddie/7170d2280bc9e19da84cd7eb4e3b32e0)
 
 TODO
 
 ### Utilize debugger APIs to improve debug info test accuracy and error reporting
 - Contributor: [Anthony Bolden](https://github.com/Walnut356)
 - Mentors: [Jakub Beránek](https://github.com/Kobzol), [Jieyou Xu](https://github.com/jieyouxu)
+- [Final report](https://walnut356.github.io/posts/gsoc-2026-final-report/)
 
 The Rust debugging experience leaves a [lot to be desired][rust-debuginfo-survey]. One reason why we struggled to improve it is that many of our debuginfo test suites did not even run in CI for the past few years, as they were difficult to maintain. When a type visualizer, the implementation details of a standard library type or debugger internals changed, someone had to go through tens of tests and manually update them. This was not sustainable, so the test suite rotted.
 
@@ -144,6 +156,7 @@ Anthony's amazing contributions and his expertise in debuggers led to him being 
 ### XDG path support for rustup
 - Contributor: [Guicheng Liu](https://github.com/Cloud0310)
 - Mentor: [rami3l](https://github.com/rami3l)
+- [Final report](https://cloud0310.github.io/posts/2026-GSoC-project-report.html)
 
 TODO
 
