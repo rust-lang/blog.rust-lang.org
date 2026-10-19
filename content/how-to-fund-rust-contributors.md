@@ -8,23 +8,25 @@ team = "the Funding team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-funding"
 +++
 
-There is always so much to do in the Rust Project! New features to implement, bugs to fix, performance optimizations to make, issues to triage, repositories to maintain, blog posts to write… The adoption of Rust is growing, and it takes an enormous amount of work to keep our high bar of quality by ensuring that Rust keeps working well for its users, but also to ship features and improvements that make the Rust language and its toolchain better.
+There is always so much to do in the Rust Project! New features to implement, bugs to fix, performance optimizations to make, issues to triage… It takes a lot of work to keep our high bar of quality while also shipping new features and improvements. And the workload keeps increasing with the continuous growth of Rust adoption.
 
-As is (unfortunately!) common for many open source projects, a large fraction of that work is currently done by volunteers. That causes various issues, especially for a project as large as Rust. Performing [maintenance][what-is-maintenance-post] for long periods of time without financial support can feel like a chore, and eventually lead to burnout. Implementing complex features, which often requires gathering a lot of context upfront, discussing competing designs and alternatives and doing all kinds of implementation work, can take years when you can only focus on it for a few hours per week. And the list goes on.
+As is unfortunately common in open source projects, a large fraction of that work is currently done by volunteers. That causes various issues, such as people burning out or complex features taking many years to ship.
 
-It is probably unsurprising that one of the best ways of helping with this situation is to get more people who work on Rust funded. We see that funding Rust contributors helps a lot, as we already experience the positive effects of several funding initiatives that started ramping up this year. They helped make significant improvements to various initiatives, such as improving the maintenance status of critical Rust projects or pushing long-awaited features (e.g. allocators, never type, next trait solver or the Polonius borrow checker) close to stabilization. Nevertheless, only a fraction of people working on Rust are currently funded for their work, and more funding will be required to change that.
+Unsurprisingly, one of the best ways to help improve that is to get more people who work on Rust funded! This year, several funding initiatives started ramping up, and we already experience many positive effects. They helped us improve the maintenance status of critical Rust projects and make significant progress on several long-awaited features, such as allocators, the never type, the next trait solver or the Polonius borrow checker. However, only a fraction of people working on Rust are currently funded for their work.
 
-We know that there are actually many Rust users, both individuals and companies, who would like to help improve Rust by funding it. But it might not always be obvious *how exactly* to do that. This post attempts to make that clearer by writing down a "Rust Project funding guide". We propose three concrete ways of financially supporting the development of Rust:
+We know that there are Rust users, both individuals and companies, who would like to help improve Rust by funding it, but it might not always be obvious *how exactly* to do that. This post thus contains a brief "Rust Project funding guide". The TLDR is:
 
-- [Fund general maintenance](#fund-general-maintenance)
-- [Fund specific features and improvements](#fund-specific-features-and-improvements)
-- [Fund individual contributors](#fund-individual-contributors)
+- To fund [general maintenance](#fund-general-maintenance), donate to the [Rust Foundation Maintainers Fund][rfmf]
+- To fund [specific features and improvements](#fund-specific-features-and-improvements), sponsor [fundable Rust Project Goals][goals-looking-for-funding]
+- To fund [individual contributors](#fund-individual-contributors), donate to their [GitHub Sponsors][sponsor-individual-contributors] accounts
+
+Read below for more details.
 
 ## Fund general maintenance
 
 [Maintenance][what-is-maintenance-post] is a continuous process required to keep Rust (or any software project for that matter) working. It consists of two main activities. The first is general housekeeping, such as ensuring that Continuous Integration works, dependencies are kept up-to-date and issues, bugs and security incidents are promptly triaged and resolved. The second is performing refactorings and code reviews, which ensures that the codebase will be able to evolve and continuously ship new features, without accruing extensive technical debt.
 
-Having quality maintenance is crucial for the long-term health of Rust, yet it is typically very difficult to find funding for it; funders often want to sponsor flashy new features, rather than just "keeping the lights on". However, it is important to know that without sufficient maintenance, it becomes much more difficult, and much slower, to ship new features. Improving the maintenance of Rust thus also helps us ship features and improvements faster, though the effects are sometimes only observable over longer periods of time.
+Having quality maintenance is crucial for the long-term health of Rust, yet it is typically very difficult to find funding for it; funders often want to sponsor flashy new features, rather than just "keeping the lights on". However, without sufficient maintenance, it becomes much more difficult, and much slower, to ship new features. Improving the maintenance of Rust thus also helps us ship features and improvements faster, though the effects are sometimes only observable over longer periods of time.
 
 Funding maintenance is a great choice if you want to let us decide how best to improve Rust. The Rust [Funding team][funding-team] continuously looks for Rust teams and projects that require help with their maintenance efforts, and allocates available funds to Rust maintainers who could help improve the situation.
 
