@@ -1,0 +1,25 @@
+{% extends "layout.html" -%}
+{% block page -%}
+<header class="mt3 mt0-ns mb4-ns">
+  <div class="container flex flex-column flex-row-l justify-between-l">
+    <div class="mw6-l">
+      <p>Posts on the Rust blogs, grouped by tag.</p>
+    </div>
+  </div>
+</header>
+
+<section id="posts" class="posts">
+   <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+
+    <table class="post-list collapse w-100 f2-l f2-m f3-s">
+    {%- for term in terms %}
+      <tr>
+        <td class="tr o-60 pr4 pr5-l w-50 bn">{{ term.page_count }}&nbsp;post{{ term.page_count | pluralize }}</td>
+        <td class="bn"><a href="{{ term.permalink | safe }}">{{ term.name }}</a></td>
+      </tr>
+    {%- endfor %}
+    </table>
+
+  </div>
+</section>
+{%- endblock page %}

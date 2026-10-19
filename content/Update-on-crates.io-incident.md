@@ -3,6 +3,9 @@ path = "2018/10/19/Update-on-crates.io-incident"
 title = "Update on the October 15, 2018 incident on crates.io"
 authors = ["The Crates.io Team"]
 aliases = ["2018/10/19/Update-on-crates.io-incident.html"]
+
+[taxonomies]
+tags = ["crates.io"]
 +++
 
 On Monday, Oct 15, starting at approximately 20:00 UTC, crates.io sustained

@@ -3,6 +3,9 @@ path = "2025/09/12/crates-io-phishing-campaign"
 title = "crates.io phishing campaign"
 authors = ["Rust Security Response WG", "crates.io team"]
 aliases = []
+
+[taxonomies]
+tags = ["crates.io"]
 +++
 
 We received multiple reports of a phishing campaign targeting crates.io users

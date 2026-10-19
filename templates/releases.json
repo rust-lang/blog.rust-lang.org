@@ -1,8 +1,16 @@
-{% set section_path = feed_url | trim_start(pat=config.base_url ~ "/") | trim_end(pat="releases.json") -%}
-{% set section = get_section(path=section_path ~ "_index.md") -%}
+{% if term -%}
+  {% set tag = get_taxonomy_term(kind=taxonomy.name, term=term.name) -%}
+  {#- Blog posts have no Zola `date`, so sort them by the date in their path. -#}
+  {% set dated_pages = [{"date": page.components[-4:], "page": page} for page in tag.pages] -%}
+  {% set posts = [entry.page for entry in dated_pages | sort(attribute="date") | reverse] -%}
+{% else -%}
+  {% set section_path = feed_url | trim_start(pat=config.base_url ~ "/") | trim_end(pat="releases.json") -%}
+  {% set section = get_section(path=section_path ~ "_index.md") -%}
+  {% set posts = section.pages | reverse -%}
+{% endif -%}
 {% set releases = [
     {"title": page.title, "url": page.path | trim_start(pat="/")}
-    for page in section.pages | reverse
+    for page in posts
     if "release" in page.taxonomies.tags | default(value=[])
 ] -%}
 {{ {"releases": releases, "feed_updated": now() | date(format="%Y-%m-%dT%H:%M:%S+00:00")} | json_encode }}

@@ -4,6 +4,9 @@ title = "crates.io: Dropping support for non-canonical downloads"
 authors = ["Tobias Bieniek"]
 aliases = ["2023/10/27/crates-io-non-canonical-downloads.html"]
 
+[taxonomies]
+tags = ["crates.io"]
+
 [extra]
 team = "the crates.io team"
 team_url = "https://www.rust-lang.org/governance/teams/crates-io"

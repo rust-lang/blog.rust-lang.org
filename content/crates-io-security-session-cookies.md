@@ -4,6 +4,9 @@ title = "crates.io security incident: improperly stored session cookies"
 authors = ["Adam Harvey"]
 aliases = ["2025/04/11/crates-io-security-session-cookies.html"]
 
+[taxonomies]
+tags = ["crates.io"]
+
 [extra]
 team = "the crates.io team"
 team_url = "https://www.rust-lang.org/governance/teams/crates-io"

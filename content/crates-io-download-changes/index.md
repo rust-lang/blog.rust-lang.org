@@ -4,6 +4,9 @@ title = "crates.io: Download changes"
 authors = ["Tobias Bieniek"]
 aliases = ["2024/03/11/crates-io-download-changes.html"]
 
+[taxonomies]
+tags = ["crates.io"]
+
 [extra]
 team = "the crates.io team"
 team_url = "https://www.rust-lang.org/governance/teams/crates-io"

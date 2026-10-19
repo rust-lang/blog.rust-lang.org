@@ -3,6 +3,9 @@ path = "2025/12/03/crates.io-malicious-crates-evm-units-and-uniswap-utils"
 title = "crates.io: Malicious crates evm-units and uniswap-utils"
 authors = ["Walter Pearce"]
 
+[taxonomies]
+tags = ["crates.io"]
+
 [extra]
 team = "the crates.io team"
 team_url = "https://www.rust-lang.org/governance/teams/dev-tools#team-crates-io"
