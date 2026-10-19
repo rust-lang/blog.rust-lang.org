@@ -125,7 +125,21 @@ TODO
 - Contributor: [Anthony Bolden](https://github.com/Walnut356)
 - Mentors: [Jakub Beránek](https://github.com/Kobzol), [Jieyou Xu](https://github.com/jieyouxu)
 
-TODO
+The Rust debugging experience leaves a [lot to be desired][rust-debuginfo-survey]. One reason why we struggled to improve it is that many of our debuginfo test suites did not even run in CI for the past few years, as they were difficult to maintain. When a type visualizer, the implementation details of a standard library type or debugger internals changed, someone had to go through tens of tests and manually update them. This was not sustainable, so the test suite rotted.
+
+Luckily for us, Anthony took that affront personally. Even before his GSoC project, he spent considerable effort on improving the quality of debug visualizers of various Rust standard library types, and gained an impressive amount of knowledge about debuggers.
+
+During his GSoC project, he completely overhauled how our debuginfo test infrastructure works, both for [LLDB][lldb-repr] and [GDB][gdb-repr]. Thanks to his improvements, we can now easily "rebless" the reference output when something changes, which makes it much easier to keep our test suite up-to-date. The new tests also record much more information about the internal state of the debugger recorded during the test, which helps with diagnosing issues that cause type visualizers to stop working.
+
+In addition to redesigning the test suite, Anthony also actually managed to re-enable the LLDB tests on both Windows and Linux in our CI again (after several years of being skipped there!). This will allow us to avoid debuginfo regressions and make it easier to improve the Rust debugging experience. Oh, and it goes without saying that while doing all that, he also made numerous improvements to Rust type visualizers. You can find his PRs [here][walnut-prs].
+
+Anthony's amazing contributions and his expertise in debuggers led to him being invited to the Rust [Compiler team][compiler-team], which was much deserved. What else can we add, other than: thank you for your awesome work!
+
+[rust-debuginfo-survey]: https://blog.rust-lang.org/2026/09/07/rust-debugging-survey-2026-results/
+[lldb-repr]: https://github.com/rust-lang/rust/pull/158298
+[gdb-repr]: https://github.com/rust-lang/rust/pull/160377
+[walnut-prs]: https://github.com/rust-lang/rust/pulls?q=is%3Apr+state%3Amerged+author%3Awalnut356
+[compiler-team]: https://rust-lang.org/governance/teams/compiler/#team-compiler
 
 ### XDG path support for rustup
 - Contributor: [Guicheng Liu](https://github.com/Cloud0310)
