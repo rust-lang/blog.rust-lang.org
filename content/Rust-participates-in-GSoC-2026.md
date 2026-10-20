@@ -6,6 +6,9 @@ authors = ["Jakub Beránek", "Jack Huey"]
 [extra]
 team = "the mentorship team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-mentorship"
+
+[taxonomies]
+tags = ["google-summer-of-code"]
 +++
 
 We are happy to announce that the Rust Project will again be participating in [Google Summer of Code (GSoC) 2026][gsoc], same as in the previous two years. If you're not eligible or interested in participating in GSoC, then most of this post likely isn't relevant to you; if you are, this should contain some useful information and links.

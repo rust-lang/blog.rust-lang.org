@@ -3,6 +3,9 @@ path = "2024/11/07/gsoc-2024-results"
 title = "Google Summer of Code 2024 results"
 authors = ["Jakub Beránek, Jack Huey and Paul Lenz"]
 aliases = ["2024/11/07/gsoc-2024-results.html"]
+
+[taxonomies]
+tags = ["google-summer-of-code"]
 +++
 
 As we have previously [announced][gsoc-blog-post], the Rust Project participated
