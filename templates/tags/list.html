@@ -15,7 +15,9 @@
     {%- for term in terms %}
       <tr>
         <td class="tr o-60 pr4 pr5-l w-50 bn">{{ term.page_count }}&nbsp;post{{ term.page_count | pluralize }}</td>
-        <td class="bn"><a href="{{ term.permalink | safe }}">{{ term.name }}</a></td>
+        <td class="bn"><a href="{{ term.permalink | safe }}">{{
+          config.extra.tag_labels[term.name] or term.name
+        }}</a></td>
       </tr>
     {%- endfor %}
     </table>
