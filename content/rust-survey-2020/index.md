@@ -3,6 +3,9 @@ path = "2020/12/16/rust-survey-2020"
 title = "Rust Survey 2020 Results"
 authors = ["The Rust Survey Team"]
 aliases = ["2020/12/16/rust-survey-2020.html"]
+
+[taxonomies]
+tags = ["survey"]
 +++
 
 Greetings Rustaceans!

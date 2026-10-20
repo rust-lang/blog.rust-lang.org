@@ -8,6 +8,9 @@ aliases = ["inside-rust/2020/05/27/contributor-survey.html"]
 [extra]
 team = "the compiler team"
 team_url = "https://www.rust-lang.org/governance/teams/compiler"
+
+[taxonomies]
+tags = ["survey"]
 +++
 
 

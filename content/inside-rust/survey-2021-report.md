@@ -8,6 +8,9 @@ aliases = ["inside-rust/2022/06/21/survey-2021-report.html"]
 [extra]
 team = "The Survey Working Group"
 team_url = "https://www.rust-lang.org/governance/teams/community#Survey%20team"
+
+[taxonomies]
+tags = ["survey"]
 +++
 As usual, we conducted an annual community survey in 2021. We previously shared some some highlights and charts
 in a [blog post](https://blog.rust-lang.org/2022/02/15/Rust-Survey-2021.html). This year we would also like to

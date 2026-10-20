@@ -6,6 +6,9 @@ authors = ["apiraino", "Jakub Beránek"]
 [extra]
 team = "the Survey team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-survey"
+
+[taxonomies]
+tags = ["survey"]
 +++
 
 It’s time for the [2025 State of Rust Survey][survey-link]!

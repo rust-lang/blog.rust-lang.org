@@ -6,6 +6,9 @@ authors = ["Jakub Beránek"]
 [extra]
 team = "the compiler performance working group"
 team_url = "https://www.rust-lang.org/governance/teams/compiler#team-wg-compiler-performance"
+
+[taxonomies]
+tags = ["survey"]
 +++
 
 Two months ago, we launched the first [Rust Compiler Performance Survey][rust-compiler-performance-survey], with the goal of helping us understand the biggest pain points of Rust developers related to build performance. It is clear that this topic is very important for the Rust community, as the survey received over 3 700 responses! We would like to thank everyone who participated in the survey, and especially those who described their workflows and challenges with an open answer. We plan to run this survey annually, so that we can observe long-term trends in Rust build performance and its perception.

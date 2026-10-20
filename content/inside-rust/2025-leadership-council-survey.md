@@ -6,6 +6,9 @@ authors = ["Leadership Council"]
 [extra]
 team = "the Leadership Council team"
 team_url = "https://www.rust-lang.org/governance/teams/leadership-council#team-leadership-council"
+
+[taxonomies]
+tags = ["survey"]
 +++
 
 One of the responsibilities of the [leadership council](https://www.rust-lang.org/governance/teams/leadership-council),

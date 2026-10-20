@@ -4,6 +4,9 @@ title = "Launching the 2018 State of Rust Survey"
 authors = ["The Rust Community Team"]
 description = "Hearing from you about the third year of Rust"
 aliases = ["2018/08/08/survey.html"]
+
+[taxonomies]
+tags = ["survey"]
 +++
 
 It's that time again! Time for us to take a look at how the Rust project is doing, and what we should plan for the future. The Rust Community Team is pleased to announce our [2018 State of Rust Survey][survey]! Whether or not you use Rust today, we want to know your opinions. Your responses will help the project understand its strengths and weaknesses and establish development priorities for the future.
