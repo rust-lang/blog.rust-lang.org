@@ -14,19 +14,19 @@ We are announcing two new groups in the compiler team:
 
 The GPU target notification group is made of experts from various vendors (AMD, Nvidia, Intel, etc.) and its goal is to better respond to issues and in general work in this area of expertise, for example [this one][rust-150452].
 
-This group has an associated Zulip stream ([`#t-compiler/gpgpu-backend`]).
+This group has an associated Zulip stream ([`#t-compiler/gpgpu-backend`][t-compiler/gpgpu-backend]).
 
 [rust-lang/team]: https://github.com/rust-lang/team
-[`t-compiler/gpgpu-backend`]: https://rust-lang.zulipchat.com/#narrow/channel/422870-t-compiler.2Fgpgpu-backend
+[t-compiler/gpgpu-backend]: https://rust-lang.zulipchat.com/#narrow/channel/422870-t-compiler.2Fgpgpu-backend
 [rust-150452]: https://github.com/rust-lang/rust/pull/150452
 
 ### About the Linker working area
 
 Creating of a linker group was discussed in [MCP#964][mcp#964] to kickstart work about integrating alternative linkers in the compiler, like [Wild][Wild]. As the second goal, this group can be a point of contact for handling questions and issues regarding linkers.
 
-This group has an associated Zulip stream ([`#t-compiler/linker`]).
+This group has an associated Zulip stream ([`#t-compiler/linker`][t-compiler/linker]).
 
-[`t-compiler/linker`]: https://rust-lang.zulipchat.com/#narrow/channel/585172-t-compiler.2Flinker
+[t-compiler/linker]: https://rust-lang.zulipchat.com/#narrow/channel/585172-t-compiler.2Flinker
 [mcp#964]: https://github.com/rust-lang/compiler-team/issues/964
 [Wild]: https://github.com/wild-linker/wild/
 
