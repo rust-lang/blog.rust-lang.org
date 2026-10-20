@@ -6,6 +6,9 @@ authors = ["rami3l"]
 [extra]
 team = "The Rustup Team"
 team_url = "https://rust-lang.org/governance/teams/dev-tools/#team-rustup"
+
+[taxonomies]
+tags = ["rustup"]
 +++
 
 This blog post is `t-rustup`'s first attempt of providing a more transparent

@@ -3,6 +3,9 @@ path = "2021/04/27/Rustup-1.24.0"
 title = "Announcing Rustup 1.24.0"
 authors = ["The Rustup Working Group"]
 aliases = ["2021/04/27/Rustup-1.24.0.html"]
+
+[taxonomies]
+tags = ["rustup"]
 +++
 
 > Shortly after publishing the release we got reports of [a regression][2737]

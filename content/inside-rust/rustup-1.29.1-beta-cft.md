@@ -6,6 +6,9 @@ authors = ["rami3l"]
 [extra]
 team = "The Rustup Team"
 team_url = "https://rust-lang.org/governance/teams/dev-tools/#team-rustup"
+
+[taxonomies]
+tags = ["rustup"]
 +++
 
 We are excited to announce that rustup 1.29.1 beta is now available for testing

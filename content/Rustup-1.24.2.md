@@ -3,6 +3,9 @@ path = "2021/05/17/Rustup-1.24.2"
 title = "Announcing Rustup 1.24.2"
 authors = ["The Rustup Working Group"]
 aliases = ["2021/05/17/Rustup-1.24.2.html"]
+
+[taxonomies]
+tags = ["rustup"]
 +++
 
 The rustup working group is happy to announce the release of rustup version 1.24.2. [Rustup][install] is the recommended tool to install [Rust][rust], a programming language that is empowering everyone to build reliable and efficient software.

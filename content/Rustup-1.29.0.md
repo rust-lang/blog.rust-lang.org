@@ -2,6 +2,9 @@
 path = "2026/03/12/Rustup-1.29.0"
 title = "Announcing rustup 1.29.0"
 authors = ["The Rustup Team"]
+
+[taxonomies]
+tags = ["rustup"]
 +++
 
 The rustup team is happy to announce the release of rustup version 1.29.0.
