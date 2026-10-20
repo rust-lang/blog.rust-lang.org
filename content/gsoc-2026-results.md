@@ -51,7 +51,17 @@ TODO
 - Mentor: [David Lattimore](https://github.com/davidlattimore)
 - [Final report](https://lapla.dev/posts/gsoc_final2)
 
-TODO
+The goal of this project was simple on paper: teach the [Wild][wild] linker to link WebAssembly (Wasm) programs. However, adding support for a new linker target is of course far from simple. Luckily, Kei already had a lot of experience with Wild, as this was his second [GSoC project][kei-gsoc-2025] working on the Wild linker.
+
+And as expected, Kei did great a job! Prior to GSoC 2026, Wild had no Wasm output support. Now, the Wasm support is sufficiently good that Wild can link a range of complex programs to Wasm. For example, it is able to link itself, SQLite, ripgrep, CPython and even the SpiderMonkey JavaScript engine.
+
+And the linking performance is excellent! When compared to `wasm-ld`, the de-facto standard Wasm linker, which is based on the LLD linker, Wild is 2-15x faster, and uses 2-5x less memory. You can find more benchmarks in his [final report][wild-linker-wasm-final-report], where he also explains that achieving this performance took quite some work, because Wild's ELF linking performance did not immediately translate to being fast when linking Wasm.
+
+Even after this GSoC project ended, Kei has continued improving Wild's Wasm support, as well as contributing to other parts of Wild. Thank you for bringing fast linking to a new set of use-cases, Kei! You are a valued member of the Wild team.
+
+[wild]: https://github.com/davidlattimore/wild
+[kei-gsoc-2025]: https://blog.rust-lang.org/2025/11/18/gsoc-2025-results/#improve-wild-linker-test-suites
+[wild-linker-wasm-final-report]: https://lapla.dev/posts/gsoc_final2#link-performance
 
 ### Bringing autodiff and offload into Rust CI
 - Contributor: [Shota Sugano](https://github.com/sgasho)
@@ -93,7 +103,19 @@ TODO
 - Mentor: [David Lattimore](https://github.com/davidlattimore)
 - [Final report](https://vishthimmaiah.dev/blog/gsoc-26/)
 
-TODO
+Linker scripts are arcane commands that can be used to instruct a linker to construct the final binary in a custom way. The [Wild][wild] linker used to implement only basic linker script functionality, which Vishruth greatly expanded during his GSoC project.
+
+Thanks to that, Wild can now successfully link Linux kernel modules, and it's even close to being able to link the Linux kernel itself! Vishruth's work involved greatly expanding expression evaluation support, location counters, program headers, etc. In addition to adding support for many missing bits of linker script support, Vishruth implemented support for partial linking (-r) as this is needed in order to link Linux kernel modules. You can find all the linker script features that he implemented [here][linker-script-support].
+
+Adding all those peculiar features to Wild required performing many cross-cutting changes to its codebase, which Vishruth managed to do really well. And it was not at the cost of performance! Wild now manages to link Linux kernel modules such as `btrfs` or `amdgpu` 2-4x faster than the BFD (GNU ld) or LLD linkers[^mold]. You can find more benchmarks in his [final report][wild-linker-modules-final-report].
+
+[^mold]: In case you were wondering, the `mold` linker does not support linker scripts required to link Linux kernel modules at the moment, so Vishruth did not compare the performance of Wild against `mold` here.
+
+Vishruth has continued to contribute to Wild even after his GSoC project ended and has become a valued contributor to the project. Thank you very much for making Wild better, Vishruth!
+
+[wild]: https://github.com/davidlattimore/wild
+[linker-script-support]: https://github.com/wild-linker/wild/blob/main/LINKER_SCRIPT_SUPPORT.md
+[wild-linker-modules-final-report]: https://vishthimmaiah.dev/blog/gsoc-26#benchmarks
 
 ### Migrating rust-analyzer assists to SyntaxEditor
 - Contributor: [Shourya Sharma](https://github.com/Shourya742)
@@ -145,7 +167,7 @@ During his GSoC project, he completely overhauled how our debuginfo test infrast
 
 In addition to redesigning the test suite, Anthony also actually managed to re-enable the LLDB tests on both Windows and Linux in our CI again (after several years of being skipped there!). This will allow us to avoid debuginfo regressions and make it easier to improve the Rust debugging experience. Oh, and it goes without saying that while doing all that, he also made numerous improvements to Rust type visualizers. You can find his PRs [here][walnut-prs].
 
-Anthony's amazing contributions and his expertise in debuggers led to him being invited to the Rust [Compiler team][compiler-team], which was much deserved. What else can we add, other than: thank you for your awesome work!
+Anthony's amazing contributions and his deep expertise in debuggers led to him being invited to the Rust [Compiler team][compiler-team], which was much deserved. What else can we add, other than: thank you for your awesome work!
 
 [rust-debuginfo-survey]: https://blog.rust-lang.org/2026/09/07/rust-debugging-survey-2026-results/
 [lldb-repr]: https://github.com/rust-lang/rust/pull/158298
