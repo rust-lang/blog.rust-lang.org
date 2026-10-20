@@ -3,10 +3,6 @@ path = "inside-rust/2026/10/20/gpu-target-notification-group"
 title = "Announcing the GPU notification group and Linker Working Area"
 authors = ["The compiler team"]
 description = "Announcing the GPU notification group and Linker Working Area"
-
-[extra]
-team = "the compiler team"
-team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 We are announcing two new groups in the compiler team:
