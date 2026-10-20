@@ -4,6 +4,9 @@ title = "Taking Rust everywhere with rustup"
 authors = ["Brian Anderson"]
 description = "The rustup toolchain manager makes cross-compilation in Rust a breeze"
 aliases = ["2016/05/13/rustup.html"]
+
+[taxonomies]
+tags = ["rustup"]
 +++
 
 *Cross-compilation* is an imposing term for a common kind of desire:

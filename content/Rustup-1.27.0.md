@@ -3,6 +3,9 @@ path = "2024/03/11/Rustup-1.27.0"
 title = "Announcing Rustup 1.27.0"
 authors = ["The Rustup Team"]
 aliases = ["2024/03/11/Rustup-1.27.0.html"]
+
+[taxonomies]
+tags = ["rustup"]
 +++
 
 The rustup team is happy to announce the release of rustup version 1.27.0.
