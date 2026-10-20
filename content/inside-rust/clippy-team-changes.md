@@ -4,6 +4,9 @@ title = "Changes at the Clippy Team"
 authors = ["Philipp Krones"]
 aliases = ["inside-rust/2022/07/13/clippy-team-changes.html"]
 
+[taxonomies]
+tags = ["clippy"]
+
 [extra]
 team = "The Clippy Team"
 team_url = "https://www.rust-lang.org/governance/teams/dev-tools#clippy"

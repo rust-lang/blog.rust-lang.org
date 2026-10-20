@@ -3,6 +3,9 @@ path = "inside-rust/2026/07/06/unite-for-clippy"
 title = "Together for a healthier Clippy"
 authors = ["blyxyas"]
 
+[taxonomies]
+tags = ["clippy"]
+
 [extra]
 team = "the Clippy team"
 team_url = "https://www.rust-lang.org/governance/teams/dev-tools#team-clippy"
