@@ -3,6 +3,9 @@ path = "2024/02/28/Clippy-deprecating-feature-cargo-clippy"
 title = 'Clippy: Deprecating `feature = "cargo-clippy"`'
 authors = ["The Clippy Team"]
 aliases = ["2024/02/28/Clippy-deprecating-feature-cargo-clippy.html"]
+
+[taxonomies]
+tags = ["clippy"]
 +++
 
 Since Clippy [`v0.0.97`] and before it was shipped with `rustup`, Clippy

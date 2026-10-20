@@ -3,6 +3,9 @@ path = "inside-rust/2025/10/22/clippys-feature-warming-up"
 title = "What we learned with Clippy's feature freeze"
 authors = ["blyxyas"]
 
+[taxonomies]
+tags = ["clippy"]
+
 [extra]
 team = "the Clippy team"
 team_url = "https://www.rust-lang.org/governance/teams/dev-tools#team-clippy"
