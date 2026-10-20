@@ -1,5 +1,5 @@
 +++
-path = "inside-rust/2026/04/08/gpu-target-notification-group"
+path = "inside-rust/2026/10/20/gpu-target-notification-group"
 title = "Announcing the GPU notification group and Linker Working Area"
 authors = ["The compiler team"]
 description = "Announcing the GPU notification group and Linker Working Area"
