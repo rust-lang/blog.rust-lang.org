@@ -47,5 +47,5 @@ Anyone can add their own name to these groups and be notified when an issue in t
 For more info, see the documentation [about notification groups][forge-docs-notif-group] and compiler [working areas][forge-docs-work-area].
 
 [forge-docs-notif-group]: https://forge.rust-lang.org/compiler/notification-groups.html
-[forge-docs-work-area]: https://forge.rust-lang.org/compiler/notification-groups.html
+[forge-docs-work-area]: https://forge.rust-lang.org/compiler/working-areas.html
 [team-2341]: https://github.com/rust-lang/team/pull/2341
