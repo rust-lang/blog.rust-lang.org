@@ -6,6 +6,9 @@ authors = ["Jakub Beránek", "Jack Huey"]
 [extra]
 team = "the mentorship team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-mentorship"
+
+[taxonomies]
+tags = ["google-summer-of-code"]
 +++
 
 As we have [announced][gsoc-blog-post] previously this year, the Rust Project participated

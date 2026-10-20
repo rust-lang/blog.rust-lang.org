@@ -3,6 +3,9 @@ path = "2024/05/01/gsoc-2024-selected-projects"
 title = "Announcing Google Summer of Code 2024 selected projects"
 authors = ["Jakub Beránek, Jack Huey and Paul Lenz"]
 aliases = ["2024/05/01/gsoc-2024-selected-projects.html"]
+
+[taxonomies]
+tags = ["google-summer-of-code"]
 +++
 
 The Rust Project is [participating][gsoc blog post] in [Google Summer of Code (GSoC) 2024][gsoc], a global program organized by Google which is designed to bring new contributors to the world of open-source.
