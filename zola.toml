@@ -18,5 +18,12 @@ dark_theme = "dark-plus"
 style = "class"
 extra_themes = ["night-owl-light.json"]
 
-[extra]
 # Put all your custom variables here
+[extra]
+# Labels for tags, rendered on the /tags page.
+# If a label is missing for a tag, the tag will be rendered directly
+tag_labels = {
+    "clippy" = "Clippy",
+    "crates.io" = "crates.io",
+    "release" = "Release announcements",
+}
