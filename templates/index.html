@@ -5,13 +5,13 @@
     <div class="mw6-l">
       <p>{{ section.extra.index_html | safe }}</p>
     </div>
-  </div>    
+  </div>
   <div class="container flex flex-column flex-row-l justify-between-l">
     <div class="mw8-l">
       <p>
       <b>See also:</b>
       {% for see_also in section.extra.see_also -%}
-      {% if loop.index0 != 0 %},{% endif %}
+      {% if loop.index0 != 0 %}{% if loop.last %} or{% else %},{% endif %}{% endif %}
         <a href="{{ config.base_url | safe }}{{ see_also.path | safe }}">{{ see_also.text }}</a>
       {%- endfor -%}
       </p>

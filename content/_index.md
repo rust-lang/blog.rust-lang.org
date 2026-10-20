@@ -16,4 +16,7 @@ text = """the "Inside Rust" blog"""
 [[extra.see_also]]
 path = "/releases/"
 text = "release announcements"
+[[extra.see_also]]
+path = "/tags/"
+text = "tagged posts"
 +++
