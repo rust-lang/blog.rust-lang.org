@@ -8,19 +8,19 @@ team = "the Funding team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-funding"
 +++
 
+> TLDR:
+>
+> - To fund general maintenance, donate to the [Rust Foundation Maintainers Fund][rfmf] or sponsor the [RustNL Maintainers Team][rustnl-maintainers]
+> - To fund specific features and improvements, sponsor [fundable Rust Project Goals][goals-looking-for-funding]
+> - To fund individual contributors, donate to their [GitHub Sponsors][sponsor-individual-contributors] accounts
+
 There is always so much to do in the Rust Project! New features to implement, bugs to fix, performance optimizations to make, issues to triage… It takes a lot of work to keep our high bar of quality while also shipping new features and improvements. And the workload keeps increasing with the continuous growth of Rust adoption.
 
 As is unfortunately common in open source projects, a large fraction of that work is currently done by volunteers. That causes various issues, such as people burning out or complex features taking many years to ship.
 
 Unsurprisingly, one of the best ways to help improve that is to get more people who work on Rust funded! This year, several funding initiatives started ramping up, and we already experience many positive effects. They helped us improve the maintenance status of critical Rust projects and make significant progress on several long-awaited features, such as allocators, the never type, the next trait solver or the Polonius borrow checker. However, only a fraction of people working on Rust are currently funded for their work.
 
-We know that there are Rust users, both individuals and companies, who would like to help improve Rust by funding it, but it might not always be obvious *how exactly* to do that. This post thus contains a brief "Rust Project funding guide". The TLDR is:
-
-- To fund [general maintenance](#fund-general-maintenance), donate to the [Rust Foundation Maintainers Fund][rfmf]
-- To fund [specific features and improvements](#fund-specific-features-and-improvements), sponsor [fundable Rust Project Goals][goals-looking-for-funding]
-- To fund [individual contributors](#fund-individual-contributors), donate to their [GitHub Sponsors][sponsor-individual-contributors] accounts
-
-Read below for more details.
+We know that there are Rust users, both individuals and companies, who would like to help improve Rust by funding it, but it might not always be obvious *how exactly* to do that. This post thus provides suggestions on how you can support the development of Rust in three areas.
 
 ## Fund general maintenance
 
