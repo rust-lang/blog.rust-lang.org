@@ -1,5 +1,5 @@
 +++
-path = "inside-rust/2026/04/08/gpu-target-notification-group"
+path = "inside-rust/2026/10/20/gpu-target-notification-group"
 title = "Announcing the GPU notification group and Linker Working Area"
 authors = ["The compiler team"]
 description = "Announcing the GPU notification group and Linker Working Area"
@@ -36,7 +36,7 @@ This group has an associated Zulip stream ([`#t-compiler/linker`]).
 
 ### What is a "notification group" and a "working area group"?
 
-Notification groups are made of people volunteering to keep an eye and respond to issues in a specific area they have expertise, they mostly help with maintenaince.
+Notification groups are made of people volunteering to keep an eye and respond to issues in a specific area they have expertise, they mostly help with maintenance.
 
 Working areas explore and do work focused on specific areas with the goal of adding features or improving the compiler.
 
