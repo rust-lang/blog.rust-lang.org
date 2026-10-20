@@ -7,6 +7,9 @@ aliases = ["inside-rust/2024/05/14/leadership-council-update.html"]
 [extra]
 team = "Leadership Council"
 team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
+
+[taxonomies]
+tags = ["council"]
 +++
 
 Hello again from the Rust Leadership Council!

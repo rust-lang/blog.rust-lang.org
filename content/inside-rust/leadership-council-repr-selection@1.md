@@ -7,6 +7,9 @@ aliases = ["inside-rust/2024/04/01/leadership-council-repr-selection.html"]
 [extra]
 team = "Leadership Council"
 team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
+
+[taxonomies]
+tags = ["council"]
 +++
 
 The March 2024 selections for [Leadership Council] representatives have been finalized. All teams chose their existing representatives to continue for a second term. The representatives are:

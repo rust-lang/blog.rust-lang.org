@@ -7,6 +7,9 @@ aliases = ["inside-rust/2024/08/20/leadership-council-repr-selection.html"]
 [extra]
 team = "Leadership Council"
 team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
+
+[taxonomies]
+tags = ["council"]
 +++
 
 The selection process for representatives on the [Leadership Council] is starting today.

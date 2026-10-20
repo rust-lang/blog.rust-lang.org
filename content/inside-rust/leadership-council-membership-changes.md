@@ -7,6 +7,9 @@ aliases = ["inside-rust/2023/08/29/leadership-council-membership-changes.html"]
 [extra]
 team = "the leadership council"
 team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
+
+[taxonomies]
+tags = ["council"]
 +++
 
 As of today, Khionu Sybiern will no longer be the representative of the Moderation team on the
