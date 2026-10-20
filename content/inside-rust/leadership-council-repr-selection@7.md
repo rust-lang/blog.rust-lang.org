@@ -6,6 +6,9 @@ authors = ["Eric Huss"]
 [extra]
 team = "Leadership Council"
 team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
+
+[taxonomies]
+tags = ["council"]
 +++
 
 The September 2025 selections for [Leadership Council] representatives have been finalized. The [infrastructure team][infra] has chosen [Jakub Beránek] as their new representative. [TC], [Mara Bos], and [Oli Scherer] will continue to represent [lang], [libs], and [mods] respectively.

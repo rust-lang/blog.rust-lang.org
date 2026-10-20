@@ -7,6 +7,9 @@ aliases = ["inside-rust/2023/08/25/leadership-initiatives.html"]
 [extra]
 team = "the leadership council"
 team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
+
+[taxonomies]
+tags = ["council"]
 +++
 
 Having not heard any significant disagreement with the first set of [proposed priorities],

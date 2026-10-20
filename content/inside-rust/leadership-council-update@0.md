@@ -7,6 +7,9 @@ aliases = ["inside-rust/2023/07/25/leadership-council-update.html"]
 [extra]
 team = "Leadership Council"
 team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
+
+[taxonomies]
+tags = ["council"]
 +++
 
 Hello again from the Rust Leadership Council. In our [first blog post][first post], we laid out several immediate goals for the council and promised to report back on their progress. It has been about a month since our first update so we wanted to share how it's going and what we're working on now.

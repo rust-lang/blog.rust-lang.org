@@ -7,6 +7,9 @@ aliases = ["inside-rust/2025/03/26/leadership-council-repr-selection.html"]
 [extra]
 team = "Leadership Council"
 team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
+
+[taxonomies]
+tags = ["council"]
 +++
 
 The March 2025 selections for [Leadership Council] representatives have been finalized. The compiler team has chosen [Josh Stone] as their new representative. [Eric Huss] and [James Munns] will continue to represent [Devtools] and [Launching Pad] respectively.

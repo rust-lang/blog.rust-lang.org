@@ -7,6 +7,9 @@ aliases = ["2023/06/20/introducing-leadership-council.html"]
 [extra]
 team = "Leadership Council"
 team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
+
+[taxonomies]
+tags = ["council"]
 +++
 
 As of today, [RFC 3392] has been merged, forming the new top level governance body of the Rust Project: the Leadership Council. The creation of this Council marks the end of both the Core Team and the interim Leadership Chat.

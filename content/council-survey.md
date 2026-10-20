@@ -5,7 +5,7 @@ authors = ["The Leadership Council"]
 aliases = ["2024/08/26/council-survey.html"]
 
 [taxonomies]
-tags = ["survey"]
+tags = ["council", "survey"]
 +++
 
 One of the responsibilities of the [leadership council](https://www.rust-lang.org/governance/teams/leadership-council),
