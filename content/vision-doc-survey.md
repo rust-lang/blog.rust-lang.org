@@ -7,6 +7,9 @@ aliases = ["2025/04/04/vision-doc-survey.html"]
 [extra]
 team = "Vision Doc Team"
 team_url = "https://rust-lang.zulipchat.com/#narrow/channel/486265-vision-doc-2025"
+
+[taxonomies]
+tags = ["survey"]
 +++
 
 tl;dr: Please take our [survey here][survey]

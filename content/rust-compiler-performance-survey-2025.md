@@ -6,6 +6,9 @@ authors = ["Jakub Beránek"]
 [extra]
 team = "the Compiler Performance Working Group"
 team_url = "https://www.rust-lang.org/governance/teams/compiler#team-wg-compiler-performance"
+
+[taxonomies]
+tags = ["survey"]
 +++
 
 We're launching a [Rust Compiler Performance Survey][survey-link].

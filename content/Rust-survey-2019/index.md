@@ -3,6 +3,9 @@ path = "2020/04/17/Rust-survey-2019"
 title = "Rust Survey 2019 Results"
 authors = ["The Rust Survey Team"]
 aliases = ["2020/04/17/Rust-survey-2019.html"]
+
+[taxonomies]
+tags = ["survey"]
 +++
 
 > Translation available for [Chinese | 中文](https://web.archive.org/web/20200611004214/http://www.secondstate.info/blog/rust-2019)

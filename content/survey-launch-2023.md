@@ -4,6 +4,9 @@ title = "Launching the 2023 State of Rust Survey"
 authors = ["The Rust Survey Working Group"]
 description = "Share your experience using Rust in the eighth edition of the State of Rust Survey"
 aliases = ["2023/12/18/survey-launch.html"]
+
+[taxonomies]
+tags = ["survey"]
 +++
 
 It’s time for the [2023 State of Rust Survey](https://www.surveyhero.com/c/4vxempzc)!

@@ -6,6 +6,9 @@ authors = ["Sam Kellam"]
 [extra]
 team = "the compiler team"
 team_url = "https://www.rust-lang.org/governance/teams/compiler#team-compiler"
+
+[taxonomies]
+tags = ["survey"]
 +++
 
 

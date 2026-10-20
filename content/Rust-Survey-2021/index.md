@@ -3,6 +3,9 @@ path = "2022/02/15/Rust-Survey-2021"
 title = "Rust Survey 2021 Results"
 authors = ["The Rust Survey Team"]
 aliases = ["2022/02/15/Rust-Survey-2021.html"]
+
+[taxonomies]
+tags = ["survey"]
 +++
 
 Greetings Rustaceans!

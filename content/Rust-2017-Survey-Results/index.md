@@ -3,6 +3,9 @@ path = "2017/09/05/Rust-2017-Survey-Results"
 title = "Rust 2017 Survey Results"
 authors = ["Jonathan Turner"]
 aliases = ["2017/09/05/Rust-2017-Survey-Results.html"]
+
+[taxonomies]
+tags = ["survey"]
 +++
 
 It's that time of the year, where we take a good look at how things are going by asking the community at large -- both Rust users and non-users.  And wow, did you respond!

@@ -2,6 +2,9 @@
 path = "2026/03/02/2025-State-Of-Rust-Survey-results"
 title = "2025 State of Rust Survey Results"
 authors = ["The Rust Survey Team"]
+
+[taxonomies]
+tags = ["survey"]
 +++
 
 Hello, Rust community!

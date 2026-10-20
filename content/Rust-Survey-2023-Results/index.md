@@ -3,6 +3,9 @@ path = "2023/08/07/Rust-Survey-2023-Results"
 title = "2022 Annual Rust Survey Results"
 authors = ["The Rust Survey Working Group in partnership with the Rust Foundation"]
 aliases = ["2023/08/07/Rust-Survey-2023-Results.html"]
+
+[taxonomies]
+tags = ["survey"]
 +++
 
 Hello, Rustaceans!

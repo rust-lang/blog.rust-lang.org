@@ -3,6 +3,9 @@ path = "2018/11/27/Rust-survey-2018"
 title = "Rust Survey 2018 Results"
 authors = ["The Rust Survey Team"]
 aliases = ["2018/11/27/Rust-survey-2018.html"]
+
+[taxonomies]
+tags = ["survey"]
 +++
 
 Another year means another Rust survey, and this year marks Rust's third annual survey. This year, the survey launched for the first time in multiple languages. In total **14** languages, in addition to English, were covered.  The results from non-English languages totalled *25% of all responses* and helped pushed the number of responses to a new record of **5991 responses**. Before we begin the analysis, we just want to give a big "thank you!" to all the people who took the time to respond and give us your thoughts. It’s because of your help that Rust will continue to improve year after year.

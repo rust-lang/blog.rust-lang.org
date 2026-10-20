@@ -4,6 +4,9 @@ title = "Launching the 2024 State of Rust Survey"
 authors = ["The Rust Survey Working Group"]
 description = "Share your experience using Rust in the ninth edition of the State of Rust Survey"
 aliases = ["2024/12/05/annual-survey-2024-launch.html"]
+
+[taxonomies]
+tags = ["survey"]
 +++
 
 It’s time for the [2024 State of Rust Survey][survey-link]!

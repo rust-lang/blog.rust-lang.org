@@ -6,6 +6,9 @@ authors = ["Jakub Beránek"]
 [extra]
 team = "the compiler team"
 team_url = "https://www.rust-lang.org/governance/teams/compiler"
+
+[taxonomies]
+tags = ["survey"]
 +++
 
 We're launching a [Rust Debugging Survey][survey-link].

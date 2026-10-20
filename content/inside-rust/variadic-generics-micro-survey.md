@@ -2,6 +2,9 @@
 path = "inside-rust/2025/09/22/variadic-generics-micro-survey"
 title = "Variadic Generics Micro Survey"
 authors = ["Olivier Faure"]
+
+[taxonomies]
+tags = ["survey"]
 +++
 
 We are launching a [Variadic Generics Micro Survey][survey-url].

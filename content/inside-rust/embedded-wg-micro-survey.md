@@ -7,6 +7,9 @@ aliases = ["inside-rust/2024/08/22/embedded-wg-micro-survey.html"]
 [extra]
 team = "Embedded Devices Working Group"
 team_url = "https://www.rust-lang.org/governance/wgs/embedded"
+
+[taxonomies]
+tags = ["survey"]
 +++
 
 The [Embedded devices working group] has launched the [2024 Embedded Community Micro Survey] starting
