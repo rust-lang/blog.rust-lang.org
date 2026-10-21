@@ -3,6 +3,9 @@ path = "inside-rust/2025/08/26/removing-inactive-members-from-github-organizatio
 title = "Removing inactive members from our GitHub organizations"
 authors = ["Marco Ieni"]
 
+[taxonomies]
+tags = ["infrastructure"]
+
 [extra]
 team = "The Rust Infrastructure Team"
 team_url = "https://www.rust-lang.org/governance/teams/infra#team-infra"

@@ -4,6 +4,9 @@ title = "2019-11-19 Infrastructure Team Meeting"
 authors = ["Pietro Albini"]
 aliases = ["inside-rust/2019/11/19/infra-team-meeting.html"]
 
+[taxonomies]
+tags = ["infrastructure"]
+
 [extra]
 team = "the infrastructure team"
 team_url = "https://www.rust-lang.org/governance/teams/operations#infra"

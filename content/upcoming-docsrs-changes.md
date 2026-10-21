@@ -3,6 +3,9 @@ path = "2019/09/18/upcoming-docsrs-changes"
 title = "Upcoming docs.rs changes"
 authors = ["The Rust Infrastructure Team"]
 aliases = ["2019/09/18/upcoming-docsrs-changes.html"]
+
+[taxonomies]
+tags = ["infrastructure"]
 +++
 
 On September 30th breaking changes will be deployed to the [docs.rs] build

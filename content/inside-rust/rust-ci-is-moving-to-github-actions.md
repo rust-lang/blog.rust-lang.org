@@ -4,6 +4,9 @@ title = "Rust's CI is moving to GitHub Actions"
 authors = ["Pietro Albini"]
 aliases = ["inside-rust/2020/07/23/rust-ci-is-moving-to-github-actions.html"]
 
+[taxonomies]
+tags = ["infrastructure"]
+
 [extra]
 team = "the infrastructure team"
 team_url = "https://www.rust-lang.org/governance/teams/operations#infra"

@@ -3,6 +3,9 @@ path = "inside-rust/2025/11/16/infra-announcement-zulip-channel"
 title = "Infrastructure announcement Zulip channel"
 authors = ["Jieyou Xu"]
 
+[taxonomies]
+tags = ["infrastructure"]
+
 [extra]
 team = "the Infrastructure Team"
 team_url = "https://rust-lang.org/governance/teams/infra/#team-infra"

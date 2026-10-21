@@ -4,6 +4,9 @@ title = "Diversifying our Content Delivery Networks"
 authors = ["Jan David Nose"]
 aliases = ["inside-rust/2023/01/24/content-delivery-networks.html"]
 
+[taxonomies]
+tags = ["infrastructure"]
+
 [extra]
 team = "The Rust Infrastructure Team"
 team_url = "https://www.rust-lang.org/governance/teams/infra"
