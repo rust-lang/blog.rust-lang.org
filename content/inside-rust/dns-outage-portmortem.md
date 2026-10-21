@@ -4,6 +4,9 @@ title = "DNS Outage on 2023-01-25"
 authors = ["Jan David Nose"]
 aliases = ["inside-rust/2023/02/08/dns-outage-portmortem.html"]
 
+[taxonomies]
+tags = ["infrastructure"]
+
 [extra]
 team = "The Rust Infrastructure Team"
 team_url = "https://www.rust-lang.org/governance/teams/infra"

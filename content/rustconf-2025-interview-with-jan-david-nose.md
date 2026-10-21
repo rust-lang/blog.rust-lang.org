@@ -3,6 +3,9 @@ path = "2025/11/25/interview-with-jan-david-nose"
 title = "Interview with Jan David Nose"
 authors = ["Pete LeVasseur"]
 
+[taxonomies]
+tags = ["infrastructure"]
+
 [extra]
 team = "the Content Team"
 team_url = "https://rust-lang.org/governance/teams/launching-pad/#team-content"

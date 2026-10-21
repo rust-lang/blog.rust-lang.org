@@ -3,6 +3,9 @@ path = "inside-rust/2026/04/14/infrastructure-team-q1-recap-and-q2-plan"
 title = "Infrastructure Team 2026 Q1 Recap and Q2 Plan"
 authors = ["Marco Ieni"]
 
+[taxonomies]
+tags = ["infrastructure"]
+
 [extra]
 team = "The Rust Infrastructure Team"
 team_url = "https://www.rust-lang.org/governance/teams/infra#team-infra"

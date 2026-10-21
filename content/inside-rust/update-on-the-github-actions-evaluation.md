@@ -4,6 +4,9 @@ title = "Update on the GitHub Actions evaluation"
 authors = ["Pietro Albini"]
 aliases = ["inside-rust/2020/04/07/update-on-the-github-actions-evaluation.html"]
 
+[taxonomies]
+tags = ["infrastructure"]
+
 [extra]
 team = "the infrastructure team"
 team_url = "https://www.rust-lang.org/governance/teams/operations#infra"

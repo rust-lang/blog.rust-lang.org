@@ -3,6 +3,9 @@ path = "inside-rust/2026/07/15/infrastructure-team-q2-recap-and-q3-plan"
 title = "Infrastructure Team 2026 Q2 Recap and Q3 Plan"
 authors = ["Ubiratan Soares"]
 
+[taxonomies]
+tags = ["infrastructure"]
+
 [extra]
 team = "The Rust Infrastructure Team"
 team_url = "https://www.rust-lang.org/governance/teams/infra#team-infra"

@@ -3,6 +3,9 @@ path = "2025/08/19/demoting-x86-64-apple-darwin-to-tier-2-with-host-tools"
 title = "Demoting x86_64-apple-darwin to Tier 2 with host tools"
 authors = ["Jake Goulding"]
 
+[taxonomies]
+tags = ["infrastructure"]
+
 [extra]
 team = "the Infrastructure team"
 team_url = "https://www.rust-lang.org/governance/teams/infra#team-infra"

@@ -4,6 +4,9 @@ title = "Renaming the default branch of rust-lang/rust"
 authors = ["Jake Goulding"]
 aliases = ["inside-rust/2025/10/16/renaming-the-default-branch-of-rust-langrust"]
 
+[taxonomies]
+tags = ["infrastructure"]
+
 [extra]
 team = "the Infra team"
 team_url = "https://www.rust-lang.org/governance/teams/infra#team-infra"

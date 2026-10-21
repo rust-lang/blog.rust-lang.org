@@ -4,6 +4,9 @@ title = "Leadership change in the Rust Infrastructure Team"
 authors = ["Pietro Albini"]
 aliases = ["inside-rust/2023/09/08/infra-team-leadership-change.html"]
 
+[taxonomies]
+tags = ["infrastructure"]
+
 [extra]
 team = "the infrastructure team"
 team_url = "https://www.rust-lang.org/governance/teams/infra"

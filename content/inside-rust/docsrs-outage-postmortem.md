@@ -4,6 +4,9 @@ title = "docs.rs outage postmortem"
 authors = ["Pietro Albini"]
 aliases = ["inside-rust/2019/10/24/docsrs-outage-postmortem.html"]
 
+[taxonomies]
+tags = ["infrastructure"]
+
 [extra]
 team = "the infrastructure team"
 team_url = "https://www.rust-lang.org/governance/teams/operations#infra"
