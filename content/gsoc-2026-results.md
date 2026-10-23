@@ -137,7 +137,7 @@ And that is where Sumit came in! Over the course of his GSoC project, he examine
 
 We run ~90 CI jobs across several hardware architectures, operating systems and *OS versions*. Getting all that to work while testing *vendor-specific* intrinsics required a lot of dilligent work… and a lot of patience. It took *five months* for [one][stdarch-gen-tests] of the test suites to finally succeed on the main repo's CI, and it required Sumit to completely refactor how the suite worked, for it to be more compatible with bootstrap. As another example, a [different][intrinsic-tests] test suite that Sumir also got to work required running the tests in a `qemu` emulator on CI.
 
-Sumit ported most of the `stdarch` test suites to `bootstrap`, including intrinsics verification against reference *C* implementations, checks for automatically generated source code being up-to-date, and various unit tests for individual intrinsics and CPU feature detection logic. There are is one [remaining][core-arch-tests] test suite to port, but the ported tests are already helping us find issues, which is great.
+Sumit ported most of the `stdarch` test suites to `bootstrap`, including intrinsics verification against reference *C* implementations, checks for automatically generated source code being up-to-date, and various unit tests for individual intrinsics and CPU feature detection logic. There is one [remaining][core-arch-tests] test suite to port, but the ported tests are already helping us find issues, which is great.
 
 You can check Sumit's `rust-lang` PRs [here][xonx4l-prs]; notice that he was also contributing to other parts of Rust in the meantime! Sumit's work will help us make LLVM upgrades and land intrinsics changes more easily. Thank you, Sumit!
 
