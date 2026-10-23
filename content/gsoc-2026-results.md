@@ -3,6 +3,9 @@ path = "2026/11/16/gsoc-2026-results"
 title = "Google Summer of Code 2026 results"
 authors = ["Jakub Beránek"]
 
+[taxonomies]
+tags = ["google-summer-of-code"]
+
 [extra]
 team = "the mentorship team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-mentorship"
@@ -159,7 +162,7 @@ TODO
 - Mentors: [Jakub Beránek](https://github.com/Kobzol), [Jieyou Xu](https://github.com/jieyouxu)
 - [Final report](https://walnut356.github.io/posts/gsoc-2026-final-report/)
 
-The Rust debugging experience leaves a [lot to be desired][rust-debuginfo-survey]. One reason why we struggled to improve it is that many of our debuginfo test suites did not even run in CI for the past few years, as they were difficult to maintain. When a type visualizer, the implementation details of a standard library type or debugger internals changed, someone had to go through tens of tests and manually update them. This was not sustainable, so the test suite rotted.
+The Rust debugging experience leaves a [lot to be desired][rust-debuginfo-survey]. One reason why we struggled to improve it is that many of our debuginfo test suites did not even run in CI for the past few years, as they were difficult to maintain. When something changed in the type visualizers, the implementation details of a standard library type or in debugger internals, someone had to go through tens of tests and manually update them. This was not sustainable, so the test suite rotted.
 
 Luckily for us, Anthony took that affront personally. Even before his GSoC project, he spent considerable effort on improving the quality of debug visualizers of various Rust standard library types, and gained an impressive amount of knowledge about debuggers.
 
