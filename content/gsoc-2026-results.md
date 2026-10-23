@@ -99,7 +99,24 @@ TODO
 - Mentor: [Trevor Gross](https://github.com/tgross35)
 - [Final report](https://dybucc.github.io/gsoc-2026-report/)
 
-TODO
+[`libc`][libc] is a foundational crate that is used by thousands of other crates across the Rust ecosystem. For the past several years, its maintainers have been attempting to publish a stable 1.0 release of the crate. Because this crate has to support interoperating with C on many compilation targets with weird quirks, this requires an enormous amount of work. We already had a GSoC project for moving `libc` towards 1.0 [last year][libc-gsoc-2025], and the goal of Adam's project was to make more progress in that direction.
+
+And we can happily say that progress was indeed made! The original goal of Adam's project was to deprecate a number of constants that were difficult to maintain and cleanup inconsistencies in handling 32-bit/64-bit variants of file and time handling functions[^2038]. Adam was able to resolve that in a few weeks, and then he moved on to resolve a number of various issues blocking the [1.0 milestone][milestone].
+
+Saying that Adam was productive would be… an understatement. We could follow his work in real-time, because he was posting [daily GSoC reports][libc-gsoc-updates] for *116 days (!) in a row*. The dilligence and consistency with which he tackled so many complicated issues was an inspiration to us. In fact, sometimes the `libc` reviewers were not able to keep up!
+
+You can find all Adam's `libc` pull requests [here][libc-prs]. You might notice that many of them have lots of comments, and even more discussions happened in GitHub issues and on Zulip. In addition to implementing the necessary code, making changes that affect interesting C platforms and architectures also required him to do a ton of research, and a lot of considerations of edge cases and possible backwards compatibility breakages. His work also took him on a whirlwind tour of diverse platforms; Adam's contributions spanned FreeBSD, NetBSD, Android, Hurd, NuttX, AIX, VxWorks, Fuchsia, L4Re and more.
+
+Even though more work will still be required to get `libc` to 1.0, Adam's contributions made a significant dent in this effort. Thank you very much for all your work!
+
+[^2038]: If you were wondering, then yes, this is actually related to the famous [2038 problem][2038] :)
+
+[libc]: https://github.com/rust-lang/libc
+[libc-gsoc-2025]: https://blog.rust-lang.org/2025/11/18/gsoc-2025-results/#modernising-the-libc-crate
+[milestone]: https://github.com/rust-lang/libc/issues/3248
+[libc-gsoc-updates]: https://dybucc.github.io/gsoc-2026-report/daily-reports/
+[libc-prs]: https://github.com/rust-lang/libc/pulls?q=is%3Apr+author%3Adybucc
+[2038]: https://en.wikipedia.org/wiki/Year_2038_problem
 
 ### Link Linux kernel and its Modules with Wild
 - Contributor: [Vishruth Thimmaiah](https://github.com/vishruth-thimmaiah)
