@@ -60,7 +60,7 @@ We hope that this post is useful to anyone who would potentially like to invest 
 
 If you are a company looking to fund the development of Rust, consider joining the [Rust Commercial Network][rust-commercial-network]. It can help you find opportunities for funding improvements in specific areas related to Rust usage (e.g. user interfaces, language interop, supply chain security, etc.) and collaborate on funding Rust development with other companies.
 
-There are of course other ways of helping Rust other than donating funds. For example, you can check out Project Goals that are [looking for contributors][goals-looking-for-contributors] or more generally check our [contributor onboarding guide][contributor-onboarding].
+There are of course other ways of helping Rust other than donating funds. For example, you can check out Project Goals that are [looking for contributors][goals-looking-for-contributors] or more generally check our [contributor onboarding guide][contributor-onboarding]. Companies can also help by giving employees paid time to contribute upstream, or by hiring Rust contributors to do that work.
 
 [what-is-maintenance-post]: https://blog.rust-lang.org/inside-rust/2026/01/12/what-is-maintenance-anyway/
 [funding-page]: http://rust-lang.org/funding
