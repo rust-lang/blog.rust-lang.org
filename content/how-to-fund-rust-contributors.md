@@ -22,11 +22,13 @@ Unsurprisingly, one of the best ways to help improve that is to get more people 
 
 We know that there are Rust users, both individuals and companies, who would like to help improve Rust by funding it, but it might not always be obvious *how exactly* to do that. This post thus provides suggestions on how you can support the development of Rust in three ways.
 
+If you're unsure which option fits, or would like to discuss funding on behalf of your company, please contact the [Funding team](mailto:funding@rust-lang.org).
+
 ## Fund general maintenance
 
 [Maintenance][what-is-maintenance-post] is a continuous process required to keep Rust (or any software project for that matter) working. It consists of two main activities. The first is general housekeeping, such as ensuring that Continuous Integration works, dependencies are kept up-to-date and issues, bugs and security incidents are promptly triaged and resolved. The second is performing refactorings and code reviews, which ensures that the codebase will be able to evolve and continuously ship new features, without accruing extensive technical debt.
 
-Having quality maintenance is crucial for the long-term health of Rust, yet it is typically very difficult to find funding for it; funders often want to sponsor flashy new features, rather than just "keeping the lights on". However, without sufficient maintenance, it becomes much more difficult, and much slower, to ship new features. Improving the maintenance of Rust thus also helps us ship features and improvements faster, though the effects are sometimes only observable over longer periods of time.
+Having quality maintenance is crucial for the long-term health of Rust, yet it is typically very difficult to find funding for it; funders often want to sponsor specific new features, rather than just "keeping the lights on". However, without sufficient maintenance, it becomes much more difficult, and much slower, to ship new features. Improving the maintenance of Rust thus also helps us ship features and improvements faster, though the effects are sometimes only observable over longer periods of time.
 
 Funding maintenance is a great choice if you want to let us decide how best to improve Rust. The Rust [Funding team][funding-team] continuously looks for Rust teams and projects that require help with their maintenance efforts, and allocates available funds to Rust maintainers who could help improve the situation.
 
@@ -58,7 +60,7 @@ Funding individual contributors is a great choice if you want to directly suppor
 
 We hope that this post is useful to anyone who would potentially like to invest funds into making Rust better. You can also find a shortened version of the "how to fund Rust guide" at the [Funding page][funding-page] of the Rust website, or check out a RustConf 2026 talk by [Niko Matsakis][niko-funding-talk] about how Project Goals and their funding works.
 
-If you are a company looking to fund the development of Rust, consider joining the [Rust Commercial Network][rust-commercial-network]. It can help you find opportunities for funding improvements in specific areas related to Rust usage (e.g. user interfaces, language interop, supply chain security, etc.) and collaborate on funding Rust development with other companies.
+If you are a company looking to fund the development of Rust, consider joining the [Rust Commercial Network][rust-commercial-network]. Joining the network is free, and Rust Foundation membership is not required. It can help you find opportunities for funding improvements in specific areas related to Rust usage (e.g. user interfaces, language interop, supply chain security, etc.) and collaborate on funding Rust development with other companies.
 
 There are of course other ways of helping Rust other than donating funds. For example, you can check out Project Goals that are [looking for contributors][goals-looking-for-contributors] or more generally check our [contributor onboarding guide][contributor-onboarding]. Companies can also help by giving employees paid time to contribute upstream, or by hiring Rust contributors to do that work.
 
