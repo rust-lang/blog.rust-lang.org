@@ -297,7 +297,7 @@ Overall, the sentiment was more cautious than in previous questions. A lot of re
 
 Some interesting answers:
 
-> My company uses Rust for financial time series processing. Our data processing library currently uses a kludgy tuple-based method of defining data pipelines, which is constrained by max tuple length and requires a macro to define the implementation of.
+> Our company's data processing library currently uses a kludgy tuple-based method of defining data pipelines, which is constrained by max tuple length and requires a macro to define the implementation of.
 > 
 > VarArgs would allow us to directly have a function signature like `fn pipe<...Ts>(transforms: *Ts)`, without the extra tuple or extra complexity
 > 
