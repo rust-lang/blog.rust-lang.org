@@ -148,7 +148,7 @@ Some quotes (copied verbatim):
 
 > Struct-of-Arrays vector wants to decompose a type (struct or enum) into its fields: a tuple of field types or a tuple of field pointers is thus needed. Variadics could be helpful here
 
-(See [full report][report] for a list of quotes illustrating each of those categories.)
+(See [this document](https://hackmd.io/@s_haMSbyTAOWfoXc1aYNUg/H19dabltGg) for a list of quotes illustrating each of those categories.)
 
 Some people mentioned wanting variadics for a specific project:
 
