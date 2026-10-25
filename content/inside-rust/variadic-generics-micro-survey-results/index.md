@@ -1,10 +1,8 @@
 +++
-path = "inside-rust/2026/99/99/variadic-generics-micro-survey-results"
+path = "inside-rust/2026/10/29/variadic-generics-micro-survey-results"
 title = "Variadic Generics Micro Survey results"
 authors = ["Olivier Faure"]
 +++
-
-**TODO: Replace answer lists with charts**
 
 A year ago, we launched the [Variadic Generics Micro Survey](https://blog.rust-lang.org/inside-rust/2025/09/22/variadic-generics-micro-survey/), with the goal of collecting people's use cases for a hypothetical [variadic generics](https://poignardazur.github.io/2021/01/30/variadic-generics/) feature.
 
@@ -33,35 +31,57 @@ This article will include both the numerical survey results and some trends obse
 This first questions were about users' backgrounds.
 
 **How long have you been using Rust?**
-- Never (24)
-- Zero to two years (493)
-- Two to four years (1121)
-- Four to six years (867)
-- More than six years (804)
+
+<!-- Chart how-long-rust start -->
+<div>
+    <div class="bar-chart" id="how-long-rust"><noscript>
+<img alt="how-long-rust" src="how-long-rust.png"/>
+</noscript></div>
+    <div style="display: flex; margin-bottom: 10px;">
+        <span>[<a href="how-long-rust.png" target="_href_" title="Download chart as PNG">PNG</a>]</span>&nbsp;<span>[<a href="how-long-rust.svg" target="_href_" title="Download chart as SVG">SVG</a>]</span>
+    </div>
+</div>
+<!-- Chart how-long-rust end -->
 
 **Have you heard about variadic generics before?**
-- Yes (2718)
-- No (586)
+
+<!-- Chart heard-about-variadics start -->
+<div>
+    <div class="pie-chart" id="heard-about-variadics"><noscript>
+<img alt="heard-about-variadics" src="heard-about-variadics.png"/>
+</noscript></div>
+    <div style="display: flex; margin-bottom: 10px;">
+        <span>[<a href="heard-about-variadics.png" target="_href_" title="Download chart as PNG">PNG</a>]</span>&nbsp;<span>[<a href="heard-about-variadics.svg" target="_href_" title="Download chart as SVG">SVG</a>]</span>
+    </div>
+</div>
+<!-- Chart heard-about-variadics end -->
 
 **Where have you heard about variadic generics?**
-- Pre-RFCs and discussions on internals.rust-lang.org. (833)
-- Discussions on Reddit. (1236)
-- Blog posts on poignardazur.github.io. (1176)
-- Other programming languages. (1630)
-- Other means: (open response) (190)
+
+<!-- Chart where-heard-about-variadics start -->
+<div>
+    <div class="bar-chart" id="where-heard-about-variadics"><noscript>
+<img alt="where-heard-about-variadics" src="where-heard-about-variadics.png"/>
+</noscript></div>
+    <div style="display: flex; margin-bottom: 10px;">
+        <span>[<a href="where-heard-about-variadics.png" target="_href_" title="Download chart as PNG">PNG</a>]</span>&nbsp;<span>[<a href="where-heard-about-variadics.svg" target="_href_" title="Download chart as SVG">SVG</a>]</span>
+    </div>
+</div>
+<!-- Chart where-heard-about-variadics end -->
 
 Among the open responses, the most common were:
-- Github (13)
-- Zulip (16)
-- Bevy (60)
-- Discord (45)
-  - Specifically, the Bevy Discord server (22)
-  - Specifically, the Rust Programming Language Community Server (10)
-- This Week in Rust (7)
-- Other social apps (14)
-- Friends or colleagues (14)
-- Existing code or docs (7)
-- Solving a problem (15)
+
+<!-- Chart where-heard-about-variadics-open start -->
+<div>
+    <div class="bar-chart" id="where-heard-about-variadics-open"><noscript>
+<img alt="where-heard-about-variadics-open" src="where-heard-about-variadics-open.png"/>
+</noscript></div>
+    <div style="display: flex; margin-bottom: 10px;">
+        <span>[<a href="where-heard-about-variadics-open.png" target="_href_" title="Download chart as PNG">PNG</a>]</span>&nbsp;<span>[<a href="where-heard-about-variadics-open.svg" target="_href_" title="Download chart as SVG">SVG</a>]</span>
+    </div>
+</div>
+<!-- Chart where-heard-about-variadics-open end -->
+
 
 The "solving a problem" category is interesting: a few people mentioned wanting to solve a specific problem, doing some research, and finding that they wanted was called "variadic generics".
 
@@ -90,40 +110,32 @@ let value: u32 = (0, 0.5, "hello", Some("hello"), false).do_stuff();
 Users then saw this question:
 
 **Are there cases where variadic generics would have made your project easier?**
-- Yes (1702)
-- No (1319)
+
+<!-- Chart use-cases-variadic-generics start -->
+<div>
+    <div class="pie-chart" id="use-cases-variadic-generics"><noscript>
+<img alt="use-cases-variadic-generics" src="use-cases-variadic-generics.png"/>
+</noscript></div>
+    <div style="display: flex; margin-bottom: 10px;">
+        <span>[<a href="use-cases-variadic-generics.png" target="_href_" title="Download chart as PNG">PNG</a>]</span>&nbsp;<span>[<a href="use-cases-variadic-generics.svg" target="_href_" title="Download chart as SVG">SVG</a>]</span>
+    </div>
+</div>
+<!-- Chart use-cases-variadic-generics end -->
 
 This was the question with the most open answers: of the 1702 people who said yes above, 1025 gave more detail, from single-line answers to multi-page explanations.
 
 We've split the open answers into rough categories:
 
-- Implementing `SomeTrait` for all tuples whose members implement `SomeTrait` (227)
-    - For UI (47)
-    - For serialization (19)
-- Implementing traits for all function types (97)
-    - Implementing function wrappers (34)
-- Combining parsers or state machines (112)
-    - For file parsing (17)
-    - For Web/RPC/REST endpoints (24)
-    - For SQL/ORM queries (38)
-- Representing a graph node (38)
-    - For a compiler/interpreter (20)
-- Language interop (32)
-    - With C++ (8)
-    - With C variadic functions (6)
-    - With Python (6)
-    - With Lua (5)
-    - With another language (7)
-- Variadic functions (65)
-    - `zip`-like functions (26)
-    - `join`-like functions (8)
-    - `println`-like functions, logging (18)
-- N-dimensional maths (20)
-- Structure-of-arrays and ECS (52)
-- Builder pattern (9)
-- `io_uring` (4)
-- Function pipelines (6)
-- Dependency injection (38)
+<!-- Chart use-cases-variadic-generics-open start -->
+<div>
+    <div class="bar-chart" id="use-cases-variadic-generics-open"><noscript>
+<img alt="use-cases-variadic-generics-open" src="use-cases-variadic-generics-open.png"/>
+</noscript></div>
+    <div style="display: flex; margin-bottom: 10px;">
+        <span>[<a href="use-cases-variadic-generics-open.png" target="_href_" title="Download chart as PNG">PNG</a>]</span>&nbsp;<span>[<a href="use-cases-variadic-generics-open.svg" target="_href_" title="Download chart as SVG">SVG</a>]</span>
+    </div>
+</div>
+<!-- Chart use-cases-variadic-generics-open end -->
 
 Some quotes (copied verbatim):
 
@@ -142,19 +154,31 @@ Some quotes (copied verbatim):
 
 Some people mentioned wanting variadics for a specific project:
 
-- Bevy (83)
-- Axum (21)
-- Diesel (9)
+<!-- Chart specific-project start -->
+<div>
+    <div class="bar-chart" id="specific-project"><noscript>
+<img alt="specific-project" src="specific-project.png"/>
+</noscript></div>
+    <div style="display: flex; margin-bottom: 10px;">
+        <span>[<a href="specific-project.png" target="_href_" title="Download chart as PNG">PNG</a>]</span>&nbsp;<span>[<a href="specific-project.svg" target="_href_" title="Download chart as SVG">SVG</a>]</span>
+    </div>
+</div>
+<!-- Chart specific-project end -->
 
 A lot of people mentioned wanting to replace macros, or using macros as a substitute for variadics. Most people were neutral about this. A few (about 7) explicitly declared the macros workaround were enough for them.
 
 More people mentioned strongly disliking the macro workaround, for various reasons:
 
-(Total: 51)
-- Documentation bloat (10)
-- Source code bloat (13)
-- Unreadable compile errors (14)
-- Long compile times (13)
+<!-- Chart disliked-macros start -->
+<div>
+    <div class="bar-chart" id="disliked-macros"><noscript>
+<img alt="disliked-macros" src="disliked-macros.png"/>
+</noscript></div>
+    <div style="display: flex; margin-bottom: 10px;">
+        <span>[<a href="disliked-macros.png" target="_href_" title="Download chart as PNG">PNG</a>]</span>&nbsp;<span>[<a href="disliked-macros.svg" target="_href_" title="Download chart as SVG">SVG</a>]</span>
+    </div>
+</div>
+<!-- Chart disliked-macros end -->
 
 A few answers mentioned implementing the macro workaround for tuples up to a given size, and then finding out that size wasn't enough for their users.
 
@@ -162,7 +186,7 @@ A few answers mentioned implementing the macro workaround for tuples up to a giv
 
 The most interesting answers are people who explicitly mentioned they gave up on a feature or an approach because of the lack of variadics.
 
-> These days it's more about the opportunity loss: I know this is impossible, so I don't even think about reaching out for tuples of items implementing the same trait. I'm sure I've written situations where I had to use `Vec<Box<dyn Trait>>` not because I *wanted* boxed elements, but because the more natural thing (tuples of dierently-typed values all implementing a single trait of arbitrary length) doesn't exist.
+> These days it's more about the opportunity loss: I know this is impossible, so I don't even think about reaching out for tuples of items implementing the same trait. I'm sure I've written situations where I had to use `Vec<Box<dyn Trait>>` not because I *wanted* boxed elements, but because the more natural thing (tuples of differently-typed values all implementing a single trait of arbitrary length) doesn't exist.
 
 > Sometimes I have also wanted to implement some crate-local trait for tuples but have found it too cumbersome due to the necessity to use a macro to do it, so I never bothered, even though I sort of wanted to.
 
@@ -191,8 +215,16 @@ Users then saw this question:
 
 **Are there cases where variadic mappings would have made your project easier?**
 
-Yes - 1287
-No - 1168
+<!-- Chart use-cases-variadic-mappings start -->
+<div>
+    <div class="pie-chart" id="use-cases-variadic-mappings"><noscript>
+<img alt="use-cases-variadic-mappings" src="use-cases-variadic-mappings.png"/>
+</noscript></div>
+    <div style="display: flex; margin-bottom: 10px;">
+        <span>[<a href="use-cases-variadic-mappings.png" target="_href_" title="Download chart as PNG">PNG</a>]</span>&nbsp;<span>[<a href="use-cases-variadic-mappings.svg" target="_href_" title="Download chart as SVG">SVG</a>]</span>
+    </div>
+</div>
+<!-- Chart use-cases-variadic-mappings end -->
 
 Of the 1287 people who said yes, 344 included free answers.
 
@@ -231,17 +263,31 @@ Users then saw this question:
 
 **Are there cases where non-linear mappings would have made your project easier?**
 
-Yes - 696
-No - 1537
+<!-- Chart use-cases-variadic-nonlinear start -->
+<div>
+    <div class="pie-chart" id="use-cases-variadic-nonlinear"><noscript>
+<img alt="use-cases-variadic-nonlinear" src="use-cases-variadic-nonlinear.png"/>
+</noscript></div>
+    <div style="display: flex; margin-bottom: 10px;">
+        <span>[<a href="use-cases-variadic-nonlinear.png" target="_href_" title="Download chart as PNG">PNG</a>]</span>&nbsp;<span>[<a href="use-cases-variadic-nonlinear.svg" target="_href_" title="Download chart as SVG">SVG</a>]</span>
+    </div>
+</div>
+<!-- Chart use-cases-variadic-nonlinear end -->
 
 In retrospect, the example is clearly too leading. The question was supposed to point to any kind of operation on lists of types beside "one-to-one mapping"; but the example oriented responses towards filtering specifically. That example would also, if allowed, be a workaround for trait specialization, which a lot of people focused on.
 
 Of the 696 people who said yes, 205 included free answers. The use-cases in the free answers roughly matched these categories:
 
-- Type filtering (38)
-  - Specifically Bevy queries (10)
-- As a specialization workaround (18)
-- Other specific use-cases (19)
+<!-- Chart use-cases-variadic-nonlinear-open start -->
+<div>
+    <div class="bar-chart" id="use-cases-variadic-nonlinear-open"><noscript>
+<img alt="use-cases-variadic-nonlinear-open" src="use-cases-variadic-nonlinear-open.png"/>
+</noscript></div>
+    <div style="display: flex; margin-bottom: 10px;">
+        <span>[<a href="use-cases-variadic-nonlinear-open.png" target="_href_" title="Download chart as PNG">PNG</a>]</span>&nbsp;<span>[<a href="use-cases-variadic-nonlinear-open.svg" target="_href_" title="Download chart as SVG">SVG</a>]</span>
+    </div>
+</div>
+<!-- Chart use-cases-variadic-nonlinear-open end -->
 
 Overall, the sentiment was more cautious than in previous questions. A lot of responses to the first questions were along the lines of "Yes, I absolutely need this yesterday for X/Y/Z", whereas the responses to this question were more likely to hedge or mention hypothetical use-cases:
 
@@ -283,30 +329,31 @@ The second-last question was about people's priorities:
 
 **How high a priority would you say variadics are for you?**
 
-- It should be the highest priority feature (48)
-- Very important (286)
-- Moderately important (599)
-- Nice to have (1015)
-- I don't care (182)
-- I don't want Rust to have variadics (99)
+<!-- Chart variadics-priority-level start -->
+<div>
+    <div class="bar-chart" id="variadics-priority-level"><noscript>
+<img alt="variadics-priority-level" src="variadics-priority-level.png"/>
+</noscript></div>
+    <div style="display: flex; margin-bottom: 10px;">
+        <span>[<a href="variadics-priority-level.png" target="_href_" title="Download chart as PNG">PNG</a>]</span>&nbsp;<span>[<a href="variadics-priority-level.svg" target="_href_" title="Download chart as SVG">SVG</a>]</span>
+    </div>
+</div>
+<!-- Chart variadics-priority-level end -->
 
 The last question was **Do you have any further comments related to variadic generics?**, and 572 people answered.
 
 This last question is where skeptics who had skipped the previous questions voiced their concerns and doubts, while enthusiasts reaffirmed their support:
 
-- I really want variadics (34)
-- Variadics add too much complexity to the language (22)
-- Rust must not become like C++ (18)
-- I miss variadics from C++ (22)
-- Macros work fine as a workaround (25)
-- Non-linear variadics are too complex (13)
-- The article's example syntax is bad  (28)
-    - The syntax should be keyword-based, not dot-dot-dot (5)
-    - The "for where" non-linear syntax is bad (7)
-- Feature X is more important (23)
-- We should have type-to-type functions (7)
-- Variadics should also cover struct fields (8)
-- Compliments/thanks (18)
+<!-- Chart last-comments start -->
+<div>
+    <div class="bar-chart" id="last-comments"><noscript>
+<img alt="last-comments" src="last-comments.png"/>
+</noscript></div>
+    <div style="display: flex; margin-bottom: 10px;">
+        <span>[<a href="last-comments.png" target="_href_" title="Download chart as PNG">PNG</a>]</span>&nbsp;<span>[<a href="last-comments.svg" target="_href_" title="Download chart as SVG">SVG</a>]</span>
+    </div>
+</div>
+<!-- Chart last-comments end -->
 
 A lot of answers (23) were specifically about why they didn't pick "It should be the highest priority feature", and listed other features they considered more important. In those answers, "specialization" and "better const generics" were common picks.
 
@@ -331,3 +378,9 @@ On behalf of the survey team, we'd like to return the sentiment, thank all the p
 The Rust community's enthusiasm is what keeps the language alive.
 
 Thanks again!
+
+<!-- Chart scripts -->
+
+<script charset="utf-8" src="/scripts/plotly-basic-2.29.0.min.js"></script>
+
+<script src="charts.js"></script>
