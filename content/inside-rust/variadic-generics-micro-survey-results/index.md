@@ -47,7 +47,7 @@ This first questions were about users' backgrounds.
 
 <!-- Chart heard-about-variadics start -->
 <div>
-    <div class="pie-chart" id="heard-about-variadics"><noscript>
+    <div class id="heard-about-variadics"><noscript>
 <img alt="heard-about-variadics" src="heard-about-variadics.png"/>
 </noscript></div>
     <div style="display: flex; margin-bottom: 10px;">
@@ -113,7 +113,7 @@ Users then saw this question:
 
 <!-- Chart use-cases-variadic-generics start -->
 <div>
-    <div class="pie-chart" id="use-cases-variadic-generics"><noscript>
+    <div class id="use-cases-variadic-generics"><noscript>
 <img alt="use-cases-variadic-generics" src="use-cases-variadic-generics.png"/>
 </noscript></div>
     <div style="display: flex; margin-bottom: 10px;">
@@ -217,7 +217,7 @@ Users then saw this question:
 
 <!-- Chart use-cases-variadic-mappings start -->
 <div>
-    <div class="pie-chart" id="use-cases-variadic-mappings"><noscript>
+    <div class id="use-cases-variadic-mappings"><noscript>
 <img alt="use-cases-variadic-mappings" src="use-cases-variadic-mappings.png"/>
 </noscript></div>
     <div style="display: flex; margin-bottom: 10px;">
@@ -265,7 +265,7 @@ Users then saw this question:
 
 <!-- Chart use-cases-variadic-nonlinear start -->
 <div>
-    <div class="pie-chart" id="use-cases-variadic-nonlinear"><noscript>
+    <div class id="use-cases-variadic-nonlinear"><noscript>
 <img alt="use-cases-variadic-nonlinear" src="use-cases-variadic-nonlinear.png"/>
 </noscript></div>
     <div style="display: flex; margin-bottom: 10px;">
