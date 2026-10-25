@@ -12,9 +12,7 @@ We fed these answers to Claude and it told us th- ha, just kidding, if only.
 
 More seriously, we did consider using AI to process the answers, but decided not to over privacy and quality concerns. Instead we ended up going through the dataset by hand, hence why these results took so long to publish.
 
-This article will include both the numerical survey results and some trends observed in the free answers. See also the full report, which includes the polls and examples of answers showcasing the trends.
-
-**TODO: Link to full report**
+This article will include both the numerical survey results and some trends observed in the free answers. See also the [full report][report], which includes the polls and examples of answers showcasing the trends.
 
 
 ## Table of contents
@@ -150,7 +148,7 @@ Some quotes (copied verbatim):
 
 > Struct-of-Arrays vector wants to decompose a type (struct or enum) into its fields: a tuple of field types or a tuple of field pointers is thus needed. Variadics could be helpful here
 
-(See full report for a list of quotes illustrating each of those categories.)
+(See [full report][report] for a list of quotes illustrating each of those categories.)
 
 Some people mentioned wanting variadics for a specific project:
 
@@ -320,7 +318,7 @@ Some interesting answers:
 >
 > The transaction requests are in arbitrary order for API convenience, but need to be executed in a fixed order. Currently I build an array of `(u8, Priority)` and sort it by priority to get my order, then map the u8 values to each tuple field, execute the request and map the result onto a tuple of `Option<RequestN::Result>`. Finally, I return the tuple unwrapping all fields.
 >
-> If I could have sorted the tuple, most of this wouldn't have been neccessary.
+> If I could have sorted the tuple, most of this wouldn't have been necessary.
 
 
 ## Final questions
@@ -384,3 +382,6 @@ Thanks again!
 <script charset="utf-8" src="/scripts/plotly-basic-2.29.0.min.js"></script>
 
 <script src="charts.js"></script>
+
+
+[report]: https://raw.githubusercontent.com/rust-lang/surveys/main/surveys/2025/variadic-generics-survey/report/variadic-use-cases-results.pdf
