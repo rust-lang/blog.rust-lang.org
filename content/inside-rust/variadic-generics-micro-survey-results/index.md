@@ -1,5 +1,5 @@
 +++
-path = "inside-rust/2026/10/29/variadic-generics-micro-survey-results"
+path = "inside-rust/2026/10/27/variadic-generics-micro-survey-results"
 title = "Variadic Generics Micro Survey results"
 authors = ["Olivier Faure"]
 +++
