@@ -3,6 +3,9 @@ path = "inside-rust/2026/09/21/maintainer-spotlight-alejandra-gonzalez-blyxyas"
 title = "Maintainer spotlight: Alejandra González (@blyxyas)"
 authors = ["Jakub Beránek", "Lori Lorusso"]
 
+[taxonomies]
+tags = ["maintainer-spotlight"]
+
 [extra]
 team = "the Content team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-content"
