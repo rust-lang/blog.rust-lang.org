@@ -3,6 +3,9 @@ path = "2026/10/26/how-to-fund-rust-contributors"
 title = "How to fund Rust contributors"
 authors = ["Jakub Beránek"]
 
+[taxonomies]
+tags = ["funding"]
+
 [extra]
 team = "the Funding team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-funding"

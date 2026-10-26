@@ -3,6 +3,9 @@ path = "2026/06/02/launching-the-rust-foundation-maintainers-fund"
 title = "Launching the Rust Foundation Maintainers Fund"
 authors = ["Funding team"]
 
+[taxonomies]
+tags = ["funding"]
+
 [extra]
 team = "Leadership Council"
 team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
