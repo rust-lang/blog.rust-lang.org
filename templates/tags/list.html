@@ -12,12 +12,16 @@
    <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
 
     <table class="post-list collapse w-100 f2-l f2-m f3-s">
-    {%- for term in terms %}
+    {%- set tags = [
+      {"label": config.extra.tag_labels[term.name] or term.name, "term": term}
+      for term in terms
+    ] %}
+    {%- set tags = [{"sort_key": tag.label | lower, ...tag} for tag in tags] %}
+    {%- for tag in tags | sort(attribute="sort_key") %}
+      {%- set term = tag.term %}
       <tr>
         <td class="tr o-60 pr4 pr5-l w-50 bn">{{ term.page_count }}&nbsp;post{{ term.page_count | pluralize }}</td>
-        <td class="bn"><a href="{{ term.permalink | safe }}">{{
-          config.extra.tag_labels[term.name] or term.name
-        }}</a></td>
+        <td class="bn"><a href="{{ term.permalink | safe }}">{{ tag.label }}</a></td>
       </tr>
     {%- endfor %}
     </table>

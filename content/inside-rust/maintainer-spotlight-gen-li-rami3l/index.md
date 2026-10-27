@@ -3,6 +3,9 @@ path = "inside-rust/2026/07/07/maintainer-spotlight-gen-li-rami3l"
 title = "Maintainer spotlight: Gen Li (@rami3l)"
 authors = ["Jakub Beránek", "Lori Lorusso"]
 
+[taxonomies]
+tags = ["maintainer-spotlight"]
+
 [extra]
 team = "the Content team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-content"
