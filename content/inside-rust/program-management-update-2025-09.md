@@ -1,7 +1,7 @@
 +++
 path = "inside-rust/2025/10/14/program-management-update-2025-09"
 title = "Program management update — September 2025"
-authors = ["Tomas Sedovic"]
+authors = ["Tomáš Šedovič"]
 
 [extra]
 team = "Edition & Goals teams"

@@ -1,7 +1,7 @@
 +++
 path = "inside-rust/2026/03/27/program-management-update-2026-02"
 title = "Program management update — February 2026"
-authors = ["Tomas Sedovic", "Nurzhan Saken"]
+authors = ["Tomáš Šedovič", "Nurzhan Saken"]
 
 [extra]
 team = "the Program team"
@@ -11,15 +11,15 @@ team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-progra
 tags = ["program"]
 +++
 
-Greetings! This update is brought to you by Tomas Sedovic *and* Nurzhan Saken \o/.
+Greetings! This update is brought to you by Tomáš Šedovič *and* Nurzhan Saken \o/.
 
 ## Hello from Nurzhan
 
-I discovered the Rust Project in 2022 and quickly became *obsessed*. The language, the documentation, tracking issues, changelogs, blogs, talks, and user/contributor discussions — all of these scratched an itch and comforted me during a difficult period in my life. As a huge introvert, I mostly observed and didn't participate, so the job posting for a program manager felt like a wake-up call. Tomas put it well in his first update: I had to apply despite many doubts about whether I would actually do a good job; the regret of not going for it would have been devastating.
+I discovered the Rust Project in 2022 and quickly became *obsessed*. The language, the documentation, tracking issues, changelogs, blogs, talks, and user/contributor discussions — all of these scratched an itch and comforted me during a difficult period in my life. As a huge introvert, I mostly observed and didn't participate, so the job posting for a program manager felt like a wake-up call. Tomáš put it well in his first update: I had to apply despite many doubts about whether I would actually do a good job; the regret of not going for it would have been devastating.
 
 TC and Joel Marcey interviewed me in March–April 2025 and considered hiring me. This was a surprise because I felt like a total mess! Alas, you may know from the previous update that things didn't go as planned, and I didn't end up getting the position. Still, there was no going back, so I started engaging with Rust by stabilizing multiple features I was interested in. Eventually, more funds did get allocated, and I was hired.
 
-The first month felt surreal. Suddenly, the imaginary barrier vanished, and I found myself sharing spaces (and even interacting) with the people whose work I had admired so much. Tomas had been leaving behind some impressive footprints, seemingly impossible to match. It was easy to feel like there'd been some mistake, that I didn't belong. Yet, everyone has been so welcoming. Tomas has been going out of his way to talk to me, support me, and loop me into everything happening in the Project. Thanks to that, I already feel mostly integrated, well-equipped, and really lucky that things have turned out this way.
+The first month felt surreal. Suddenly, the imaginary barrier vanished, and I found myself sharing spaces (and even interacting) with the people whose work I had admired so much. Tomáš had been leaving behind some impressive footprints, seemingly impossible to match. It was easy to feel like there'd been some mistake, that I didn't belong. Yet, everyone has been so welcoming. Tomáš has been going out of his way to talk to me, support me, and loop me into everything happening in the Project. Thanks to that, I already feel mostly integrated, well-equipped, and really lucky that things have turned out this way.
 
 ## Project goals
 
@@ -61,7 +61,7 @@ Finally, you can now use the `T-program` alias on Zulip to talk to us, tag us on
 
 We're hoping this will make it clearer how to reach out to Program management, provide greater transparency (to show what we're actually working on), and, of course, help us (the PMs) coordinate better.
 
-As of this writing, the repo and board are both empty. There are a few issues in other repos that we can link there, but mainly, Tomas needs to move the contents of his Rust org-mode file over.
+As of this writing, the repo and board are both empty. There are a few issues in other repos that we can link there, but mainly, Tomáš needs to move the contents of his Rust org-mode file over.
 
 ## C++/Rust interoperability
 

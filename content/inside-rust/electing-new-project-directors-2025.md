@@ -1,7 +1,7 @@
 +++
 path = "inside-rust/2025/08/20/electing-new-project-directors-2025"
 title = "Electing new Project Directors 2025"
-authors = ["Tomas Sedovic"]
+authors = ["Tomáš Šedovič"]
 
 [extra]
 team = "the Leadership Council"

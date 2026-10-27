@@ -1,7 +1,7 @@
 +++
 path = "inside-rust/2025/06/30/program-management-update-2025-06"
 title = "Program management update — June 2025"
-authors = ["Tomas Sedovic"]
+authors = ["Tomáš Šedovič"]
 
 [extra]
 team = "Edition & Goals teams"
@@ -56,7 +56,7 @@ Being there and saying, "yep, I'll set it up", and then everyone moves on, confi
 
 Indeed, this is what Josh said a couple of weeks ago:
 
-> "It was great being in a Rust meeting, talking about setting up a one-off meeting with specific people, and then it magically happening without any of us having to do anything to schedule it. Often, scheduling a meeting is harder than actually having the meeting. Tomas makes it feel like we can concentrate on getting work done, and things don't get lost or fall through the cracks with him around."
+> "It was great being in a Rust meeting, talking about setting up a one-off meeting with specific people, and then it magically happening without any of us having to do anything to schedule it. Often, scheduling a meeting is harder than actually having the meeting. Tomáš makes it feel like we can concentrate on getting work done, and things don't get lost or fall through the cracks with him around."
 >
 > &mdash; Josh Triplett
 

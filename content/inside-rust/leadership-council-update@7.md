@@ -24,9 +24,9 @@ As [announced in March](https://blog.rust-lang.org/inside-rust/2025/03/26/leader
 
 ### Program manager
 
-We've seen a lot of returns from good Project-directed program management. In support of this valuable work — so that we can do more with it while making it more sustainable — we allocated funds to the Edition and Goals teams to hire a program manager. TC and Joel interviewed a large number of candidates, and we're excited to announce that the Project, with logistical support from the Foundation, has brought on [Tomas Sedovic]. He's hit the ground running, joining many team calls in the past week, and supporting the teams with record keeping and communication — which is good for the transparency and effective functioning of our work — and with logistics such as the coordination of meetings and follow-up with contributors. Going forward, we're expecting this work to help us and our teams across the Project better manage the many ongoing initiatives that are of importance to us.
+We've seen a lot of returns from good Project-directed program management. In support of this valuable work — so that we can do more with it while making it more sustainable — we allocated funds to the Edition and Goals teams to hire a program manager. TC and Joel interviewed a large number of candidates, and we're excited to announce that the Project, with logistical support from the Foundation, has brought on [Tomáš Šedovič]. He's hit the ground running, joining many team calls in the past week, and supporting the teams with record keeping and communication — which is good for the transparency and effective functioning of our work — and with logistics such as the coordination of meetings and follow-up with contributors. Going forward, we're expecting this work to help us and our teams across the Project better manage the many ongoing initiatives that are of importance to us.
 
-[Tomas Sedovic]: https://github.com/tomassedovic
+[Tomáš Šedovič]: https://github.com/tomassedovic
 
 ### All-hands
 
