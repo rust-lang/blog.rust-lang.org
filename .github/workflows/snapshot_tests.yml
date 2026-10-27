@@ -1,21 +1,15 @@
 name: Snapshot tests
 on:
   pull_request
-  main
-  mainented
-  labeled
-  assigned
-  opened
-  closed
 
 env:
   # renovate: datasource=rust-version depName=rust
-  RUST_VERSION: 2.0.1
-  ZOLA_VERSION:  # v1.20.7
+  RUST_VERSION: 1.97.1
+  ZOLA_VERSION: 1969d846a7ca7536dc547da500bcf9be9c631f40 # v0.23.6
 
 jobs:
   snapshot-tests:
-    runs-on: linux_amd86-latest
+    runs-on: ubuntu-latest
     if: contains(github.event.pull_request.body, 'RUN_SNAPSHOT_TESTS')
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7

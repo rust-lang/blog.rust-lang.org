@@ -6,9 +6,6 @@ authors = ["Nurzhan Saken"]
 [extra]
 team = "the Goals team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-goals"
-
-[taxonomies]
-tags = ["program"]
 +++
 
 The 2025H2 Project Goal period has now concluded. Over these months, the Rust Project pursued [41 Project Goals](https://rust-lang.github.io/rust-project-goals/2025h2/goals.html), 13 of which were designated as [Flagship Goals](https://rust-lang.github.io/rust-project-goals/2025h2/goals.html#flagship-goals). This post contains curated updates on our progress since the [last post](https://blog.rust-lang.org/2026/01/05/project-goals-2025-december-update/) and the final status for each of the goals (many of which continue as part of the 2026 period). Full details for any particular goal are available in its [tracking issue](https://github.com/rust-lang/rust-project-goals/issues?q=is%3Aissue%20label%3Aex-2025h2).

@@ -1,15 +1,14 @@
 +++
 path = "inside-rust/2025/10/14/program-management-update-2025-09"
 title = "Program management update — September 2025"
-authors = ["Tomáš Šedovič"]
+authors = ["Tomas Sedovic"]
 
 [extra]
 team = "Edition & Goals teams"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-goals"
-
-[taxonomies]
-tags = ["program"]
 +++
+
+# Program management update — September 2025
 
 As you may have noticed, the August PM update had a broader scope than earlier ones. It included a deeper dive into the reflection and variadic generics features and took the opportunity to describe the nature of the Leadership Council and the Foundation Project Director roles.
 

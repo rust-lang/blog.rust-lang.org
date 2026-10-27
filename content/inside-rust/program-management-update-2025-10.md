@@ -1,15 +1,14 @@
 +++
 path = "inside-rust/2025/11/19/program-management-update--october-2025"
 title = "Program management update — October 2025"
-authors = ["Tomáš Šedovič"]
+authors = ["Tomas Sedovic"]
 
 [extra]
 team = "Edition & Goals teams"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-goals"
-
-[taxonomies]
-tags = ["program"]
 +++
+
+# Program management update — October 2025
 
 Lots of things happened in October! I've added a new section containing things that happened throughout the broader Project. I think it's useful to highlight these, but I don't want to conflate them with my own work. These posts also serve as accountability to the Project, so it's important to make that distinction.
 

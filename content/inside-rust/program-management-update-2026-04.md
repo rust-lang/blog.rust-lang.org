@@ -6,9 +6,6 @@ authors = ["Tomáš Šedovič and Nurzhan Saken"]
 [extra]
 team = "the Program team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-program"
-
-[taxonomies]
-tags = ["program"]
 +++
 
 Greetings! This was a busy month. The Project goals RFC has been accepted, and we're officially in the 2026 goals period. At the time of writing, RustWeek is exactly one week away. Time flies!

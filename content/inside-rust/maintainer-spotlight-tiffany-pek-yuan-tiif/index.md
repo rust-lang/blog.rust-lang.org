@@ -3,9 +3,6 @@ path = "inside-rust/2026/06/03/maintainer-spotlight-tiffany-pek-yuan-tiif"
 title = "Maintainer spotlight: Tiffany Pek Yuan (@tiif)"
 authors = ["Jakub Beránek", "Lori Lorusso"]
 
-[taxonomies]
-tags = ["maintainer-spotlight"]
-
 [extra]
 team = "the Content team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-content"

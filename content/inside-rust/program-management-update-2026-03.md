@@ -1,14 +1,11 @@
 +++
 path = "inside-rust/2026/04/09/program-management-update-2026-03"
 title = "Program management update — March 2026"
-authors = ["Tomáš Šedovič and Nurzhan Saken"]
+authors = ["Tomas Sedovic and Nurzhan Saken"]
 
 [extra]
 team = "the Program team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-program"
-
-[taxonomies]
-tags = ["program"]
 +++
 
 Greetings and happy spring to you if you live in a place that's getting spring now!
@@ -116,7 +113,7 @@ The Council has [allocated money for three internship slots][outreachy-funding] 
 
 We have [five projects proposed][outreachy-projects] (adding Rust to an existing C/C++ build system, calling overloaded C++ functions from Rust, code coverage of the Rust compiler at scale, fuzzing the a-mir-formality type system implementation, and improving the security of our GitHub Actions). Right now, we are in the contribution period. This is where the applicants make contributions to the Project, and these contributions will help select the interns.
 
-Personally, I (Tomáš) am extremely happy about this. I love what Outreachy does and stands for. I've known and worked with several people who have participated in the program, and they are all fantastic people and colleagues.
+Personally, I (Tomas) am extremely happy about this. I love what Outreachy does and stands for. I've known and worked with several people who have participated in the program, and they are all fantastic people and colleagues.
 
 Huge thanks to Jack Huey for organizing it! And thanks to Niko, Rémy, tiif, teor, Joel Marcey, and Ethan Smith for signing up as mentors and co-mentors!
 
@@ -142,7 +139,7 @@ The `dma_read!`/`dma_write!` macros switched over to it. Note that this is done 
 
 On that note, the lang team held a design meeting to discuss Field Projections via Virtual Places, the latest proposal from Benno Lossin, Nadrieril, and Tyler Mandry. You can read the [proposal and meeting notes here][field-projection-design].
 
-Finally, as a follow-up on the rustfmt `use` discussion, Tomáš opened [an issue](https://github.com/rust-lang/rustfmt/issues/6829) for keeping imports on individual lines the way Rust for Linux needs without having to use the trailing `//` workaround.
+Finally, as a follow-up on the rustfmt `use` discussion, Tomas opened [an issue](https://github.com/rust-lang/rustfmt/issues/6829) for keeping imports on individual lines the way Rust for Linux needs without having to use the trailing `//` workaround.
 
 [field-projection-design]: https://rust-lang.github.io/rust-project-goals/2026/field-projections.html
 

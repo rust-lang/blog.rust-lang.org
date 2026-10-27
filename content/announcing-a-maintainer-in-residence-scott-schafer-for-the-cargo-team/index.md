@@ -3,9 +3,6 @@ path = "2026/09/22/announcing-a-maintainer-in-residence-scott-schafer-for-the-ca
 title = "Announcing a Maintainer in Residence: Scott Schafer for the Cargo team"
 authors = ["Jakub Beránek"]
 
-[taxonomies]
-tags = ["funding"]
-
 [extra]
 team = "the Funding team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-funding"

@@ -6,9 +6,6 @@ authors = ["Nurzhan Saken"]
 [extra]
 team = "the Program team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-program"
-
-[taxonomies]
-tags = ["program"]
 +++
 
 It's been _fun_ since the last update. Tomáš was away for a month, and I had to get my wisdom teeth pulled right after he left.

@@ -6,9 +6,6 @@ authors = ["Nurzhan Saken"]
 [extra]
 team = "the Program team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-program"
-
-[taxonomies]
-tags = ["program"]
 +++
 
 In May 2026, 166 Rustaceans gathered in Utrecht for the *Rust All Hands*. This event is an opportunity for the Rust Project members and invited guests to work on Rust in person for several days — discuss its future, resolve blockers, build connections between teams, and so on (but not make any final decisions!).

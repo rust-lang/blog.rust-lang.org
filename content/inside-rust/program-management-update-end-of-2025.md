@@ -1,14 +1,11 @@
 +++
 path = "inside-rust/2025/12/19/program-management-update--end-of-2025"
 title = "Program management update — End of 2025"
-authors = ["Tomáš Šedovič"]
+authors = ["Tomas Sedovic"]
 
 [extra]
 team = "the Goals team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-goals"
-
-[taxonomies]
-tags = ["program"]
 +++
 
 This is a combined update for November and December. I had less time to work in November, and I'll be off for the winter holidays, so combining them makes sense.

@@ -3,9 +3,6 @@ path = "inside-rust/2026/08/04/funding-team-progress-update-july-2026"
 title = "Funding team progress update — July 2026"
 authors = ["Niko Matsakis"]
 
-[taxonomies]
-tags = ["funding"]
-
 [extra]
 team = "the funding team"
 team_url = "https://github.com/rust-lang/leadership-council/issues/294"

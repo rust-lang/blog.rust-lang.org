@@ -7,9 +7,6 @@ aliases = ["inside-rust/2025/03/18/hiring-for-program-management.html"]
 [extra]
 team = "the Edition & Goals teams"
 team_url = "https://www.rust-lang.org/governance#teams"
-
-[taxonomies]
-tags = ["program"]
 +++
 
 # Hiring for Rust program management

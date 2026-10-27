@@ -1,14 +1,11 @@
 +++
 path = "inside-rust/2025/08/05/program-management-update-2025-07"
 title = "Program management update — July 2025"
-authors = ["Tomáš Šedovič"]
+authors = ["Tomas Sedovic"]
 
 [extra]
 team = "Edition & Goals teams"
 team_url = "https://www.rust-lang.org/governance/teams/"
-
-[taxonomies]
-tags = ["program"]
 +++
 
 Welcome to the second Rust PM update!

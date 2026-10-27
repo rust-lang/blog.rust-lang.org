@@ -3,9 +3,6 @@ path = "2026/08/26/announcing-our-first-maintainers-in-residence"
 title = "Announcing our first Maintainers in Residence"
 authors = ["Lori Lorusso", "Jakub Beránek"]
 
-[taxonomies]
-tags = ["funding"]
-
 [extra]
 team = "the Funding team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-funding"

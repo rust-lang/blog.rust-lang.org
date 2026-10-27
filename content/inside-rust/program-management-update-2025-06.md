@@ -1,14 +1,11 @@
 +++
 path = "inside-rust/2025/06/30/program-management-update-2025-06"
 title = "Program management update — June 2025"
-authors = ["Tomáš Šedovič"]
+authors = ["Tomas Sedovic"]
 
 [extra]
 team = "Edition & Goals teams"
 team_url = "https://www.rust-lang.org/governance/teams/"
-
-[taxonomies]
-tags = ["program"]
 +++
 
 When I saw TC's [post][pm] on Inside Rust, back in March, about looking to bring on someone to help the Project build on its successful program management work, it was one of those situations where I had to apply &mdash; despite many uncertainties &mdash; because if I hadn't, I'd have regretted it for the rest of my life.
@@ -56,7 +53,7 @@ Being there and saying, "yep, I'll set it up", and then everyone moves on, confi
 
 Indeed, this is what Josh said a couple of weeks ago:
 
-> "It was great being in a Rust meeting, talking about setting up a one-off meeting with specific people, and then it magically happening without any of us having to do anything to schedule it. Often, scheduling a meeting is harder than actually having the meeting. Tomáš makes it feel like we can concentrate on getting work done, and things don't get lost or fall through the cracks with him around."
+> "It was great being in a Rust meeting, talking about setting up a one-off meeting with specific people, and then it magically happening without any of us having to do anything to schedule it. Often, scheduling a meeting is harder than actually having the meeting. Tomas makes it feel like we can concentrate on getting work done, and things don't get lost or fall through the cracks with him around."
 >
 > &mdash; Josh Triplett
 

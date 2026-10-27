@@ -1,15 +1,15 @@
 +++
 path = "inside-rust/2025/09/11/program-management-update-2025-08"
 title = "Program management update — August 2025"
-authors = ["Tomáš Šedovič"]
+authors = ["Tomas Sedovic"]
+
 
 [extra]
 team = "Edition & Goals teams"
 team_url = "https://www.rust-lang.org/governance/teams/"
-
-[taxonomies]
-tags = ["program"]
 +++
+
+# Program management update — August 2025
 
 Quite a lot has happened in August. Let's dive in!
 

@@ -1,15 +1,13 @@
 +++
 path = "inside-rust/2025/08/20/electing-new-project-directors-2025"
 title = "Electing new Project Directors 2025"
-authors = ["Tomáš Šedovič"]
+authors = ["Tomas Sedovic"]
 
 [extra]
 team = "the Leadership Council"
 team_url = "https://www.rust-lang.org/governance/teams/leadership-council#team-leadership-council"
-
-[taxonomies]
-tags = ["program"]
 +++
+
 
 Today we are launching the process to elect three Project Directors to the Rust Foundation Board of Directors. This is the second round of slots, following from [last year's election](https://blog.rust-lang.org/inside-rust/2024/09/06/electing-new-project-directors/).
 

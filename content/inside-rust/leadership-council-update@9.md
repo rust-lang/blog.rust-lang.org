@@ -8,7 +8,7 @@ team = "Leadership Council"
 team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
 
 [taxonomies]
-tags = ["council", "program"]
+tags = ["council"]
 +++
 
 Hello again from the Rust Leadership Council! We wanted to share an update on what the Council has been working on since [our last update][update].
@@ -25,13 +25,13 @@ As [announced in September](https://blog.rust-lang.org/inside-rust/2025/09/23/le
 
 ### Foundation updates
 
-In October we wrapped up the election process for the Project Directors of the Rust Foundation. [Jack Huey], [Niko Matsakis], and [David Wood] are our new Directors ([see announcement][pd-election]). We'd like to thank [Tomáš Šedovič] for facilitating the election process.
+In October we wrapped up the election process for the Project Directors of the Rust Foundation. [Jack Huey], [Niko Matsakis], and [David Wood] are our new Directors ([see announcement][pd-election]). We'd like to thank [Tomas Sedovic] for facilitating the election process.
 
 [pd-election]: https://rustfoundation.org/media/introducing-the-rust-foundations-newest-project-directors-october-2025/
 [Jack Huey]: https://github.com/jackh726/
 [Niko Matsakis]: https://github.com/nikomatsakis/
 [David Wood]: https://github.com/davidtwco/
-[Tomáš Šedovič]: https://github.com/tomassedovic
+[Tomas Sedovic]: https://github.com/tomassedovic
 
 We've been discussing the 2026 "Project Priorities" budget with the Foundation, which would continue the program funded by Microsoft in 2024 and 2025. We're happy to report that we will be able to continue this program, which funds initiatives such as our travel budget, program management, compiler operations, and other maintenance support for the Rust project. The final budget will be submitted for board approval at the next meeting in December. We'll have more to share about this in the future. [#183](https://github.com/rust-lang/leadership-council/issues/183) [#234](https://github.com/rust-lang/leadership-council/issues/234)
 
