@@ -1,11 +1,14 @@
 +++
 path = "inside-rust/2025/12/16/please-submit-2026-project-goal-proposals"
 title = "Please submit 2026 Project goal proposals"
-authors = ["Tomas Sedovic"]
+authors = ["Tomáš Šedovič"]
 
 [extra]
 team = "the Goals team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-goals"
+
+[taxonomies]
+tags = ["program"]
 +++
 
 # Please submit 2026 Project goal proposals

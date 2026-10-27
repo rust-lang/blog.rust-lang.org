@@ -8,7 +8,7 @@ team = "Leadership Council"
 team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
 
 [taxonomies]
-tags = ["council"]
+tags = ["council", "program"]
 +++
 
 Hello again from the Rust Leadership Council! We wanted to share an update on what the Council has been working on since [our last update][update].
@@ -43,10 +43,10 @@ Thanks to everyone who participated in the process! The next representative sele
 
 ### Welcome Nurzhan Saken as our second Program Manager
 
-In February we welcomed [Nurzhan Saken] as our second Program Manager joining [Tomas Sedovic]. This will help make our PM program more sustainable and strengthen the support it provides. You can read more about Nurzhan in [the recent PM update](https://blog.rust-lang.org/inside-rust/2026/03/27/program-management-update-2026-02/#hello-from-nurzhan).
+In February we welcomed [Nurzhan Saken] as our second Program Manager joining [Tomáš Šedovič]. This will help make our PM program more sustainable and strengthen the support it provides. You can read more about Nurzhan in [the recent PM update](https://blog.rust-lang.org/inside-rust/2026/03/27/program-management-update-2026-02/#hello-from-nurzhan).
 
 [Nurzhan Saken]: https://github.com/nxsaken/
-[Tomas Sedovic]: https://github.com/tomassedovic/
+[Tomáš Šedovič]: https://github.com/tomassedovic/
 
 ### Project priorities budget
 
