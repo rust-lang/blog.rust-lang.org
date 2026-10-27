@@ -8,7 +8,7 @@ team = "Leadership Council"
 team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
 
 [taxonomies]
-tags = ["council"]
+tags = ["council", "program"]
 +++
 
 Hello again from the Rust Leadership Council!
