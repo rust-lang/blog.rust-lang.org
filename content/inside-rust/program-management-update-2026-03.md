@@ -6,6 +6,9 @@ authors = ["Tomas Sedovic and Nurzhan Saken"]
 [extra]
 team = "the Program team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-program"
+
+[taxonomies]
+tags = ["program"]
 +++
 
 Greetings and happy spring to you if you live in a place that's getting spring now!

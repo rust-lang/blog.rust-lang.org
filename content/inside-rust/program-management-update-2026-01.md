@@ -6,6 +6,9 @@ authors = ["Tomas Sedovic"]
 [extra]
 team = "the Goals team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-goals"
+
+[taxonomies]
+tags = ["program"]
 +++
 
 Happy 2026! We got off to a great start with Project goals and hiring. I had a couple of weeks off in December, and that was really lovely.

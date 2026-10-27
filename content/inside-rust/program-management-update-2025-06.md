@@ -6,6 +6,9 @@ authors = ["Tomas Sedovic"]
 [extra]
 team = "Edition & Goals teams"
 team_url = "https://www.rust-lang.org/governance/teams/"
+
+[taxonomies]
+tags = ["program"]
 +++
 
 When I saw TC's [post][pm] on Inside Rust, back in March, about looking to bring on someone to help the Project build on its successful program management work, it was one of those situations where I had to apply &mdash; despite many uncertainties &mdash; because if I hadn't, I'd have regretted it for the rest of my life.

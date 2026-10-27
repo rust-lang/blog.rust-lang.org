@@ -6,8 +6,10 @@ authors = ["Tomáš Šedovič"]
 [extra]
 team = "the Program team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-program"
+
+[taxonomies]
+tags = ["program"]
 +++
-# Program management update — June 2026
 
 ## Meetings
 

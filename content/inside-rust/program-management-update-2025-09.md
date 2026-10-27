@@ -6,9 +6,10 @@ authors = ["Tomas Sedovic"]
 [extra]
 team = "Edition & Goals teams"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-goals"
-+++
 
-# Program management update — September 2025
+[taxonomies]
+tags = ["program"]
++++
 
 As you may have noticed, the August PM update had a broader scope than earlier ones. It included a deeper dive into the reflection and variadic generics features and took the opportunity to describe the nature of the Leadership Council and the Foundation Project Director roles.
 

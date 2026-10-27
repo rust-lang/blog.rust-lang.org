@@ -6,6 +6,9 @@ authors = ["Tomas Sedovic"]
 [extra]
 team = "Edition & Goals teams"
 team_url = "https://www.rust-lang.org/governance/teams/"
+
+[taxonomies]
+tags = ["program"]
 +++
 
 Welcome to the second Rust PM update!

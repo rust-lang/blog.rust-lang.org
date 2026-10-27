@@ -6,6 +6,9 @@ authors = ["Tomas Sedovic"]
 [extra]
 team = "the Goals team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-goals"
+
+[taxonomies]
+tags = ["program"]
 +++
 
 This is a combined update for November and December. I had less time to work in November, and I'll be off for the winter holidays, so combining them makes sense.

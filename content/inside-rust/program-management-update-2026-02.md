@@ -6,9 +6,10 @@ authors = ["Tomas Sedovic", "Nurzhan Saken"]
 [extra]
 team = "the Program team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-program"
-+++
 
-# Program management update — February 2026
+[taxonomies]
+tags = ["program"]
++++
 
 Greetings! This update is brought to you by Tomas Sedovic *and* Nurzhan Saken \o/.
 
