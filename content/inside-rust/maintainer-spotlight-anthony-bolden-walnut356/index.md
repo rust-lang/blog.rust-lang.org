@@ -55,7 +55,7 @@ I read through the CodeLLDB debuginfo visualizers, and it spiraled from there. W
 
 **How did you start contributing to Rust?**
 
-Back in 2024, the Rust toolchain did not distribute debuginfo visualizers on Windows. Fixing that was one of my [first contributions][first-pr]. Back then, the Rust compiler debuginfo test suite did not work on Windows at all, so I had to provide "proof" that my pull requests worked via screenshots.
+Back in 2024, the Rust toolchain did not distribute debuginfo visualizers on Windows. Fixing that was one of my [first contributions][first-pr]. Then I got started fixing all the little details that prevented the scripts from working properly for programs compiled for MSVC. Back then, the Rust compiler debuginfo test suite did not work on Windows at all, so I had to provide "proof" that my pull requests worked via screenshots. It was pretty silly, and not very reliable.
 
 Sometimes, I work on debuginfo improvements out of spite, because I'm a bit mad about the state of debugging in Rust when working on my own projects. But in general, I want to improve it also for everyone else, because many people are [dissatisfied][debuginfo-survey] with it. It feels nice and rewarding to be able to take something (like the LLDB debugging experience on Windows) from not working at all to working reasonably well.
 
