@@ -200,7 +200,15 @@ Anthony's amazing contributions and his deep expertise in debuggers led to him b
 - Mentor: [rami3l](https://github.com/rami3l)
 - [Final report](https://cloud0310.github.io/posts/2026-GSoC-project-report.html)
 
-TODO
+The support for platform-specific directories (platformdirs) has been a long-standing feature request for rustup, to have more fine-grained filesystem directory choices. This project investigated how that issue could be resolved.
+
+The real complexity of this feature request lies within a decade worth of different assumptions that previous iterations of rustup and cargo have made: it turns out that quite a lot of them are no longer true if we were to implement platformdirs support truly faithfully.
+
+Guicheng first worked on cleaning up the interactions between `rustup self uninstall` and `$CARGO_HOME/bin` as a warmup. This issue itself is a very good demonstration of all that compatibility baggage: somehow `$CARGO_HOME/bin` has become the default binary directory for all things Rust, so rustup ended up installing itself and all its proxies into it. As a result, it has been super annoying to many that everything in `$CARGO_HOME` is gone with `rustup self uninstall`.
+
+After that, he started the actual implementation of platformdirs support in rustup. This was no easy task! Not because the code itself was hard to write, but because it takes a lot of effort to figure out what should be the desired behavior in the first place. Also, in order to determine the appropriate platformdirs semantics, some prior research is often required to see how things became what they are today, so the decoupling of different concerns could proceed, and migration paths could be designed accordingly. It was in this sense that this is different from a typical GSoC project, and luckily thanks to the effort he has put into this project, we have not only come up with the final patch, but also discovered and fixed some tiny preexisting issues with this long-untouched aspect of the rustup codebase along the way.
+
+Thank you for digging into this complex topic, Guicheng!
 
     
 
