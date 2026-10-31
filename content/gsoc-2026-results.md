@@ -85,7 +85,21 @@ TODO
 - Mentors: [Jacob Pratt](https://github.com/jhpratt), [Urgau](https://github.com/Urgau)
 - [Final report](https://gist.github.com/CoCo-Japan-pan/ced54db688080b94ec777bd750e87b34)
 
-TODO
+The goal of this project was to implement two new language features that were accepted in [RFC 3323][rfc-3323]:
+- Impl restrictions (`impl(crate) trait Foo {}`), which allow restricting in which crates you are able to implement a given trait.
+- Mut restrictions (`struct Foo { pub mut(crate) bar: u8 }`), which allow restricting in which crates you are able to mutate a given field.
+
+Ryosuke had to familiarize himself with the compiler's codebase and do a lot of implementation work to get both features working. This included implementing parsing of the new syntax, recording its metadata in the compiler's Abstract Syntax Tree, implementing resolution of the restricted crate paths, and finally adding checks to enforce both restriction rules. This all amounted to around five thousand lines of Rust code!
+
+Once the new features were implemented and available on nightly, Ryosuke wrote a [Call for Testing][impl-mut-restrictions-blog] blog post together with his mentors. It had to be very exciting to announce to the world that he implemented two new features from scratch, and people can now play with them on the nightly channel! After the blog post was published, users reported a few issues, which Ryosuke promptly fixed. He also contributed to rustdoc to improve how are the impl and mut restrictions rendered in the generated documentation pages.
+
+Now that the features are available on nightly, feedback is being gathered on them, with the plan being to stabilize them in 2027. If you would like to provide feedback on the impl and mut restrictions, you can do so in [this issue][feedback-issue].
+
+The goal of this project was clear, and Ryosuke achieved it completely. Awesome work!
+
+[rfc-3323]: https://rust-lang.github.io/rfcs/3323-restrictions.html
+[impl-mut-restrictions-blog]: https://blog.rust-lang.org/inside-rust/2026/08/10/call-for-testing-impl-and-mut-restrictions/
+[feedback-issue]: https://github.com/rust-lang/rust/issues/160614
 
 ### Improving Ergonomics and Safety of serialport-rs
 - Contributor: [Tanmay](https://github.com/NONnonHere)
