@@ -86,12 +86,12 @@ TODO
 - [Final report](https://gist.github.com/CoCo-Japan-pan/ced54db688080b94ec777bd750e87b34)
 
 The goal of this project was to implement two new language features that were accepted in [RFC 3323][rfc-3323]:
-- Impl restrictions (`impl(crate) trait Foo {}`), which allow restricting in which crates you are able to implement a given trait.
-- Mut restrictions (`struct Foo { pub mut(crate) bar: u8 }`), which allow restricting in which crates you are able to mutate a given field.
+- Impl restrictions (`impl(crate) trait Foo {}`), which allow restricting in which modules you are able to implement a given trait.
+- Mut restrictions (`struct Foo { pub mut(crate) bar: u8 }`), which allow restricting in which modules you are able to mutate a given field.
 
 Ryosuke had to familiarize himself with the compiler's codebase and do a lot of implementation work to get both features working. This included implementing parsing of the new syntax, recording its metadata in the compiler's Abstract Syntax Tree, implementing resolution of the restricted crate paths, and finally adding checks to enforce both restriction rules. This all amounted to around five thousand lines of Rust code!
 
-Once the new features were implemented and available on nightly, Ryosuke wrote a [Call for Testing][impl-mut-restrictions-blog] blog post together with his mentors. It had to be very exciting to announce to the world that he implemented two new features from scratch, and people can now play with them on the nightly channel! After the blog post was published, users reported a few issues, which Ryosuke promptly fixed. He also contributed to rustdoc to improve how are the impl and mut restrictions rendered in the generated documentation pages.
+Once the new features were implemented and available on nightly, Ryosuke wrote a [Call for Testing][impl-mut-restrictions-blog] blog post. It had to be very exciting to announce to the world that he implemented two new features from scratch, and people can now play with them on the nightly channel! After the blog post was published, users reported a few issues, which Ryosuke promptly fixed. He also contributed to rustdoc to improve how are the impl and mut restrictions rendered in the generated documentation pages.
 
 Now that the features are available on nightly, feedback is being gathered on them, with the plan being to stabilize them in 2027. If you would like to provide feedback on the impl and mut restrictions, you can do so in [this issue][feedback-issue].
 
