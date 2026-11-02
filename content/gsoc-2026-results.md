@@ -34,7 +34,7 @@ Below you can find a brief summary of our GSoC 2026 projects. You can find more 
 - [Improving Ergonomics and Safety of serialport-rs](#improving-ergonomics-and-safety-of-serialport-rs) by [Tanmay](https://github.com/NONnonHere)
 - [libc: transition differing bit-width time and offset variants and deprecate bug-prone constants](#libc-transition-differing-bit-width-time-and-offset-variants-and-deprecate-bug-prone-constants) by [Adam Martinez](https://github.com/dybucc)
 - [Link Linux kernel and its Modules with Wild](#link-linux-kernel-and-its-modules-with-wild) by [Vishruth Thimmaiah](https://github.com/vishruth-thimmaiah)
-- [Migrating rust-analyzer assists to SyntaxEditor](#migrating-rust-analyzer-assists-to-syntaxeditor) by [Shourya Sharma](https://github.com/Shourya742)
+- [Migrating rust-analyzer assists to SyntaxEditor](#migrating-rust-analyzer-assists-to-syntaxeditor) by [bit-aloo](https://github.com/Shourya742)
 - [Port std::arch test suite to rust-lang/rust](#port-std-arch-test-suite-to-rust-lang-rust) by [Sumit Kumas](https://github.com/xonx4l)
 - [Reorganizing tests/ui/issues](#reorganizing-tests-ui-issues) by [zedddie](https://github.com/zedddie)
 - [Utilize debugger APIs to improve debug info test accuracy and error reporting](#utilize-debugger-apis-to-improve-debug-info-test-accuracy-and-error-reporting) by [Anthony Bolden](https://github.com/Walnut356)
@@ -152,11 +152,19 @@ Vishruth has continued to contribute to Wild even after his GSoC project ended a
 [wild-linker-modules-final-report]: https://vishthimmaiah.dev/blog/gsoc-26#benchmarks
 
 ### Migrating rust-analyzer assists to SyntaxEditor
-- Contributor: [Shourya Sharma](https://github.com/Shourya742)
+- Contributor: [bit-aloo](https://github.com/Shourya742)
 - Mentors: [Chayim Refael Friedman](https://github.com/ChayimFriedman2), [Lukas Wirth](https://github.com/Veykril)
-- [Final report](TODO)
+- [Final report](https://gist.github.com/bit-aloo/b960133f349ab8a63de63bfbc35d3b8e)
 
-TODO
+rust-analyzer uses [rowan] for its syntax trees, a library for Concrete Syntax Trees. `rowan` has served us well over the years, but it has some downsides that cause major performance problems and also smaller convenience issues. In particular, memory fragmentation causes rust-analyzer to consume much more memory than it actually needs (in the order of redundant gigabytes).
+
+We wanted to rewrite `rowan` to change that. The problem was that many parts in rust-analyzer touch syntax trees, and in particular assists (code actions) of which we have a lot. They also use mutable tree editing, a feature of `rowan` that can be convenient but was a major obstacle in rewriting it to be more efficient.
+
+During his project, bit-aloo first migrated all rust-analyzer code from mutable tree editing to `SyntaxEditor`, a new abstraction that was created specifically to avoid mutation. After that, he removed mutable editing from `rowan` altogether.
+
+The migration process is incremental and `rowan` is still inefficient in various aspects. However, we believe that the parts which required changes to large amounts of code are behind us, and we can complete the migration with more focused changes. bit-aloo is continuing to work on that even after his GSoC project ended. And he was also accepted as a member of the rust-analyzer team, so congratulations! We would like to thank him for their work, and hope to continue working with him to improve rust-analyzer for everyone.
+
+[rowan]: https://github.com/rust-analyzer/rowan
 
 ### Port std::arch test suite to rust-lang/rust
 - Contributor: [Sumit Kumas](https://github.com/xonx4l)
