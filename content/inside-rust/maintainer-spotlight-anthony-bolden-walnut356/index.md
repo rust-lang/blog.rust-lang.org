@@ -87,7 +87,7 @@ Recently, I learned that LLDB maintainers plan to improve their plugin interface
 
 **Would you like to work on Rust professionally?**
 
-If I could work on improving Rust debuginfo full-time, that would actually be the dream for me. I have a lot of fun with this, and I do it both during my night shifts, and in my free time. I would love to have a programming job in general, though I guess I sort of chose the wrong time to get into the industry, with the state of the job market right now.
+If I could work on improving Rust debuginfo full-time, that would actually be the dream for me. I have a lot of fun with this, and I did it both during my night shifts, and in my free time. I would love to have a programming job in general, though I guess I sort of chose the wrong time to get into the industry, with the state of the job market right now. The hotel I worked for reduced the number of night auditors recently, and my position was eliminated. It's a bit bittersweet, since the stability and downtime are what allowed me to start programming in the first place, but I take it as a sign that it's time to move forward with my career and start seriously applying for software engineering positions.
 
 **What advice would you give someone just starting their Rust journey?**
 
