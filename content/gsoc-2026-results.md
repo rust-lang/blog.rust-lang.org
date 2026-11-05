@@ -47,7 +47,19 @@ And now strap in, as there is a ton of great content to read about here!
 - Mentor: [Manuel Drehwald](https://github.com/ZuseZ4)
 - [Final report](https://sa4dus.github.io/posts/gsoc2026-final-report/)
 
-TODO
+Marcelo worked on improving the usability of cross-vendor GPU programs in Rust using the `std::offload` module. At the start of the project, the offload prototype was only a proof of concept. It assumed that the offloaded code was bug-free, and it required users to write a lot of boilerplate code. Marcelo resolved both issues over the summer.
+
+First, he implemented proper type checking. Marcelo extended the compiler to verify that the arguments passed to any offload call are of the correct type, as expected by the GPU kernel. Kernel launches are thus now safe.
+
+After that, he added support for generic kernels. The compiler now collects all generic instantiations launched from the CPU side, and loads that info later when compiling GPU kernels to make sure we instantiate them as needed. Marcelo also added support to select which GPU to use, which is helpful for laptops with both an integrated and a dedicated GPU, as well as for servers with multiple GPUs. He also added two macros that removed the need for any boilerplate when writing and launching GPU kernels. 
+
+The hardest part of this project by far was dealing with references. Due to Rust semantics, we cannot just map types containing mutable references to GPUs and then process them using multiple threads. Previous Rust GPU projects used raw pointers as a workaround, but we obviously wanted to avoid those. Marcelo managed to implement a sound abstraction so that users can now safely declare how their kernels will access mutable arguments.
+
+As a cherry on top, Marcelo also ported the [RajaPerf][rajaperf] performance suite from C++ to Rust and used it to benchmark his pull requests. His safe Rust version matches the performance of the original C++ code, and is now described in a [GPU offload paper][gpu-offload-paper] that he is working on together with his mentor, Manuel. This was Marcelo's [second][marcelo-gsoc-2025] Rust GSoC project, and same as last year, we are very happy with the results. Great job!
+
+[marcelo-gsoc-2025]: https://blog.rust-lang.org/2025/11/18/gsoc-2025-results/#abi-layout-handling-for-the-automatic-differentiation-feature
+[rajaperf]: https://github.com/llnl/rajaperf
+[gpu-offload-paper]: https://arxiv.org/abs/2608.13759
 
 ### Adding WebAssembly Linking Support to Wild
 - Contributor: [Kei Akiyama](https://github.com/lapla-cogito)
