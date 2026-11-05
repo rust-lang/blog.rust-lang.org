@@ -11,7 +11,7 @@ team = "the mentorship team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-mentorship"
 +++
 
-The Rust Project [participated][gsoc-blog-post] in [Google Summer of Code (GSoC)][gsoc] for the third time this year. This time, we had 13 projects, whose contributors have been working on very hard for several months. As usually, the projects had various durations, so while some of them have ended in August, the last one has only finished in November, so we have been waiting until we have all the results before publishing this blog post.
+The Rust Project [participated][gsoc-blog-post] in [Google Summer of Code (GSoC)][gsoc] for the third time this year. This time we had 13 projects, and our dear contributors have been working very hard on them for several months. As usually, the projects had various durations, so while some of them have ended in August, the last one has only finished in November, so we have been waiting until we have all the results before publishing this blog post.
 
 **We are very happy to announce that all 13 projects were successful and passed their final evaluation!** We consider it to be a testament to the diligence of our contributors, and the helpfulness of our mentors, that we are able to keep a very high rate[^success-rate] of successful GSoC projects several years in a row.
 
@@ -106,7 +106,22 @@ The goal of this project was clear, and Ryosuke achieved it completely. Awesome 
 - Mentor: [Christian Meusel](https://github.com/sirhcel)
 - [Final report](https://nonnonhere.github.io/posts/gsoc2026-report/)
 
-TODO
+The goal of this project, which was done in the collaboration with the [Rust Embedded Working Group][rust-embedded], was to improve the API ergonomics and type safety of the [serialport-rs] crate. 
+
+The serialport project is a bit different from some others projects which participated in this year's Google Summer of Code. It is more on the side of "facility management" than rocket science. Its challenges are taming finicky operating system APIs and making good abstractions, rather than full-blown software engineering.
+
+Tanmay led many fruitful discussions about potential design decisions, and did a lot of field research on how other crates that depend on serialport actually use its API, to figure out how to make the upcoming breaking API changes less disruptive and painful for them.
+
+Tanmay also worked on sanding off some rough edges of the serialport API, such as replacing Boxed trait objects with enums, and making errors explicit in places where the legacy API used to panic. Some of the work still waits for integration. It is targeting the upcoming serialport 5.0 release.
+
+Christian (Tanmay's mentor) found working alongside Tanmay very motivational, and he was able to catch up with a lot of other unrelated work in order to integrate Tanmay's changes. He noted that working with Tanmay was fun and productive, and that it was pure joy to see him grow from his first contribution in the bonding phase to seasoned contributions. Thank you, Tanmay!
+
+> This was my first Google Summer of Code as well. It was challenging, motivating, fun and definitely worth it. I would show up again.
+> 
+> Christian Meusel
+
+[rust-embedded]: https://rust-embedded.org
+[serialport-rs]: https://github.com/serialport/serialport-rs
 
 ### libc: transition differing bit-width time and offset variants and deprecate bug-prone constants
 - Contributor: [Adam Martinez](https://github.com/dybucc)
