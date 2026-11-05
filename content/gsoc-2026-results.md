@@ -71,7 +71,15 @@ Even after this GSoC project ended, Kei has continued improving Wild's Wasm supp
 - Mentor: [Manuel Drehwald](https://github.com/ZuseZ4)
 - [Final report](https://sgasho.github.io/posts/gsoc-2026-final-report/)
 
-TODO
+The goal of this project was to build the experimental `std::autodiff` module, which implements automatic differentiation of Rust code, and the `std::offload` module, which allows offloading Rust code to GPUs, in the CI of the Rust compiler.
+
+Shota has already been contributing to this area in the months leading up to this year's GSoC, so he had no issues getting started. After valiantly fighting with our CI, he made both modules available in the official `nightly` compiler channel. Rust users can thus now simply install them with a single rustup command, rather than having to compile rustc from source! This is a huge benefit for gathering feedback on these features in the wild, as it makes it much easier to experiment with them.
+
+Beyond making these projects available via rustup, he also worked on making it simpler to build projects that use `std::offload`. The original compilation pipeline was derived from Clang's support for GPU offload, so it involved calling clang helper binaries. That is clearly not optimal, so Shota worked on replacing it by directly calling the underlying LLVM APIs from rustc.
+
+The last piece of his project was enabling testing in CI for both offload and autodiff, which already helped prevent multiple regressions. Right now, the GPU offload pipeline only tests the CPU setup side, but his work allowed us to talk to GPU hardware vendors, two of which already agreed to provide the Rust Project with GPU hardware so that in the future we can also run those tests on dedicated GPUs.
+
+Overall, the project was a success. Shota had to show a lot of patience and endurance when working with various CMake quirks and CI challenges. We would like to extend a special thank you for that!
 
 ### Debugger for Miri
 - Contributor: [Mohamed Ali Mohamed](https://github.com/moabo3li)
