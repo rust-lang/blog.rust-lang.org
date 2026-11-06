@@ -29,7 +29,7 @@ Below you can find a brief summary of our GSoC 2026 projects. You can find more 
 - [A Frontend for Safe GPU Offloading in Rust](#a-frontend-for-safe-gpu-offloading-in-rust) by [Marcelo Domínguez](https://github.com/sa4dus)
 - [Adding WebAssembly Linking Support to Wild](#adding-webassembly-linking-support-to-wild) by [Kei Akiyama](https://github.com/lapla-cogito)
 - [Bringing autodiff and offload into Rust CI](#bringing-autodiff-and-offload-into-rust-ci) by [Shota Sugano](https://github.com/sgasho)
-- [Debugger for Miri](#debugger-for-miri) by [Mohamed Ali Mohamed](https://github.com/moabo3li)
+- [Debugger for Miri](#debugger-for-miri) by [Mohamed Ali](https://github.com/moabo3li)
 - [Implementing impl and mut restrictions](#implementing-impl-and-mut-restrictions) by [Ryosuke Yamano](https://github.com/CoCo-Japan-pan)
 - [Improving Ergonomics and Safety of serialport-rs](#improving-ergonomics-and-safety-of-serialport-rs) by [Tanmay](https://github.com/NONnonHere)
 - [libc: transition differing bit-width time and offset variants and deprecate bug-prone constants](#libc-transition-differing-bit-width-time-and-offset-variants-and-deprecate-bug-prone-constants) by [Adam Martinez](https://github.com/dybucc)
@@ -94,11 +94,17 @@ The last piece of his project was enabling testing in CI for both offload and au
 Overall, the project was a success. Shota had to show a lot of patience and endurance when working with various CMake quirks and CI challenges. We would like to extend a special thank you for that!
 
 ### Debugger for Miri
-- Contributor: [Mohamed Ali Mohamed](https://github.com/moabo3li)
+- Contributor: [Mohamed Ali](https://github.com/moabo3li)
 - Mentor: [Oli Scherer](https://github.com/oli-obk)
 - [Final report](https://gist.github.com/moabo3li/10b6ca701cb998ab36781e81ac0f100d)
 
-TODO
+miri is a tool that can detect undefined behavior (UB) in unsafe Rust code. It used to have a prototype of an interactive debugger called `priroda`, but it became unmaintained some time ago. The goal of this project was to re-establish `priroda`, to make it easier to use miri interactively, debug how and why is UB introduced in Rust programs, and also help rustc developers analyse MIR, one of the intermediate representations of Rust programs.
+
+Mohamed successfully reached both main goals of this project. He created a miri interface for the gdb debugger, which allows debugging programs executed by miri. You can set breakpoints, step through individual instructions, analyse MIR local variables and inspect the debugged program's state, with miri acting as a "virtual CPU". So when you encounter your next miri UB report, you can actually debug the program state that caused UB by running `priroda`! Mohamed also created a command-line interface for `priroda`, which is used to test it in miri's CI. This will ensure that it keeps working properly and will not bitrot again.
+
+Mohamed also added basic support for the Debugger Adapter Protocol, which allows using `priroda` together with IDEs such as Visual Studio Code. Currently, connecting priroda to an IDE is a bit involved, so the next step would be to build a plugin for an IDE that would allow showing all the extra state that miri has, which gdb doesn't know how to interpret.
+
+Debugging programs executed by miri is very exciting. Thank you for all your work!
 
 ### Implementing impl and mut restrictions
 - Contributor: [Ryosuke Yamano](https://github.com/CoCo-Japan-pan)
