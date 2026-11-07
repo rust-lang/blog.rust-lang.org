@@ -34,7 +34,7 @@ Below you can find a brief summary of our GSoC 2026 projects. You can find more 
 - [Improving Ergonomics and Safety of serialport-rs](#improving-ergonomics-and-safety-of-serialport-rs) by [Tanmay](https://github.com/NONnonHere)
 - [libc: transition differing bit-width time and offset variants and deprecate bug-prone constants](#libc-transition-differing-bit-width-time-and-offset-variants-and-deprecate-bug-prone-constants) by [Adam Martinez](https://github.com/dybucc)
 - [Link Linux kernel and its Modules with Wild](#link-linux-kernel-and-its-modules-with-wild) by [Vishruth Thimmaiah](https://github.com/vishruth-thimmaiah)
-- [Migrating rust-analyzer assists to SyntaxEditor](#migrating-rust-analyzer-assists-to-syntaxeditor) by [bit-aloo](https://github.com/Shourya742)
+- [Migrating rust-analyzer assists to SyntaxEditor](#migrating-rust-analyzer-assists-to-syntaxeditor) by [bit-aloo](https://github.com/bit-aloo)
 - [Port std::arch test suite to rust-lang/rust](#port-std-arch-test-suite-to-rust-lang-rust) by [Sumit Kumas](https://github.com/xonx4l)
 - [Reorganizing tests/ui/issues](#reorganizing-tests-ui-issues) by [zedddie](https://github.com/zedddie)
 - [Utilize debugger APIs to improve debug info test accuracy and error reporting](#utilize-debugger-apis-to-improve-debug-info-test-accuracy-and-error-reporting) by [Anthony Bolden](https://github.com/Walnut356)
