@@ -185,6 +185,7 @@ The `build-dir` now consistently applies the build-configuration hash to all con
 
 This also unblocks future improvements such as cache garbage collection, cross-workspace cache de-duplication, cross-workspace caching, and fine grain locking.
 
+We previously published a [call for testing](https://blog.rust-lang.org/2026/03/13/call-for-testing-build-dir-layout-v2/) for the changes that are now taking effect.
 While this is an internal change, this may break build processes and tests that had workarounds for missing or incomplete features.
 In some cases, the workaround is no longer needed.
 See [cargo#17287](https://github.com/rust-lang/cargo/issues/17287) for possible solutions and to add any new use cases.
