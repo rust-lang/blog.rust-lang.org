@@ -59,7 +59,7 @@ fn infallible_unwrap(res: Result<T, !>) -> T {
 
 Additionally this release changes [`Infallible`] to be an alias to the never type. That makes all old APIs that used `Infallible` be compatible with using `!`. This was the plan ever since the introduction of `Infallible` and is one of the reasons why the never type stabilization was so hard (waffle gave a [talk](https://www.youtube.com/watch?v=3jM4cnEVrLc) about some of the troubles of the stabilization).
 
-[`Infallible`]: https://doc.rust-lang.org/nightly/std/convert/type.Infallible.html
+[`Infallible`]: https://doc.rust-lang.org/stable/std/convert/type.Infallible.html
 
 Unfortunately, to allow changing `Infallible`, we had to introduce a breaking change. This release changes the "never type fallback" from `()` to `!` in editions **before** 2024 (i.e. 2015, 2018, and 2021), similarly to what has [already been done in edition 2024]. This should largely be unnoticeable, but can affect code in some rare cases (for example when ignoring a result of a function returning a generic parameter). Note that this change might also make the compiler detect more code as unreachable.
 
