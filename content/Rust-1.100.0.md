@@ -175,7 +175,7 @@ This warning is being introduced as part of a new linting system for Cargo, cont
 
 ### Reducing Cargo cache collisions
 
-Cargo builds all libraries and binaries in the `build-dir` and then uplifts final artifacts to the `target-dir. At this time, these share a common parent directory.
+Cargo builds all libraries and binaries in the `build-dir` and then uplifts final artifacts to the `target-dir`. At this time, these share a common parent directory.
 Different build configurations, like `--features`, can lead to different copies of libraries and binaries in the `build-dir`.
 These copies are kept unique by a build-configuration hash but this hash was not always applied due to platform constraints.
 This can lead to extra rebuilds, missed rebuilds, confusion over what binaries or libraries are used, and so on.
