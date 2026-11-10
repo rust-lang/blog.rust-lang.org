@@ -140,9 +140,89 @@ impl Handle {
 
 Here, the module exploits the fact that `Handle` *cannot be used* without first setting up `HANDLE`, to make the `count` function safe. If we could just `conjure_zst::<Handle>()` in safe code, this is no longer sound, which is why it's unsafe to call `conjure_zst`.
 
-### Cargo XYZ
+### Reporting unused dependencies
 
-:construction: TODO -- expecting several blog-worthy items
+Building dependencies that are no longer used or are only needed for specific platforms can slow down builds.
+Rustc has the `unused_crate_dependencies` lint for this but it has false positives when used with Cargo because dependencies may be shared between multiple build targets, e.g. `dependencies.tracing-subscriber` being available for every `bin` in a package when only some may use it.
+
+Cargo now reports unused dependencies to users, e.g.
+
+```
+warning: unused dependency `tracing-subscriber`
+  --> Cargo.toml:23:1
+   |
+23 | tracing-subscriber.workspace = true
+   | ^^^^^^^^^^^^^^^^^^
+   |
+   = note: `cargo::unused_dependencies` is set to `warn` by default
+help: consider removing the dependency on `tracing-subscriber`
+```
+
+A limitation of this warning is that it will only appear when building every build target that may use an entry in a dependencies table.
+For example, running `cargo check --bin foo` won't show warnings for unused `[dependencies]` because another `bin` may be present that uses them.
+No warning will be shown for unused `dev-dependencies` because there isn't a way to ensure every development build target is built.
+
+This warning is being introduced as part of a new linting system for Cargo, controlled by the `[lints.cargo]` table in `Cargo.toml`. See also the [other lints that have been introduced](https://doc.rust-lang.org/stable/cargo/reference/lints.html).
+
+### Reducing Cargo cache collisions
+
+Cargo builds all libraries and binaries in the `build-dir` and then uplifts final artifacts to the `target-dir. At this time, these share a common parent directory.
+Different build configurations, like `--features`, can lead to different copies of libraries and binaries in the `build-dir`.
+These copies are kept unique by a build-configuration hash but this hash was not always applied due to platform constraints.
+This can lead to extra rebuilds, missed rebuilds, confusion over what binaries or libraries are used, and so on.
+These problems get exacerbated when sharing a `build-dir` across git worktrees.
+
+The `build-dir` now consistently applies the build-configuration hash to all content by organizing the directories around their build step, rather than their file type, and moving the hash from a file's name to the parent directory.
+
+This also unblocks future improvements such as cache garbage collection, cross-workspace cache de-duplication, cross-workspace caching, and fine grain locking.
+
+While this is an internal change, this may break build processes and tests that had workarounds for missing or incomplete features.
+In some cases, the workaround is no longer needed.
+See [cargo#17287](https://github.com/rust-lang/cargo/issues/17287) for possible solutions and to add any new use cases.
+
+### Cargo min-publish-age a.k.a. dependency cooldowns
+
+Malicious versions of packages are often caught within hours or daysafter being published, by either automated scanners or by the community.
+Rust 1.100 stabilizes Cargo's min-publish-age aware dependency resolution, which lets you wait for that window before it picks up newly published versions.
+This practice is also known as dependency cooldowns.
+
+You can opt in via [`.cargo/config.toml`](https://doc.rust-lang.org/cargo/reference/config.html#registryglobal-min-publish-age):
+
+```toml
+[registry]
+global-min-publish-age = "3 days"
+```
+
+When selecting versions, Cargo now skips any version published more recently than that, and tells you what it held back:
+
+```console
+$ cargo update
+    Updating crates.io index
+     Locking 2 packages to highest compatible version as of min-publish-age
+      Adding cc v1.11.0 (available: v1.18.0, published 3 hours ago)
+      Adding clap 4.6.7 (available: 4.6.9, published 2 days ago)
+```
+
+When a new version is needed right away, you can override the check for a single update:
+
+```console
+$ CARGO_RESOLVER_INCOMPATIBLE_PUBLISH_AGE=allow cargo update clap --precise 4.6.9
+    Updating crates.io index
+    Updating clap 4.6.7 -> clap 4.6.9 (published 2 days ago, minimum age 3 days)
+```
+
+The newer version will be recorded in `Cargo.lock` and kept from then on until a later `cargo update` re-resolves it.
+
+A few things to keep in mind:
+
+* This depends on the registry recording when each version was published.
+  Versions without a `pubtime` field in the index are never held back.
+
+* `cargo install` ignores the minimum publish age, for both the installed crate and its dependencies.
+  Pin a version with `cargo install foo@1.2.3` if needed.
+
+* Cooldowns reduce the risk from some supply chain attacks but are not a complete defense on their own.
+  Please keep reviewing dependency updates as you otherwise would.
 
 ### Stabilized APIs
 
