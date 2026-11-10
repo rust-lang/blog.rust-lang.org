@@ -22,6 +22,15 @@ If you'd like to help us out by testing future releases, you might consider upda
 
 ## What's in 1.100.0 stable
 
+- [Never type](#never-type)
+- [`Allocator` API](#allocator-api)
+- [`DropGuard` API](#dropguard-run-a-closure-on-every-exit-path)
+- [Conjuring zero-sized types](#conjuring-zero-sized-types)
+- [Reporting unused dependencies](#reporting-unused-dependencies)
+- [Reducing Cargo cache collisions](#reducing-cargo-cache-collisions)
+- [Cargo min-publish-age](#cargo-min-publish-age-a-k-a-dependency-cooldowns)
+- [Stabilized APIs](#stabilized-apis)
+
 ### Never type
 
 After 10 years and 5 failed stabilization attempts, **the [never type] is finally stable**!
