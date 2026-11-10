@@ -121,33 +121,7 @@ This question is answered in Rust 1.100 with a single function: [`std::mem::conj
 
 Instead of transmuting `()`, `MaybeUninit::uninit().assume_init()`, or various other incantations, this is the dedicated way to create a value of a zero-sized type when you know that doing so is safe to do. If the type has no size, we know exactly what value it must be: nothing.
 
-Of course, APIs often rely on the inability to construct such types for safety, and that's why this function is unsafe. For example, take this contrived example:
-
-```rust
-use std::cell::Cell;
-use std::sync::atomic::{AtomicUsize, Ordering};
-
-// look, I said the example was contrived, okay?
-static HANDLE: Cell<*const AtomicUsize> = std::ptr::null();
-static COUNTER: AtomicUsize = AtomicUsize::new(0);
-
-// outside this module, you can't make your own `Handle`
-pub struct Handle(());
-impl Handle {
-    pub fn setup() -> Handle {
-        HANDLE.set(&raw const COUNTER);
-        Handle(())
-    }
-
-    pub fn count(&self) -> usize {
-        // SAFETY: We initialized `HANDLE` in the constructor, so, this is a valid pointer.
-        let atomic = unsafe { &*HANDLE.get() };
-        atomic.fetch_add(1, Ordering::Relaxed)
-    }
-}
-```
-
-Here, the module exploits the fact that `Handle` *cannot be used* without first setting up `HANDLE`, to make the `count` function safe. If we could just `conjure_zst::<Handle>()` in safe code, this is no longer sound, which is why it's unsafe to call `conjure_zst`.
+Of course, APIs often rely on the inability to construct such types for safety, and that's why this function is unsafe. For example, PyO3's [`Python<'py>`](https://docs.rs/pyo3/latest/pyo3/marker/struct.Python.html) is a zero-sized marker token that represents holding the Python GIL (global interpreter lock). Many of Python's APIs require holding this lock to be safe, but conjuring a token from thin air would allow safe PyO3 calls to violate that precondition.
 
 ### Reporting unused dependencies in Cargo
 
