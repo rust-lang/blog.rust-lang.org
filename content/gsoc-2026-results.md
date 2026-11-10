@@ -11,7 +11,7 @@ team = "the mentorship team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-mentorship"
 +++
 
-The Rust Project [participated][gsoc-blog-post] in [Google Summer of Code (GSoC)][gsoc] for the third time this year. This time we had 13 projects, and our dear contributors have been working very hard on them for several months. As usually, the projects had various durations, so while some of them have ended in August, the last one has only finished in November, so we have been waiting until we have all the results before publishing this blog post.
+The Rust Project [participated][gsoc-blog-post] in [Google Summer of Code (GSoC)][gsoc] for the third time this year. This time we had 13 projects, and our dear contributors have been working very hard on them for several months. As usual, the projects had various durations, so while some of them have ended in August, the last one has only finished in November, so we have been waiting until we have all the results before publishing this blog post.
 
 **We are very happy to announce that all 13 projects were successful and passed their final evaluation!** We consider it to be a testament to the diligence of our contributors, and the helpfulness of our mentors, that we are able to keep a very high rate[^success-rate] of successful GSoC projects several years in a row.
 
@@ -68,7 +68,7 @@ As a cherry on top, Marcelo also ported the [RajaPerf][rajaperf] performance sui
 
 The goal of this project was simple on paper: teach the [Wild][wild] linker to link WebAssembly (Wasm) programs. However, adding support for a new linker target is of course far from simple. Luckily, Kei already had a lot of experience with Wild, as this was his second [GSoC project][kei-gsoc-2025] working on the Wild linker.
 
-And as expected, Kei did great a job! Prior to GSoC 2026, Wild had no Wasm output support. Now, the Wasm support is sufficiently good that Wild can link a range of complex programs to Wasm. For example, it is able to link itself, SQLite, ripgrep, CPython and even the SpiderMonkey JavaScript engine.
+And as expected, Kei did a great job! Prior to GSoC 2026, Wild had no Wasm output support. Now, the Wasm support is sufficiently good that Wild can link a range of complex programs to Wasm. For example, it is able to link itself, SQLite, ripgrep, CPython and even the SpiderMonkey JavaScript engine.
 
 And the linking performance is excellent! When compared to `wasm-ld`, the de-facto standard Wasm linker, which is based on the LLD linker, Wild is 2-15x faster, and uses 2-5x less memory. You can find more benchmarks in his [final report][wild-linker-wasm-final-report], where he also explains that achieving this performance took quite some work, because Wild's ELF linking performance did not immediately translate to being fast when linking Wasm.
 
@@ -117,7 +117,7 @@ The goal of this project was to implement two new language features that were ac
 
 Ryosuke had to familiarize himself with the compiler's codebase and do a lot of implementation work to get both features working. This included implementing parsing of the new syntax, recording its metadata in the compiler's Abstract Syntax Tree, implementing resolution of the restricted crate paths, and finally adding checks to enforce both restriction rules. This all amounted to around five thousand lines of Rust code!
 
-Once the new features were implemented and available on nightly, Ryosuke wrote a [Call for Testing][impl-mut-restrictions-blog] blog post. It had to be very exciting to announce to the world that he implemented two new features from scratch, and people can now play with them on the nightly channel! After the blog post was published, users reported a few issues, which Ryosuke promptly fixed. He also contributed to rustdoc to improve how are the impl and mut restrictions rendered in the generated documentation pages.
+Once the new features were implemented and available on nightly, Ryosuke wrote a [Call for Testing][impl-mut-restrictions-blog] blog post. It had to be very exciting to announce to the world that he implemented two new features from scratch, and people can now play with them on the nightly channel! After the blog post was published, users reported a few issues, which Ryosuke promptly fixed. He also contributed to rustdoc to improve how the impl and mut restrictions are rendered in the generated documentation pages.
 
 Now that the features are available on nightly, feedback is being gathered on them, with the plan being to stabilize them in 2027. If you would like to provide feedback on the impl and mut restrictions, you can do so in [this issue][feedback-issue].
 
@@ -132,9 +132,9 @@ The goal of this project was clear, and Ryosuke achieved it completely. Awesome 
 - Mentor: [Christian Meusel](https://github.com/sirhcel)
 - [Final report](https://nonnonhere.github.io/posts/gsoc2026-report/)
 
-The goal of this project, which was done in the collaboration with the [Rust Embedded Working Group][rust-embedded], was to improve the API ergonomics and type safety of the [serialport-rs] crate. 
+The goal of this project, which was done in collaboration with the [Rust Embedded Working Group][rust-embedded], was to improve the API ergonomics and type safety of the [serialport-rs] crate. 
 
-The serialport project is a bit different from some others projects which participated in this year's Google Summer of Code. It is more on the side of "facility management" than rocket science. Its challenges are taming finicky operating system APIs and making good abstractions, rather than full-blown software engineering.
+The serialport project is a bit different from some other projects which participated in this year's Google Summer of Code. It is more on the side of "facility management" than rocket science. Its challenges are taming finicky operating system APIs and making good abstractions, rather than full-blown software engineering.
 
 Tanmay led many fruitful discussions about potential design decisions, and did a lot of field research on how other crates that depend on serialport actually use its API, to figure out how to make the upcoming breaking API changes less disruptive and painful for them.
 
@@ -203,7 +203,7 @@ We wanted to rewrite `rowan` to change that. The problem was that many parts in 
 
 During his project, bit-aloo first migrated all rust-analyzer code from mutable tree editing to `SyntaxEditor`, a new abstraction that was created specifically to avoid mutation. After that, he removed mutable editing from `rowan` altogether.
 
-The migration process is incremental and `rowan` is still inefficient in various aspects. However, we believe that the parts which required changes to large amounts of code are behind us, and we can complete the migration with more focused changes. bit-aloo is continuing to work on that even after his GSoC project ended. And he was also accepted as a member of the rust-analyzer team, so congratulations! We would like to thank him for their work, and hope to continue working with him to improve rust-analyzer for everyone.
+The migration process is incremental and `rowan` is still inefficient in various aspects. However, we believe that the parts which required changes to large amounts of code are behind us, and we can complete the migration with more focused changes. bit-aloo is continuing to work on that even after his GSoC project ended. And he was also accepted as a member of the rust-analyzer team, so congratulations! We would like to thank him for his work, and hope to continue working with him to improve rust-analyzer for everyone.
 
 [rowan]: https://github.com/rust-analyzer/rowan
 
@@ -218,7 +218,7 @@ When someone changes the intrinsics in the main repo, breakages can silently cre
 
 And that is where Sumit came in! Over the course of his GSoC project, he examined the (very!) complex ways the intrinsics are tested in `stdarch`, and started porting them over to the main repo. But this was not a matter of copying over a few lines of YAML. The compiler repo uses its own build system (called `bootstrap`) and a CI workflow structure that is quite different from the `stdarch` repository. Sumit thus had to first understand what is each test suite doing, reimplement it as a part of bootstrap and finally integrate it into the compiler's CI workflows.
 
-We run ~90 CI jobs across several hardware architectures, operating systems and *OS versions*. Getting all that to work while testing *vendor-specific* intrinsics required a lot of diligent work… and a lot of patience. It took *five months* for [one][stdarch-gen-tests] of the test suites to finally succeed on the main repo's CI, and it required Sumit to completely refactor how the suite worked, for it to be more compatible with bootstrap. As another example, a [different][intrinsic-tests] test suite that Sumir also got to work required running the tests in a `qemu` emulator on CI.
+We run ~90 CI jobs across several hardware architectures, operating systems and *OS versions*. Getting all that to work while testing *vendor-specific* intrinsics required a lot of diligent work… and a lot of patience. It took *five months* for [one][stdarch-gen-tests] of the test suites to finally succeed on the main repo's CI, and it required Sumit to completely refactor how the suite worked, for it to be more compatible with bootstrap. As another example, a [different][intrinsic-tests] test suite that Sumit also got to work required running the tests in a `qemu` emulator on CI.
 
 Sumit ported most of the `stdarch` test suites to `bootstrap`, including intrinsics verification against reference *C* implementations, checks for automatically generated source code being up-to-date, and various unit tests for individual intrinsics and CPU feature detection logic. There is one [remaining][core-arch-tests] test suite to port, but the ported tests are already helping us find issues, which is great.
 
@@ -291,7 +291,7 @@ Thank you for digging into this complex topic, Guicheng!
 
 We would like to thank all contributors who have participated in Google Summer of Code 2026 with us! Your contributions helped make Rust better, and introduced you as new members of our community, which is a reason to celebrate. We are looking forward to participating in GSoC again next year!
 
-We would also like to thank Google for organizing the Google Summer of Code program and for allowing us to a large number of projects every year. And last, but not least, we would like to thank all the Rust mentors who were tirelessly helping our contributors to complete their projects. Without you, Rust GSoC would not be possible.
+We would also like to thank Google for organizing the Google Summer of Code program and for allowing us to host a large number of projects every year. And last, but not least, we would like to thank all the Rust mentors who were tirelessly helping our contributors to complete their projects. Without you, Rust GSoC would not be possible.
 
 [gsoc]: https://summerofcode.withgoogle.com
 [gsoc-blog-post]: https://blog.rust-lang.org/2026/04/30/gsoc-2026-selected-projects/
