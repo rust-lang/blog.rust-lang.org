@@ -26,7 +26,7 @@ If you'd like to help us out by testing future releases, you might consider upda
 - [`Allocator` API](#allocator-api)
 - [`DropGuard` API](#dropguard-run-a-closure-on-every-exit-path)
 - [Conjuring zero-sized types](#conjuring-zero-sized-types)
-- [Reporting unused dependencies](#reporting-unused-dependencies)
+- [Reporting unused dependencies in Cargo](#reporting-unused-dependencies-in-cargo)
 - [Reducing Cargo cache collisions](#reducing-cargo-cache-collisions)
 - [Cargo min-publish-age](#cargo-min-publish-age-a-k-a-dependency-cooldowns)
 - [Stabilized APIs](#stabilized-apis)
@@ -149,7 +149,7 @@ impl Handle {
 
 Here, the module exploits the fact that `Handle` *cannot be used* without first setting up `HANDLE`, to make the `count` function safe. If we could just `conjure_zst::<Handle>()` in safe code, this is no longer sound, which is why it's unsafe to call `conjure_zst`.
 
-### Reporting unused dependencies
+### Reporting unused dependencies in Cargo
 
 Building dependencies that are no longer used or are only needed for specific platforms can slow down builds.
 Rustc has the `unused_crate_dependencies` lint for this but it has false positives when used with Cargo because dependencies may be shared between multiple build targets, e.g. `dependencies.tracing-subscriber` being available for every `bin` in a package when only some may use it.
