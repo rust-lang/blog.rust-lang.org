@@ -59,7 +59,7 @@ fn mrrrow(option: Option<u32>) {
 The never type could already have been "observed" on stable before – it was permitted as the return type of functions (`-> !`) and it was already the type of some built-in constructs (`return`, `break`, etc). What this release allows, is to name the never type anywhere:
 
 ```rust
-fn infallible_unwrap(res: Result<T, !>) -> T {
+fn infallible_unwrap<T>(res: Result<T, !>) -> T {
     // ^^ writing `Result<_, !>` was not allowed before
     let Ok(v) = res;
     v
@@ -96,8 +96,8 @@ Implementing `Drop` can however feel a little inconvenient when all you want is 
 use std::mem::DropGuard;
 use std::num::ParseIntError;
 
-/// Attempt to parse all strings in `items` and push them into `nums`.
-/// If parsing any of the strings fails, `nums` remains unchanged.
+/// Attempt to parse all `strings` and push them into `nums`.
+/// If parsing any of them fails, `nums` remains unchanged.
 fn parse_all(nums: &mut Vec<u32>, strings: &[&str]) -> Result<(), ParseIntError> {
     let len = nums.len();
     let mut nums = DropGuard::new(nums, move |nums| {
@@ -119,7 +119,7 @@ As Rust's [unsafe code guidelines](https://github.com/rust-lang/unsafe-code-guid
 
 This question is answered in Rust 1.100 with a single function: [`std::mem::conjure_zst`](https://doc.rust-lang.org/stable/std/mem/fn.conjure_zst.html).
 
-Instead of transmuting `()`, `MaybeUninit::uninit().assume_init()`, or various other incantations, this is the dedicated way to create a value of a zero-sized type when you know that doing so is safe to do. If the type has no size, we know exactly what value it must be: nothing.
+Instead of transmuting `()`, `MaybeUninit::uninit().assume_init()`, or various other incantations, this is the dedicated way to create a value of a zero-sized type when you know that doing so is safe to do. If an inhabited type has no size, we know exactly what value it must be: nothing.
 
 Of course, APIs often rely on the inability to construct such types for safety, and that's why this function is unsafe. For example, PyO3's [`Python<'py>`](https://docs.rs/pyo3/latest/pyo3/marker/struct.Python.html) is a zero-sized marker token that represents holding the Python GIL (global interpreter lock). Many of Python's APIs require holding this lock to be safe, but conjuring a token from thin air would allow safe PyO3 calls to violate that precondition.
 
@@ -166,7 +166,7 @@ See [cargo#17287](https://github.com/rust-lang/cargo/issues/17287) for possible 
 
 ### Cargo min-publish-age a.k.a. dependency cooldowns
 
-Malicious versions of packages are often caught within hours or daysafter being published, by either automated scanners or by the community.
+Malicious versions of packages are often caught within hours or days after being published, by either automated scanners or by the community.
 Rust 1.100 stabilizes Cargo's min-publish-age aware dependency resolution, which lets you wait for that window before it picks up newly published versions.
 This practice is also known as dependency cooldowns.
 
@@ -226,13 +226,13 @@ A few things to keep in mind:
 - [`Box::new_in`](https://doc.rust-lang.org/stable/std/boxed/struct.Box.html#method.new_in)
 - [`Box::from_raw_in`](https://doc.rust-lang.org/stable/std/boxed/struct.Box.html#method.from_raw_in)
 - [`Box::from_non_null_in`](https://doc.rust-lang.org/stable/std/boxed/struct.Box.html#method.from_non_null_in)
-- [`Box::into_raw_with_allocator`](https://doc.rust-lang.org/std/std/boxed/struct.Box.html#method.into_raw_with_allocator)
+- [`Box::into_raw_with_allocator`](https://doc.rust-lang.org/stable/std/boxed/struct.Box.html#method.into_raw_with_allocator)
 - [`Box::into_non_null_with_allocator`](https://doc.rust-lang.org/stable/std/boxed/struct.Box.html#method.into_non_null_with_allocator)
 - [`Box::allocator`](https://doc.rust-lang.org/stable/std/boxed/struct.Box.html#method.allocator)
 - [`Vec::new_in`](https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#method.new_in)
 - [`Vec::with_capacity_in`](https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#method.with_capacity_in)
 - [`Vec::from_raw_parts_in`](https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#method.from_raw_parts_in)
-- [`Vec::from_parts_in`](https://doc.rust-lang.org/stable/stable/vec/struct.Vec.html#method.from_parts_in)
+- [`Vec::from_parts_in`](https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#method.from_parts_in)
 - [`Vec::into_raw_parts_with_allocator`](https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#method.into_raw_parts_with_allocator)
 - [`Vec::into_parts_with_allocator`](https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#method.into_parts_with_allocator)
 - [`Vec::allocator`](https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#method.allocator)
