@@ -1,5 +1,5 @@
 +++
-path = "2026/11/16/gsoc-2026-results"
+path = "2026/11/11/gsoc-2026-results"
 title = "Google Summer of Code 2026 results"
 authors = ["Jakub Beránek"]
 
