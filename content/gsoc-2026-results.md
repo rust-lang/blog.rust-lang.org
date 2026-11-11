@@ -193,7 +193,7 @@ Vishruth has continued to contribute to Wild even after his GSoC project ended a
 [wild-linker-modules-final-report]: https://vishthimmaiah.dev/blog/gsoc-26#benchmarks
 
 ### Migrating rust-analyzer assists to SyntaxEditor
-- Contributor: [bit-aloo](https://github.com/Shourya742)
+- Contributor: [bit-aloo](https://github.com/bit-aloo)
 - Mentors: [Chayim Refael Friedman](https://github.com/ChayimFriedman2), [Lukas Wirth](https://github.com/Veykril)
 - [Final report](https://gist.github.com/bit-aloo/b960133f349ab8a63de63bfbc35d3b8e)
 
