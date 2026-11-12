@@ -37,7 +37,7 @@ After 10 years and 5 failed stabilization attempts, **the [never type] is finall
 
 [never type]: https://doc.rust-lang.org/stable/std/primitive.never.html
 
-The never type (spelled `!` in code) is the canonical uninhabited type, it represents the type of diverging computations – computations which never resolve to any value. It is impossible to create a value of the never type, as such, it is a marker of unreachable code. It is the type of expressions that terminate control flow, such as `return`, `break`, and [`std::process::exit`].
+The never type, spelled `!` in code, is the canonical uninhabited type. It represents the type of diverging computations – computations which never resolve to any value – where any code that follows is unreachable. Expressions that terminate control flow, such as `return`, `break`, and [`std::process::exit`], also have the type `!`.
 
 [`std::process::exit`]: https://doc.rust-lang.org/stable/std/process/fn.exit.html
 
@@ -56,7 +56,7 @@ fn mrrrow(option: Option<u32>) {
 }
 ```
 
-The never type could already have been "observed" on stable before – it was permitted as the return type of functions (`-> !`) and it was already the type of some built-in constructs (`return`, `break`, etc). What this release allows, is to name the never type anywhere:
+While the never type could already be used and observed this way, and even named in the return type of functions (`-> !`), this release allows naming the never type anywhere:
 
 ```rust
 fn infallible_unwrap<T>(res: Result<T, !>) -> T {
