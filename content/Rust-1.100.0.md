@@ -33,7 +33,7 @@ If you'd like to help us out by testing future releases, you might consider upda
 
 ### Never type
 
-After 10 years and 5 failed stabilization attempts, **the [never type] is finally stable**!
+After 10 years and 5 failed stabilization attempts, **the [never type] is finally stable**! This also completes the [project goal](https://goals.rust-lang.org/2026/stabilize-never-type.html) for this work.
 
 [never type]: https://doc.rust-lang.org/stable/std/primitive.never.html
 
@@ -82,7 +82,7 @@ This release brings about the stabilization of the core parts of [`allocator_api
 
 [`Allocator`]: https://doc.rust-lang.org/std/alloc/trait.Allocator.html
 
-A lot remains to be done still, including expanding the API surface usable with custom allocators and stabilizing their use on more collections and pointer types; with the core trait and design out of the way though, expect to see more being stabilized soon!
+This is the foundation of the [Allocators 1.0 project goal](https://goals.rust-lang.org/2026/allocators-1.0.html). A lot remains to be done still, including expanding the API surface usable with custom allocators and stabilizing their use on more collections and pointer types; with the core trait and design out of the way though, expect to see more being stabilized soon!
 
 ### `DropGuard`: run a closure on every exit path
 
@@ -147,7 +147,7 @@ A limitation of this warning is that it will only appear when building every bui
 For example, running `cargo check --bin foo` won't show warnings for unused `[dependencies]` because another `bin` may be present that uses them.
 No warning will be shown for unused `dev-dependencies` because there isn't a way to ensure every development build target is built.
 
-This warning is being introduced as part of a new linting system for Cargo, controlled by the `[lints.cargo]` table in `Cargo.toml`. See also the [other lints that have been introduced](https://doc.rust-lang.org/stable/cargo/reference/lints.html).
+This warning is being introduced as part of a new linting system for Cargo, controlled by the `[lints.cargo]` table in `Cargo.toml`, completing this [project goal](https://goals.rust-lang.org/2026/cargo-lints.html). See also the [other lints that have been introduced](https://doc.rust-lang.org/stable/cargo/reference/lints.html).
 
 ### Reducing Cargo cache collisions
 
@@ -159,7 +159,7 @@ These problems get exacerbated when sharing a `build-dir` across git worktrees.
 
 The `build-dir` now consistently applies the build-configuration hash to all content by organizing the directories around their build step, rather than their file type, and moving the hash from a file's name to the parent directory.
 
-This also unblocks future improvements such as cache garbage collection, cross-workspace cache de-duplication, cross-workspace caching, and fine grain locking.
+This work began with the [build directory layout project goal](https://goals.rust-lang.org/2025h2/cargo-build-dir-layout.html) in 2025, and its stabilization is a milestone toward a new [project goal](https://goals.rust-lang.org/2026/cargo-cross-workspace-cache.html), unblocking future improvements such as cache garbage collection, cross-workspace cache de-duplication, cross-workspace caching, and fine grain locking.
 
 We previously published a [call for testing](https://blog.rust-lang.org/2026/03/13/call-for-testing-build-dir-layout-v2/) for the changes that are now taking effect.
 While this is an internal change, this may break build processes and tests that had workarounds for missing or incomplete features.
@@ -210,6 +210,7 @@ A few things to keep in mind:
 * Cooldowns reduce the risk from some supply chain attacks but are not a complete defense on their own.
   Please keep reviewing dependency updates as you otherwise would.
 
+Further work to protect the ecosystem is planned under the [crates.io supply chain hardening project goal](https://goals.rust-lang.org/2026/crates-io-supply-chain-hardening.html), including quarantine support and automated detection of suspicious releases.
 ### Stabilized APIs
 
 - [`impl PartialEq<Cow<'_, [U]>> for Vec<T, A>`](https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#impl-PartialEq%3CCow%3C'_,+%5BU%5D%3E%3E-for-Vec%3CT,+A%3E)
