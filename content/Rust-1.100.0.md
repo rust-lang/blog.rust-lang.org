@@ -78,7 +78,9 @@ We tried to minimize the impact of this breaking change as much as possible, by 
 
 ### `Allocator` API
 
-This release brings about the stabilization of the core parts of [`allocator_api`](https://github.com/rust-lang/rust/issues/32838), enabling library authors to define custom allocators that can be used together with certain standard library types - currently `Vec` and `Box`. These are enabled through the newly-stabilized `Allocator` trait.
+This release brings about the stabilization of the core parts of [`allocator_api`](https://github.com/rust-lang/rust/issues/32838), enabling library authors to define custom allocators that can be used together with certain standard library types - currently `Vec` and `Box`. These are enabled through the newly-stabilized [`Allocator`] trait.
+
+[`Allocator`]: https://doc.rust-lang.org/std/alloc/trait.Allocator.html
 
 A lot remains to be done still, including expanding the API surface usable with custom allocators and stabilizing their use on more collections and pointer types; with the core trait and design out of the way though, expect to see more being stabilized soon!
 
