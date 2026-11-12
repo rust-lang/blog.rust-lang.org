@@ -121,7 +121,7 @@ This question is answered in Rust 1.100 with a single function: [`std::mem::conj
 
 Instead of transmuting `()`, `MaybeUninit::uninit().assume_init()`, or various other incantations, this is the dedicated way to create a value of a zero-sized type when you know that doing so is safe to do. If an inhabited type has no size, we know exactly what value it must be: nothing.
 
-Of course, APIs often rely on the inability to construct such types for safety, and that's why this function is unsafe. For example, PyO3's [`Python<'py>`](https://docs.rs/pyo3/latest/pyo3/marker/struct.Python.html) is a zero-sized marker token that represents holding the Python GIL (global interpreter lock). Many of Python's APIs require holding this lock to be safe, but conjuring a token from thin air would allow safe PyO3 calls to violate that precondition.
+Of course, APIs often rely on the inability to construct such types for safety, and that's why this function is unsafe. For example, PyO3's [`Python<'py>`](https://docs.rs/pyo3/0.30.1/pyo3/marker/struct.Python.html) is a zero-sized marker token that represents holding the Python GIL (global interpreter lock). Many of Python's APIs require holding this lock to be safe, but conjuring a token from thin air would allow safe PyO3 calls to violate that precondition.
 
 ### Reporting unused dependencies in Cargo
 
