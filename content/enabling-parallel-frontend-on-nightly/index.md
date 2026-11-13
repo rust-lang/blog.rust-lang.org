@@ -13,7 +13,7 @@ to find remaining issues in preparation for its stabilization.
 
 ## Context
 
-The Rust compiler has been using multiple threads to compile code in its "backend" part (using LLVM) for a long time. However, its "frontend" part (which includes type checking and borrow checking) has been executing in serial, on a single thread, which of course limits the performance of the compiler. If you are interested in a more in-depth explanation of parallelism in the Rust compiler, see this [previous post][previous-post-backend].
+The Rust compiler has been using multiple threads to compile code in its "backend" part (using LLVM) for a long time. However, its "frontend" part (which includes type checking and borrow checking) has been executing sequentially, on a single thread, which of course limits the performance of the compiler. If you are interested in a more in-depth explanation of parallelism in the Rust compiler, see this [previous post][previous-post-backend].
 
 The compiler frontend actually had support for running in parallel for a long time, but it was not enabled by default due to various issues. [Three years ago][previous-post], we made it possible to opt into the parallel frontend on the nightly channel, with the plan to stabilize it in 2024. Clearly, we did not achieve that goal, but work on the parallel frontend was still slowly progressing in the meantime.
 
