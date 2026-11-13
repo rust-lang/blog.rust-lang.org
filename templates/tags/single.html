@@ -28,7 +28,9 @@
       {%- endif %}
       <tr>
         <td class="tr o-60 pr4 pr5-l bn">{{<month_name num={month} />}}&nbsp;{{ day }}</td>
-        <td class="bn"><a href="{{ config.base_url | safe }}{{ page.path | safe }}">{{<escape_hbs input={page.title} />}}</a></td>
+        <td class="bn"><a href="{{ config.base_url | safe }}{{ page.path | safe }}">{{<escape_hbs input={page.title} />}}</a>
+          {%- if page.components[0] == "inside-rust" %}<span class="blog-label">Inside Rust</span>{% endif -%}
+        </td>
       </tr>
     {%- endfor %}
     </table>
