@@ -92,7 +92,9 @@ Implementing `Drop` can however feel a little inconvenient when all you want is 
 
 `DropGuard` takes two arguments: a variable and a closure. It implements `Deref` and `DerefMut` so you can keep working with the variable as normal. But when dropped it runs the closure and consumes the variable.
 
-`DropGuard` also implements a `dismiss` method which returns the variable from the guard without running the destructor. This makes it possible to quickly implement all-or-nothing transaction-like APIs with a rollback. Here is an example implementing a parser which uses a guard to roll back mutations in case of failure:
+`DropGuard` also implements a `dismiss` associated function[^not_a_method] which returns the variable from the guard without running the destructor. This makes it possible to quickly implement all-or-nothing transaction-like APIs with a rollback. Here is an example implementing a parser which uses a guard to roll back mutations in case of failure:
+
+[^not_a_method]: it has deliberately been chosen not to be a method to avoid name collisions with the `DerefMut`-enabled method resolution on the inner type.
 
 ```rust
 use std::mem::DropGuard;
