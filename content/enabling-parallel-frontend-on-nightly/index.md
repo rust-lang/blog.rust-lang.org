@@ -23,7 +23,7 @@ Last year, [Vadim Petrochenkov][petrochenkov], together with several other contr
 
 The primary benefit of enabling the parallel frontend is, of course, faster compilation of Rust programs.
 
-We benchmarked the parallel frontend in our [benchmark suite][rustc-perf], which measures the duration to compile the *leaf* crate in a crate graph. As usually, the results were varied. In some benchmarks, the parallel frontend barely helped. In others, for example when performing a `cargo check` of the `nalgebra`, `cargo` or `diesel` crates, the compilation was almost three times faster, using 8 threads.
+We benchmarked the parallel frontend in our [benchmark suite][rustc-perf], which measures the duration to compile the *leaf* crate in a crate graph. As usual, the results were varied. In some benchmarks, the parallel frontend barely helped. In others, for example when performing a `cargo check` of the `nalgebra`, `cargo` or `diesel` crates, the compilation was almost three times faster, using 8 threads.
 
 In the table below, you can find the aggregated wall-time mean change for the real-world benchmarks in our suite, when building a single crate from scratch across several configurations, compared to the same build using a sequential frontend.
 
