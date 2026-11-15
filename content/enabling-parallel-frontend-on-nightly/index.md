@@ -33,7 +33,9 @@ In the table below, you can find the aggregated wall-time mean change for the re
 |             4              | -37.99 % | -36.01 % | -29.14 % | -23.67 % |
 |             8              | -44.23 % | -41.76 % |  -36.1 % | -27.88 % |
 
-Note that the performance benefits for incremental rebuilds are much more modest, and also very hard to compare, because the performance of rebuilds depends on what was changed and how were the codegen units laid out. In our benchmark suite, we saw a mean improvement of 3-5% for incremental rebuilds. But we currently do not have great benchmarks for this use-case, so your results might vary.
+It is clear that the parallelization is not perfect, and we definitely plan to invest more effort into improving its performance. Nevertheless, with 8 threads, it can make the end-to-end compilation time of `cargo check` ~2x faster for several crates that we tested, which is still quite an improvement.
+
+The performance benefits for incremental rebuilds are much more modest, and also very hard to compare, because the performance of rebuilds depends on what was changed and how were the codegen units laid out. In our benchmark suite, we saw a mean improvement of 3-5% for incremental rebuilds. But we currently do not have great benchmarks for this use-case, so your results might vary.
 
 We can also zoom in on an individual crate. Here is a chart of how the wall-time scales when compiling the `nalgebra 0.33` crate, for a full non-incremental build (`full`), full incremental build (`incr-full`) and an incremental rebuild (`incr-patched`) across several build configurations:
 
