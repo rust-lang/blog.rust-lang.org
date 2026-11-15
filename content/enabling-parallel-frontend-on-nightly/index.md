@@ -17,7 +17,9 @@ The Rust compiler has been using multiple threads to compile code in its "backen
 
 The compiler frontend actually had support for running in parallel for a long time, but it was not enabled by default due to various issues. [Three years ago][previous-post], we made it possible to opt into the parallel frontend on the nightly channel, with the plan to stabilize it in 2024. Clearly, we did not achieve that goal, but work on the parallel frontend was still slowly progressing in the meantime.
 
-Last year, [Vadim Petrochenkov][petrochenkov], together with several other contributors, started a coordinated effort to finally get the parallel frontend over the finish line. Since then, many long-standing issues were fixed, and its performance was improved. Now we are at a point where we would like to make it widely available. But before that, we want to find out if people encounter issues with it in the wild, which is why we are enabling it by default only on the nightly channel. Once we will be confident enough that it is working well, we want to stabilize it. 
+Last year, [Vadim Petrochenkov][petrochenkov], together with several other contributors, started a coordinated effort to finally get the parallel frontend over the finish line. Since then, many long-standing issues were fixed, and its performance was improved. Now we are at a point where we would like to make it widely available. But before that, we want to find out if people encounter issues with it in the wild, which is why we are enabling it by default only on the nightly channel. Once we will be confident enough that it is working well, we want to stabilize it.
+
+The parallel frontend has been enabled on the nightly channel by default since `nightly-2026-11-14`.
 
 ## Benefits
 
@@ -94,7 +96,7 @@ Over the next few months, we will be monitoring GitHub and Zulip for any reporte
 
 We would also like to improve its performance, and make more things parallel. So far, a lot of the work on the parallel frontend has been focused on making it work correctly, rather than tuning its performance down to the last percent. We thus expect that we might still be able to make further performance improvements to it.
 
-We would also like to make more parts of the frontend actually parallel, as some parts are currently still sequential even if parallelism is enabled. There is some ongoing work on this. Last year, we had a Google Summer of Code project focused on enabling [parallel macro expansion and name resolution][gsoc-project], and there is also an open [pull request][parallel-ast-hir-pr] for parallelizing the lowering of the Abstract Syntax Tree (AST) to the High-Level Intermediate Representation (HIR).
+We would also like to make more parts of the frontend actually parallel, as some parts are currently still sequential even if parallelism is enabled. There is some ongoing work on this. Last year, we had a Google Summer of Code project focused on enabling [parallel macro expansion and name resolution][gsoc-project], and there is also an open [pull request][parallel-ast-hir-pr] for parallelizing the lowering of the Abstract Syntax Tree (AST) to the High-Level Intermediate Representation (HIR). More work remains to be done on this front.
 
 [previous-post]: https://blog.rust-lang.org/2023/11/09/parallel-rustc/
 [previous-post-frontend]: https://blog.rust-lang.org/2023/11/09/parallel-rustc/#new-intraprocess-parallelism-the-front-end
