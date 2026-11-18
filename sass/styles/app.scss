@@ -342,6 +342,13 @@ table.post-list .blog-label {
   vertical-align: 0.45em;
   white-space: nowrap;
   opacity: 0.6;
+  transition: opacity 0.15s, background-color 0.15s;
+
+  &:hover {
+    text-decoration: none;
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 }
 
 .publish-date-author {
