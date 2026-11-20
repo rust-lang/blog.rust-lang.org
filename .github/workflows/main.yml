@@ -6,6 +6,8 @@ on:
   pull_request:
   merge_group:
 
+permissions: {}
+
 env:
   # renovate: datasource=rust-version depName=rust
   RUST_VERSION: 1.97.1
