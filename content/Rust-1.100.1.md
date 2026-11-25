@@ -24,7 +24,7 @@ If you'd like to help us out by testing future releases, you might consider upda
 
 Rust 1.100.1 fixes a [regression where some types were not inferred as having `Iterator` impls](https://github.com/rust-lang/rust/issues/166229).
 
-We backported a change to the unstable `const` version of `Iterator` in Rust 1.100.0,
+We reverted a change to the unstable `const` version of `Iterator` in Rust 1.100.0,
 which cannot actually be used by stable code, but accidentally prevented some types
 with valid `Iterator` impls from being seen as actually implementing `Iterator`.
 
